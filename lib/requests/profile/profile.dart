@@ -1,0 +1,92 @@
+import 'dart:convert';
+
+// import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:http/http.dart' as http;
+import 'package:inspire/screens/ProfileScreen/profile_screen.dart';
+import 'package:inspire/screens/auth/authorization_screen2.dart';
+import 'package:inspire/screens/registration/reg_screen_two.dart';
+import 'package:oktoast/oktoast.dart';
+
+GetStorage auth = GetStorage();
+GetStorage user = GetStorage();
+
+Future<void> profileRequest() async {
+  var headers = {
+    'Accept': 'application/json',
+    'Authorization': 'Bearer ${auth.read('token').toString()}'
+  };
+
+  final Uri url = await Uri.parse('https://inspireapp.kz/api/user');
+  var request = await http.MultipartRequest('GET', url);
+  request.headers.addAll(headers);
+
+  var response = await request.send();
+
+  var responsed = await http.Response.fromStream(response);
+
+  print(response.statusCode);
+
+  if (response.statusCode == 200) {
+    var data = await json.decode(responsed.body);
+
+    print('response.statusCode : ${response.statusCode}');
+    print('data : ${data}');
+
+    Get.to(() => ProfileScreen(),
+        transition: Transition.rightToLeft,
+        arguments: [
+          data['code'],
+          data['full_name'],
+          data['description'],
+          data['phone'],
+          data['profile_photo_url']
+        ]);
+  } else {
+    print('error');
+  }
+}
+
+Future<void> userActivities() async {
+  var headers = {
+    'Accept': 'application/json',
+    'Authorization': 'Bearer ${auth.read('token').toString()}'
+  };
+
+  final Uri url = await Uri.parse('https://inspireapp.kz/api/user_activities');
+  var request = await http.MultipartRequest('GET', url);
+  request.headers.addAll(headers);
+
+  var response = await request.send();
+
+  var responsed = await http.Response.fromStream(response);
+
+  print(response.statusCode);
+
+  if (response.statusCode == 200) {
+    var data = await json.decode(responsed.body);
+
+
+    user.write('meditation', data['meditation'].toString());
+    user.write('affirmations', data['affirmations'].toString());
+    user.write('courses', data['courses'].toString());
+    user.write('invited_users', data['invited_users'].toString());
+
+    //
+    // Get.to(() => ProfileScreen(),
+    //     transition: Transition.rightToLeft,
+    //     arguments: [
+    //       data['code'],
+    //       data['full_name'],
+    //       data['description'],
+    //       data['phone'],
+    //       data['profile_photo_url']
+    //     ]);
+  } else {
+    print('error');
+  }
+}
+
+
