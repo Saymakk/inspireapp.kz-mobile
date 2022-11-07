@@ -35,6 +35,8 @@ Future<void> profileRequest() async {
     print('response.statusCode : ${response.statusCode}');
     print('data : ${data}');
 
+    await user.write('username', data['full_name']);
+
     Get.to(() => ProfileScreen(),
         transition: Transition.rightToLeft,
         arguments: [

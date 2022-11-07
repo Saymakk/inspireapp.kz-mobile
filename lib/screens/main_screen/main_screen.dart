@@ -9,6 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:inspire/constants/app_bar.dart';
 import 'package:inspire/constants/bottom_app_bar.dart';
 import 'package:inspire/constants/constants.dart';
+import 'package:inspire/requests/profile/profile.dart';
 import 'add_note.dart';
 import 'affirmations.dart';
 import 'calendar_smile_list.dart';
@@ -25,14 +26,17 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
 
+
+
   GetStorage data_list = GetStorage();
   GetStorage auth = GetStorage();
+  GetStorage user = GetStorage();
 
  @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    // print(decoded[0]['user']['name']);
+    // profileRequest();
   }
 
   @override

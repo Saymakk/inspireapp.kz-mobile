@@ -9,6 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:inspire/constants/constants.dart';
 import 'package:inspire/requests/lists/country_list_request.dart';
+import 'package:inspire/requests/profile/profile_settings_requests.dart';
 import 'package:skeletons/skeletons.dart';
 
 import '../../../requests/lists/cities_list_request.dart';
@@ -40,6 +41,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
 
   TextEditingController nameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
+  TextEditingController descController = TextEditingController();
 
   List<String> cities_list = [
     'Алматы',
@@ -139,6 +141,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
                               child: Container(
                                 margin: EdgeInsets.only(left: 20),
                                 child: TextFormField(
+                                  controller: nameController,
                                   decoration: InputDecoration(
                                       hintText: 'Имя',
                                       border: InputBorder.none,
@@ -164,6 +167,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
                               child: Container(
                                 margin: EdgeInsets.only(left: 20),
                                 child: TextFormField(
+                                  controller: lastNameController,
                                   decoration: InputDecoration(
                                       hintText: 'Фамилия',
                                       border: InputBorder.none,
@@ -464,7 +468,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
                     width: double.infinity,
                     height: 168,
                     margin: EdgeInsets.only(
-                      bottom: 200,
+                      bottom: 30,
                     ),
                     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                     decoration: BoxDecoration(
@@ -472,32 +476,39 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
                         border: Border.all(color: Color(0xffDEECEC)),
                         borderRadius: BorderRadius.circular(8)),
                     child: TextFormField(
+                      controller: descController,
                       maxLines: 6,
                       decoration: InputDecoration(
-                          hintText: 'О вас',
-                          hintStyle: GoogleFonts.poppins(
-                              fontSize: 14,
-                              color: Color(0xffAFC5CC),
-                              height: 1.645),
-                          border: InputBorder.none),
+                        hintText: 'О вас',
+                        hintStyle: GoogleFonts.poppins(
+                            fontSize: 14,
+                            color: Color(0xffAFC5CC),
+                            height: 1.645),
+                        border: InputBorder.none,
+                      ),
                     ),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            color: Color(0xff21cac8)),
+                      GestureDetector(
+                        onTap: (){
+                          userUpdateRequest(nameController.text, lastNameController.text, selected_city, descController.text, image!);
+                        },  /** !!! Отправка запроса на редактирование аккаунта !!! **/
                         child: Container(
-                          margin:
-                              EdgeInsets.symmetric(vertical: 9, horizontal: 48),
-                          child: Text(
-                            'Сохранить',
-                            style: GoogleFonts.poppins(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.white),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              color: Color(0xff21cac8)),
+                          child: Container(
+                            margin:
+                                EdgeInsets.symmetric(vertical: 9, horizontal: 48),
+                            child: Text(
+                              'Сохранить',
+                              style: GoogleFonts.poppins(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.white),
+                            ),
                           ),
                         ),
                       ),
