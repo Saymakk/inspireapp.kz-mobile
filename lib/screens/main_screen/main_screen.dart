@@ -12,8 +12,6 @@ import 'package:inspire/constants/constants.dart';
 import 'package:inspire/requests/profile/profile.dart';
 import 'add_note.dart';
 import 'affirmations.dart';
-import 'calendar_smile_list.dart';
-import 'do_selfie.dart';
 import 'meditations.dart';
 import 'mini_courses.dart';
 
@@ -79,10 +77,8 @@ class _MainScreenState extends State<MainScreen> {
                 Meditations(),
                 Affirmations(),
                 MiniCourses(),
-                SmileList(),
                 AddNote(),
-                DoSelfie(),
-                AgreeButton(),
+                // DoSelfie(),
               ],
             ),
           ),
@@ -142,29 +138,5 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
 
-  Widget AgreeButton() {
-    return  Padding(
-      padding: const EdgeInsets.only(left: 24, right: 24),
-      child: GestureDetector(
-        onTap: () {
-          // Get.to(() => RegAgreed(), transition: Transition.rightToLeft);
-        },
-        child: Container(
-          margin: EdgeInsets.only(bottom: 10),
-          width: double.infinity,
-          height: 40,
-          decoration: Const.cont_turq_circ8,
-          // padding: EdgeInsets.only(top: 5),
-          child: Center(
-            child: Text(
-              'Сохранить заметку об этом дне',
-              style: Const.buttontextstyle,
-              textAlign: TextAlign.center,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
 
 }
