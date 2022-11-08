@@ -216,7 +216,7 @@ class _RegAgreedState extends State<RegAgreed> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    print('Хорошо');
+                    // print('Хорошо');
                     // Get.to(() => MainScreen(),
                     Get.offAll(() => BottomNav(),
                         transition: Transition.rightToLeft);

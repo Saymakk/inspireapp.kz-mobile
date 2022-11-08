@@ -29,7 +29,7 @@ Future<List<countriesListModel>> countriesListRequest() async {
     Iterable list = json.decode(responsed.body);
     List<countriesListModel> datasheet = list.map((f) => countriesListModel.fromJson(f)).toList();
 
-    print(list);
+    // print(list);
 
     return Future<List<countriesListModel>>.value(datasheet);
   } else {

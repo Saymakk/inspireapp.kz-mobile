@@ -26,7 +26,7 @@ Future<List<categoriesAff>> affirmationsRequest() async {
     List<categoriesAff> datasheet =
         list.map((f) => categoriesAff.fromJson(f)).toList();
 
-    print(list.toString());
+    // print(list.toString());
 
     return Future<List<categoriesAff>>.value(datasheet);
   } else {

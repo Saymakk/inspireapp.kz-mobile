@@ -22,21 +22,21 @@ Future<void> authPass(code, phone) async {
   request.fields['phone'] = phone;
   request.fields['code'] = code;
 
-  print(request.fields);
+  // print(request.fields);
 
   var response = await request.send();
 
   var responsed = await http.Response.fromStream(response);
 
-  print(response.statusCode);
+  // print(response.statusCode);
 
   if (response.statusCode == 200) {
     var data = await json.decode(responsed.body);
 
 
-    print('response.statusCode : ${response.statusCode}');
+    // print('response.statusCode : ${response.statusCode}');
     print('data : ${data['data']['token']}');
-    print('data : ${data['data']}');
+    // print('data : ${data['data']}');
 
     auth.write('reg_code', data['data']['code'].toString());
     auth.write('token', data['data']['token'].toString());

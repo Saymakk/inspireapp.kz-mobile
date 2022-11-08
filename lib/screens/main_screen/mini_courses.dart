@@ -178,7 +178,8 @@ class _MiniCoursesState extends State<MiniCourses> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      singleCourse();
+                      // print(course.id);
+                      singleCourse(course.id);
                     },
                     child: Container(
                       margin: EdgeInsets.only(bottom: 12),

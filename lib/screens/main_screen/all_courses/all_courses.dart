@@ -141,10 +141,10 @@ class _AllCoursesScreenState extends State<AllCoursesScreen> {
                         () => SingleCourseScreen(),
                         transition: Transition.rightToLeft,
                         arguments: [
-                          course.course_contents[0]['title'],
-                          course.course_contents[0]['description'],
-                          course.course_contents[0]['length'],
-                          course.course_contents[0]['material_path'],
+                          course.title,
+                          course.description,
+                          course.length.toString(),
+                          course.material_path,
                         ]
                       );
                     },
@@ -174,7 +174,7 @@ class _AllCoursesScreenState extends State<AllCoursesScreen> {
                     child: Row(
                       children: [
                         Text(
-                          course.course_contents[0]['title'],
+                          course.title,
                           style: GoogleFonts.poppins(
                               textStyle: TextStyle(
                             fontWeight: FontWeight.w600,
@@ -198,7 +198,7 @@ class _AllCoursesScreenState extends State<AllCoursesScreen> {
                           ),
                         ),
                         Text(
-                          '${course.course_contents[0]['length']} мин',
+                          '${course.length.toString()} мин',
                           style: GoogleFonts.poppins(
                               textStyle: TextStyle(
                             fontWeight: FontWeight.w500,

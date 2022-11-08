@@ -17,26 +17,26 @@ Future<void> otpAuth1(phone) async {
 
   var r_phone = phone.replaceAll(('-'),'').replaceAll((' '),'').replaceAll((')'),'').replaceAll(('('),'');
 
-  print(r_phone);
+  // print(r_phone);
 
   final Uri url = await Uri.parse('https://inspireapp.kz/api/otpAuth');
   var request = await http.MultipartRequest('POST', url);
 
   request.fields['phone'] = r_phone.toString();
 
-  print(request.fields);
+  // print(request.fields);
 
   var response = await request.send();
 
   var responsed = await http.Response.fromStream(response);
 
-  print(response.statusCode);
+  // print(response.statusCode);
 
   if (response.statusCode == 200) {
     var data = await json.decode(responsed.body);
 
-    print('response.statusCode : ${response.statusCode}');
-    print('data : ${data['data']['code']}');
+    // print('response.statusCode : ${response.statusCode}');
+    // print('data : ${data['data']['code']}');
 
     auth.write('phone', r_phone);
 

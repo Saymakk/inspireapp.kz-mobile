@@ -28,7 +28,7 @@ Future<List<citiesListModel>> citiesListRequest() async {
     Iterable list = json.decode(responsed.body);
     List<citiesListModel> datasheet = list.map((f) => citiesListModel.fromJson(f)).toList();
 
-    print(list);
+    // print(list);
 
     return Future<List<citiesListModel>>.value(datasheet);
   } else {

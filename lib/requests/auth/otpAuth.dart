@@ -16,7 +16,7 @@ Future<void> otpAuth(phone) async {
 
   var r_phone = phone.replaceAll(('-'),'').replaceAll((' '),'').replaceAll((')'),'').replaceAll(('('),'');
 
-  print(r_phone);
+  // print(r_phone);
 
   final Uri url = await Uri.parse('https://inspireapp.kz/api/otpAuth');
   var request = await http.MultipartRequest('POST', url);

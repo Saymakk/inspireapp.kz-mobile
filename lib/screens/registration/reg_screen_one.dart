@@ -84,7 +84,7 @@ class _RegScreenOneState extends State<RegScreenOne> {
                   ),
                   GestureDetector(
                     onTap: () async {
-                      print(phoneController.text);
+                      // print(phoneController.text);
                       auth.write('phone', phoneController.text);
                        otpAuth(phoneController.text);
 

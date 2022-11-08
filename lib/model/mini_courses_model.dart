@@ -1,7 +1,6 @@
 class coursesList {
   final int id;
   final String title;
-  final List<coursesList> course_contents;
   final int course_id;
   final String path;
   final String material_path;
@@ -11,7 +10,6 @@ class coursesList {
   coursesList({
     required this.id,
     required this.title,
-    required this.course_contents,
     required this.course_id,
     required this.path,
     required this.material_path,
@@ -23,7 +21,6 @@ class coursesList {
     return coursesList(
       id: json['id'] != null ? (json['id']) : 0,
       title: json['title'] != null ? (json['title']) : '',
-      course_contents: [],
       course_id: json['course_id'] != null ? (json['course_id']) : 0,
       path: json['path'] != null ? (json['path']) : '',
       material_path: json['material_path'] != null ? json['material_path'] : '',
@@ -35,7 +32,6 @@ class coursesList {
   Map<String, dynamic> toJson() => {
     'id': id,
     'title': title,
-    'course_contents': course_contents,
     'course_id': course_id,
     'path': path,
     'material_path': material_path,

@@ -20,9 +20,9 @@ class _SingleCourseScreenState extends State<SingleCourseScreen> {
   static var httpClient = new HttpClient();
 
   String course_title = Get.arguments[0];
-  String description = Get.arguments[1];
+  String description = Get.arguments[3];
   var length = Get.arguments[2];
-  String material_path = Get.arguments[3];
+  String material_path = Get.arguments[1];
 
   @override
   Widget build(BuildContext context) {
