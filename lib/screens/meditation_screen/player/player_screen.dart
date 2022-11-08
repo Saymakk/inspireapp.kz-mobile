@@ -125,7 +125,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                 ),
                 Container(
                   width: 85,
-                  margin: EdgeInsets.only(bottom: 23),
+                  margin: EdgeInsets.only(bottom: 20),
                   decoration: BoxDecoration(
                     color: Color(0xff21cac8),
                     borderRadius: BorderRadius.circular(14),
@@ -184,16 +184,15 @@ class _PlayerScreenState extends State<PlayerScreen> {
                     ),
                   ),
                 ),
-                Expanded(child: SizedBox()),
                 Container(
-                  margin: EdgeInsets.only(bottom: 60),
+                  margin: EdgeInsets.only(top: 20),
                   // height: 186,
                   width: double.infinity,
                   decoration: BoxDecoration(
                       color: Colors.black.withOpacity(.6),
                       borderRadius: BorderRadius.circular(13)),
                   child: Container(
-                    margin: EdgeInsets.symmetric(vertical: 40),
+                    margin: EdgeInsets.symmetric(vertical: 10),
                     child: Column(
                       children: [
                         Row(

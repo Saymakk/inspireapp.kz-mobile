@@ -16,7 +16,7 @@ Future<List<categoriesAff>> singleAffRequest(id) async {
     'Authorization': 'Bearer ${auth.read('token').toString()}'
   };
 
-  final Uri url = Uri.parse('https://inspireapp.kz/api/affirmations/$id');
+  final Uri url = Uri.parse('https://inspireapp.kz/api/affirmations/');
   var request = http.MultipartRequest('GET', url);
   request.headers.addAll(headers);
 
@@ -28,6 +28,7 @@ Future<List<categoriesAff>> singleAffRequest(id) async {
     Iterable list = json.decode(responsed.body);
     List<categoriesAff> datasheet = list.map((f) => categoriesAff.fromJson(f)).toList();
 
+    // print(list.toString());
 
     return Future<List<categoriesAff>>.value(datasheet);
   } else {

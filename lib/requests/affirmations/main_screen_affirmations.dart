@@ -4,8 +4,9 @@ import 'package:http/http.dart' as http;
 import 'package:get_storage/get_storage.dart';
 import 'package:inspire/model/affirmation_model.dart';
 import 'package:inspire/model/meditation_model.dart';
+import 'package:inspire/model/single_affirm.dart';
 
-Future<List<affirmationsList>> affirmationsRequest() async {
+Future<List<categoriesAff>> affirmationsRequest() async {
   GetStorage auth = GetStorage();
 
   var headers = {
@@ -22,12 +23,12 @@ Future<List<affirmationsList>> affirmationsRequest() async {
 
   if (response.statusCode == 200) {
     Iterable list = json.decode(responsed.body);
-    List<affirmationsList> datasheet =
-        list.map((f) => affirmationsList.fromJson(f)).toList();
+    List<categoriesAff> datasheet =
+        list.map((f) => categoriesAff.fromJson(f)).toList();
 
-    // print(datasheet);
+    print(list.toString());
 
-    return Future<List<affirmationsList>>.value(datasheet);
+    return Future<List<categoriesAff>>.value(datasheet);
   } else {
     throw Exception('Failed.');
   }

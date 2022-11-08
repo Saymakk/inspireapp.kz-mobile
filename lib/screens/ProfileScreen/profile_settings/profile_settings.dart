@@ -10,6 +10,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:inspire/constants/constants.dart';
 import 'package:inspire/requests/lists/country_list_request.dart';
 import 'package:inspire/requests/profile/profile_settings_requests.dart';
+import 'package:inspire/screens/registration/registering_screen.dart';
+import 'package:inspire/screens/welcome_screen.dart';
 import 'package:skeletons/skeletons.dart';
 
 import '../../../requests/lists/cities_list_request.dart';
@@ -92,6 +94,16 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
                 ),
               ),
             ),
+            actions: [
+              IconButton(
+                onPressed: () {},
+                icon: Icon(
+                  Icons.delete_forever,
+                  color: Colors.red,
+                ),
+                tooltip: 'Удалить аккаунт',
+              )
+            ],
           ),
           body: SingleChildScrollView(
             child: Container(
@@ -488,54 +500,73 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
                       ),
                     ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      GestureDetector(
-                        onTap: (){
-                          userUpdateRequest(nameController.text, lastNameController.text, selected_city, descController.text, image!);
-                        },  /** !!! Отправка запроса на редактирование аккаунта !!! **/
-                        child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              color: Color(0xff21cac8)),
-                          child: Container(
-                            margin:
-                                EdgeInsets.symmetric(vertical: 9, horizontal: 48),
-                            child: Text(
-                              'Сохранить',
+                  GestureDetector(
+                    onTap: () {
+                      nameController.text == '' ||
+                              lastNameController.text == '' ||
+                              selected_city == null ||
+                              descController.text == '' ||
+                              image!.path == null
+                          ? ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text(
+                              'Все поля обязательны к заполнению. Также, не забудьте выбрать город и сделать фото!',
                               style: GoogleFonts.poppins(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.white),
-                            ),
-                          ),
+                                fontWeight: FontWeight.w400,
+                              ),
+                            )))
+                          : userUpdateRequest(
+                              nameController.text,
+                              lastNameController.text,
+                              selected_city!,
+                              descController.text,
+                              image!);
+                    },
+                    /** !!! Отправка запроса на редактирование аккаунта !!! **/
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: Color(0xff21cac8)),
+                      child: Container(
+                        margin:
+                            EdgeInsets.symmetric(vertical: 9, horizontal: 48),
+                        child: Text(
+                          'Сохранить',
+                          style: GoogleFonts.poppins(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.white),
                         ),
                       ),
-                      SizedBox(
-                        width: 4,
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Color(0xff21cac8)),
-                            borderRadius: BorderRadius.circular(8),
-                            color: Colors.white),
-                        child: Container(
-                          margin: EdgeInsets.symmetric(
-                            vertical: 9,
-                            horizontal: 56,
-                          ),
-                          child: Text(
-                            'Выйти',
-                            style: GoogleFonts.poppins(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w600,
-                                color: Color(0xff21cac8)),
-                          ),
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //   children: [
+                  //
+                  //     // SizedBox(
+                  //     //   width: 4,
+                  //     // ),
+                  //     // Container(
+                  //     //   decoration: BoxDecoration(
+                  //     //       border: Border.all(color: Color(0xff21cac8)),
+                  //     //       borderRadius: BorderRadius.circular(8),
+                  //     //       color: Colors.white),
+                  //     //   child: Container(
+                  //     //     margin: EdgeInsets.symmetric(
+                  //     //       vertical: 9,
+                  //     //       horizontal: 56,
+                  //     //     ),
+                  //     //     child: Text(
+                  //     //       'Выйти',
+                  //     //       style: GoogleFonts.poppins(
+                  //     //           fontSize: 14,
+                  //     //           fontWeight: FontWeight.w600,
+                  //     //           color: Color(0xff21cac8)),
+                  //     //     ),
+                  //     //   ),
+                  //     // ),
+                  //   ],
+                  // ),
                 ],
               ),
             ),

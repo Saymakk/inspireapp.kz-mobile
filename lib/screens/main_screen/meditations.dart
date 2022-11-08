@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:inspire/constants/constants.dart';
 import 'package:inspire/requests/meditations/main_screen_meditations.dart';
@@ -17,11 +18,8 @@ class Meditations extends StatefulWidget {
 }
 
 class _MeditationsState extends State<Meditations> {
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
+
+  GetStorage auth = GetStorage();
 
   @override
   Widget build(BuildContext context) {
@@ -115,8 +113,17 @@ class _MeditationsState extends State<Meditations> {
 
                     default:
                       // return rideList(snapshot.data, context);
-
-                      return MeditList(snapshot.data, context);
+                      if (snapshot.data == null) {
+                        print(auth.read('token'));
+                        return Container(
+                            margin: EdgeInsets.only(top: 20),
+                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(15), border: Border.all(color: Colors.black)),
+                            child: Container(
+                                margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                                child: Text('Извините, здесь пока ничего нет!', style: GoogleFonts.poppins(fontSize: 15, fontWeight: FontWeight.w400),)));
+                      } else {
+                        return MeditList(snapshot.data, context);
+                      }
                   }
                 },
               ),

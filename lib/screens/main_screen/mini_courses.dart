@@ -109,8 +109,24 @@ class _MiniCoursesState extends State<MiniCourses> {
 
                         default:
                           // return rideList(snapshot.data, context);
-print(snapshot.data.toString());
-                          return CoursesWidget(snapshot.data, context);
+                          if (snapshot.data == null) {
+                            return Container(
+                                margin: EdgeInsets.only(top: 20, bottom: 20),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15),
+                                    border: Border.all(color: Colors.black)),
+                                child: Container(
+                                    margin: EdgeInsets.symmetric(
+                                        vertical: 10, horizontal: 20),
+                                    child: Text(
+                                      'Извините, здесь пока ничего нет!',
+                                      style: GoogleFonts.poppins(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w400),
+                                    )));
+                          } else {
+                            return CoursesWidget(snapshot.data, context);
+                          }
                       }
                     },
                   ),

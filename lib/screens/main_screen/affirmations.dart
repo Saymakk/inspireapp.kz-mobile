@@ -113,8 +113,24 @@ class _AffirmationsState extends State<Affirmations> {
 
                 default:
                   // return rideList(snapshot.data, context);
-
-                  return AffirmList(snapshot.data, context);
+                  if (snapshot.data == null) {
+                    print(auth.read('token'));
+                    return Container(
+                        margin: EdgeInsets.only(top: 20),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            border: Border.all(color: Colors.black)),
+                        child: Container(
+                            margin: EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 20),
+                            child: Text(
+                              'Извините, здесь пока ничего нет!',
+                              style: GoogleFonts.poppins(
+                                  fontSize: 15, fontWeight: FontWeight.w400),
+                            )));
+                  } else {
+                    return AffirmList(snapshot.data, context);
+                  }
               }
             },
           ),
@@ -136,7 +152,7 @@ class _AffirmationsState extends State<Affirmations> {
             // padding: EdgeInsets.all(20),
             child: ListTile(
               leading: SvgPicture.network(
-                'https://inspireapp.kz/${affirm.icon}',
+                'https://inspireapp.kz/${affirm.subcategory['icon']}',
                 height: 24,
               ),
               title: Text(
@@ -150,10 +166,12 @@ class _AffirmationsState extends State<Affirmations> {
               trailing: GestureDetector(
                 onTap: () {
                   // affirmationsRequest();
-                  // Get.to(()=>SingleAffScreen());
+                  Get.to(()=>SingleAffScreen(),
+                      transition: Transition.rightToLeft,
+                      arguments: [affirm.title, affirm.length]);
                   // print(auth.read('token'));
-                  print(affirm.icon);
-                  print(affirm.title);
+                  // print(affirm.icon);
+                  // print(affirm.title);
                   // singleAffRequest();
                 },
                 child: Container(

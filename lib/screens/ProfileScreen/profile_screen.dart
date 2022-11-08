@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:inspire/constants/constants.dart';
 import 'package:inspire/requests/invited_users/invited_users_request.dart';
 import 'package:inspire/screens/ProfileScreen/profile_settings/profile_settings.dart';
+import 'package:inspire/screens/welcome_screen.dart';
 import 'package:skeletons/skeletons.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -24,11 +25,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   String phone = Get.arguments[3];
   String? photo = Get.arguments[4];
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
+ GetStorage auth = GetStorage();
 
   @override
   Widget build(BuildContext context) {
@@ -403,33 +400,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ],
                 ),
 
-                Container(
-                  margin: EdgeInsets.only(
-                    top: 52,
-                    bottom: 38,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        width: 165,
-                        height: 40,
-                        decoration: BoxDecoration(
-                          color: Color(0xff21cac8),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Center(
-                          child: Text(
-                            'Сохранить',
-                            style: GoogleFonts.poppins(
-                                textStyle: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.white)),
-                          ),
-                        ),
-                      ),
-                      Container(
+                Center(
+                  child: Container(
+                    margin: EdgeInsets.only(
+                      top: 20,
+                      bottom: 38,
+                    ),
+                    child: GestureDetector(
+                      onTap: () async {
+                        await auth.remove('token');
+                        Get.offAll(()=>WelcomeScreen());
+                      },
+                      child: Container(
                         width: 165,
                         height: 40,
                         decoration: BoxDecoration(
@@ -450,7 +432,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                         ),
                       ),
-                    ],
+                    ),
                   ),
                 ),
               ],

@@ -6,6 +6,7 @@ import 'package:inspire/constants/constants.dart';
 import 'package:inspire/requests/affirmations/main_screen_affirmations.dart';
 import 'package:inspire/requests/affirmations/single_affirm.dart';
 import 'package:inspire/requests/meditations/main_screen_meditations.dart';
+import 'package:inspire/screens/affirmation_screen/single_affirm/single_aff.dart';
 import 'package:inspire/screens/meditation_screen/player/player_screen.dart';
 import 'package:skeletons/skeletons.dart';
 
@@ -59,63 +60,63 @@ class _AllAffirmationsScreenState extends State<AllAffirmationsScreen> {
                       ),
                     );
                   case ConnectionState.waiting:
-                    return Column(children: [
-                      Container(
-                        padding: EdgeInsets.only(top: 10),
-                        child: SkeletonLine(
-                          style: SkeletonLineStyle(
-                              height: 48,
-                              width: double.infinity,
-                              borderRadius: BorderRadius.circular(8)),
+                    return Column(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.only(top: 10),
+                          child: SkeletonLine(
+                            style: SkeletonLineStyle(
+                                height: 48,
+                                width: double.infinity,
+                                borderRadius: BorderRadius.circular(8)),
+                          ),
                         ),
-                      ),
-                      Container(
-                        padding: EdgeInsets.only(top: 10),
-                        child: SkeletonLine(
-                          style: SkeletonLineStyle(
-                              height: 48,
-                              width: double.infinity,
-                              borderRadius: BorderRadius.circular(8)),
+                        Container(
+                          padding: EdgeInsets.only(top: 10),
+                          child: SkeletonLine(
+                            style: SkeletonLineStyle(
+                                height: 48,
+                                width: double.infinity,
+                                borderRadius: BorderRadius.circular(8)),
+                          ),
                         ),
-                      ),
-                      Container(
-                        padding: EdgeInsets.only(top: 10),
-                        child: SkeletonLine(
-                          style: SkeletonLineStyle(
-                              height: 48,
-                              width: double.infinity,
-                              borderRadius: BorderRadius.circular(8)),
+                        Container(
+                          padding: EdgeInsets.only(top: 10),
+                          child: SkeletonLine(
+                            style: SkeletonLineStyle(
+                                height: 48,
+                                width: double.infinity,
+                                borderRadius: BorderRadius.circular(8)),
+                          ),
                         ),
-                      ),
-                      Container(
-                        padding: EdgeInsets.only(top: 10),
-                        child: SkeletonLine(
-                          style: SkeletonLineStyle(
-                              height: 48,
-                              width: double.infinity,
-                              borderRadius: BorderRadius.circular(8)),
+                        Container(
+                          padding: EdgeInsets.only(top: 10),
+                          child: SkeletonLine(
+                            style: SkeletonLineStyle(
+                                height: 48,
+                                width: double.infinity,
+                                borderRadius: BorderRadius.circular(8)),
+                          ),
                         ),
-                      ),
-                      Container(
-                        padding: EdgeInsets.only(top: 10),
-                        child: SkeletonLine(
-                          style: SkeletonLineStyle(
-                              height: 48,
-                              width: double.infinity,
-                              borderRadius: BorderRadius.circular(8)),
+                        Container(
+                          padding: EdgeInsets.only(top: 10),
+                          child: SkeletonLine(
+                            style: SkeletonLineStyle(
+                                height: 48,
+                                width: double.infinity,
+                                borderRadius: BorderRadius.circular(8)),
+                          ),
                         ),
-                      ),
-                    ],);
+                      ],
+                    );
 
                   default:
-                  // return rideList(snapshot.data, context);
+                    // return rideList(snapshot.data, context);
 
                     return AffirmList(snapshot.data, context);
                 }
               },
             ),
-
-
           ],
         ),
       ),
@@ -125,7 +126,7 @@ class _AllAffirmationsScreenState extends State<AllAffirmationsScreen> {
   Widget AffirmList(List items, context) {
     return Column(
       children: items.map<Widget>(
-            (affirm) {
+        (affirm) {
           return Container(
             decoration: BoxDecoration(
               color: Const.lowgrey,
@@ -135,7 +136,7 @@ class _AllAffirmationsScreenState extends State<AllAffirmationsScreen> {
             // padding: EdgeInsets.all(20),
             child: ListTile(
               leading: SvgPicture.network(
-                'https://inspireapp.kz/${affirm.icon}',
+                'https://inspireapp.kz/${affirm.subcategory['icon']}',
                 height: 24,
               ),
               title: Text(
@@ -148,8 +149,11 @@ class _AllAffirmationsScreenState extends State<AllAffirmationsScreen> {
               ),
               trailing: GestureDetector(
                 onTap: () {
-                  // Get.to(()=>SingleAffScreen());
-                  singleAffRequest(affirm.id);
+                  // print(affirm.title);
+                  Get.to(() => SingleAffScreen(),
+                      transition: Transition.rightToLeft,
+                      arguments: [affirm.title, affirm.length]);
+                  // singleAffRequest(affirm.id);
                 },
                 child: Container(
                     decoration: BoxDecoration(

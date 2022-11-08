@@ -18,8 +18,9 @@ Future<void> userUpdateRequest(
   String lastName,
   int city,
   String description,
-   image,
+  image,
 ) async {
+  print(image.path);
 
   var headers = {
     'Accept': 'application/json',
@@ -31,13 +32,26 @@ Future<void> userUpdateRequest(
 
   request.headers.addAll(headers);
 
-
-  request.fields['name'] = name;
-  request.fields['last_name'] = lastName;
-  request.fields['description'] = description;
-  request.fields['city_id'] = city.toString();
-
-  request.files.add(await http.MultipartFile.fromPath("photo", image.path));
+  if (city != null || image.path != '') {
+    request.fields['name'] = name;
+    request.fields['last_name'] = lastName;
+    request.fields['description'] = description;
+    request.fields['city_id'] = city.toString();
+    request.files.add(await http.MultipartFile.fromPath("photo", image.path));
+  } else {
+    if (image.path == '') {
+      request.fields['name'] = name;
+      request.fields['last_name'] = lastName;
+      request.fields['description'] = description;
+      request.fields['city_id'] = city.toString();
+    } else {
+      if (city == null || image.path == '') {
+        request.fields['name'] = name;
+        request.fields['last_name'] = lastName;
+        request.fields['description'] = description;
+      }
+    }
+  }
 
   print(request.fields);
 
@@ -58,9 +72,9 @@ Future<void> userUpdateRequest(
 
     print('${data}');
 
-    await profileRequest();
+    // await profileRequest();
 
-    return Get.offAll(()=>BottomNav());
+    return Get.back();
 
     // Get.offAllNamed('/tokenCheckPage');
   } else {

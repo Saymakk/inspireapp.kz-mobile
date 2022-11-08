@@ -35,6 +35,9 @@ class _SingleAffScreenState extends State<SingleAffScreen>
     ;
   }
 
+  String title = Get.arguments[0];
+  int len = Get.arguments[1];
+
   void inactivePress() {
     setState(() {
       active = false;
@@ -97,7 +100,7 @@ class _SingleAffScreenState extends State<SingleAffScreen>
                         animatedTexts: [
                           ColorizeAnimatedText(
 
-                              'В моей жизни длительные и счастливые отношения',
+                              '$title',
                               textStyle: GoogleFonts.poppins(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w600,
@@ -106,7 +109,7 @@ class _SingleAffScreenState extends State<SingleAffScreen>
                               textAlign: TextAlign.center,
                               colors: colorizeColors,
                               speed: Duration(
-                                  milliseconds: 150 ),
+                                  milliseconds: 200 ),
                             // cursor: '',
                           ),
                         ],
@@ -119,7 +122,7 @@ class _SingleAffScreenState extends State<SingleAffScreen>
                   visible: !active,
                   child: Expanded(
                     child: Text(
-                      'В моей жизни длительные и счастливые отношения',
+                      '$title',
                       textAlign: TextAlign.center,
                       style: GoogleFonts.poppins(
                           color: Colors.white,

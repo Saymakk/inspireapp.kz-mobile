@@ -25,6 +25,7 @@ Future<List<meditationsList>> meditationsRequest() async {
     Iterable list = json.decode(responsed.body);
     List<meditationsList> datasheet = list.map((f) => meditationsList.fromJson(f)).toList();
 
+    print(list.toString());
 
     return Future<List<meditationsList>>.value(datasheet);
   } else {
