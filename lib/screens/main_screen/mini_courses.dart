@@ -111,7 +111,7 @@ class _MiniCoursesState extends State<MiniCourses> {
                           // return rideList(snapshot.data, context);
                           if (snapshot.data == null) {
                             return Container(
-                                margin: EdgeInsets.only(top: 20, bottom: 20),
+                                margin: EdgeInsets.only(top: 20, bottom: 20, right: 50),
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(15),
                                     border: Border.all(color: Colors.black)),

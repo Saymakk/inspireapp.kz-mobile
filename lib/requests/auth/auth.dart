@@ -42,7 +42,7 @@ Future<void> otpAuth1(phone) async {
 
     debugPrint(auth.read('reg_code').toString());
 
-    Get.offAll(() => AuthorizationScreen2(),
+    Get.to(() => AuthorizationScreen2(),
         transition: Transition.rightToLeft,
         arguments: [data['data']['code'].toString(), r_phone.toString()]);
   } else {

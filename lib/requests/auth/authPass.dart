@@ -41,7 +41,7 @@ Future<void> authPass(code, phone) async {
     auth.write('reg_code', data['data']['code'].toString());
     auth.write('token', data['data']['token'].toString());
 
-    Get.offAll(
+    Get.to(
             () => BottomNav(),
         transition: Transition.rightToLeft,
         arguments: [data['data']]

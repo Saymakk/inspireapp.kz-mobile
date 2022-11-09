@@ -18,14 +18,13 @@ class RegisteringScreen extends StatefulWidget {
 }
 
 class _RegisteringScreenState extends State<RegisteringScreen> {
-
   GetStorage auth = GetStorage();
 
   TextEditingController nameController = TextEditingController();
   TextEditingController passController = TextEditingController();
   TextEditingController codeController = TextEditingController();
 
-var pass = Get.arguments[2];
+  var pass = Get.arguments[2];
 
   @override
   Widget build(BuildContext context) {
@@ -114,7 +113,8 @@ var pass = Get.arguments[2];
                   Padding(
                     padding: const EdgeInsets.only(bottom: 20),
                     child: TextFormField(
-                        controller: passController..text = int.parse(pass).toString(),
+                        controller: passController
+                          ..text = int.parse(pass).toString(),
                         decoration: InputDecoration(
                           hintText: 'Пароль',
                           hintStyle: Const.hint_text_style,
@@ -142,8 +142,8 @@ var pass = Get.arguments[2];
                     onTap: () {
                       // Get.to(() => RegAgreed(), transition: Transition.rightToLeft);
                       // otpVerifyFinal(codeController.text, passController.text, nameController.text );
-                      otpVerifyFinal(codeController.text, passController.text, nameController.text);
-
+                      otpVerifyFinal(codeController.text, passController.text,
+                          nameController.text);
                     },
                     child: Container(
                       margin: EdgeInsets.only(bottom: 10),
@@ -160,7 +160,6 @@ var pass = Get.arguments[2];
                       ),
                     ),
                   ),
-
                 ],
               ),
             ),
@@ -185,7 +184,11 @@ class _RegAgreedState extends State<RegAgreed> {
       color: Const.greybg,
       child: Scaffold(
         body: Padding(
-          padding: const EdgeInsets.only(top: 85, left: 24, right: 24, ),
+          padding: const EdgeInsets.only(
+            top: 85,
+            left: 24,
+            right: 24,
+          ),
           child: Center(
             child: Column(
               children: [
@@ -216,18 +219,25 @@ class _RegAgreedState extends State<RegAgreed> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    // print('Хорошо');
-                    // Get.to(() => MainScreen(),
-                    Get.offAll(() => BottomNav(),
-                        transition: Transition.rightToLeft);
+                    Get.defaultDialog(
+                      title: 'Поздравляем с регистрацией!',
+                      content: Container(
+                        child: Text(
+                            'Вы унаспешно зарегестрированы! Пока ваш аккаунт не активируют, большая часть функций будет вам недоступ'),
+                     
+                     
+                      ),
+                      confirm: TextButton(onPressed: (){}, child: Text('Продолжить'))
+                    ); // Get.to(() => MainScreen(),
+                    // Get.offAll(() => BottomNav(),
+                    //     transition: Transition.rightToLeft);
                   },
                   child: Container(
                     width: double.infinity,
                     height: 40,
                     decoration: Const.cont_turq_circ8,
                     // padding: EdgeInsets.only(top: 5),
-                    margin: EdgeInsets.only(
-                        bottom: 66),
+                    margin: EdgeInsets.only(bottom: 66),
                     child: Center(
                       child: Text(
                         'Хорошо',

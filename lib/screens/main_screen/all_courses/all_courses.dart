@@ -51,7 +51,7 @@ class _AllCoursesScreenState extends State<AllCoursesScreen> {
                   builder: (BuildContext context, AsyncSnapshot snapshot) {
                     switch (snapshot.connectionState) {
                       case ConnectionState.none:
-                        return  Container(
+                        return Container(
                           margin: EdgeInsets.only(top: 24, right: 15),
                           padding: EdgeInsets.only(top: 10),
                           child: SkeletonLine(
@@ -63,54 +63,72 @@ class _AllCoursesScreenState extends State<AllCoursesScreen> {
                         );
                       case ConnectionState.waiting:
                         return Column(
-
                           children: [
-                          Container(
-                            margin: EdgeInsets.only(top: 24, right: 15),
-                            padding: EdgeInsets.only(top: 10),
-                            child: SkeletonLine(
-                              style: SkeletonLineStyle(
-                                  height: 150,
-                                  width: 259,
-                                  borderRadius: BorderRadius.circular(15)),
+                            Container(
+                              margin: EdgeInsets.only(top: 24, right: 15),
+                              padding: EdgeInsets.only(top: 10),
+                              child: SkeletonLine(
+                                style: SkeletonLineStyle(
+                                    height: 150,
+                                    width: 259,
+                                    borderRadius: BorderRadius.circular(15)),
+                              ),
                             ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(top: 24, right: 15),
-                            padding: EdgeInsets.only(top: 10),
-                            child: SkeletonLine(
-                              style: SkeletonLineStyle(
-                                  height: 150,
-                                  width: 259,
-                                  borderRadius: BorderRadius.circular(15)),
+                            Container(
+                              margin: EdgeInsets.only(top: 24, right: 15),
+                              padding: EdgeInsets.only(top: 10),
+                              child: SkeletonLine(
+                                style: SkeletonLineStyle(
+                                    height: 150,
+                                    width: 259,
+                                    borderRadius: BorderRadius.circular(15)),
+                              ),
                             ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(top: 24, right: 15),
-                            padding: EdgeInsets.only(top: 10),
-                            child: SkeletonLine(
-                              style: SkeletonLineStyle(
-                                  height: 150,
-                                  width: 259,
-                                  borderRadius: BorderRadius.circular(15)),
+                            Container(
+                              margin: EdgeInsets.only(top: 24, right: 15),
+                              padding: EdgeInsets.only(top: 10),
+                              child: SkeletonLine(
+                                style: SkeletonLineStyle(
+                                    height: 150,
+                                    width: 259,
+                                    borderRadius: BorderRadius.circular(15)),
+                              ),
                             ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(top: 24, right: 15),
-                            padding: EdgeInsets.only(top: 10),
-                            child: SkeletonLine(
-                              style: SkeletonLineStyle(
-                                  height: 150,
-                                  width: 259,
-                                  borderRadius: BorderRadius.circular(15)),
+                            Container(
+                              margin: EdgeInsets.only(top: 24, right: 15),
+                              padding: EdgeInsets.only(top: 10),
+                              child: SkeletonLine(
+                                style: SkeletonLineStyle(
+                                    height: 150,
+                                    width: 259,
+                                    borderRadius: BorderRadius.circular(15)),
+                              ),
                             ),
-                          ),
-                        ],);
+                          ],
+                        );
 
                       default:
                         // return rideList(snapshot.data, context);
-
-                        return CoursesWidget(snapshot.data, context);
+                        if (snapshot.data == null) {
+                          return Center(
+                            child: Container(
+                                margin: EdgeInsets.only(top: 20, bottom: 20),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15),
+                                    border: Border.all(color: Colors.black)),
+                                child: Container(
+                                    margin: EdgeInsets.symmetric(
+                                        vertical: 10, horizontal: 20),
+                                    child: Text(
+                                      'Извините, здесь пока ничего нет!',
+                                      style: GoogleFonts.poppins(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w400),
+                                    ))),
+                          );
+                        } else {
+                          return CoursesWidget(snapshot.data, context);
+                        }
                     }
                   },
                 ),
@@ -137,16 +155,14 @@ class _AllCoursesScreenState extends State<AllCoursesScreen> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      Get.to(
-                        () => SingleCourseScreen(),
-                        transition: Transition.rightToLeft,
-                        arguments: [
-                          course.title,
-                          course.description,
-                          course.length.toString(),
-                          course.material_path,
-                        ]
-                      );
+                      Get.to(() => SingleCourseScreen(),
+                          transition: Transition.rightToLeft,
+                          arguments: [
+                            course.title,
+                            course.description,
+                            course.length.toString(),
+                            course.material_path,
+                          ]);
                     },
                     child: Container(
                       margin: EdgeInsets.only(bottom: 12),

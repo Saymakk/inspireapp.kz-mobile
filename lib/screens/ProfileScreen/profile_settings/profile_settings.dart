@@ -9,9 +9,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:inspire/constants/constants.dart';
 import 'package:inspire/requests/lists/country_list_request.dart';
+import 'package:inspire/requests/profile/profile_delete.dart';
 import 'package:inspire/requests/profile/profile_settings_requests.dart';
 import 'package:inspire/screens/registration/registering_screen.dart';
 import 'package:inspire/screens/welcome_screen.dart';
+import 'package:oktoast/oktoast.dart';
 import 'package:skeletons/skeletons.dart';
 
 import '../../../requests/lists/cities_list_request.dart';
@@ -96,7 +98,27 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
             ),
             actions: [
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Get.defaultDialog(
+                    title: 'Удаление аккаунта',
+                    content: Container(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text('Вы действительно хотите удалить аккаунт?'),
+                        ],
+                      ),
+                    ),
+                    confirm: TextButton(
+                      onPressed: () => profile_delete(),
+                      child: Text('Да', style: TextStyle(color: Colors.red),),
+                    ),
+                    cancel: TextButton(
+                      onPressed: () {},
+                      child: Text('Нет'),
+                    ),
+                  );
+                },
                 icon: Icon(
                   Icons.delete_forever,
                   color: Colors.red,

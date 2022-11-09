@@ -6,9 +6,12 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:inspire/constants/app_bar.dart';
 import 'package:inspire/constants/constants.dart';
+import 'package:inspire/requests/affirmations/main_screen_affirmations.dart';
+import 'package:skeletons/skeletons.dart';
 
 import '../ProfileScreen/profile_screen.dart';
 import 'modal_bottom_sheet.dart';
+import 'single_affirm/single_aff.dart';
 
 class AffirmationScreen extends StatefulWidget {
   const AffirmationScreen({Key? key}) : super(key: key);
@@ -87,7 +90,7 @@ class _AffirmationScreenState extends State<AffirmationScreen> {
                   child: Container(
                     margin: EdgeInsets.symmetric(horizontal: 17, vertical: 18),
                     child: GestureDetector(
-                      onTap: (){
+                      onTap: () {
                         showModalBottomSheet(
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15),
@@ -98,7 +101,6 @@ class _AffirmationScreenState extends State<AffirmationScreen> {
                               return ModalBottomSheet();
                             });
                       },
-
                       child: Row(
                         children: [
                           Image.asset(
@@ -147,460 +149,213 @@ class _AffirmationScreenState extends State<AffirmationScreen> {
                       color: Color(0xffEDEDED),
                     )),
 
-                Container(
-                  margin: EdgeInsets.only(
-                    bottom: 12,
-                  ),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: Color(0xff282828)),
-                  child: Container(
-                    margin: EdgeInsets.symmetric(horizontal: 17, vertical: 18),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Image.asset(
-                          Const.icns + 'heart_w.png',
-                          width: 40,
-                          height: 40,
-                        ),
-                        SizedBox(
-                          width: 23,
-                        ),
-
-                        Expanded(
-                          child: Text(
-                            'Благодарность',
-                            style: GoogleFonts.poppins(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 14),
+                FutureBuilder(
+                  future: affirmationsRequest(),
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    switch (snapshot.connectionState) {
+                      case ConnectionState.none:
+                        return Container(
+                          padding: EdgeInsets.only(top: 10),
+                          child: SkeletonLine(
+                            style: SkeletonLineStyle(
+                                height: 48,
+                                width: double.infinity,
+                                borderRadius: BorderRadius.circular(8)),
                           ),
-                        ),
-                        Image.asset(
-                          'assets/icons/lock.png',
-                          width: 45,
-                          height: 45,
-                        ),
-                        // Container(
-                        //   decoration: BoxDecoration(
-                        //     color: Colors.white,
-                        //     shape: BoxShape.circle,
-                        //   ),
-                        //   width: 45,
-                        //   height: 45,
-                        //   child: Center(
-                        //     child: Container(
-                        //       // margin: EdgeInsets.all(11),
-                        //         child: Text(
-                        //           '8',
-                        //           style: GoogleFonts.poppins(
-                        //               fontSize: 22, color: Color(0xff21cac8)),
-                        //         )),
-                        //   ),
-                        // ),
-                      ],
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(
-                    bottom: 12,
-                  ),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: Color(0xff282828)),
-                  child: Container(
-                    margin: EdgeInsets.symmetric(horizontal: 17, vertical: 18),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Image.asset(
-                          Const.icns + 'heart_w.png',
-                          width: 40,
-                          height: 40,
-                        ),
-                        SizedBox(
-                          width: 23,
-                        ),
+                        );
+                      case ConnectionState.waiting:
+                        return Column(
+                          children: [
+                            Container(
+                              padding: EdgeInsets.only(top: 10),
+                              child: SkeletonLine(
+                                style: SkeletonLineStyle(
+                                    height: 48,
+                                    width: double.infinity,
+                                    borderRadius: BorderRadius.circular(8)),
+                              ),
+                            ),
+                            Container(
+                              padding: EdgeInsets.only(top: 10),
+                              child: SkeletonLine(
+                                style: SkeletonLineStyle(
+                                    height: 48,
+                                    width: double.infinity,
+                                    borderRadius: BorderRadius.circular(8)),
+                              ),
+                            ),
+                            Container(
+                              padding: EdgeInsets.only(top: 10),
+                              child: SkeletonLine(
+                                style: SkeletonLineStyle(
+                                    height: 48,
+                                    width: double.infinity,
+                                    borderRadius: BorderRadius.circular(8)),
+                              ),
+                            ),
+                            Container(
+                              padding: EdgeInsets.only(top: 10),
+                              child: SkeletonLine(
+                                style: SkeletonLineStyle(
+                                    height: 48,
+                                    width: double.infinity,
+                                    borderRadius: BorderRadius.circular(8)),
+                              ),
+                            ),
+                            Container(
+                              padding: EdgeInsets.only(top: 10),
+                              child: SkeletonLine(
+                                style: SkeletonLineStyle(
+                                    height: 48,
+                                    width: double.infinity,
+                                    borderRadius: BorderRadius.circular(8)),
+                              ),
+                            ),
+                          ],
+                        );
 
-                        Expanded(
-                          child: Text(
-                            'Богатство',
-                            style: GoogleFonts.poppins(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 14),
-                          ),
-                        ),
-                        Image.asset(
-                          'assets/icons/lock.png',
-                          width: 45,
-                          height: 45,
-                        ),
-                        // Container(
-                        //   decoration: BoxDecoration(
-                        //     color: Colors.white,
-                        //     shape: BoxShape.circle,
-                        //   ),
-                        //   width: 45,
-                        //   height: 45,
-                        //   child: Center(
-                        //     child: Container(
-                        //       // margin: EdgeInsets.all(11),
-                        //         child: Text(
-                        //           '8',
-                        //           style: GoogleFonts.poppins(
-                        //               fontSize: 22, color: Color(0xff21cac8)),
-                        //         )),
-                        //   ),
-                        // ),
-                      ],
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(
-                    bottom: 12,
-                  ),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: Color(0xff282828)),
-                  child: Container(
-                    margin: EdgeInsets.symmetric(horizontal: 17, vertical: 18),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Image.asset(
-                          Const.icns + 'heart_w.png',
-                          width: 40,
-                          height: 40,
-                        ),
-                        SizedBox(
-                          width: 23,
-                        ),
+                      default:
+                        // return rideList(snapshot.data, context);
 
-                        Expanded(
-                          child: Text(
-                            'Желания',
-                            style: GoogleFonts.poppins(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 14),
-                          ),
-                        ),
-                        Image.asset(
-                          'assets/icons/lock.png',
-                          width: 45,
-                          height: 45,
-                        ),
-                        // Container(
-                        //   decoration: BoxDecoration(
-                        //     color: Colors.white,
-                        //     shape: BoxShape.circle,
-                        //   ),
-                        //   width: 45,
-                        //   height: 45,
-                        //   child: Center(
-                        //     child: Container(
-                        //       // margin: EdgeInsets.all(11),
-                        //         child: Text(
-                        //           '8',
-                        //           style: GoogleFonts.poppins(
-                        //               fontSize: 22, color: Color(0xff21cac8)),
-                        //         )),
-                        //   ),
-                        // ),
-                      ],
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(
-                    bottom: 12,
-                  ),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: Color(0xff282828)),
-                  child: Container(
-                    margin: EdgeInsets.symmetric(horizontal: 17, vertical: 18),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Image.asset(
-                          Const.icns + 'heart_w.png',
-                          width: 40,
-                          height: 40,
-                        ),
-                        SizedBox(
-                          width: 23,
-                        ),
-
-                        Expanded(
-                          child: Text(
-                            'Защита',
-                            style: GoogleFonts.poppins(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 14),
-                          ),
-                        ),
-                        Image.asset(
-                          'assets/icons/lock.png',
-                          width: 45,
-                          height: 45,
-                        ),
-                        // Container(
-                        //   decoration: BoxDecoration(
-                        //     color: Colors.white,
-                        //     shape: BoxShape.circle,
-                        //   ),
-                        //   width: 45,
-                        //   height: 45,
-                        //   child: Center(
-                        //     child: Container(
-                        //       // margin: EdgeInsets.all(11),
-                        //         child: Text(
-                        //           '8',
-                        //           style: GoogleFonts.poppins(
-                        //               fontSize: 22, color: Color(0xff21cac8)),
-                        //         )),
-                        //   ),
-                        // ),
-                      ],
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(
-                    bottom: 12,
-                  ),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: Color(0xff282828)),
-                  child: Container(
-                    margin: EdgeInsets.symmetric(horizontal: 17, vertical: 18),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Image.asset(
-                          Const.icns + 'heart_w.png',
-                          width: 40,
-                          height: 40,
-                        ),
-                        SizedBox(
-                          width: 23,
-                        ),
-
-                        Expanded(
-                          child: Text(
-                            'Здоровье',
-                            style: GoogleFonts.poppins(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 14),
-                          ),
-                        ),
-                        Image.asset(
-                          'assets/icons/lock.png',
-                          width: 45,
-                          height: 45,
-                        ),
-                        // Container(
-                        //   decoration: BoxDecoration(
-                        //     color: Colors.white,
-                        //     shape: BoxShape.circle,
-                        //   ),
-                        //   width: 45,
-                        //   height: 45,
-                        //   child: Center(
-                        //     child: Container(
-                        //       // margin: EdgeInsets.all(11),
-                        //         child: Text(
-                        //           '8',
-                        //           style: GoogleFonts.poppins(
-                        //               fontSize: 22, color: Color(0xff21cac8)),
-                        //         )),
-                        //   ),
-                        // ),
-                      ],
-                    ),
-                  ),
+                        if (snapshot.data == null) {
+                          return Center(
+                            child: Container(
+                                margin: EdgeInsets.only(top: 20, bottom: 20),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15),
+                                    border: Border.all(color: Colors.black)),
+                                child: Container(
+                                    margin: EdgeInsets.symmetric(
+                                        vertical: 10, horizontal: 20),
+                                    child: Text(
+                                      'Извините, здесь пока ничего нет!',
+                                      style: GoogleFonts.poppins(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w400),
+                                    ))),
+                          );
+                        } else {
+                          return AffirmList(snapshot.data, context);
+                        }
+                    }
+                  },
                 ),
 
-                Container(
-                  margin: EdgeInsets.only(
-                    bottom: 12,
-                  ),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: Color(0xff282828)),
-                  child: Container(
-                    margin: EdgeInsets.symmetric(horizontal: 17, vertical: 18),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Image.asset(
-                          Const.icns + 'heart_w.png',
-                          width: 40,
-                          height: 40,
-                        ),
-                        SizedBox(
-                          width: 23,
-                        ),
+                // Container(
+                //   margin: EdgeInsets.only(
+                //     bottom: 12,
+                //   ),
+                //   decoration: BoxDecoration(
+                //       borderRadius: BorderRadius.circular(15),
+                //       color: Color(0xff282828)),
+                //   child: Container(
+                //     margin: EdgeInsets.symmetric(horizontal: 17, vertical: 18),
+                //     child: Row(
+                //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //       children: [
+                //         Image.asset(
+                //           Const.icns + 'heart_w.png',
+                //           width: 40,
+                //           height: 40,
+                //         ),
+                //         SizedBox(
+                //           width: 23,
+                //         ),
+                //
+                //         Expanded(
+                //           child: Text(
+                //             'Благодарность',
+                //             style: GoogleFonts.poppins(
+                //                 color: Colors.white,
+                //                 fontWeight: FontWeight.w600,
+                //                 fontSize: 14),
+                //           ),
+                //         ),
+                //         Image.asset(
+                //           'assets/icons/lock.png',
+                //           width: 45,
+                //           height: 45,
+                //         ),
+                //         // Container(
+                //         //   decoration: BoxDecoration(
+                //         //     color: Colors.white,
+                //         //     shape: BoxShape.circle,
+                //         //   ),
+                //         //   width: 45,
+                //         //   height: 45,
+                //         //   child: Center(
+                //         //     child: Container(
+                //         //       // margin: EdgeInsets.all(11),
+                //         //         child: Text(
+                //         //           '8',
+                //         //           style: GoogleFonts.poppins(
+                //         //               fontSize: 22, color: Color(0xff21cac8)),
+                //         //         )),
+                //         //   ),
+                //         // ),
+                //       ],
+                //     ),
+                //   ),
+                // ),
 
-                        Expanded(
-                          child: Text(
-                            'Знания',
-                            style: GoogleFonts.poppins(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 14),
-                          ),
-                        ),
-                        Image.asset(
-                          'assets/icons/lock.png',
-                          width: 45,
-                          height: 45,
-                        ),
-                        // Container(
-                        //   decoration: BoxDecoration(
-                        //     color: Colors.white,
-                        //     shape: BoxShape.circle,
-                        //   ),
-                        //   width: 45,
-                        //   height: 45,
-                        //   child: Center(
-                        //     child: Container(
-                        //       // margin: EdgeInsets.all(11),
-                        //         child: Text(
-                        //           '8',
-                        //           style: GoogleFonts.poppins(
-                        //               fontSize: 22, color: Color(0xff21cac8)),
-                        //         )),
-                        //   ),
-                        // ),
-                      ],
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(
-                    bottom: 12,
-                  ),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: Color(0xff282828)),
-                  child: Container(
-                    margin: EdgeInsets.symmetric(horizontal: 17, vertical: 18),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Image.asset(
-                          Const.icns + 'heart_w.png',
-                          width: 40,
-                          height: 40,
-                        ),
-                        SizedBox(
-                          width: 23,
-                        ),
-
-                        Expanded(
-                          child: Text(
-                            'Истории',
-                            style: GoogleFonts.poppins(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 14),
-                          ),
-                        ),
-                        Image.asset(
-                          'assets/icons/lock.png',
-                          width: 45,
-                          height: 45,
-                        ),
-                        // Container(
-                        //   decoration: BoxDecoration(
-                        //     color: Colors.white,
-                        //     shape: BoxShape.circle,
-                        //   ),
-                        //   width: 45,
-                        //   height: 45,
-                        //   child: Center(
-                        //     child: Container(
-                        //       // margin: EdgeInsets.all(11),
-                        //         child: Text(
-                        //           '8',
-                        //           style: GoogleFonts.poppins(
-                        //               fontSize: 22, color: Color(0xff21cac8)),
-                        //         )),
-                        //   ),
-                        // ),
-                      ],
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(
-                    bottom: 120,
-                  ),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: Color(0xff282828)),
-                  child: Container(
-                    margin: EdgeInsets.symmetric(horizontal: 17, vertical: 18),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Image.asset(
-                          Const.icns + 'heart_w.png',
-                          width: 40,
-                          height: 40,
-                        ),
-                        SizedBox(
-                          width: 23,
-                        ),
-
-                        Expanded(
-                          child: Text(
-                            'Любовь',
-                            style: GoogleFonts.poppins(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 14),
-                          ),
-                        ),
-                        Image.asset(
-                          'assets/icons/lock.png',
-                          width: 45,
-                          height: 45,
-                        ),
-                        // Container(
-                        //   decoration: BoxDecoration(
-                        //     color: Colors.white,
-                        //     shape: BoxShape.circle,
-                        //   ),
-                        //   width: 45,
-                        //   height: 45,
-                        //   child: Center(
-                        //     child: Container(
-                        //       // margin: EdgeInsets.all(11),
-                        //         child: Text(
-                        //           '8',
-                        //           style: GoogleFonts.poppins(
-                        //               fontSize: 22, color: Color(0xff21cac8)),
-                        //         )),
-                        //   ),
-                        // ),
-                      ],
-                    ),
-                  ),
+                SizedBox(
+                  height: 100,
                 ),
               ],
             ),
           ),
         ),
       ),
+    );
+  }
+
+  Widget AffirmList(List items, context) {
+    return Column(
+      children: items.map<Widget>(
+        (affirm) {
+          return Container(
+            decoration: BoxDecoration(
+              color: Const.lowgrey,
+              borderRadius: BorderRadius.circular(15),
+            ),
+            margin: EdgeInsets.only(top: 12),
+            // padding: EdgeInsets.all(20),
+            child: ListTile(
+              leading: SvgPicture.network(
+                'https://inspireapp.kz/${affirm.subcategory['icon']}',
+                height: 24,
+              ),
+              title: Text(
+                affirm.title,
+                style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 14,
+                        color: Const.semigrey)),
+              ),
+              trailing: GestureDetector(
+                onTap: () {
+                  // print(affirm.title);
+                  Get.to(() => SingleAffScreen(),
+                      transition: Transition.rightToLeft,
+                      arguments: [affirm.title, affirm.length]);
+                  // singleAffRequest(affirm.id);
+                },
+                child: Container(
+                    decoration: BoxDecoration(
+                        color: Const.turq,
+                        borderRadius: BorderRadius.circular(8)),
+                    height: 40,
+                    width: 45,
+                    child: Icon(
+                      Icons.add,
+                      color: Colors.white,
+                    )),
+              ),
+            ),
+          );
+        },
+      ).toList(),
     );
   }
 }

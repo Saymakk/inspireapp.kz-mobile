@@ -53,26 +53,16 @@ Future<void> userUpdateRequest(
     }
   }
 
-  // print(request.fields);
 
   var response = await request.send();
 
   var responsed = await http.Response.fromStream(response);
 
   print(response.statusCode);
-  // print(responsed.body);
 
   if (response.statusCode == 200) {
     var data = json.decode(responsed.body);
 
-    // print('response.statusCode : ${response.statusCode}');
-
-    // debugPrint(data.toString());
-    // print(response.statusCode);
-
-    // print('${data}');
-
-    // await profileRequest();
 
     return Get.back();
 
