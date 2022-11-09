@@ -92,7 +92,7 @@ class _AuthorizationScreen2State extends State<AuthorizationScreen2> {
                     margin: EdgeInsets.only(bottom: 20),
                     decoration: Const.input_cont_grey_circ8,
                     child: TextFormField(
-                        controller: passwordController..text = Get.arguments[0],
+                        controller: passwordController..text = Get.arguments[0].toString(),
                         decoration: InputDecoration(
                           hintText: 'Пароль',
                           hintStyle: Const.hint_text_style,

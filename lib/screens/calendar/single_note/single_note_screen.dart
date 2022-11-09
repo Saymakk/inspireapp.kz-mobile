@@ -11,6 +11,14 @@ class SingleNoteScreen extends StatefulWidget {
 }
 
 class _SingleNoteScreenState extends State<SingleNoteScreen> {
+
+  String title = Get.arguments[0];
+  String description = Get.arguments[1];
+  String emoji = Get.arguments[2];
+  String created_at_date = Get.arguments[3];
+  String profile_photo_url = Get.arguments[4];
+  String created_at_time = Get.arguments[5];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +37,7 @@ class _SingleNoteScreenState extends State<SingleNoteScreen> {
         title: Row(
           children: [
             Text(
-              '9 сентября, 2022',
+              created_at_date,
               style: GoogleFonts.poppins(
                 textStyle: TextStyle(
                     fontSize: 20,
@@ -58,7 +66,7 @@ class _SingleNoteScreenState extends State<SingleNoteScreen> {
                       width: 3,
                     ),
                     Text(
-                      '17:53',
+                      created_at_time,
                       style: GoogleFonts.poppins(
                         textStyle: TextStyle(
                             fontSize: 12,
@@ -87,10 +95,7 @@ class _SingleNoteScreenState extends State<SingleNoteScreen> {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
                     color: Colors.black),
-                child: Image.asset(
-                  Const.imgs + 'photo.png',
-                  fit: BoxFit.fill,
-                ),
+                child: Image.network(profile_photo_url, fit: BoxFit.fill,)
               ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 12),
@@ -105,7 +110,7 @@ class _SingleNoteScreenState extends State<SingleNoteScreen> {
                       width: 12,
                     ),
                     Text(
-                      'Заметка этого дня',
+                      title,
                       style: GoogleFonts.poppins(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
@@ -118,7 +123,7 @@ class _SingleNoteScreenState extends State<SingleNoteScreen> {
               ),
               Container(
                 child: Text(
-                  'Congue lobortis mauris aliquet mi, nulla sed. Risus odio commodo metus vestibulum. Mi volutpat vestibulum pharetra fringilla consectetur dignissim sociis. Consequat at amet aliquam sodales sit vitae ultrices quam non. Sed morbi quis fringilla urna, ut senectus mattis. Morbi sit blandit.',
+                  description,
                   style: GoogleFonts.poppins(
                     fontSize: 14,
                     fontWeight: FontWeight.w400,

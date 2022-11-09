@@ -8,6 +8,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:inspire/constants/bottom_app_bar.dart';
 import 'package:inspire/requests/profile/profile.dart';
+import 'package:inspire/screens/ProfileScreen/profile_screen.dart';
 import 'package:inspire/screens/registration/reg_screen_two.dart';
 import 'package:oktoast/oktoast.dart';
 
@@ -53,7 +54,6 @@ Future<void> userUpdateRequest(
     }
   }
 
-
   var response = await request.send();
 
   var responsed = await http.Response.fromStream(response);
@@ -61,10 +61,16 @@ Future<void> userUpdateRequest(
   print(response.statusCode);
 
   if (response.statusCode == 200) {
-    var data = json.decode(responsed.body);
+    // var data = json.decode(responsed.body);
 
+   return Get.defaultDialog(
+      title: 'Сохранить изменения',
+      content: Text('Вы внесли изменения в свой аккаунт.'),
+      confirm: TextButton(
+          onPressed: () => Get.back(),
+          child: Text('Продолжить')),
+    );
 
-    return Get.back();
 
     // Get.offAllNamed('/tokenCheckPage');
   } else {

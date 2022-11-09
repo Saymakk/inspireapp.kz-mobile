@@ -7,6 +7,8 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:inspire/constants/constants.dart';
+import 'package:inspire/controllers/success_controller.dart';
+import 'package:inspire/requests/create_note/create_note.dart';
 
 class AddMoodScreen extends StatefulWidget {
   const AddMoodScreen({Key? key}) : super(key: key);
@@ -16,6 +18,31 @@ class AddMoodScreen extends StatefulWidget {
 }
 
 class _AddMoodScreenState extends State<AddMoodScreen> {
+  NoteStatusController noteStatusController = Get.put(NoteStatusController());
+
+  TextEditingController noteController = TextEditingController();
+
+  @override
+  void dispose() {
+    noteController.dispose();
+    super.dispose();
+  }
+
+  File? image;
+
+  Future pickImage(ImageSource source) async {
+    try {
+      final image = await ImagePicker().pickImage(source: source, maxHeight: 768, maxWidth: 1024);
+      if (image == null) return;
+
+      final imageTemp = File(image.path);
+
+      setState(() => this.image = imageTemp);
+    } on PlatformException catch (e) {
+      print('Failed $e');
+    }
+  }
+
   bool s1 = false;
   bool s2 = false;
   bool s3 = false;
@@ -31,27 +58,15 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
 
   bool isVisible = true;
 
-  TextEditingController controller = TextEditingController();
+  late String smile;
 
   @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
-
-  File? image;
-
-  Future pickImage(ImageSource source) async {
-    try {
-      final image = await ImagePicker().pickImage(source: source);
-      if (image == null) return;
-
-      final imageTemp = File(image.path);
-
-      setState(() => this.image = imageTemp);
-    } on PlatformException catch (e) {
-      print('Failed $e');
-    }
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    setState(() {
+      smile = '';
+    });
   }
 
   @override
@@ -78,541 +93,693 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 24),
-              margin: EdgeInsets.only(bottom: 49, top: 36),
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              s1 = !s1;
-                              s2 = false;
-                              s3 = false;
-                              s4 = false;
-                              s5 = false;
-                              s6 = false;
-                              s7 = false;
-                              s8 = false;
-                              s9 = false;
-                              s10 = false;
-                              s11 = false;
-                              s12 = false;
-                            });
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: s1 == true ? Color(0xffdadada) : null),
-                            child: DottedBorder(
-                              borderType: BorderType.RRect,
-                              radius: Radius.circular(15),
-                              color: Color(0xffDADADA),
-                              // padding: EdgeInsets.all(6),
-                              child: ClipRRect(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(12)),
-                                child: Container(
-                                  padding: EdgeInsets.all(10),
-                                  // height: 66,
-                                  // width: 66,
-                                  child: Image.asset(
-                                    Const.icns + 'smile_1.png',
-                                    height: 46,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              s1 = false;
-                              s2 = !s2;
-                              s3 = false;
-                              s4 = false;
-                              s5 = false;
-                              s6 = false;
-                              s7 = false;
-                              s8 = false;
-                              s9 = false;
-                              s10 = false;
-                              s11 = false;
-                              s12 = false;
-                            });
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: s2 == true ? Color(0xffdadada) : null),
-                            child: DottedBorder(
-                              borderType: BorderType.RRect,
-                              radius: Radius.circular(15),
-                              color: Color(0xffDADADA),
-                              // padding: EdgeInsets.all(6),
-                              child: ClipRRect(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(12)),
-                                child: Container(
-                                  padding: EdgeInsets.all(10),
-                                  // height: 66,
-                                  // width: 66,
-                                  child: Image.asset(
-                                    Const.icns + 'smile_2.png',
-                                    height: 46,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              s3 = !s3;
-                              s2 = false;
-                              s1 = false;
-                              s4 = false;
-                              s5 = false;
-                              s6 = false;
-                              s7 = false;
-                              s8 = false;
-                              s9 = false;
-                              s10 = false;
-                              s11 = false;
-                              s12 = false;
-                            });
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: s3 == true ? Color(0xffdadada) : null),
-                            child: DottedBorder(
-                              borderType: BorderType.RRect,
-                              radius: Radius.circular(15),
-                              color: Color(0xffDADADA),
-                              // padding: EdgeInsets.all(6),
-                              child: ClipRRect(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(12)),
-                                child: Container(
-                                  padding: EdgeInsets.all(10),
-                                  // height: 66,
-                                  // width: 66,
-                                  child: Image.asset(
-                                    Const.icns + 'smile_3.png',
-                                    height: 46,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              s4 = !s4;
-                              s2 = false;
-                              s3 = false;
-                              s1 = false;
-                              s5 = false;
-                              s6 = false;
-                              s7 = false;
-                              s8 = false;
-                              s9 = false;
-                              s10 = false;
-                              s11 = false;
-                              s12 = false;
-                            });
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: s4 == true ? Color(0xffdadada) : null),
-                            child: DottedBorder(
-                              borderType: BorderType.RRect,
-                              radius: Radius.circular(15),
-                              color: Color(0xffDADADA),
-                              // padding: EdgeInsets.all(6),
-                              child: ClipRRect(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(12)),
-                                child: Container(
-                                  padding: EdgeInsets.all(10),
-                                  // height: 66,
-                                  // width: 66,
-                                  child: Image.asset(
-                                    Const.icns + 'smile_4.png',
-                                    height: 46,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+            Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 24,
+                    right: 24,
+                    top: 20
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              s5 = !s5;
-                              s2 = false;
-                              s3 = false;
-                              s4 = false;
-                              s1 = false;
-                              s6 = false;
-                              s7 = false;
-                              s8 = false;
-                              s9 = false;
-                              s10 = false;
-                              s11 = false;
-                              s12 = false;
-                            });
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: s5 == true ? Color(0xffdadada) : null),
-                            child: DottedBorder(
-                              borderType: BorderType.RRect,
-                              radius: Radius.circular(15),
-                              color: Color(0xffDADADA),
-                              // padding: EdgeInsets.all(6),
-                              child: ClipRRect(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(12)),
-                                child: Container(
-                                  padding: EdgeInsets.all(10),
-                                  // height: 66,
-                                  // width: 66,
-                                  child: Image.asset(
-                                    Const.icns + 'smile_5.png',
-                                    height: 46,
+                  child: Column(
+                    children: [
+                      Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Календарь настроения',
+                                style: GoogleFonts.poppins(
+                                    textStyle: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                        color: Const.semiblack)),
+                              ),
+
+                            ],
+                          ),
+                          Container(
+                              margin: EdgeInsets.only(top: 12, bottom: 38),
+                              child: Text(
+                                'Отмечай своё настроение каждый день, чтобы проследить за его изменением в течение длительного времени',
+                                maxLines: 3,
+                                textAlign: TextAlign.left,
+                                style: GoogleFonts.poppins(
+                                    textStyle: TextStyle(
+                                        fontSize: 14,
+                                        color: Color(0xffa5adaf),
+                                        height: 1.3)),
+                              )),
+                        ],
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(bottom: 22),
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 20),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        smile = '😊';
+
+                                        s1 = !s1;
+                                        s2 = false;
+                                        s3 = false;
+                                        s4 = false;
+                                        s5 = false;
+                                        s6 = false;
+                                        s7 = false;
+                                        s8 = false;
+                                        s9 = false;
+                                        s10 = false;
+                                        s11 = false;
+                                        s12 = false;
+                                      });
+                                    },
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(15),
+                                          color: s1 == true
+                                              ? Color(0xffdadada)
+                                              : null),
+                                      child: DottedBorder(
+                                        borderType: BorderType.RRect,
+                                        radius: Radius.circular(15),
+                                        color: Color(0xffDADADA),
+                                        // padding: EdgeInsets.all(6),
+                                        child: ClipRRect(
+                                          borderRadius:
+                                          BorderRadius.all(Radius.circular(12)),
+                                          child: Container(
+                                            padding: EdgeInsets.all(10),
+                                            // height: 66,
+                                            // width: 66,
+                                            // child: Image.asset(
+                                            //   Const.icns + 'smile_1.png',
+                                            //   height: 46,
+                                            // ),
+                                            child: Text(
+                                              '😊',
+                                              style:
+                                              GoogleFonts.poppins(fontSize: 40),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
                                   ),
-                                ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        smile = '😋';
+
+                                        s1 = false;
+                                        s2 = !s2;
+                                        s3 = false;
+                                        s4 = false;
+                                        s5 = false;
+                                        s6 = false;
+                                        s7 = false;
+                                        s8 = false;
+                                        s9 = false;
+                                        s10 = false;
+                                        s11 = false;
+                                        s12 = false;
+                                      });
+                                    },
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(15),
+                                          color: s2 == true
+                                              ? Color(0xffdadada)
+                                              : null),
+                                      child: DottedBorder(
+                                        borderType: BorderType.RRect,
+                                        radius: Radius.circular(15),
+                                        color: Color(0xffDADADA),
+                                        // padding: EdgeInsets.all(6),
+                                        child: ClipRRect(
+                                          borderRadius:
+                                          BorderRadius.all(Radius.circular(12)),
+                                          child: Container(
+                                            padding: EdgeInsets.all(10),
+                                            // height: 66,
+                                            // width: 66,
+                                            // child: Image.asset(
+                                            //   Const.icns + 'smile_2.png',
+                                            //   height: 46,
+                                            // ),
+                                            child: Text(
+                                              '😋',
+                                              style:
+                                              GoogleFonts.poppins(fontSize: 40),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        smile = '😍';
+
+                                        s3 = !s3;
+                                        s2 = false;
+                                        s1 = false;
+                                        s4 = false;
+                                        s5 = false;
+                                        s6 = false;
+                                        s7 = false;
+                                        s8 = false;
+                                        s9 = false;
+                                        s10 = false;
+                                        s11 = false;
+                                        s12 = false;
+                                      });
+                                    },
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(15),
+                                          color: s3 == true
+                                              ? Color(0xffdadada)
+                                              : null),
+                                      child: DottedBorder(
+                                        borderType: BorderType.RRect,
+                                        radius: Radius.circular(15),
+                                        color: Color(0xffDADADA),
+                                        // padding: EdgeInsets.all(6),
+                                        child: ClipRRect(
+                                          borderRadius:
+                                          BorderRadius.all(Radius.circular(12)),
+                                          child: Container(
+                                            padding: EdgeInsets.all(10),
+                                            // height: 66,
+                                            // width: 66,
+                                            // child: Image.asset(
+                                            //   Const.icns + 'smile_3.png',
+                                            //   height: 46,
+                                            // ),
+                                            child: Text(
+                                              '😍',
+                                              style:
+                                              GoogleFonts.poppins(fontSize: 40),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        smile = '😕';
+
+                                        s4 = !s4;
+                                        s2 = false;
+                                        s3 = false;
+                                        s1 = false;
+                                        s5 = false;
+                                        s6 = false;
+                                        s7 = false;
+                                        s8 = false;
+                                        s9 = false;
+                                        s10 = false;
+                                        s11 = false;
+                                        s12 = false;
+                                      });
+                                    },
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(15),
+                                          color: s4 == true
+                                              ? Color(0xffdadada)
+                                              : null),
+                                      child: DottedBorder(
+                                        borderType: BorderType.RRect,
+                                        radius: Radius.circular(15),
+                                        color: Color(0xffDADADA),
+                                        // padding: EdgeInsets.all(6),
+                                        child: ClipRRect(
+                                          borderRadius:
+                                          BorderRadius.all(Radius.circular(12)),
+                                          child: Container(
+                                            padding: EdgeInsets.all(10),
+                                            // height: 66,
+                                            // width: 66,
+                                            // child: Image.asset(
+                                            //   Const.icns + 'smile_4.png',
+                                            //   height: 46,
+                                            // ),
+                                            child: Text(
+                                              '😕',
+                                              style:
+                                              GoogleFonts.poppins(fontSize: 40),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              s6 = !s6;
-                              s2 = false;
-                              s3 = false;
-                              s4 = false;
-                              s5 = false;
-                              s1 = false;
-                              s7 = false;
-                              s8 = false;
-                              s9 = false;
-                              s10 = false;
-                              s11 = false;
-                              s12 = false;
-                            });
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: s6 == true ? Color(0xffdadada) : null),
-                            child: DottedBorder(
-                              borderType: BorderType.RRect,
-                              radius: Radius.circular(15),
-                              color: Color(0xffDADADA),
-                              // padding: EdgeInsets.all(6),
-                              child: ClipRRect(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(12)),
-                                child: Container(
-                                  padding: EdgeInsets.all(10),
-                                  // height: 66,
-                                  // width: 66,
-                                  child: Image.asset(
-                                    Const.icns + 'smile_6.png',
-                                    height: 46,
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 20),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        s5 = !s5;
+                                        s2 = false;
+                                        s3 = false;
+                                        s4 = false;
+                                        s1 = false;
+                                        s6 = false;
+                                        s7 = false;
+                                        s8 = false;
+                                        s9 = false;
+                                        s10 = false;
+                                        s11 = false;
+                                        s12 = false;
+
+                                        smile = '😌';
+                                      });
+                                    },
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(15),
+                                          color: s5 == true
+                                              ? Color(0xffdadada)
+                                              : null),
+                                      child: DottedBorder(
+                                        borderType: BorderType.RRect,
+                                        radius: Radius.circular(15),
+                                        color: Color(0xffDADADA),
+                                        // padding: EdgeInsets.all(6),
+                                        child: ClipRRect(
+                                          borderRadius:
+                                          BorderRadius.all(Radius.circular(12)),
+                                          child: Container(
+                                            padding: EdgeInsets.all(10),
+                                            // height: 66,
+                                            // width: 66,
+                                            // child: Image.asset(
+                                            //   Const.icns + 'smile_5.png',
+                                            //   height: 46,
+                                            // ),
+                                            child: Text(
+                                              '😌',
+                                              style:
+                                              GoogleFonts.poppins(fontSize: 40),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
                                   ),
-                                ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        s6 = !s6;
+                                        s2 = false;
+                                        s3 = false;
+                                        s4 = false;
+                                        s5 = false;
+                                        s1 = false;
+                                        s7 = false;
+                                        s8 = false;
+                                        s9 = false;
+                                        s10 = false;
+                                        s11 = false;
+                                        s12 = false;
+
+                                        smile = '🙂';
+                                      });
+                                    },
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(15),
+                                          color: s6 == true
+                                              ? Color(0xffdadada)
+                                              : null),
+                                      child: DottedBorder(
+                                        borderType: BorderType.RRect,
+                                        radius: Radius.circular(15),
+                                        color: Color(0xffDADADA),
+                                        // padding: EdgeInsets.all(6),
+                                        child: ClipRRect(
+                                          borderRadius:
+                                          BorderRadius.all(Radius.circular(12)),
+                                          child: Container(
+                                            padding: EdgeInsets.all(10),
+                                            // height: 66,
+                                            // width: 66,
+                                            // child: Image.asset(
+                                            //   Const.icns + 'smile_6.png',
+                                            //   height: 46,
+                                            // ),
+                                            child: Text(
+                                              '🙂',
+                                              style:
+                                              GoogleFonts.poppins(fontSize: 40),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        s7 = !s7;
+                                        s2 = false;
+                                        s3 = false;
+                                        s4 = false;
+                                        s5 = false;
+                                        s6 = false;
+                                        s1 = false;
+                                        s8 = false;
+                                        s9 = false;
+                                        s10 = false;
+                                        s11 = false;
+                                        s12 = false;
+
+                                        smile = '😴';
+                                      });
+                                    },
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(15),
+                                          color: s7 == true
+                                              ? Color(0xffdadada)
+                                              : null),
+                                      child: DottedBorder(
+                                        borderType: BorderType.RRect,
+                                        radius: Radius.circular(15),
+                                        color: Color(0xffDADADA),
+                                        // padding: EdgeInsets.all(6),
+                                        child: ClipRRect(
+                                          borderRadius:
+                                          BorderRadius.all(Radius.circular(12)),
+                                          child: Container(
+                                            padding: EdgeInsets.all(10),
+                                            // height: 66,
+                                            // width: 66,
+                                            // child: Image.asset(
+                                            //   Const.icns + 'smile_7.png',
+                                            //   height: 46,
+                                            // ),
+                                            child: Text(
+                                              '😴',
+                                              style:
+                                              GoogleFonts.poppins(fontSize: 40),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        s8 = !s8;
+                                        s2 = false;
+                                        s3 = false;
+                                        s4 = false;
+                                        s5 = false;
+                                        s6 = false;
+                                        s7 = false;
+                                        s1 = false;
+                                        s9 = false;
+                                        s10 = false;
+                                        s11 = false;
+                                        s12 = false;
+
+                                        smile = '😉';
+                                      });
+                                    },
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(15),
+                                          color: s8 == true
+                                              ? Color(0xffdadada)
+                                              : null),
+                                      child: DottedBorder(
+                                        borderType: BorderType.RRect,
+                                        radius: Radius.circular(15),
+                                        color: Color(0xffDADADA),
+                                        // padding: EdgeInsets.all(6),
+                                        child: ClipRRect(
+                                          borderRadius:
+                                          BorderRadius.all(Radius.circular(12)),
+                                          child: Container(
+                                            padding: EdgeInsets.all(10),
+                                            // height: 66,
+                                            // width: 66,
+                                            // child: Image.asset(
+                                            //   Const.icns + 'smile_8.png',
+                                            //   height: 46,
+                                            // ),
+                                            child: Text(
+                                              '😉',
+                                              style:
+                                              GoogleFonts.poppins(fontSize: 40),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              s7 = !s7;
-                              s2 = false;
-                              s3 = false;
-                              s4 = false;
-                              s5 = false;
-                              s6 = false;
-                              s1 = false;
-                              s8 = false;
-                              s9 = false;
-                              s10 = false;
-                              s11 = false;
-                              s12 = false;
-                            });
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: s7 == true ? Color(0xffdadada) : null),
-                            child: DottedBorder(
-                              borderType: BorderType.RRect,
-                              radius: Radius.circular(15),
-                              color: Color(0xffDADADA),
-                              // padding: EdgeInsets.all(6),
-                              child: ClipRRect(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(12)),
-                                child: Container(
-                                  padding: EdgeInsets.all(10),
-                                  // height: 66,
-                                  // width: 66,
-                                  child: Image.asset(
-                                    Const.icns + 'smile_7.png',
-                                    height: 46,
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 20),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        s9 = !s9;
+                                        s2 = false;
+                                        s3 = false;
+                                        s4 = false;
+                                        s5 = false;
+                                        s6 = false;
+                                        s7 = false;
+                                        s8 = false;
+                                        s1 = false;
+                                        s10 = false;
+                                        s11 = false;
+                                        s12 = false;
+
+                                        smile = '😐';
+                                      });
+                                    },
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(15),
+                                          color: s9 == true
+                                              ? Color(0xffdadada)
+                                              : null),
+                                      child: DottedBorder(
+                                        borderType: BorderType.RRect,
+                                        radius: Radius.circular(15),
+                                        color: Color(0xffDADADA),
+                                        // padding: EdgeInsets.all(6),
+                                        child: ClipRRect(
+                                          borderRadius:
+                                          BorderRadius.all(Radius.circular(12)),
+                                          child: Container(
+                                            padding: EdgeInsets.all(10),
+                                            // height: 66,
+                                            // width: 66,
+                                            // child: Image.asset(
+                                            //   Const.icns + 'smile_9.png',
+                                            //   height: 46,
+                                            // ),
+                                            child: Text(
+                                              '😐',
+                                              style:
+                                              GoogleFonts.poppins(fontSize: 40),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
                                   ),
-                                ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        s10 = !s10;
+                                        s2 = false;
+                                        s3 = false;
+                                        s4 = false;
+                                        s5 = false;
+                                        s6 = false;
+                                        s7 = false;
+                                        s8 = false;
+                                        s9 = false;
+                                        s1 = false;
+                                        s11 = false;
+                                        s12 = false;
+
+                                        smile = '😤';
+                                      });
+                                    },
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(15),
+                                          color: s10 == true
+                                              ? Color(0xffdadada)
+                                              : null),
+                                      child: DottedBorder(
+                                        borderType: BorderType.RRect,
+                                        radius: Radius.circular(15),
+                                        color: Color(0xffDADADA),
+                                        // padding: EdgeInsets.all(6),
+                                        child: ClipRRect(
+                                          borderRadius:
+                                          BorderRadius.all(Radius.circular(12)),
+                                          child: Container(
+                                            padding: EdgeInsets.all(10),
+                                            // height: 66,
+                                            // width: 66,
+                                            // child: Image.asset(
+                                            //   Const.icns + 'smile_10.png',
+                                            //   height: 46,
+                                            // ),
+                                            child: Text(
+                                              '😤',
+                                              style:
+                                              GoogleFonts.poppins(fontSize: 40),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        s11 = !s11;
+                                        s2 = false;
+                                        s3 = false;
+                                        s4 = false;
+                                        s5 = false;
+                                        s6 = false;
+                                        s7 = false;
+                                        s8 = false;
+                                        s9 = false;
+                                        s10 = false;
+                                        s1 = false;
+                                        s12 = false;
+
+                                        smile = '😫';
+                                      });
+                                    },
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(15),
+                                          color: s11 == true
+                                              ? Color(0xffdadada)
+                                              : null),
+                                      child: DottedBorder(
+                                        borderType: BorderType.RRect,
+                                        radius: Radius.circular(15),
+                                        color: Color(0xffDADADA),
+                                        // padding: EdgeInsets.all(6),
+                                        child: ClipRRect(
+                                          borderRadius:
+                                          BorderRadius.all(Radius.circular(12)),
+                                          child: Container(
+                                            padding: EdgeInsets.all(10),
+                                            // height: 66,
+                                            // width: 66,
+                                            // child: Image.asset(
+                                            //   Const.icns + 'smile_11.png',
+                                            //   height: 46,
+                                            // ),
+                                            child: Text(
+                                              '😫',
+                                              style:
+                                              GoogleFonts.poppins(fontSize: 40),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        s12 = !s12;
+                                        s2 = false;
+                                        s3 = false;
+                                        s4 = false;
+                                        s5 = false;
+                                        s6 = false;
+                                        s7 = false;
+                                        s8 = false;
+                                        s9 = false;
+                                        s10 = false;
+                                        s11 = false;
+                                        s1 = false;
+
+                                        smile = '😬';
+                                      });
+                                    },
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(15),
+                                          color: s12 == true
+                                              ? Color(0xffdadada)
+                                              : null),
+                                      child: DottedBorder(
+                                        borderType: BorderType.RRect,
+                                        radius: Radius.circular(15),
+                                        color: Color(0xffDADADA),
+                                        // padding: EdgeInsets.all(6),
+                                        child: ClipRRect(
+                                          borderRadius:
+                                          BorderRadius.all(Radius.circular(12)),
+                                          child: Container(
+                                            padding: EdgeInsets.all(10),
+                                            // height: 66,
+                                            // width: 66,
+                                            // child: Image.asset(
+                                            //   Const.icns + 'smile_12.png',
+                                            //   height: 46,
+                                            // ),
+                                            child: Text(
+                                              '😬',
+                                              style:
+                                              GoogleFonts.poppins(fontSize: 40),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                          ),
+                          ],
                         ),
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              s8 = !s8;
-                              s2 = false;
-                              s3 = false;
-                              s4 = false;
-                              s5 = false;
-                              s6 = false;
-                              s7 = false;
-                              s1 = false;
-                              s9 = false;
-                              s10 = false;
-                              s11 = false;
-                              s12 = false;
-                            });
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: s8 == true ? Color(0xffdadada) : null),
-                            child: DottedBorder(
-                              borderType: BorderType.RRect,
-                              radius: Radius.circular(15),
-                              color: Color(0xffDADADA),
-                              // padding: EdgeInsets.all(6),
-                              child: ClipRRect(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(12)),
-                                child: Container(
-                                  padding: EdgeInsets.all(10),
-                                  // height: 66,
-                                  // width: 66,
-                                  child: Image.asset(
-                                    Const.icns + 'smile_8.png',
-                                    height: 46,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                      )
+                    ],
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              s9 = !s9;
-                              s2 = false;
-                              s3 = false;
-                              s4 = false;
-                              s5 = false;
-                              s6 = false;
-                              s7 = false;
-                              s8 = false;
-                              s1 = false;
-                              s10 = false;
-                              s11 = false;
-                              s12 = false;
-                            });
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: s9 == true ? Color(0xffdadada) : null),
-                            child: DottedBorder(
-                              borderType: BorderType.RRect,
-                              radius: Radius.circular(15),
-                              color: Color(0xffDADADA),
-                              // padding: EdgeInsets.all(6),
-                              child: ClipRRect(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(12)),
-                                child: Container(
-                                  padding: EdgeInsets.all(10),
-                                  // height: 66,
-                                  // width: 66,
-                                  child: Image.asset(
-                                    Const.icns + 'smile_9.png',
-                                    height: 46,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              s10 = !s10;
-                              s2 = false;
-                              s3 = false;
-                              s4 = false;
-                              s5 = false;
-                              s6 = false;
-                              s7 = false;
-                              s8 = false;
-                              s9 = false;
-                              s1 = false;
-                              s11 = false;
-                              s12 = false;
-                            });
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: s10 == true ? Color(0xffdadada) : null),
-                            child: DottedBorder(
-                              borderType: BorderType.RRect,
-                              radius: Radius.circular(15),
-                              color: Color(0xffDADADA),
-                              // padding: EdgeInsets.all(6),
-                              child: ClipRRect(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(12)),
-                                child: Container(
-                                  padding: EdgeInsets.all(10),
-                                  // height: 66,
-                                  // width: 66,
-                                  child: Image.asset(
-                                    Const.icns + 'smile_10.png',
-                                    height: 46,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              s11 = !s11;
-                              s2 = false;
-                              s3 = false;
-                              s4 = false;
-                              s5 = false;
-                              s6 = false;
-                              s7 = false;
-                              s8 = false;
-                              s9 = false;
-                              s10 = false;
-                              s1 = false;
-                              s12 = false;
-                            });
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: s11 == true ? Color(0xffdadada) : null),
-                            child: DottedBorder(
-                              borderType: BorderType.RRect,
-                              radius: Radius.circular(15),
-                              color: Color(0xffDADADA),
-                              // padding: EdgeInsets.all(6),
-                              child: ClipRRect(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(12)),
-                                child: Container(
-                                  padding: EdgeInsets.all(10),
-                                  // height: 66,
-                                  // width: 66,
-                                  child: Image.asset(
-                                    Const.icns + 'smile_11.png',
-                                    height: 46,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              s12 = !s12;
-                              s2 = false;
-                              s3 = false;
-                              s4 = false;
-                              s5 = false;
-                              s6 = false;
-                              s7 = false;
-                              s8 = false;
-                              s9 = false;
-                              s10 = false;
-                              s11 = false;
-                              s1 = false;
-                            });
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: s12 == true ? Color(0xffdadada) : null),
-                            child: DottedBorder(
-                              borderType: BorderType.RRect,
-                              radius: Radius.circular(15),
-                              color: Color(0xffDADADA),
-                              // padding: EdgeInsets.all(6),
-                              child: ClipRRect(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(12)),
-                                child: Container(
-                                  padding: EdgeInsets.all(10),
-                                  // height: 66,
-                                  // width: 66,
-                                  child: Image.asset(
-                                    Const.icns + 'smile_12.png',
-                                    height: 46,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
             Stack(
               children: [
@@ -631,10 +798,10 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
                   child: TextFormField(
                       cursorColor: Color(0xffCFD7D9),
                       maxLines: 3,
-                      controller: controller,
+                      controller: noteController,
                       onChanged: (text) {
                         setState(() {
-                          controller.text.isEmpty
+                          noteController.text.isEmpty
                               ? isVisible = true
                               : isVisible = false;
                         });
@@ -727,7 +894,6 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
                           ),
                           GestureDetector(
                             onTap: () => pickImage(ImageSource.gallery),
-
                             child: Container(
                               // margin: EdgeInsets.only(left: 34),
                               padding: EdgeInsets.only(
@@ -765,22 +931,47 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: Container(
-                width: double.infinity,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: Color(0xff21cac8)),
-                child: Center(
-                  child: Container(
-                      margin: EdgeInsets.symmetric(vertical: 9),
-                      child: Text(
-                        'Сохранить заметку об этом дне',
-                        style: GoogleFonts.poppins(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 14,
-                            color: Colors.white),
-                      )),
+              padding: const EdgeInsets.only(left: 24, right: 24),
+              child: GestureDetector(
+                onTap: () async {
+                  noteController.text == ''
+                      ? ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Заполните поле для заметок')))
+                      : smile == ''
+                      ? ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Выберите эмодзи')))
+                      : image == null
+                      ? ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Сделайте фото')))
+                      : await createNoteRequest(
+                    noteController.text,
+                    smile,
+                    image!,
+                  );
+
+                  /** !!! Добавить GET OBS !!! **/
+                  // Get.defaultDialog(
+                  //   title: 'Ваша заметка успешно сохранена!',
+                  //   titleStyle: GoogleFonts.poppins(),
+                  //   content: Text(
+                  //     'Проведите этот день с пользой!',
+                  //     style: GoogleFonts.poppins(),
+                  //   ),
+                  // );
+                },
+                child: Container(
+                  margin: EdgeInsets.only(bottom: 10),
+                  width: double.infinity,
+                  height: 40,
+                  decoration: Const.cont_turq_circ8,
+                  // padding: EdgeInsets.only(top: 5),
+                  child: Center(
+                    child: Text(
+                      'Сохранить своё настроение',
+                      style: Const.buttontextstyle,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
                 ),
               ),
             ),

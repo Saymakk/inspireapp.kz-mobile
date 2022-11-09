@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:inspire/constants/bottom_app_bar.dart';
 import 'package:inspire/controllers/success_controller.dart';
@@ -14,10 +15,7 @@ GetStorage auth = GetStorage();
 
 NoteStatusController noteStatusController = Get.put(NoteStatusController());
 
-Future<void> createNoteRequest(description, emoji, File? photo, ) async {
-
-
-
+Future<void> createNoteRequest(description, emoji, File? photo,) async {
   var headers = {
     'Accept': 'application/json',
     'Authorization': 'Bearer ${auth.read('token').toString()}'
@@ -31,7 +29,7 @@ Future<void> createNoteRequest(description, emoji, File? photo, ) async {
   request.fields['title'] = 'Моё настроение сегодня';
   request.fields['description'] = description;
   request.fields['emoji'] = emoji;
-  request.files.add(await http.MultipartFile.fromPath("photo", photo!.path));
+  request.files.add(await http.MultipartFile.fromPath("photo", photo!.path,),);
 
   var response = await request.send();
 
@@ -39,6 +37,19 @@ Future<void> createNoteRequest(description, emoji, File? photo, ) async {
 
   print(response.statusCode);
   print(responsed.body);
+
+  Get.defaultDialog(
+    title: 'Ваша заметка успешно сохранена!',
+    titleStyle: GoogleFonts.poppins(),
+    content: Text(
+      'Проведите этот день с пользой!',
+      style: GoogleFonts.poppins(),
+    ),
+    confirm: TextButton(onPressed: (){
+      Get.back();
+      Get.back();
+    }, child: Text('Продолжить'),),
+  );
 
   // noteStatusController.currentNoteValue('asdasd');
 
