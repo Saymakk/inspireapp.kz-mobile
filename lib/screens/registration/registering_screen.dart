@@ -8,6 +8,7 @@ import 'package:inspire/requests/auth/otpAuth.dart';
 import 'package:inspire/requests/registering/otpVerify.dart';
 import 'package:inspire/requests/registering/otpVerifyFinal.dart';
 import 'package:inspire/screens/auth/authorization_screen.dart';
+import 'package:inspire/screens/welcome_screen.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class RegisteringScreen extends StatefulWidget {
@@ -220,15 +221,21 @@ class _RegAgreedState extends State<RegAgreed> {
                 GestureDetector(
                   onTap: () {
                     Get.defaultDialog(
-                      title: 'Поздравляем с регистрацией!',
-                      content: Container(
-                        child: Text(
-                            'Вы унаспешно зарегестрированы! Пока ваш аккаунт не активируют, большая часть функций будет вам недоступ'),
-                     
-                     
-                      ),
-                      confirm: TextButton(onPressed: (){}, child: Text('Продолжить'))
-                    ); // Get.to(() => MainScreen(),
+                        title: 'Поздравляем с регистрацией!',
+                        content: Container(
+                          child: Text(
+                            'Вы успешно зарегистрированы! Пока ваш аккаунт не активируют, большая часть функций будет вам недоступна!',
+                          ),
+                        ),
+                        confirm: TextButton(
+                            onPressed: () {
+                              Get.off(
+                                () => WelcomeScreen(),
+                                transition: Transition.rightToLeft,
+                              );
+                            },
+                            child: Text(
+                                'Продолжить'))); // Get.to(() => MainScreen(),
                     // Get.offAll(() => BottomNav(),
                     //     transition: Transition.rightToLeft);
                   },

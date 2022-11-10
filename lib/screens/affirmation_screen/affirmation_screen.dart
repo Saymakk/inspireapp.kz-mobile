@@ -27,35 +27,9 @@ class _AffirmationScreenState extends State<AffirmationScreen> {
       child: Scaffold(
         extendBody: true,
         backgroundColor: Color(0xffffffff),
-        appBar: AppBar(
-          flexibleSpace: ClipRect(
-            child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
-              child: Container(
-                color: Colors.transparent,
-              ),
-            ),
-          ),
-          toolbarHeight: 59,
-          backgroundColor: Colors.white.withOpacity(.9),
-          elevation: 0.8,
-          centerTitle: false,
-          automaticallyImplyLeading: false,
-          shadowColor: Const.bottommenuborder,
-          title: Image.asset(
-            'assets/images/logo.png',
-            width: 100,
-          ),
-          actions: [
-            Padding(
-              padding: const EdgeInsets.only(right: 24.0),
-              child: GestureDetector(
-                  onTap: () {
-                    Get.to(() => ProfileScreen());
-                  },
-                  child: SvgPicture.asset('assets/icons/profileButton.svg')),
-            ),
-          ],
+        appBar: PreferredSize(
+          preferredSize: Size(double.infinity, 59),
+          child: AppBarWidget(),
         ),
         body: Container(
           padding: EdgeInsets.symmetric(

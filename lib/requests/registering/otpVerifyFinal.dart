@@ -10,6 +10,7 @@ import 'package:inspire/constants/bottom_app_bar.dart';
 import 'package:inspire/constants/constants.dart';
 import 'package:inspire/screens/registration/reg_screen_two.dart';
 import 'package:inspire/screens/registration/registering_screen.dart';
+import 'package:inspire/screens/welcome_screen.dart';
 
 GetStorage auth = GetStorage();
 
@@ -58,14 +59,14 @@ Future<void> otpVerifyFinal(
         contentPadding: EdgeInsets.only(left: 10),
         content: Container(
           child: Text(
-            'Вы унаспешно зарегестрированы! Пока ваш аккаунт не активируют, большая часть функций будет вам недоступ',
+            'Вы успешно зарегистрированы! Пока ваш аккаунт не активируют, большая часть функций будет вам недоступна!',
             style: GoogleFonts.poppins(),
           ),
         ),
         confirm: TextButton(
 
             onPressed: () {
-              Get.to(() => BottomNav(),
+              Get.off(() => WelcomeScreen(),
                   transition: Transition.rightToLeft,
                   arguments: [data['data']]);
             },

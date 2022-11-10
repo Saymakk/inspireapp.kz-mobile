@@ -30,12 +30,19 @@ class _AddNoteState extends State<AddNote> {
     super.dispose();
   }
 
+  String selfie = 'Сделайте селфи';
+
+
   File? image;
 
   Future pickImage(ImageSource source) async {
     try {
       final image = await ImagePicker().pickImage(source: source);
-      if (image == null) return;
+      if (image == null) return; else {
+        setState(() {
+          selfistate();
+        });
+      }
 
       final imageTemp = File(image.path);
 
@@ -43,6 +50,13 @@ class _AddNoteState extends State<AddNote> {
     } on PlatformException catch (e) {
       print('Failed $e');
     }
+  }
+
+  @override
+  void selfistate(){
+    setState(() {
+      selfie = 'Фото загружено';
+    });
   }
 
   bool s1 = false;
@@ -860,7 +874,7 @@ class _AddNoteState extends State<AddNote> {
                           Row(
                             children: [
                               Text(
-                                'Сделайте селфи',
+                                selfie,
                                 style: GoogleFonts.poppins(
                                   textStyle: TextStyle(
                                     fontSize: 14,

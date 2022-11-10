@@ -53,8 +53,8 @@ class _CoursesScreenState extends State<CoursesScreen> {
                           padding: EdgeInsets.only(top: 10),
                           child: SkeletonLine(
                             style: SkeletonLineStyle(
-                                height: 150,
-                                width: 170,
+                                height: 130,
+                                width: 160,
                                 borderRadius: BorderRadius.circular(15)),
                           ),
                         ),
@@ -63,33 +63,8 @@ class _CoursesScreenState extends State<CoursesScreen> {
                           padding: EdgeInsets.only(top: 10),
                           child: SkeletonLine(
                             style: SkeletonLineStyle(
-                                height: 150,
-                                width: 170,
-                                borderRadius: BorderRadius.circular(15)),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(top: 24, right: 15, left: 15),
-                          padding: EdgeInsets.only(top: 10),
-                          child: SkeletonLine(
-                            style: SkeletonLineStyle(
-                                height: 150,
-                                width: 170,
-                                borderRadius: BorderRadius.circular(15)),
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(top: 24, right: 15, left: 15),
-                          padding: EdgeInsets.only(top: 10),
-                          child: SkeletonLine(
-                            style: SkeletonLineStyle(
-                                height: 150,
-                                width: 170,
+                                height: 130,
+                                width: 160,
                                 borderRadius: BorderRadius.circular(15)),
                           ),
                         ),
@@ -103,8 +78,8 @@ class _CoursesScreenState extends State<CoursesScreen> {
                           padding: EdgeInsets.only(top: 10),
                           child: SkeletonLine(
                             style: SkeletonLineStyle(
-                                height: 150,
-                                width: 170,
+                                height: 130,
+                                width: 160,
                                 borderRadius: BorderRadius.circular(15)),
                           ),
                         ),
@@ -113,8 +88,33 @@ class _CoursesScreenState extends State<CoursesScreen> {
                           padding: EdgeInsets.only(top: 10),
                           child: SkeletonLine(
                             style: SkeletonLineStyle(
-                                height: 150,
-                                width: 170,
+                                height: 130,
+                                width: 160,
+                                borderRadius: BorderRadius.circular(15)),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(top: 24, right: 15, left: 15),
+                          padding: EdgeInsets.only(top: 10),
+                          child: SkeletonLine(
+                            style: SkeletonLineStyle(
+                                height: 130,
+                                width: 160,
+                                borderRadius: BorderRadius.circular(15)),
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(top: 24, right: 15, left: 15),
+                          padding: EdgeInsets.only(top: 10),
+                          child: SkeletonLine(
+                            style: SkeletonLineStyle(
+                                height: 130,
+                                width: 160,
                                 borderRadius: BorderRadius.circular(15)),
                           ),
                         ),
@@ -133,8 +133,8 @@ class _CoursesScreenState extends State<CoursesScreen> {
                           padding: EdgeInsets.only(top: 10),
                           child: SkeletonLine(
                             style: SkeletonLineStyle(
-                                height: 150,
-                                width: 170,
+                                height: 130,
+                                width: 160,
                                 borderRadius: BorderRadius.circular(15)),
                           ),
                         ),
@@ -143,33 +143,8 @@ class _CoursesScreenState extends State<CoursesScreen> {
                           padding: EdgeInsets.only(top: 10),
                           child: SkeletonLine(
                             style: SkeletonLineStyle(
-                                height: 150,
-                                width: 170,
-                                borderRadius: BorderRadius.circular(15)),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(top: 24, right: 15, left: 15),
-                          padding: EdgeInsets.only(top: 10),
-                          child: SkeletonLine(
-                            style: SkeletonLineStyle(
-                                height: 150,
-                                width: 170,
-                                borderRadius: BorderRadius.circular(15)),
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(top: 24, right: 15, left: 15),
-                          padding: EdgeInsets.only(top: 10),
-                          child: SkeletonLine(
-                            style: SkeletonLineStyle(
-                                height: 150,
-                                width: 170,
+                                height: 130,
+                                width: 160,
                                 borderRadius: BorderRadius.circular(15)),
                           ),
                         ),
@@ -183,8 +158,8 @@ class _CoursesScreenState extends State<CoursesScreen> {
                           padding: EdgeInsets.only(top: 10),
                           child: SkeletonLine(
                             style: SkeletonLineStyle(
-                                height: 150,
-                                width: 170,
+                                height: 130,
+                                width: 160,
                                 borderRadius: BorderRadius.circular(15)),
                           ),
                         ),
@@ -193,8 +168,33 @@ class _CoursesScreenState extends State<CoursesScreen> {
                           padding: EdgeInsets.only(top: 10),
                           child: SkeletonLine(
                             style: SkeletonLineStyle(
-                                height: 150,
-                                width: 170,
+                                height: 130,
+                                width: 160,
+                                borderRadius: BorderRadius.circular(15)),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(top: 24, right: 15, left: 15),
+                          padding: EdgeInsets.only(top: 10),
+                          child: SkeletonLine(
+                            style: SkeletonLineStyle(
+                                height: 130,
+                                width: 160,
+                                borderRadius: BorderRadius.circular(15)),
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(top: 24, right: 15, left: 15),
+                          padding: EdgeInsets.only(top: 10),
+                          child: SkeletonLine(
+                            style: SkeletonLineStyle(  
+                                height: 130  ,
+                                width: 160,
                                 borderRadius: BorderRadius.circular(15)),
                           ),
                         ),

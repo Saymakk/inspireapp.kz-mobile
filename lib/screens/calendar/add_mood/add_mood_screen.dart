@@ -28,6 +28,8 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
     super.dispose();
   }
 
+  String selfie = 'Сделайте селфи';
+
   File? image;
 
   Future pickImage(ImageSource source) async {
@@ -38,7 +40,11 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
         maxWidth: 800,
         imageQuality: 50,
       );
-      if (image == null) return;
+      if (image == null) return; else {
+        setState(() {
+          selfistate();
+        });
+      }
 
       final imageTemp = File(image.path);
 
@@ -71,6 +77,13 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
     super.initState();
     setState(() {
       smile = '';
+    });
+  }
+
+  @override
+  void selfistate(){
+    setState(() {
+      selfie = 'Фото загружено';
     });
   }
 
@@ -880,7 +893,7 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
                               Row(
                                 children: [
                                   Text(
-                                    'Сделайте селфи',
+                                    selfie,
                                     style: GoogleFonts.poppins(
                                       textStyle: TextStyle(
                                         fontSize: 14,

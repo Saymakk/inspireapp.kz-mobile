@@ -32,7 +32,8 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
 
   Future pickImage(ImageSource source) async {
     try {
-      final image = await ImagePicker().pickImage(source: source);
+      final image = await ImagePicker().pickImage(
+          source: source, maxWidth: 640, maxHeight: 480, imageQuality: 50);
       if (image == null) return;
 
       final imageTemp = File(image.path);
@@ -111,7 +112,10 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
                     ),
                     confirm: TextButton(
                       onPressed: () => profile_delete(),
-                      child: Text('Да', style: TextStyle(color: Colors.red),),
+                      child: Text(
+                        'Да',
+                        style: TextStyle(color: Colors.red),
+                      ),
                     ),
                     cancel: TextButton(
                       onPressed: () {},

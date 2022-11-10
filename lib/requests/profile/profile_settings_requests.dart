@@ -33,30 +33,15 @@ Future<void> userUpdateRequest(
 
   request.headers.addAll(headers);
 
-  if (city != null || image.path != '') {
     request.fields['name'] = name;
     request.fields['last_name'] = lastName;
     request.fields['description'] = description;
     request.fields['city_id'] = city.toString();
     request.files.add(await http.MultipartFile.fromPath("photo", image.path));
-  } else {
-    if (image.path == '') {
-      request.fields['name'] = name;
-      request.fields['last_name'] = lastName;
-      request.fields['description'] = description;
-      request.fields['city_id'] = city.toString();
-    } else {
-      if (city == null || image.path == '') {
-        request.fields['name'] = name;
-        request.fields['last_name'] = lastName;
-        request.fields['description'] = description;
-      }
-    }
-  }
 
   var response = await request.send();
 
-  var responsed = await http.Response.fromStream(response);
+  // var responsed = await http.Response.fromStream(response);
 
   print(response.statusCode);
 
@@ -67,25 +52,16 @@ Future<void> userUpdateRequest(
       title: 'Сохранить изменения',
       content: Text('Вы внесли изменения в свой аккаунт.'),
       confirm: TextButton(
-          onPressed: () => Get.back(),
+          onPressed: () {
+            Get.back();
+            Get.back();
+          },
           child: Text('Продолжить')),
     );
 
 
-    // Get.offAllNamed('/tokenCheckPage');
   } else {
-    print('text');
+    print('Какая-то ошибка');
   }
-  // return Get.defaultDialog(
-  //     title: 'CONGRAT',
-  //     content: Text('ANYTEXT'),
-  //     confirm: IconButton(
-  //         onPressed: () {
-  //           Get.to(() => BottomNav());
-  //         },
-  //         icon: Icon(Icons.check)));
 
-  // Get.offAll(() => RegScreenTwo(),
-  //     transition: Transition.rightToLeft,
-  //     arguments: [data['data']['code'].toString(), r_phone.toString()]);
 }
