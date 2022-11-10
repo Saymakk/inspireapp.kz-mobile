@@ -77,7 +77,7 @@ class _MiniCoursesState extends State<MiniCourses> {
                             child: SkeletonLine(
                               style: SkeletonLineStyle(
                                   height: 150,
-                                  width: 259,
+                                  width: 240,
                                   borderRadius: BorderRadius.circular(15)),
                             ),
                           );
@@ -90,7 +90,7 @@ class _MiniCoursesState extends State<MiniCourses> {
                                 child: SkeletonLine(
                                   style: SkeletonLineStyle(
                                       height: 150,
-                                      width: 259,
+                                      width: 240,
                                       borderRadius: BorderRadius.circular(15)),
                                 ),
                               ),
@@ -100,7 +100,7 @@ class _MiniCoursesState extends State<MiniCourses> {
                                 child: SkeletonLine(
                                   style: SkeletonLineStyle(
                                       height: 150,
-                                      width: 259,
+                                      width: 240,
                                       borderRadius: BorderRadius.circular(15)),
                                 ),
                               ),

@@ -11,7 +11,6 @@ class SingleNoteScreen extends StatefulWidget {
 }
 
 class _SingleNoteScreenState extends State<SingleNoteScreen> {
-
   String title = Get.arguments[0];
   String description = Get.arguments[1];
   String emoji = Get.arguments[2];
@@ -89,14 +88,16 @@ class _SingleNoteScreenState extends State<SingleNoteScreen> {
           child: Column(
             children: [
               Container(
-                margin: EdgeInsets.only(bottom: 25),
-                width: 353,
-                height: 354,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    color: Colors.black),
-                child: Image.network(profile_photo_url, fit: BoxFit.fill,)
-              ),
+                  margin: EdgeInsets.only(bottom: 25),
+                  width: 353,
+                  height: 354,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      color: Colors.black),
+                  child: Image.network(
+                    profile_photo_url,
+                    fit: BoxFit.contain,
+                  )),
               Padding(
                 padding: const EdgeInsets.only(bottom: 12),
                 child: Row(

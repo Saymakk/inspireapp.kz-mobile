@@ -32,7 +32,12 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
 
   Future pickImage(ImageSource source) async {
     try {
-      final image = await ImagePicker().pickImage(source: source, maxHeight: 768, maxWidth: 1024);
+      final image = await ImagePicker().pickImage(
+        source: source,
+        maxHeight: 600,
+        maxWidth: 800,
+        imageQuality: 50,
+      );
       if (image == null) return;
 
       final imageTemp = File(image.path);
@@ -96,11 +101,7 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
             Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(
-                    left: 24,
-                    right: 24,
-                    top: 20
-                  ),
+                  padding: const EdgeInsets.only(left: 24, right: 24, top: 20),
                   child: Column(
                     children: [
                       Column(
@@ -116,7 +117,6 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
                                         fontWeight: FontWeight.w600,
                                         color: Const.semiblack)),
                               ),
-
                             ],
                           ),
                           Container(
@@ -140,7 +140,8 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
                             Padding(
                               padding: const EdgeInsets.only(bottom: 20),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   GestureDetector(
                                     onTap: () {
@@ -163,7 +164,8 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
                                     },
                                     child: Container(
                                       decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(15),
+                                          borderRadius:
+                                              BorderRadius.circular(15),
                                           color: s1 == true
                                               ? Color(0xffdadada)
                                               : null),
@@ -173,8 +175,8 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
                                         color: Color(0xffDADADA),
                                         // padding: EdgeInsets.all(6),
                                         child: ClipRRect(
-                                          borderRadius:
-                                          BorderRadius.all(Radius.circular(12)),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(12)),
                                           child: Container(
                                             padding: EdgeInsets.all(10),
                                             // height: 66,
@@ -185,8 +187,8 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
                                             // ),
                                             child: Text(
                                               '😊',
-                                              style:
-                                              GoogleFonts.poppins(fontSize: 40),
+                                              style: GoogleFonts.poppins(
+                                                  fontSize: 40),
                                             ),
                                           ),
                                         ),
@@ -214,7 +216,8 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
                                     },
                                     child: Container(
                                       decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(15),
+                                          borderRadius:
+                                              BorderRadius.circular(15),
                                           color: s2 == true
                                               ? Color(0xffdadada)
                                               : null),
@@ -224,8 +227,8 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
                                         color: Color(0xffDADADA),
                                         // padding: EdgeInsets.all(6),
                                         child: ClipRRect(
-                                          borderRadius:
-                                          BorderRadius.all(Radius.circular(12)),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(12)),
                                           child: Container(
                                             padding: EdgeInsets.all(10),
                                             // height: 66,
@@ -236,8 +239,8 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
                                             // ),
                                             child: Text(
                                               '😋',
-                                              style:
-                                              GoogleFonts.poppins(fontSize: 40),
+                                              style: GoogleFonts.poppins(
+                                                  fontSize: 40),
                                             ),
                                           ),
                                         ),
@@ -265,7 +268,8 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
                                     },
                                     child: Container(
                                       decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(15),
+                                          borderRadius:
+                                              BorderRadius.circular(15),
                                           color: s3 == true
                                               ? Color(0xffdadada)
                                               : null),
@@ -275,8 +279,8 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
                                         color: Color(0xffDADADA),
                                         // padding: EdgeInsets.all(6),
                                         child: ClipRRect(
-                                          borderRadius:
-                                          BorderRadius.all(Radius.circular(12)),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(12)),
                                           child: Container(
                                             padding: EdgeInsets.all(10),
                                             // height: 66,
@@ -287,8 +291,8 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
                                             // ),
                                             child: Text(
                                               '😍',
-                                              style:
-                                              GoogleFonts.poppins(fontSize: 40),
+                                              style: GoogleFonts.poppins(
+                                                  fontSize: 40),
                                             ),
                                           ),
                                         ),
@@ -316,7 +320,8 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
                                     },
                                     child: Container(
                                       decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(15),
+                                          borderRadius:
+                                              BorderRadius.circular(15),
                                           color: s4 == true
                                               ? Color(0xffdadada)
                                               : null),
@@ -326,8 +331,8 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
                                         color: Color(0xffDADADA),
                                         // padding: EdgeInsets.all(6),
                                         child: ClipRRect(
-                                          borderRadius:
-                                          BorderRadius.all(Radius.circular(12)),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(12)),
                                           child: Container(
                                             padding: EdgeInsets.all(10),
                                             // height: 66,
@@ -338,8 +343,8 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
                                             // ),
                                             child: Text(
                                               '😕',
-                                              style:
-                                              GoogleFonts.poppins(fontSize: 40),
+                                              style: GoogleFonts.poppins(
+                                                  fontSize: 40),
                                             ),
                                           ),
                                         ),
@@ -352,7 +357,8 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
                             Padding(
                               padding: const EdgeInsets.only(bottom: 20),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   GestureDetector(
                                     onTap: () {
@@ -375,7 +381,8 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
                                     },
                                     child: Container(
                                       decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(15),
+                                          borderRadius:
+                                              BorderRadius.circular(15),
                                           color: s5 == true
                                               ? Color(0xffdadada)
                                               : null),
@@ -385,8 +392,8 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
                                         color: Color(0xffDADADA),
                                         // padding: EdgeInsets.all(6),
                                         child: ClipRRect(
-                                          borderRadius:
-                                          BorderRadius.all(Radius.circular(12)),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(12)),
                                           child: Container(
                                             padding: EdgeInsets.all(10),
                                             // height: 66,
@@ -397,8 +404,8 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
                                             // ),
                                             child: Text(
                                               '😌',
-                                              style:
-                                              GoogleFonts.poppins(fontSize: 40),
+                                              style: GoogleFonts.poppins(
+                                                  fontSize: 40),
                                             ),
                                           ),
                                         ),
@@ -426,7 +433,8 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
                                     },
                                     child: Container(
                                       decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(15),
+                                          borderRadius:
+                                              BorderRadius.circular(15),
                                           color: s6 == true
                                               ? Color(0xffdadada)
                                               : null),
@@ -436,8 +444,8 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
                                         color: Color(0xffDADADA),
                                         // padding: EdgeInsets.all(6),
                                         child: ClipRRect(
-                                          borderRadius:
-                                          BorderRadius.all(Radius.circular(12)),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(12)),
                                           child: Container(
                                             padding: EdgeInsets.all(10),
                                             // height: 66,
@@ -448,8 +456,8 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
                                             // ),
                                             child: Text(
                                               '🙂',
-                                              style:
-                                              GoogleFonts.poppins(fontSize: 40),
+                                              style: GoogleFonts.poppins(
+                                                  fontSize: 40),
                                             ),
                                           ),
                                         ),
@@ -477,7 +485,8 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
                                     },
                                     child: Container(
                                       decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(15),
+                                          borderRadius:
+                                              BorderRadius.circular(15),
                                           color: s7 == true
                                               ? Color(0xffdadada)
                                               : null),
@@ -487,8 +496,8 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
                                         color: Color(0xffDADADA),
                                         // padding: EdgeInsets.all(6),
                                         child: ClipRRect(
-                                          borderRadius:
-                                          BorderRadius.all(Radius.circular(12)),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(12)),
                                           child: Container(
                                             padding: EdgeInsets.all(10),
                                             // height: 66,
@@ -499,8 +508,8 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
                                             // ),
                                             child: Text(
                                               '😴',
-                                              style:
-                                              GoogleFonts.poppins(fontSize: 40),
+                                              style: GoogleFonts.poppins(
+                                                  fontSize: 40),
                                             ),
                                           ),
                                         ),
@@ -528,7 +537,8 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
                                     },
                                     child: Container(
                                       decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(15),
+                                          borderRadius:
+                                              BorderRadius.circular(15),
                                           color: s8 == true
                                               ? Color(0xffdadada)
                                               : null),
@@ -538,8 +548,8 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
                                         color: Color(0xffDADADA),
                                         // padding: EdgeInsets.all(6),
                                         child: ClipRRect(
-                                          borderRadius:
-                                          BorderRadius.all(Radius.circular(12)),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(12)),
                                           child: Container(
                                             padding: EdgeInsets.all(10),
                                             // height: 66,
@@ -550,8 +560,8 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
                                             // ),
                                             child: Text(
                                               '😉',
-                                              style:
-                                              GoogleFonts.poppins(fontSize: 40),
+                                              style: GoogleFonts.poppins(
+                                                  fontSize: 40),
                                             ),
                                           ),
                                         ),
@@ -564,7 +574,8 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
                             Padding(
                               padding: const EdgeInsets.only(bottom: 20),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   GestureDetector(
                                     onTap: () {
@@ -587,7 +598,8 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
                                     },
                                     child: Container(
                                       decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(15),
+                                          borderRadius:
+                                              BorderRadius.circular(15),
                                           color: s9 == true
                                               ? Color(0xffdadada)
                                               : null),
@@ -597,8 +609,8 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
                                         color: Color(0xffDADADA),
                                         // padding: EdgeInsets.all(6),
                                         child: ClipRRect(
-                                          borderRadius:
-                                          BorderRadius.all(Radius.circular(12)),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(12)),
                                           child: Container(
                                             padding: EdgeInsets.all(10),
                                             // height: 66,
@@ -609,8 +621,8 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
                                             // ),
                                             child: Text(
                                               '😐',
-                                              style:
-                                              GoogleFonts.poppins(fontSize: 40),
+                                              style: GoogleFonts.poppins(
+                                                  fontSize: 40),
                                             ),
                                           ),
                                         ),
@@ -638,7 +650,8 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
                                     },
                                     child: Container(
                                       decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(15),
+                                          borderRadius:
+                                              BorderRadius.circular(15),
                                           color: s10 == true
                                               ? Color(0xffdadada)
                                               : null),
@@ -648,8 +661,8 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
                                         color: Color(0xffDADADA),
                                         // padding: EdgeInsets.all(6),
                                         child: ClipRRect(
-                                          borderRadius:
-                                          BorderRadius.all(Radius.circular(12)),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(12)),
                                           child: Container(
                                             padding: EdgeInsets.all(10),
                                             // height: 66,
@@ -660,8 +673,8 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
                                             // ),
                                             child: Text(
                                               '😤',
-                                              style:
-                                              GoogleFonts.poppins(fontSize: 40),
+                                              style: GoogleFonts.poppins(
+                                                  fontSize: 40),
                                             ),
                                           ),
                                         ),
@@ -689,7 +702,8 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
                                     },
                                     child: Container(
                                       decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(15),
+                                          borderRadius:
+                                              BorderRadius.circular(15),
                                           color: s11 == true
                                               ? Color(0xffdadada)
                                               : null),
@@ -699,8 +713,8 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
                                         color: Color(0xffDADADA),
                                         // padding: EdgeInsets.all(6),
                                         child: ClipRRect(
-                                          borderRadius:
-                                          BorderRadius.all(Radius.circular(12)),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(12)),
                                           child: Container(
                                             padding: EdgeInsets.all(10),
                                             // height: 66,
@@ -711,8 +725,8 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
                                             // ),
                                             child: Text(
                                               '😫',
-                                              style:
-                                              GoogleFonts.poppins(fontSize: 40),
+                                              style: GoogleFonts.poppins(
+                                                  fontSize: 40),
                                             ),
                                           ),
                                         ),
@@ -740,7 +754,8 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
                                     },
                                     child: Container(
                                       decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(15),
+                                          borderRadius:
+                                              BorderRadius.circular(15),
                                           color: s12 == true
                                               ? Color(0xffdadada)
                                               : null),
@@ -750,8 +765,8 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
                                         color: Color(0xffDADADA),
                                         // padding: EdgeInsets.all(6),
                                         child: ClipRRect(
-                                          borderRadius:
-                                          BorderRadius.all(Radius.circular(12)),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(12)),
                                           child: Container(
                                             padding: EdgeInsets.all(10),
                                             // height: 66,
@@ -762,8 +777,8 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
                                             // ),
                                             child: Text(
                                               '😬',
-                                              style:
-                                              GoogleFonts.poppins(fontSize: 40),
+                                              style: GoogleFonts.poppins(
+                                                  fontSize: 40),
                                             ),
                                           ),
                                         ),
@@ -936,18 +951,18 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
                 onTap: () async {
                   noteController.text == ''
                       ? ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Заполните поле для заметок')))
+                          SnackBar(content: Text('Заполните поле для заметок')))
                       : smile == ''
-                      ? ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Выберите эмодзи')))
-                      : image == null
-                      ? ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Сделайте фото')))
-                      : await createNoteRequest(
-                    noteController.text,
-                    smile,
-                    image!,
-                  );
+                          ? ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text('Выберите эмодзи')))
+                          : image == null
+                              ? ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text('Сделайте фото')))
+                              : await createNoteRequest(
+                                  noteController.text,
+                                  smile,
+                                  image!,
+                                );
 
                   /** !!! Добавить GET OBS !!! **/
                   // Get.defaultDialog(

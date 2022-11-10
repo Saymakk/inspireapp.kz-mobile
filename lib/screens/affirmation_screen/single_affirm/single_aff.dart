@@ -88,127 +88,107 @@ class _SingleAffScreenState extends State<SingleAffScreen>
         body: SafeArea(
           child: Container(
             padding: EdgeInsets.only(left: 24, right: 24, top: 70),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              // mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Visibility(
-                  visible: active,
-                  child: Expanded(
-                    child: Container(
-                      child: AnimatedTextKit(
-                        animatedTexts: [
-                          ColorizeAnimatedText(
+            child: Center(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                // mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Visibility(
+                    visible: active,
+                    child: Expanded(
+                      child: Container(
+                        child: AnimatedTextKit(
+                          animatedTexts: [
+                            ColorizeAnimatedText(
 
-                              '$title',
-                              textStyle: GoogleFonts.poppins(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 20,
-                              ),
-                              textAlign: TextAlign.center,
-                              colors: colorizeColors,
-                              speed: Duration(
-                                  milliseconds: 200 ),
-                            // cursor: '',
-                          ),
-                        ],
+                                '$title',
+                                textStyle: GoogleFonts.poppins(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 20,
+                                ),
+                                textAlign: TextAlign.center,
+                                colors: colorizeColors,
+                                speed: Duration(
+                                    milliseconds: 200 ),
+                              // cursor: '',
+                            ),
+                          ],
+                        ),
+
                       ),
-
                     ),
                   ),
-                ),
-                Visibility(
-                  visible: !active,
-                  child: Expanded(
-                    child: Text(
-                      '$title',
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.poppins(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 20),
+                  Visibility(
+                    visible: !active,
+                    child: Expanded(
+                      child: Text(
+                        '$title',
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.poppins(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 20),
+                      ),
                     ),
                   ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(
-                    bottom: 70,
-                  ),
-                  child: Stack(
-                    children: [
-                      AnimatedBuilder(
-                        animation: _controller,
-                        builder: (_, child) {
-                          return Transform.rotate(
-                            angle: active == true
-                                ? (_controller.value * 2 * math.pi)
-                                : 0,
-                            child: child,
-                          );
-                        },
-                        child: DottedBorder(
-                          dashPattern: [100, 65],
-                          color: Colors.white,
-                          strokeWidth: 2,
-                          borderType: BorderType.Circle,
-                          child: Container(
-                              margin: EdgeInsets.all(70),
-                              child: SizedBox(
-                                width: 74,
-                                height: 74,
-                              )),
-                          // child: Container(
-                          //
-                          //
-                          //   margin: EdgeInsets.all(70),
-                          //   child: GestureDetector(
-                          //     // onTap: () {
-                          //     //   setState(() {
-                          //     //     active = !active;
-                          //     //   });
-                          //     // },
-                          //     onTapDown: (_)  =>  activePress(),
-                          //
-                          //     onTapUp: (_)  =>  inactivePress(),
-                          //
-                          //     child: SvgPicture.asset(
-                          //       Const.icns + 'finger.svg',
-                          //       color:
-                          //       active == true ? Color(0xff21cac8) : Colors.white,
-                          //       height: 74,
-                          //       width: 74,
-                          //     ),
-                          //   ),
-                          // ),
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.all(70),
-                        child: GestureDetector(
-                          // onTap: () {
-                          //   setState(() {
-                          //     active = !active;
-                          //   });
-                          // },
-                          onTapDown: (_) => activePress(),
+                  Container(
+                    margin: EdgeInsets.only(
+                      bottom: 70,
+                    ),
+                    child: Stack(
+                      children: [
+                        AnimatedBuilder(
+                          animation: _controller,
+                          builder: (_, child) {
+                            return Transform.rotate(
+                              angle: active == true
+                                  ? (_controller.value * 2 * math.pi)
+                                  : 0,
+                              child: child,
+                            );
+                          },
+                          child: DottedBorder(
+                            dashPattern: [100, 65],
+                            color: Colors.white,
+                            strokeWidth: 2,
+                            borderType: BorderType.Circle,
+                            child: Container(
+                                margin: EdgeInsets.all(70),
+                                child: SizedBox(
+                                  width: 74,
+                                  height: 74,
+                                )),
 
-                          onTapUp: (_) => inactivePress(),
-
-                          child: SvgPicture.asset(
-                            Const.icns + 'finger.svg',
-                            color: active == true
-                                ? Color(0xff21cac8)
-                                : Colors.white,
-                            height: 74,
-                            width: 74,
                           ),
                         ),
-                      ),
-                    ],
+                        Container(
+                          margin: EdgeInsets.all(70),
+                          child: GestureDetector(
+                            // onTap: () {
+                            //   setState(() {
+                            //     active = !active;
+                            //   });
+                            // },
+                            onTapDown: (_) => activePress(),
+
+                            onTapUp: (_) => inactivePress(),
+
+                            child: SvgPicture.asset(
+                              Const.icns + 'finger.svg',
+                              color: active == true
+                                  ? Color(0xff21cac8)
+                                  : Colors.white,
+                              height: 74,
+                              width: 74,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
