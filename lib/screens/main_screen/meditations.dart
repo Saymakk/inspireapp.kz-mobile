@@ -5,6 +5,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:inspire/constants/constants.dart';
 import 'package:inspire/requests/meditations/main_screen_meditations.dart';
+import 'package:inspire/requests/meditations/main_screen_meditations_with_offset.dart';
 import 'package:inspire/screens/main_screen/all_meditations/all_meditations.dart';
 import 'package:inspire/screens/meditation_screen/player/player_screen.dart';
 import 'package:just_audio/just_audio.dart';

@@ -41,6 +41,7 @@ dependencies:
   better_open_file: ^3.6.4
   image_picker: ^0.8.6
   skeletons: ^0.0.3
+  photo_view: ^0.14.0
 #  icons_launcher: ^2.0.5
 
 dev_dependencies:

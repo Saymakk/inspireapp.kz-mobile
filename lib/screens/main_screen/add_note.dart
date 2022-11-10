@@ -811,6 +811,7 @@ class _AddNoteState extends State<AddNote> {
                       textStyle: TextStyle(
                           color: Colors.black, fontSize: 14, height: 1.3))),
             ),
+            
             Visibility(
               visible: isVisible,
               child: Container(

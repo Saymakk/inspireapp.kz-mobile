@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:inspire/constants/constants.dart';
+import 'package:inspire/screens/calendar/single_note/photo_view.dart';
 
 class SingleNoteScreen extends StatefulWidget {
   const SingleNoteScreen({Key? key}) : super(key: key);
@@ -87,7 +88,9 @@ class _SingleNoteScreenState extends State<SingleNoteScreen> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Container(
+              GestureDetector(
+                onTap: ()=>Get.to(()=>photo_view(), arguments: [profile_photo_url]),
+                child: Container(
                   margin: EdgeInsets.only(bottom: 25),
                   width: 353,
                   height: 354,
@@ -97,7 +100,9 @@ class _SingleNoteScreenState extends State<SingleNoteScreen> {
                   child: Image.network(
                     profile_photo_url,
                     fit: BoxFit.contain,
-                  )),
+                  ),
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 12),
                 child: Row(

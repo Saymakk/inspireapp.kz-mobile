@@ -4,12 +4,14 @@ import 'package:anchor_scroll_controller/anchor_scroll_controller.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:inspire/constants/app_bar.dart';
 import 'package:inspire/constants/bottom_app_bar.dart';
 import 'package:inspire/constants/constants.dart';
 import 'package:inspire/requests/profile/profile.dart';
+import 'package:inspire/screens/calendar/add_mood/add_mood_screen.dart';
 import 'add_note.dart';
 import 'affirmations.dart';
 import 'meditations.dart';
@@ -23,14 +25,11 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-
-
-
   GetStorage data_list = GetStorage();
   GetStorage auth = GetStorage();
   GetStorage user = GetStorage();
 
- @override
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
@@ -39,7 +38,6 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     var decoded = jsonDecode(data_list.read('data_list'));
 
     return Scaffold(
@@ -121,7 +119,11 @@ class _MainScreenState extends State<MainScreen> {
             ),
           ),
           trailing: GestureDetector(
-            onTap: (){
+            onTap: () {
+              Get.to(
+                () => AddMoodScreen(),
+                transition: Transition.rightToLeft,
+              );
             },
             child: Container(
                 decoration: BoxDecoration(
@@ -137,6 +139,4 @@ class _MainScreenState extends State<MainScreen> {
       ),
     );
   }
-
-
 }
