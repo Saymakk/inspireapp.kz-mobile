@@ -12,6 +12,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:inspire/constants/constants.dart';
+import 'package:inspire/requests/affirmations/affirm_done.dart';
 
 import 'affirm_end.dart';
 
@@ -28,6 +29,11 @@ class _SingleAffScreenState extends State<SingleAffScreen>
       AnimationController(vsync: this, duration: Duration(seconds: 2))
         ..repeat();
 
+
+  String title = Get.arguments[0];
+  int len = Get.arguments[1];
+  int aff_id = Get.arguments[2];
+
   bool active = false;
 
   void activePress() {
@@ -43,7 +49,7 @@ class _SingleAffScreenState extends State<SingleAffScreen>
 
     var counter = 5;
 
-    Timer.periodic(const Duration(seconds: 1), (timer) {
+    Timer.periodic(const Duration(seconds: 1), (timer) async {
       print(timer.tick);
       if (active == true) {
         counter--;
@@ -58,13 +64,12 @@ class _SingleAffScreenState extends State<SingleAffScreen>
       if (counter == 0) {
         print('Cancel timer');
         timer.cancel();
+        await affirmDoneRequest(aff_id);
         Get.to(() => CongratAffirm());
       }
     });
   }
 
-  String title = Get.arguments[0];
-  int len = Get.arguments[1];
 
   void inactivePress() {
     setState(() {

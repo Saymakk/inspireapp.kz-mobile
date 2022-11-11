@@ -26,6 +26,7 @@ class _AuthorizationScreen2State extends State<AuthorizationScreen2> {
       filter: {"#": RegExp(r'[0-9]')},
       type: MaskAutoCompletionType.lazy);
 
+
   bool circ = false;
   var counter = 5;
 

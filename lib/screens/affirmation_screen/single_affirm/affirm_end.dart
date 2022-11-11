@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:inspire/constants/constants.dart';
 
 class CongratAffirm extends StatelessWidget {
-  const CongratAffirm({Key? key}) : super(key: key);
+   CongratAffirm({Key? key}) : super(key: key);
+
+  GetStorage auth = GetStorage();
 
   @override
   Widget build(BuildContext context) {
@@ -60,6 +63,7 @@ class CongratAffirm extends StatelessWidget {
                       ),
                       GestureDetector(
                         onTap: () {
+                          print(auth.read('token'));
                           Get.back();
                           Get.back();
                         },

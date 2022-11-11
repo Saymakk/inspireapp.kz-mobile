@@ -19,6 +19,19 @@ class _SingleNoteScreenState extends State<SingleNoteScreen> {
   String profile_photo_url = Get.arguments[4];
   String created_at_time = Get.arguments[5];
 
+
+  String date = Get.arguments[3].replaceAll(('-'), '.');
+  String d = Get.arguments[3].substring(8, 10);
+  String m = Get.arguments[3].substring(5, 7);
+  String y = Get.arguments[3].substring(0, 4);
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+print('${d}' + '.' + '${m}' + '.' + '${y}' );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,14 +49,17 @@ class _SingleNoteScreenState extends State<SingleNoteScreen> {
             )),
         title: Row(
           children: [
-            Text(
-              created_at_date,
-              style: GoogleFonts.poppins(
-                textStyle: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xff282828),
-                    height: 1.645),
+            GestureDetector(
+              onTap: () {},
+              child: Text(
+                '${d}' + '.' + '${m}' + '.' + '${y}' ,
+                style: GoogleFonts.poppins(
+                  textStyle: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xff282828),
+                      height: 1.645),
+                ),
               ),
             ),
             SizedBox(
@@ -89,7 +105,8 @@ class _SingleNoteScreenState extends State<SingleNoteScreen> {
           child: Column(
             children: [
               GestureDetector(
-                onTap: ()=>Get.to(()=>photo_view(), arguments: [profile_photo_url]),
+                onTap: () =>
+                    Get.to(() => photo_view(), arguments: [profile_photo_url]),
                 child: Container(
                   margin: EdgeInsets.only(bottom: 25),
                   width: 353,

@@ -204,8 +204,12 @@ class _CalendarScreenState extends State<CalendarScreen> {
     return Column(
       children: items.map<Widget>(
         (note) {
-          return GestureDetector(
+          String date = note.created_at.substring(0, 10).replaceAll(('-'), '.');
+          String d = note.created_at.substring(0, 10).substring(8, 10);
+          String m = note.created_at.substring(0, 10).substring(5, 7);
+          String y = note.created_at.substring(0, 10).substring(0, 4);          return GestureDetector(
             onTap: () {
+              print('${d}' + '.' + '${m}' + '.' + '${y}');
               Get.to(() => SingleNoteScreen(),
                   transition: Transition.rightToLeft,
                   arguments: [
@@ -258,7 +262,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                           width: 7,
                         ),
                         Text(
-                          note.created_at.substring(0, 10),
+                          '${d}' + '.' + '${m}' + '.' + '${y}',
                           style: GoogleFonts.poppins(
                             textStyle: TextStyle(
                                 fontSize: 12,
