@@ -28,7 +28,7 @@ Future<void> userUpdateRequest(
     'Authorization': 'Bearer ${auth.read('token').toString()}'
   };
 
-  final Uri url = await Uri.parse('https://inspireapp.kz/api/user/update');
+  final Uri url = await Uri.parse('https://kz.inspireapp.kz/api/user/update');
   var request = await http.MultipartRequest('POST', url);
 
   request.headers.addAll(headers);

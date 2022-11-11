@@ -14,7 +14,7 @@ Future<List<noteModel>> calendarNotesRequest() async {
     'Authorization': 'Bearer ${auth.read('token').toString()}'
   };
 
-  final Uri url = Uri.parse('https://inspireapp.kz/api/user/note');
+  final Uri url = Uri.parse('https://kz.inspireapp.kz/api/user/note');
   var request = http.MultipartRequest('GET', url);
   request.headers.addAll(headers);
 

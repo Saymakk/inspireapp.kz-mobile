@@ -16,7 +16,7 @@ Future<List<countriesListModel>> countriesListRequest() async {
     'Authorization': 'Bearer ${auth.read('token').toString()}'
   };
 
-  final Uri url = Uri.parse('https://inspireapp.kz/api/countries');
+  final Uri url = Uri.parse('https://kz.inspireapp.kz/api/countries');
   var request = http.MultipartRequest('GET', url);
   request.headers.addAll(headers);
 

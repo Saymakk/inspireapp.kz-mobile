@@ -1,12 +1,12 @@
+import 'package:http/http.dart' as http;
+
 import 'dart:convert';
 
-import 'package:http/http.dart' as http;
 import 'package:get_storage/get_storage.dart';
-import 'package:inspire/model/affirmation_model.dart';
-import 'package:inspire/model/meditation_model.dart';
 import 'package:inspire/model/single_affirm.dart';
 
-Future<List<categoriesAff>> affirmationsRequest() async {
+
+Future<List<categoriesAff>> affirmationsRequestWithOffset() async {
   GetStorage auth = GetStorage();
 
   var headers = {
@@ -14,7 +14,7 @@ Future<List<categoriesAff>> affirmationsRequest() async {
     'Authorization': 'Bearer ${auth.read('token').toString()}'
   };
 
-  final Uri url = Uri.parse('https://kz.inspireapp.kz/api/affirmations');
+  final Uri url = Uri.parse('https://kz.inspireapp.kz/api/affirmations?paginate=3&page=1');
   var request = http.MultipartRequest('GET', url);
   request.headers.addAll(headers);
 
@@ -22,11 +22,16 @@ Future<List<categoriesAff>> affirmationsRequest() async {
   var responsed = await http.Response.fromStream(response);
 
   print(response.statusCode);
+  print(responsed.body);
+
 
   if (response.statusCode == 200) {
-    Iterable list = json.decode(responsed.body);
+    Iterable list = json.decode(responsed.body)['data'];
+
+    print(list);
+
     List<categoriesAff> datasheet =
-        list.map((f) => categoriesAff.fromJson(f)).toList();
+    list.map((f) => categoriesAff.fromJson(f)).toList();
 
     // print(list.toString());
 

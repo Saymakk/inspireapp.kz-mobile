@@ -7,9 +7,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:inspire/constants/app_bar.dart';
 import 'package:inspire/constants/constants.dart';
 import 'package:inspire/requests/affirmations/main_screen_affirmations.dart';
+import 'package:inspire/requests/affirmations/main_screen_affirmations_with_offset.dart';
 import 'package:skeletons/skeletons.dart';
 
-import '../ProfileScreen/profile_screen.dart';
 import 'modal_bottom_sheet.dart';
 import 'single_affirm/single_aff.dart';
 
@@ -124,7 +124,7 @@ class _AffirmationScreenState extends State<AffirmationScreen> {
                     )),
 
                 FutureBuilder(
-                  future: affirmationsRequest(),
+                  future: affirmationsRequestWithOffset(),
                   builder: (BuildContext context, AsyncSnapshot snapshot) {
                     switch (snapshot.connectionState) {
                       case ConnectionState.none:
@@ -194,19 +194,25 @@ class _AffirmationScreenState extends State<AffirmationScreen> {
                         if (snapshot.data == null) {
                           return Center(
                             child: Container(
-                                margin: EdgeInsets.only(top: 20, bottom: 20),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15),
-                                    border: Border.all(color: Colors.black)),
-                                child: Container(
-                                    margin: EdgeInsets.symmetric(
-                                        vertical: 10, horizontal: 20),
-                                    child: Text(
-                                      'Извините, здесь пока ничего нет!',
-                                      style: GoogleFonts.poppins(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w400),
-                                    ))),
+                              margin: EdgeInsets.only(top: 20),
+                              padding: EdgeInsets.only(
+                                  left: 19, right: 19, top: 13.5, bottom: 10.5),
+                              decoration: BoxDecoration(
+                                color: Color(0xffFFFEE3),
+                                borderRadius: BorderRadius.circular(15), ),
+                              child: ListTile(
+                                leading: Image.asset(
+                                  Const.icns + '!.png',
+                                  height: 37,
+                                  color: Color(0xffFFDD65),
+                                ),
+                                title: Text(
+                                  'Извините, здесь пока ничего нет',
+                                  maxLines: 4,
+                                  style: TextStyle(fontSize: 14, color: Const.deepgrey),
+                                ),
+                              ),
+                            ),
                           );
                         } else {
                           return AffirmList(snapshot.data, context);
@@ -296,7 +302,7 @@ class _AffirmationScreenState extends State<AffirmationScreen> {
             // padding: EdgeInsets.all(20),
             child: ListTile(
               leading: SvgPicture.network(
-                'https://inspireapp.kz/${affirm.subcategory['icon']}',
+                'https://kz.inspireapp.kz/${affirm.subcategory['icon']}',
                 height: 24,
               ),
               title: Text(

@@ -16,7 +16,7 @@ Future<void> profile_delete() async {
     'Authorization': 'Bearer ${auth.read('token').toString()}'
   };
 
-  final Uri url = await Uri.parse('https://inspireapp.kz/api/user/delete');
+  final Uri url = await Uri.parse('https://kz.inspireapp.kz/api/user/delete');
   var request = await http.MultipartRequest('GET', url);
   request.headers.addAll(headers);
 

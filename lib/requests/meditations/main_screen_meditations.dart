@@ -13,7 +13,7 @@ Future<List<meditationsList>> meditationsRequest() async {
     'Authorization': 'Bearer ${auth.read('token').toString()}'
   };
 
-  final Uri url = Uri.parse('https://inspireapp.kz/api/meditations');
+  final Uri url = Uri.parse('https://kz.inspireapp.kz/api/meditations');
   var request = http.MultipartRequest('GET', url);
   request.headers.addAll(headers);
 

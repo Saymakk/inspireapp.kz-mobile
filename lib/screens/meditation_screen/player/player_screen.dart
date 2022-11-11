@@ -66,7 +66,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
 
   Future setAudio() async {
     audioPlayer.setReleaseMode(ReleaseMode.loop);
-    String url = 'https://inspireapp.kz/ + ${audio_path}';
+    String url = 'https://kz.inspireapp.kz/ + ${audio_path}';
     audioPlayer.setSourceUrl(url);
   }
 
@@ -221,7 +221,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                         // await audioPlayer
                                         //     .play(AssetSource('audio/nu1.mp3'));
                                         await audioPlayer.play(UrlSource(
-                                            'https://inspireapp.kz/' + audio_path));
+                                            'https://kz.inspireapp.kz/' + audio_path));
                                         setState(() {
                                           isPlaying = true;
                                         });

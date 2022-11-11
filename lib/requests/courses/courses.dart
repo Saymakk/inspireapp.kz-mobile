@@ -14,7 +14,7 @@ Future<List<coursesList>> coursesRequest() async {
     'Authorization': 'Bearer ${auth.read('token').toString()}'
   };
 
-  final Uri url = Uri.parse('https://inspireapp.kz/api/courses/all');
+  final Uri url = Uri.parse('https://kz.inspireapp.kz/api/courses/all');
   var request = http.MultipartRequest('GET', url);
   request.headers.addAll(headers);
 

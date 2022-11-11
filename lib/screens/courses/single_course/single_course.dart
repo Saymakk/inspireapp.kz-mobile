@@ -162,11 +162,11 @@ class _SingleCourseScreenState extends State<SingleCourseScreen> {
 
                     openFile(
                       url:
-                      'https://inspireapp.kz/' + material_path,
+                      'https://kz.inspireapp.kz/' + material_path,
                       fileName: '${course_title}.doc',
                     );
                     
-                  print('https://inspireapp.kz/' + material_path);
+                  print('https://kz.inspireapp.kz/' + material_path);
                 },
                 child: Container(
                   width: double.infinity,

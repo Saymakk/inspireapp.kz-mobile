@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Const {
+  //domains
+  static const String domain = 'https://kz.inspireapp.kz/';
+
   //COLORS
   static const greybg = Color.fromRGBO(239, 239, 239, 1);
   static const greyinactive = Color.fromRGBO(229, 235, 237, 1);
@@ -36,7 +39,7 @@ class Const {
     color: Color.fromRGBO(40, 40, 40, 1),
     fontSize: 27,
     fontWeight: FontWeight.w600,
-        height: 1.3,
+    height: 1.3,
   ));
 
   static var black14 = GoogleFonts.poppins(
@@ -45,8 +48,7 @@ class Const {
     fontSize: 14,
   ));
 
-
-  static var blacksemibold24 =  TextStyle(
+  static var blacksemibold24 = TextStyle(
     color: Color.fromRGBO(40, 40, 40, 1),
     fontSize: 24,
   );

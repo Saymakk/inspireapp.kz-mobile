@@ -5,8 +5,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:inspire/model/meditPaginated.dart';
 import 'package:inspire/model/meditation_model.dart';
 
-Future<List<meditationsListPag>> meditationsRequestWithOffset() async {
-
+Future<List<meditationsList>> meditationsRequestWithOffset() async {
   GetStorage auth = GetStorage();
 
   var headers = {
@@ -14,7 +13,10 @@ Future<List<meditationsListPag>> meditationsRequestWithOffset() async {
     'Authorization': 'Bearer ${auth.read('token').toString()}'
   };
 
-  final Uri url = Uri.parse('https://inspireapp.kz/api/meditations?paginate=3&page=1');
+  final Uri url = Uri.parse(
+    'https://kz.inspireapp.kz/api/meditations?paginate=3&page=1',
+  );
+
   var request = http.MultipartRequest('GET', url);
   request.headers.addAll(headers);
 
@@ -22,19 +24,26 @@ Future<List<meditationsListPag>> meditationsRequestWithOffset() async {
   var responsed = await http.Response.fromStream(response);
 
   // print(responsed.body);
-  print(response.statusCode);
+
 
   if (response.statusCode == 200) {
-    Iterable list = json.decode(responsed.body);
-
-    print(responsed.body);
-
-    List<meditationsListPag> datasheet = list.map((f) => meditationsListPag.fromJson(f)).toList();
 
 
+    // print(json.decode(responsed.body));
 
-    return Future<List<meditationsListPag>>.value(datasheet);
+    Iterable list = json.decode(responsed.body)['data'];
+
+    // print(list);
+
+    List<meditationsList> datasheet =
+        list.map((f) => meditationsList.fromJson(f)).toList();
+
+    // print(datasheet);
+
+    return Future<List<meditationsList>>.value(datasheet);
   } else {
+
+
     throw Exception('Failed.');
   }
 }

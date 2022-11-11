@@ -15,7 +15,7 @@ Future<List<citiesListModel>> citiesListRequest() async {
     'Authorization': 'Bearer ${auth.read('token').toString()}'
   };
 
-  final Uri url = Uri.parse('https://inspireapp.kz/api/cities');
+  final Uri url = Uri.parse('https://kz.inspireapp.kz/api/cities');
   var request = http.MultipartRequest('GET', url);
   request.headers.addAll(headers);
 

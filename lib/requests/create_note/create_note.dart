@@ -21,7 +21,7 @@ Future<void> createNoteRequest(description, emoji, File? photo,) async {
     'Authorization': 'Bearer ${auth.read('token').toString()}'
   };
 
-  final Uri url = await Uri.parse('https://inspireapp.kz/api/user/note/create');
+  final Uri url = await Uri.parse('https://kz.inspireapp.kz/api/user/note/create');
   var request = await http.MultipartRequest('POST', url);
 
   request.headers.addAll(headers);

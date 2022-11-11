@@ -15,7 +15,7 @@ Future<void> singleCourse(id) async {
 
   var headers = {'Authorization': 'Bearer ${auth.read('token').toString()}'};
 
-  final Uri url = Uri.parse('https://inspireapp.kz/api/courses/$id');
+  final Uri url = Uri.parse('https://kz.inspireapp.kz/api/courses/$id');
   var request = http.MultipartRequest('GET', url);
   request.headers.addAll(headers);
 

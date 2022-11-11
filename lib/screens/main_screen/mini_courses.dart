@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:inspire/constants/constants.dart';
 import 'package:inspire/requests/courses/courses.dart';
+import 'package:inspire/requests/courses/courses_with_offset.dart';
 import 'package:inspire/requests/courses/single_course.dart';
 import 'package:inspire/screens/main_screen/all_courses/all_courses.dart';
 import 'package:skeletons/skeletons.dart';
@@ -67,7 +68,7 @@ class _MiniCoursesState extends State<MiniCourses> {
               child: Row(
                 children: [
                   FutureBuilder(
-                    future: coursesRequest(),
+                    future: coursesRequestWithOffset(),
                     builder: (BuildContext context, AsyncSnapshot snapshot) {
                       switch (snapshot.connectionState) {
                         case ConnectionState.none:
@@ -111,19 +112,25 @@ class _MiniCoursesState extends State<MiniCourses> {
                           // return rideList(snapshot.data, context);
                           if (snapshot.data == null) {
                             return Container(
-                                margin: EdgeInsets.only(top: 20, bottom: 20, right: 50),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15),
-                                    border: Border.all(color: Colors.black)),
-                                child: Container(
-                                    margin: EdgeInsets.symmetric(
-                                        vertical: 10, horizontal: 20),
-                                    child: Text(
-                                      'Извините, здесь пока ничего нет!',
-                                      style: GoogleFonts.poppins(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w400),
-                                    )));
+                              margin: EdgeInsets.only(top: 20),
+                              padding: EdgeInsets.only(
+                                  left: 19, right: 19, top: 13.5, bottom: 10.5),
+                              decoration: BoxDecoration(
+                                color: Color(0xffFFFEE3),
+                                borderRadius: BorderRadius.circular(15), ),
+                              child: ListTile(
+                                leading: Image.asset(
+                                  Const.icns + '!.png',
+                                  height: 37,
+                                  color: Color(0xffFFDD65),
+                                ),
+                                title: Text(
+                                  'Извините, здесь пока ничего нет',
+                                  maxLines: 4,
+                                  style: TextStyle(fontSize: 14, color: Const.deepgrey),
+                                ),
+                              ),
+                            );
                           } else {
                             return CoursesWidget(snapshot.data, context);
                           }
@@ -147,7 +154,7 @@ class _MiniCoursesState extends State<MiniCourses> {
             // padding: EdgeInsets.only(top: 5),
             margin: EdgeInsets.only(
               bottom: 42,
-              top: 7,
+              top: 15,
               left: 24,
               right: 24,
             ),

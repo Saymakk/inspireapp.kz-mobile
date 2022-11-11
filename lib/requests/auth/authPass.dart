@@ -17,7 +17,7 @@ var code;
 var phone;
 
 Future<void> authPass(code, phone) async {
-  final Uri url = await Uri.parse('https://inspireapp.kz/api/otpVerify');
+  final Uri url = await Uri.parse('https://kz.inspireapp.kz/api/otpVerify');
   var request = await http.MultipartRequest('POST', url);
 
   request.fields['phone'] = phone;

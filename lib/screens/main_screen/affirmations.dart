@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:inspire/constants/constants.dart';
 import 'package:inspire/model/mini_courses_model.dart';
 import 'package:inspire/requests/affirmations/main_screen_affirmations.dart';
+import 'package:inspire/requests/affirmations/main_screen_affirmations_with_offset.dart';
 import 'package:inspire/requests/affirmations/single_affirm.dart';
 import 'package:inspire/requests/courses/courses.dart';
 import 'package:inspire/screens/affirmation_screen/single_affirm/single_aff.dart';
@@ -65,7 +66,7 @@ class _AffirmationsState extends State<Affirmations> {
             ),
           ),
           FutureBuilder(
-            future: affirmationsRequest(),
+            future: affirmationsRequestWithOffset(),
             builder: (BuildContext context, AsyncSnapshot snapshot) {
               switch (snapshot.connectionState) {
                 case ConnectionState.none:
@@ -116,18 +117,25 @@ class _AffirmationsState extends State<Affirmations> {
                   if (snapshot.data == null) {
                     print(auth.read('token'));
                     return Container(
-                        margin: EdgeInsets.only(top: 20),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
-                            border: Border.all(color: Colors.black)),
-                        child: Container(
-                            margin: EdgeInsets.symmetric(
-                                vertical: 10, horizontal: 20),
-                            child: Text(
-                              'Извините, здесь пока ничего нет!',
-                              style: GoogleFonts.poppins(
-                                  fontSize: 15, fontWeight: FontWeight.w400),
-                            )));
+                      margin: EdgeInsets.only(top: 20),
+                      padding: EdgeInsets.only(
+                          left: 19, right: 19, top: 13.5, bottom: 10.5),
+                      decoration: BoxDecoration(
+                        color: Color(0xffFFFEE3),
+                        borderRadius: BorderRadius.circular(15), ),
+                      child: ListTile(
+                        leading: Image.asset(
+                          Const.icns + '!.png',
+                          height: 37,
+                          color: Color(0xffFFDD65),
+                        ),
+                        title: Text(
+                          'Извините, здесь пока ничего нет',
+                          maxLines: 4,
+                          style: TextStyle(fontSize: 14, color: Const.deepgrey),
+                        ),
+                      ),
+                    );
                   } else {
                     return AffirmList(snapshot.data, context);
                   }
@@ -152,7 +160,7 @@ class _AffirmationsState extends State<Affirmations> {
             // padding: EdgeInsets.all(20),
             child: ListTile(
               leading: SvgPicture.network(
-                'https://inspireapp.kz/${affirm.subcategory['icon']}',
+                'https://kz.inspireapp.kz/${affirm.subcategory['icon']}',
                 height: 24,
               ),
               title: Text(

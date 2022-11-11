@@ -193,19 +193,25 @@ class _MeditationScreenState extends State<MeditationScreen> {
                         if (snapshot.data == null) {
                           return Center(
                             child: Container(
-                                margin: EdgeInsets.only(top: 20, bottom: 20),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15),
-                                    border: Border.all(color: Colors.black)),
-                                child: Container(
-                                    margin: EdgeInsets.symmetric(
-                                        vertical: 10, horizontal: 20),
-                                    child: Text(
-                                      'Извините, здесь пока ничего нет!',
-                                      style: GoogleFonts.poppins(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w400),
-                                    ))),
+                              margin: EdgeInsets.only(top: 20),
+                              padding: EdgeInsets.only(
+                                  left: 19, right: 19, top: 13.5, bottom: 10.5),
+                              decoration: BoxDecoration(
+                                color: Color(0xffFFFEE3),
+                                borderRadius: BorderRadius.circular(15), ),
+                              child: ListTile(
+                                leading: Image.asset(
+                                  Const.icns + '!.png',
+                                  height: 37,
+                                  color: Color(0xffFFDD65),
+                                ),
+                                title: Text(
+                                  'Извините, здесь пока ничего нет',
+                                  maxLines: 4,
+                                  style: TextStyle(fontSize: 14, color: Const.deepgrey),
+                                ),
+                              ),
+                            ),
                           );
                         } else {
                           return MeditList(snapshot.data, context);

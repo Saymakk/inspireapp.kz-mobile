@@ -19,7 +19,7 @@ Future<void> profileRequest() async {
     'Authorization': 'Bearer ${auth.read('token').toString()}'
   };
 
-  final Uri url = await Uri.parse('https://inspireapp.kz/api/user');
+  final Uri url = await Uri.parse('https://kz.inspireapp.kz/api/user');
   var request = await http.MultipartRequest('GET', url);
   request.headers.addAll(headers);
 
@@ -57,7 +57,7 @@ Future<void> userActivities() async {
     'Authorization': 'Bearer ${auth.read('token').toString()}'
   };
 
-  final Uri url = await Uri.parse('https://inspireapp.kz/api/user_activities');
+  final Uri url = await Uri.parse('https://kz.inspireapp.kz/api/user_activities');
   var request = await http.MultipartRequest('GET', url);
   request.headers.addAll(headers);
 
