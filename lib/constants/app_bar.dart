@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -8,8 +9,24 @@ import 'package:inspire/screens/ProfileScreen/profile_screen.dart';
 
 import 'constants.dart';
 
-class AppBarWidget extends StatelessWidget {
+class AppBarWidget extends StatefulWidget {
   const AppBarWidget({Key? key}) : super(key: key);
+
+  @override
+  State<AppBarWidget> createState() => _AppBarWidgetState();
+}
+
+class _AppBarWidgetState extends State<AppBarWidget> {
+  bool active = false;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    active = false;
+  }
+
+  var counter = 5;
 
   @override
   Widget build(BuildContext context) {
@@ -38,11 +55,45 @@ class AppBarWidget extends StatelessWidget {
           padding: const EdgeInsets.only(right: 24.0),
           child: GestureDetector(
               onTap: () async {
+                setState(() {
+                  active = true;
+                  Timer.periodic(const Duration(seconds: 1), (timer) {
+                    print(timer.tick);
+                    if (active == true){
+                      counter--;
+                    };
+                    if(counter == 0){
+                      setState(() {
+                        active = false;
+                        counter = 5;
+                        timer.cancel();
+
+                      });
+                    }
+
+
+                  });
+                });
                 await userActivities();
-               await profileRequest();
+                await profileRequest();
                 // Get.to(()=>ProfileScreen());
               },
-              child: SvgPicture.asset('assets/icons/profileButton.svg')),
+              child: Padding(
+                padding: const EdgeInsets.only(top: 15),
+                child: Stack(
+                  children: [
+                    Container(
+                        child:
+                            SvgPicture.asset('assets/icons/profileButton.svg')),
+                    Visibility(
+                      visible: active,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                      ),
+                    ),
+                  ],
+                ),
+              )),
         ),
       ],
     );

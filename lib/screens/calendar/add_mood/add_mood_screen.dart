@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:dotted_border/dotted_border.dart';
@@ -992,6 +993,26 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
               padding: const EdgeInsets.only(left: 24, right: 24),
               child: GestureDetector(
                 onTap: () async {
+
+                  // setState(() {
+                  //   circ = true;
+                  //   Timer.periodic(const Duration(seconds: 1), (timer) {
+                  //     print(timer.tick);
+                  //     if (circ == true) {
+                  //       counter--;
+                  //     }
+                  //     ;
+                  //     if (counter == 0) {
+                  //       setState(() {
+                  //         circ = false;
+                  //         counter = 3;
+                  //         timer.cancel();
+                  //       });
+                  //     }
+                  //   });
+                  // });
+
+
                   noteController.text == ''
                       ? ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(content: Text('Заполните поле для заметок')))

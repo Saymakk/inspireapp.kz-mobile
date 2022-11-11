@@ -33,7 +33,6 @@ class VideoPlayer extends StatelessWidget {
               ),
         body: ListView(children: <Widget>[
           VimeoVideoPlayer(
-
             vimeoPlayerModel: VimeoPlayerModel(
               url: 'https://vimeo.com/$video',
               deviceOrientation: DeviceOrientation.landscapeRight,

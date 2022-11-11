@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -23,6 +25,9 @@ class _AuthorizationScreen2State extends State<AuthorizationScreen2> {
       mask: '+7 (###) ###-##-##',
       filter: {"#": RegExp(r'[0-9]')},
       type: MaskAutoCompletionType.lazy);
+
+  bool circ = false;
+  var counter = 5;
 
   @override
   Widget build(BuildContext context) {
@@ -119,6 +124,24 @@ class _AuthorizationScreen2State extends State<AuthorizationScreen2> {
                   GestureDetector(
                     onTap: () {
 
+                      setState(() {
+                        circ = true;
+                        Timer.periodic(const Duration(seconds: 1), (timer) {
+                          print(timer.tick);
+                          if (circ == true) {
+                            counter--;
+                          }
+                          ;
+                          if (counter == 0) {
+                            setState(() {
+                              circ = false;
+                              counter = 5;
+                              timer.cancel();
+                            });
+                          }
+                        });
+                      });
+
                       authPass(Get.arguments[0], Get.arguments[1]);
 
                       // Get.offAll(() => BottomNav(),
@@ -131,7 +154,9 @@ class _AuthorizationScreen2State extends State<AuthorizationScreen2> {
                       decoration: Const.cont_turq_circ8,
                       // padding: EdgeInsets.only(top: 5),
                       child: Center(
-                        child: Text(
+                        child: circ == true
+                            ? CircularProgressIndicator()
+                            :  Text(
                           'Присоединиться к INSPIRE',
                           style: Const.buttontextstyle,
                           textAlign: TextAlign.center,

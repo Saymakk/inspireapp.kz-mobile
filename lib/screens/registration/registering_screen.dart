@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -26,6 +28,9 @@ class _RegisteringScreenState extends State<RegisteringScreen> {
   TextEditingController codeController = TextEditingController();
 
   var pass = Get.arguments[2];
+
+  var counter = 5;
+  bool active = false;
 
   @override
   Widget build(BuildContext context) {
@@ -141,6 +146,26 @@ class _RegisteringScreenState extends State<RegisteringScreen> {
                   ),
                   GestureDetector(
                     onTap: () {
+
+                      setState(() {
+                        active = true;
+                        Timer.periodic(const Duration(seconds: 1), (timer) {
+                          print(timer.tick);
+                          if (active == true){
+                            counter--;
+                          };
+                          if(counter == 0){
+                            setState(() {
+                              active = false;
+                              counter = 5;
+                              timer.cancel();
+
+                            });
+                          }
+
+
+                        });
+                      });
                       // Get.to(() => RegAgreed(), transition: Transition.rightToLeft);
                       // otpVerifyFinal(codeController.text, passController.text, nameController.text );
                       otpVerifyFinal(codeController.text, passController.text,
@@ -153,7 +178,8 @@ class _RegisteringScreenState extends State<RegisteringScreen> {
                       decoration: Const.cont_turq_circ8,
                       // padding: EdgeInsets.only(top: 5),
                       child: Center(
-                        child: Text(
+                        child: active == true
+                            ? CircularProgressIndicator() : Text(
                           'Зарегистрироваться',
                           style: Const.buttontextstyle,
                           textAlign: TextAlign.center,

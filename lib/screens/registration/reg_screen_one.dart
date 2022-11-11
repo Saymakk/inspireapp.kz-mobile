@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -26,6 +28,9 @@ class _RegScreenOneState extends State<RegScreenOne> {
       mask: '+7 (###) ###-##-##',
       filter: {"#": RegExp(r'[0-9]')},
       type: MaskAutoCompletionType.lazy);
+
+  var counter = 5;
+  var active = false;
 
   @override
   Widget build(BuildContext context) {
@@ -84,6 +89,27 @@ class _RegScreenOneState extends State<RegScreenOne> {
                   ),
                   GestureDetector(
                     onTap: () async {
+
+                      setState(() {
+                        active = true;
+                        Timer.periodic(const Duration(seconds: 1), (timer) {
+                          print(timer.tick);
+                          if (active == true){
+                            counter--;
+                          };
+                          if(counter == 0){
+                            setState(() {
+                              active = false;
+                              counter = 5;
+                              timer.cancel();
+
+                            });
+                          }
+
+
+                        });
+                      });
+
                       // print(phoneController.text);
                       auth.write('phone', phoneController.text);
                        otpAuth(phoneController.text);
@@ -99,7 +125,8 @@ class _RegScreenOneState extends State<RegScreenOne> {
                       decoration: Const.cont_turq_circ8,
                       // padding: EdgeInsets.only(top: 5),
                       child: Center(
-                        child: Text(
+                        child: active == true
+                            ? CircularProgressIndicator() : Text(
                           'Зарегистрироваться',
                           style: Const.buttontextstyle,
                           textAlign: TextAlign.center,
@@ -109,6 +136,7 @@ class _RegScreenOneState extends State<RegScreenOne> {
                   ),
                   GestureDetector(
                     onTap: () {
+
                       Get.to(() => AuthorizationScreen(),
                           transition: Transition.rightToLeft);
                     },

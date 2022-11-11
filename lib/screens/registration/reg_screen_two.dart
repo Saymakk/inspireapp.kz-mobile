@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -35,6 +37,9 @@ class _RegScreenTwoState extends State<RegScreenTwo> {
   TextEditingController phoneController = TextEditingController();
   TextEditingController codeController = TextEditingController();
   TextEditingController passController = TextEditingController();
+
+  var counter = 5;
+  bool active = false;
 
   var maskFormatter = new MaskTextInputFormatter(
       mask: '+7 (###) ###-##-##',
@@ -155,6 +160,27 @@ class _RegScreenTwoState extends State<RegScreenTwo> {
 
                   GestureDetector(
                     onTap: () {
+
+                      setState(() {
+                        active = true;
+                        Timer.periodic(const Duration(seconds: 1), (timer) {
+                          print(timer.tick);
+                          if (active == true){
+                            counter--;
+                          };
+                          if(counter == 0){
+                            setState(() {
+                              active = false;
+                              counter = 5;
+                              timer.cancel();
+
+                            });
+                          }
+
+
+                        });
+                      });
+
                       // Get.to(() => RegAgreed(), transition: Transition.rightToLeft);
                       // otpVerifyFinal(codeController.text, passController.text, nameController.text );
                       otpVerifyFinal(nameController.text, codeController.text, passController.text, );
@@ -167,7 +193,8 @@ class _RegScreenTwoState extends State<RegScreenTwo> {
                       decoration: Const.cont_turq_circ8,
                       // padding: EdgeInsets.only(top: 5),
                       child: Center(
-                        child: Text(
+                        child: active == true
+                            ? CircularProgressIndicator() :  Text(
                           'Зарегистрироваться',
                           style: Const.buttontextstyle,
                           textAlign: TextAlign.center,

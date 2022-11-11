@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -6,6 +8,7 @@ import 'package:inspire/constants/constants.dart';
 import 'package:inspire/requests/auth/auth.dart';
 import 'package:inspire/requests/auth/otpAuth.dart';
 import 'package:inspire/requests/registering/otpVerify.dart';
+import 'package:inspire/screens/registration/reg_screen_one.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class AuthorizationScreen extends StatefulWidget {
@@ -16,6 +19,16 @@ class AuthorizationScreen extends StatefulWidget {
 }
 
 class _AuthorizationScreenState extends State<AuthorizationScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    circ = false;
+  }
+
+  bool circ = false;
+  var counter = 5;
+
   TextEditingController passwordController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
 
@@ -45,7 +58,8 @@ class _AuthorizationScreenState extends State<AuthorizationScreen> {
                       children: [
                         IconButton(
                             onPressed: () {
-                              Get.back();
+                              Get.off(() => RegScreenOne(),
+                                  transition: Transition.rightToLeft);
                             },
                             icon: Icon(Icons.arrow_back_ios)),
                         SizedBox(
@@ -90,6 +104,32 @@ class _AuthorizationScreenState extends State<AuthorizationScreen> {
                   ),
                   GestureDetector(
                     onTap: () {
+                      if (phoneController.text == '') {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              'Введите номер телефона',
+                            ),
+                          ),
+                        );
+                      }
+                      setState(() {
+                        circ = true;
+                        Timer.periodic(const Duration(seconds: 1), (timer) {
+                          print(timer.tick);
+                          if (circ == true) {
+                            counter--;
+                          }
+                          ;
+                          if (counter == 0) {
+                            setState(() {
+                              circ = false;
+                              counter = 5;
+                              timer.cancel();
+                            });
+                          }
+                        });
+                      });
 
                       otpAuth1(phoneController.text);
 
@@ -103,11 +143,13 @@ class _AuthorizationScreenState extends State<AuthorizationScreen> {
                       decoration: Const.cont_turq_circ8,
                       // padding: EdgeInsets.only(top: 5),
                       child: Center(
-                        child: Text(
-                          'Отправить пароль',
-                          style: Const.buttontextstyle,
-                          textAlign: TextAlign.center,
-                        ),
+                        child: circ == true
+                            ? CircularProgressIndicator()
+                            : Text(
+                                'Отправить пароль',
+                                style: Const.buttontextstyle,
+                                textAlign: TextAlign.center,
+                              ),
                       ),
                     ),
                   ),

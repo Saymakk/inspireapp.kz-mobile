@@ -8,6 +8,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:inspire/constants/bottom_app_bar.dart';
 import 'package:inspire/constants/constants.dart';
+import 'package:inspire/screens/main_screen/main_screen.dart';
+import 'package:inspire/screens/registration/reg_agree.dart';
 import 'package:inspire/screens/registration/reg_screen_two.dart';
 import 'package:inspire/screens/registration/registering_screen.dart';
 import 'package:inspire/screens/welcome_screen.dart';
@@ -53,27 +55,30 @@ Future<void> otpVerifyFinal(
 
     auth.write('reg_code', data['data']['code'].toString());
 
-    Get.defaultDialog(
-        title: 'Поздравляем с регистрацией!',
-        titleStyle: GoogleFonts.poppins(),
-        contentPadding: EdgeInsets.only(left: 10),
-        content: Container(
-          child: Text(
-            'Вы успешно зарегистрированы! Пока ваш аккаунт не активируют, большая часть функций будет вам недоступна!',
-            style: GoogleFonts.poppins(),
-          ),
-        ),
-        confirm: TextButton(
+    Get.to(RegisterAgreed());
 
-            onPressed: () {
-              Get.off(() => WelcomeScreen(),
-                  transition: Transition.rightToLeft,
-                  arguments: [data['data']]);
-            },
-            child: Text(
-              'Продолжить',
-              textAlign: TextAlign.center,
-            )));
+    // Get.defaultDialog(
+    //     title: 'Поздравляем с регистрацией!',
+    //     titleStyle: GoogleFonts.poppins(),
+    //     contentPadding: EdgeInsets.only(left: 10),
+    //     content: Container(
+    //       child: Text(
+    //         'Вы успешно зарегистрированы! Пока ваш аккаунт не активируют, большая часть функций будет вам недоступна!',
+    //         style: GoogleFonts.poppins(),
+    //       ),
+    //     ),
+    //     confirm: TextButton(
+    //
+    //         onPressed: () {
+    //           Get.off(() => WelcomeScreen(),
+    //               transition: Transition.rightToLeft,
+    //               arguments: [data['data']]);
+    //         },
+    //         child: Text(
+    //           'Продолжить',
+    //           textAlign: TextAlign.center,
+    //         )));
+
   } else {
     print('error');
   }

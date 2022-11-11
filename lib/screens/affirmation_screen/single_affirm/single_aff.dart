@@ -41,18 +41,24 @@ class _SingleAffScreenState extends State<SingleAffScreen>
     // TODO: implement initState
     super.initState();
 
-    var counter = 3;
+    var counter = 5;
 
     Timer.periodic(const Duration(seconds: 1), (timer) {
       print(timer.tick);
       if (active == true) {
         counter--;
+      } else {
+        if(active == false){
+          setState(() {
+            counter = 5;
+          });
+        }
       }
 
       if (counter == 0) {
         print('Cancel timer');
         timer.cancel();
-        Get.offAll(()=>CongratAffirm());
+        Get.to(() => CongratAffirm());
       }
     });
   }
@@ -64,6 +70,7 @@ class _SingleAffScreenState extends State<SingleAffScreen>
     setState(() {
       active = false;
     });
+
   }
 
   static const colorizeColors = [

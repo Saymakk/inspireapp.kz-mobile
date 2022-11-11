@@ -42,6 +42,14 @@ class Const {
     height: 1.3,
   ));
 
+  static var black27boldC = GoogleFonts.poppins(
+      textStyle: TextStyle(
+    color: Color.fromRGBO(40, 40, 40, 1),
+    fontSize: 27,
+    fontWeight: FontWeight.w600,
+    height: 1.3,
+  ));
+
   static var black14 = GoogleFonts.poppins(
       textStyle: TextStyle(
     color: Color.fromRGBO(40, 40, 40, 1),
