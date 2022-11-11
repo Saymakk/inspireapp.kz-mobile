@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:get_storage/get_storage.dart';
+import 'package:inspire/constants/constants.dart';
 import 'package:inspire/model/meditation_model.dart';
 
 Future<List<meditationsList>> meditationsRequest() async {
@@ -13,7 +14,7 @@ Future<List<meditationsList>> meditationsRequest() async {
     'Authorization': 'Bearer ${auth.read('token').toString()}'
   };
 
-  final Uri url = Uri.parse('https://kz.inspireapp.kz/api/meditations');
+  final Uri url = Uri.parse(Const.domain + 'api/meditations');
   var request = http.MultipartRequest('GET', url);
   request.headers.addAll(headers);
 

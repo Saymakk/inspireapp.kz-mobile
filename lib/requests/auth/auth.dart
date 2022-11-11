@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
+import 'package:inspire/constants/constants.dart';
 import 'package:inspire/screens/auth/authorization_screen2.dart';
 import 'package:inspire/screens/registration/reg_screen_two.dart';
 import 'package:oktoast/oktoast.dart';
@@ -19,7 +20,7 @@ Future<void> otpAuth1(phone) async {
 
   print(r_phone);
 
-  final Uri url = await Uri.parse('https://kz.inspireapp.kz/api/otpAuth');
+  final Uri url = await Uri.parse(Const.domain + 'api/otpAuth');
   var request = await http.MultipartRequest('POST', url);
 
   request.fields['phone'] = r_phone.toString();

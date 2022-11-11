@@ -6,6 +6,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:inspire/constants/bottom_app_bar.dart';
+import 'package:inspire/constants/constants.dart';
 import 'package:inspire/controllers/success_controller.dart';
 import 'package:inspire/requests/profile/profile.dart';
 import 'package:inspire/screens/registration/reg_screen_two.dart';
@@ -21,7 +22,7 @@ Future<void> createNoteRequest(description, emoji, File? photo,) async {
     'Authorization': 'Bearer ${auth.read('token').toString()}'
   };
 
-  final Uri url = await Uri.parse('https://kz.inspireapp.kz/api/user/note/create');
+  final Uri url = await Uri.parse(Const.domain + 'api/user/note/create');
   var request = await http.MultipartRequest('POST', url);
 
   request.headers.addAll(headers);

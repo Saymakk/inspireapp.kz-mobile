@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:get_storage/get_storage.dart';
+import 'package:inspire/constants/constants.dart';
 import 'package:inspire/model/affirmation_model.dart';
 import 'package:inspire/model/cities_model.dart';
 import 'package:inspire/model/countries_model.dart';
@@ -16,7 +17,7 @@ Future<List<countriesListModel>> countriesListRequest() async {
     'Authorization': 'Bearer ${auth.read('token').toString()}'
   };
 
-  final Uri url = Uri.parse('https://kz.inspireapp.kz/api/countries');
+  final Uri url = Uri.parse(Const.domain + 'api/countries');
   var request = http.MultipartRequest('GET', url);
   request.headers.addAll(headers);
 

@@ -40,6 +40,7 @@ class _SingleAffScreenState extends State<SingleAffScreen>
     setState(() {
       active = true;
     });
+    print(len);
   }
 
   @override
@@ -47,16 +48,16 @@ class _SingleAffScreenState extends State<SingleAffScreen>
     // TODO: implement initState
     super.initState();
 
-    var counter = 5;
+    var counter = len;
 
     Timer.periodic(const Duration(seconds: 1), (timer) async {
-      print(timer.tick);
+      // print(timer.tick);
       if (active == true) {
         counter--;
       } else {
         if(active == false){
           setState(() {
-            counter = 5;
+            counter = len;
           });
         }
       }

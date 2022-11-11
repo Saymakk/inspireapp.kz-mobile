@@ -26,7 +26,6 @@ class _AuthorizationScreen2State extends State<AuthorizationScreen2> {
       filter: {"#": RegExp(r'[0-9]')},
       type: MaskAutoCompletionType.lazy);
 
-
   bool circ = false;
   var counter = 5;
 
@@ -98,7 +97,8 @@ class _AuthorizationScreen2State extends State<AuthorizationScreen2> {
                     margin: EdgeInsets.only(bottom: 20),
                     decoration: Const.input_cont_grey_circ8,
                     child: TextFormField(
-                        controller: passwordController..text = Get.arguments[0].toString(),
+                        controller: passwordController
+                          ..text = Get.arguments[0].toString(),
                         decoration: InputDecoration(
                           hintText: 'Пароль',
                           hintStyle: Const.hint_text_style,
@@ -124,7 +124,6 @@ class _AuthorizationScreen2State extends State<AuthorizationScreen2> {
                   ),
                   GestureDetector(
                     onTap: () {
-
                       setState(() {
                         circ = true;
                         Timer.periodic(const Duration(seconds: 1), (timer) {
@@ -132,7 +131,7 @@ class _AuthorizationScreen2State extends State<AuthorizationScreen2> {
                           if (circ == true) {
                             counter--;
                           }
-                          ;
+
                           if (counter == 0) {
                             setState(() {
                               circ = false;
@@ -157,11 +156,11 @@ class _AuthorizationScreen2State extends State<AuthorizationScreen2> {
                       child: Center(
                         child: circ == true
                             ? CircularProgressIndicator()
-                            :  Text(
-                          'Присоединиться к INSPIRE',
-                          style: Const.buttontextstyle,
-                          textAlign: TextAlign.center,
-                        ),
+                            : Text(
+                                'Присоединиться к INSPIRE',
+                                style: Const.buttontextstyle,
+                                textAlign: TextAlign.center,
+                              ),
                       ),
                     ),
                   ),

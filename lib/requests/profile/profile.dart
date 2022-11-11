@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
+import 'package:inspire/constants/constants.dart';
 import 'package:inspire/screens/ProfileScreen/profile_screen.dart';
 import 'package:inspire/screens/auth/authorization_screen2.dart';
 import 'package:inspire/screens/registration/reg_screen_two.dart';
@@ -19,7 +20,7 @@ Future<void> profileRequest() async {
     'Authorization': 'Bearer ${auth.read('token').toString()}'
   };
 
-  final Uri url = await Uri.parse('https://kz.inspireapp.kz/api/user');
+  final Uri url = await Uri.parse(Const.domain + 'api/user');
   var request = await http.MultipartRequest('GET', url);
   request.headers.addAll(headers);
 

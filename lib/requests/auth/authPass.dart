@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:inspire/constants/bottom_app_bar.dart';
+import 'package:inspire/constants/constants.dart';
 import 'package:inspire/screens/registration/reg_screen_one.dart';
 import 'package:inspire/screens/registration/reg_screen_two.dart';
 import 'package:inspire/screens/registration/registering_screen.dart';
@@ -17,7 +18,7 @@ var code;
 var phone;
 
 Future<void> authPass(code, phone) async {
-  final Uri url = await Uri.parse('https://kz.inspireapp.kz/api/otpVerify');
+  final Uri url = await Uri.parse(Const.domain + 'api/otpVerify');
   var request = await http.MultipartRequest('POST', url);
 
   request.fields['phone'] = phone;

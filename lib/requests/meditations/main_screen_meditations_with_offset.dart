@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:get_storage/get_storage.dart';
+import 'package:inspire/constants/constants.dart';
 import 'package:inspire/model/meditPaginated.dart';
 import 'package:inspire/model/meditation_model.dart';
 
@@ -14,7 +15,7 @@ Future<List<meditationsList>> meditationsRequestWithOffset() async {
   };
 
   final Uri url = Uri.parse(
-    'https://kz.inspireapp.kz/api/meditations?paginate=3&page=1',
+    Const.domain + 'api/meditations?paginate=3&page=1',
   );
 
   var request = http.MultipartRequest('GET', url);

@@ -24,11 +24,6 @@ class _AddNoteState extends State<AddNote> {
 
   TextEditingController noteController = TextEditingController();
 
-  @override
-  void dispose() {
-    noteController.dispose();
-    super.dispose();
-  }
 
   bool selfie = false;
 
@@ -85,6 +80,13 @@ class _AddNoteState extends State<AddNote> {
     setState(() {
       smile = '';
     });
+  }
+
+
+  @override
+  void dispose() {
+    noteController.dispose();
+    super.dispose();
   }
 
   @override

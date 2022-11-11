@@ -25,7 +25,7 @@ Future<void> otpVerifyFinal(
   invite_code,
   pass,
 ) async {
-  final Uri url = await Uri.parse('https://kz.inspireapp.kz/api/otpVerify');
+  final Uri url = await Uri.parse(Const.domain + 'api/otpVerify');
   var request = await http.MultipartRequest('POST', url);
 
   if (invite_code == '') {

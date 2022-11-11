@@ -23,11 +23,6 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
 
   TextEditingController noteController = TextEditingController();
 
-  @override
-  void dispose() {
-    noteController.dispose();
-    super.dispose();
-  }
 
   bool selfie = false;
 
@@ -88,6 +83,13 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
     setState(() {
       selfie = true;
     });
+  }
+
+
+  @override
+  void dispose() {
+    noteController.dispose();
+    super.dispose();
   }
 
   @override
