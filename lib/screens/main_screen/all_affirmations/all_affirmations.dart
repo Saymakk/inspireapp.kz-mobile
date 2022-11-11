@@ -158,28 +158,28 @@ class _AllAffirmationsScreenState extends State<AllAffirmationsScreen> {
             ),
             margin: EdgeInsets.only(top: 12),
             // padding: EdgeInsets.all(20),
-            child: ListTile(
-              leading: SvgPicture.network(
-                'https://kz.inspireapp.kz/${affirm.subcategory['icon']}',
-                height: 24,
-              ),
-              title: Text(
-                affirm.title,
-                style: GoogleFonts.poppins(
-                    textStyle: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 14,
-                        color: Const.semigrey)),
-              ),
-              trailing: GestureDetector(
-                onTap: () {
-                  // print(affirm.title);
-                  Get.to(() => SingleAffScreen(),
-                      transition: Transition.rightToLeft,
-                      arguments: [affirm.title, affirm.length]);
-                  // singleAffRequest(affirm.id);
-                },
-                child: Container(
+            child: GestureDetector(
+              onTap: () {
+                // print(affirm.title);
+                Get.to(() => SingleAffScreen(),
+                    transition: Transition.rightToLeft,
+                    arguments: [affirm.title, affirm.length]);
+                // singleAffRequest(affirm.id);
+              },
+              child: ListTile(
+                leading: SvgPicture.network(
+                  'https://kz.inspireapp.kz/${affirm.subcategory['icon']}',
+                  height: 24,
+                ),
+                title: Text(
+                  affirm.title,
+                  style: GoogleFonts.poppins(
+                      textStyle: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 14,
+                          color: Const.semigrey)),
+                ),
+                trailing: Container(
                     decoration: BoxDecoration(
                         color: Const.turq,
                         borderRadius: BorderRadius.circular(8)),

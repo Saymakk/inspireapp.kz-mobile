@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -119,39 +120,55 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                           Row(
                             children: [
-                              Container(
-                                padding: EdgeInsets.only(left: 18, right: 18),
-                                width: 143,
-                                height: 34,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    border:
-                                        Border.all(color: Color(0xffe5ebed))),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    Text(code.toString(),
-                                        style: GoogleFonts.poppins(
-                                            textStyle: TextStyle(
-                                                fontSize: 19,
-                                                color: Color(0xff21cac8)))),
-                                    Padding(
-                                      padding:
-                                          const EdgeInsets.only(bottom: 15),
-                                      child: SizedBox(
-                                        width: 16,
-                                        height: 16,
-                                        child: IconButton(
-                                          onPressed: () {},
-                                          icon: Icon(
-                                            Icons.copy,
-                                            size: 16,
+                              GestureDetector(
+                                onTap: () async {
+                                  final copied = await ClipboardData(text: code.toString());
+                                  Clipboard.setData(copied);
+                                  if(copied.text != ''){
+                                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                        content: Text(
+                                          'Вы скопировали код! Поделитесь им с вашими друзьями',
+                                          style: GoogleFonts.poppins(
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                        )));
+                                  }
+                                  print(copied.text);
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.only(left: 18, right: 18),
+                                  width: 143,
+                                  height: 34,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      border:
+                                          Border.all(color: Color(0xffe5ebed))),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      Text(code.toString(),
+                                          style: GoogleFonts.poppins(
+                                              textStyle: TextStyle(
+                                                  fontSize: 19,
+                                                  color: Color(0xff21cac8)))),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(bottom: 15),
+                                        child: SizedBox(
+                                          width: 16,
+                                          height: 16,
+                                          child: IconButton(
+                                            onPressed: () {},
+                                            icon: Icon(
+                                              Icons.copy,
+                                              size: 16,
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ),
                             ],
@@ -393,7 +410,32 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             // return rideList(snapshot.data, context);
                             // print(snapshot.data.toString());
                             // return CoursesWidget(snapshot.data, context);
-                            return InvitedUsersWidget(snapshot.data, context);
+                          if(snapshot.data == null){
+                            return Center(
+                              child: Container(
+                                margin: EdgeInsets.only(top: 20),
+                                padding: EdgeInsets.only(
+                                    left: 19, right: 19, top: 13.5, bottom: 10.5),
+                                decoration: BoxDecoration(
+                                  color: Color(0xffFFFEE3),
+                                  borderRadius: BorderRadius.circular(15), ),
+                                child: ListTile(
+                                  leading: Image.asset(
+                                    Const.icns + '!.png',
+                                    height: 37,
+                                    color: Color(0xffFFDD65),
+                                  ),
+                                  title: Text(
+                                    'Извините, здесь пока ничего нет',
+                                    maxLines: 4,
+                                    style: TextStyle(fontSize: 14, color: Const.deepgrey),
+                                  ),
+                                ),
+                              ),
+                            );
+                          } else {
+                              return InvitedUsersWidget(snapshot.data, context);
+                            }
                         }
                       },
                     ),

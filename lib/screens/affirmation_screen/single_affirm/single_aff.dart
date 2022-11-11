@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:ui';
 import 'dart:math' as math;
 
@@ -11,6 +12,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:inspire/constants/constants.dart';
+
+import 'affirm_end.dart';
 
 class SingleAffScreen extends StatefulWidget {
   const SingleAffScreen({Key? key}) : super(key: key);
@@ -31,8 +34,27 @@ class _SingleAffScreenState extends State<SingleAffScreen>
     setState(() {
       active = true;
     });
-    initState() {}
-    ;
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    var counter = 3;
+
+    Timer.periodic(const Duration(seconds: 1), (timer) {
+      print(timer.tick);
+      if (active == true) {
+        counter--;
+      }
+
+      if (counter == 0) {
+        print('Cancel timer');
+        timer.cancel();
+        Get.offAll(()=>CongratAffirm());
+      }
+    });
   }
 
   String title = Get.arguments[0];
@@ -48,7 +70,6 @@ class _SingleAffScreenState extends State<SingleAffScreen>
     Color(0xff21cac8),
     Colors.white,
   ];
-
 
   @override
   dispose() {
@@ -100,22 +121,19 @@ class _SingleAffScreenState extends State<SingleAffScreen>
                         child: AnimatedTextKit(
                           animatedTexts: [
                             ColorizeAnimatedText(
-
-                                '$title',
-                                textStyle: GoogleFonts.poppins(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 20,
-                                ),
-                                textAlign: TextAlign.center,
-                                colors: colorizeColors,
-                                speed: Duration(
-                                    milliseconds: 200 ),
+                              '$title',
+                              textStyle: GoogleFonts.poppins(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 20,
+                              ),
+                              textAlign: TextAlign.center,
+                              colors: colorizeColors,
+                              speed: Duration(milliseconds: 200),
                               // cursor: '',
                             ),
                           ],
                         ),
-
                       ),
                     ),
                   ),
@@ -159,7 +177,6 @@ class _SingleAffScreenState extends State<SingleAffScreen>
                                   width: 74,
                                   height: 74,
                                 )),
-
                           ),
                         ),
                         Container(

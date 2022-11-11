@@ -7,7 +7,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:inspire/constants/app_bar.dart';
 import 'package:inspire/constants/constants.dart';
 import 'package:inspire/requests/affirmations/main_screen_affirmations.dart';
-import 'package:inspire/requests/affirmations/main_screen_affirmations_with_offset.dart';
 import 'package:skeletons/skeletons.dart';
 
 import 'modal_bottom_sheet.dart';
@@ -124,7 +123,7 @@ class _AffirmationScreenState extends State<AffirmationScreen> {
                     )),
 
                 FutureBuilder(
-                  future: affirmationsRequestWithOffset(),
+                  future: affirmationsRequest(),
                   builder: (BuildContext context, AsyncSnapshot snapshot) {
                     switch (snapshot.connectionState) {
                       case ConnectionState.none:
@@ -221,63 +220,6 @@ class _AffirmationScreenState extends State<AffirmationScreen> {
                   },
                 ),
 
-                // Container(
-                //   margin: EdgeInsets.only(
-                //     bottom: 12,
-                //   ),
-                //   decoration: BoxDecoration(
-                //       borderRadius: BorderRadius.circular(15),
-                //       color: Color(0xff282828)),
-                //   child: Container(
-                //     margin: EdgeInsets.symmetric(horizontal: 17, vertical: 18),
-                //     child: Row(
-                //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //       children: [
-                //         Image.asset(
-                //           Const.icns + 'heart_w.png',
-                //           width: 40,
-                //           height: 40,
-                //         ),
-                //         SizedBox(
-                //           width: 23,
-                //         ),
-                //
-                //         Expanded(
-                //           child: Text(
-                //             'Благодарность',
-                //             style: GoogleFonts.poppins(
-                //                 color: Colors.white,
-                //                 fontWeight: FontWeight.w600,
-                //                 fontSize: 14),
-                //           ),
-                //         ),
-                //         Image.asset(
-                //           'assets/icons/lock.png',
-                //           width: 45,
-                //           height: 45,
-                //         ),
-                //         // Container(
-                //         //   decoration: BoxDecoration(
-                //         //     color: Colors.white,
-                //         //     shape: BoxShape.circle,
-                //         //   ),
-                //         //   width: 45,
-                //         //   height: 45,
-                //         //   child: Center(
-                //         //     child: Container(
-                //         //       // margin: EdgeInsets.all(11),
-                //         //         child: Text(
-                //         //           '8',
-                //         //           style: GoogleFonts.poppins(
-                //         //               fontSize: 22, color: Color(0xff21cac8)),
-                //         //         )),
-                //         //   ),
-                //         // ),
-                //       ],
-                //     ),
-                //   ),
-                // ),
-
                 SizedBox(
                   height: 100,
                 ),
@@ -300,37 +242,40 @@ class _AffirmationScreenState extends State<AffirmationScreen> {
             ),
             margin: EdgeInsets.only(top: 12),
             // padding: EdgeInsets.all(20),
-            child: ListTile(
-              leading: SvgPicture.network(
-                'https://kz.inspireapp.kz/${affirm.subcategory['icon']}',
-                height: 24,
-              ),
-              title: Text(
-                affirm.title,
-                style: GoogleFonts.poppins(
-                    textStyle: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 14,
-                        color: Const.semigrey)),
-              ),
-              trailing: GestureDetector(
-                onTap: () {
-                  // print(affirm.title);
-                  Get.to(() => SingleAffScreen(),
-                      transition: Transition.rightToLeft,
-                      arguments: [affirm.title, affirm.length]);
-                  // singleAffRequest(affirm.id);
-                },
-                child: Container(
-                    decoration: BoxDecoration(
-                        color: Const.turq,
-                        borderRadius: BorderRadius.circular(8)),
-                    height: 40,
-                    width: 45,
-                    child: Icon(
-                      Icons.add,
-                      color: Colors.white,
-                    )),
+            child: GestureDetector(
+              onTap: () {
+                // print(affirm.title);
+                Get.to(() => SingleAffScreen(),
+                    transition: Transition.rightToLeft,
+                    arguments: [affirm.title, affirm.length]);
+                // singleAffRequest(affirm.id);
+              },
+              child: ListTile(
+                leading: SvgPicture.network(
+                  'https://kz.inspireapp.kz/${affirm.subcategory['icon']}',
+                  height: 24,
+                ),
+                title: Text(
+                  affirm.title,
+                  style: GoogleFonts.poppins(
+                      textStyle: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 14,
+                          color: Const.semigrey)),
+                ),
+                trailing: GestureDetector(
+
+                  child: Container(
+                      decoration: BoxDecoration(
+                          color: Const.turq,
+                          borderRadius: BorderRadius.circular(8)),
+                      height: 40,
+                      width: 45,
+                      child: Icon(
+                        Icons.add,
+                        color: Colors.white,
+                      )),
+                ),
               ),
             ),
           );

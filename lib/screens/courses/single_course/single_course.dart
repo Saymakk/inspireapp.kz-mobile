@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:inspire/constants/constants.dart';
+import 'package:inspire/screens/video/video_vimeo.dart';
 import 'package:path_provider/path_provider.dart';
 
 class SingleCourseScreen extends StatefulWidget {
@@ -23,6 +24,7 @@ class _SingleCourseScreenState extends State<SingleCourseScreen> {
   String description = Get.arguments[3];
   var length = Get.arguments[2];
   String material_path = Get.arguments[1];
+  String video = Get.arguments[4];
 
   @override
   Widget build(BuildContext context) {
@@ -57,30 +59,33 @@ class _SingleCourseScreenState extends State<SingleCourseScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Stack(
-                alignment: AlignmentDirectional.center,
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(bottom: 25),
-                    width: double.infinity,
-                    height: 160,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        image: DecorationImage(
-                            image: AssetImage(
-                              Const.imgs + 'kuralaj.png',
-                            ),
-                            fit: BoxFit.cover)),
-                  ),
-                  CircleAvatar(
-                      child: Icon(
-                        Icons.play_arrow,
-                        color: Colors.white,
-                        size: 24,
-                      ),
-                      radius: 22.5,
-                      backgroundColor: Color(0xff21cac8))
-                ],
+              GestureDetector(
+                onTap: ()=>Get.to(()=>VideoPlayer(), arguments: [course_title, video]),
+                child: Stack(
+                  alignment: AlignmentDirectional.center,
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(bottom: 25),
+                      width: double.infinity,
+                      height: 160,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          image: DecorationImage(
+                              image: AssetImage(
+                                Const.imgs + 'kuralaj.png',
+                              ),
+                              fit: BoxFit.cover)),
+                    ),
+                    CircleAvatar(
+                        child: Icon(
+                          Icons.play_arrow,
+                          color: Colors.white,
+                          size: 24,
+                        ),
+                        radius: 22.5,
+                        backgroundColor: Color(0xff21cac8))
+                  ],
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 10),

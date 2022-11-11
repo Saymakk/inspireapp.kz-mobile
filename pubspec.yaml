@@ -42,6 +42,12 @@ dependencies:
   image_picker: ^0.8.6
   skeletons: ^0.0.3
   photo_view: ^0.14.0
+#  vimeoplayer_trinity: ^0.2.3
+#  vimeo_player_flutter: ^0.0.3+2
+#  pod_player: ^0.1.0
+  vimeo_video_player: ^0.0.6
+  flick_video_player: ^0.5.0
+  video_player: ^2.4.7
 #  icons_launcher: ^2.0.5
 
 dev_dependencies:

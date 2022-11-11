@@ -30,7 +30,7 @@ class _AddNoteState extends State<AddNote> {
     super.dispose();
   }
 
-  String selfie = 'Сделайте селфи';
+  bool selfie = false;
 
 
   File? image;
@@ -52,10 +52,12 @@ class _AddNoteState extends State<AddNote> {
     }
   }
 
+
+
   @override
   void selfistate(){
     setState(() {
-      selfie = 'Фото загружено';
+      selfie = true;
     });
   }
 
@@ -92,10 +94,7 @@ class _AddNoteState extends State<AddNote> {
         Column(
           children: [
             Padding(
-              padding: const EdgeInsets.only(
-                left: 24,
-                right: 24,
-              ),
+              padding: const EdgeInsets.only(left: 24, right: 24, top: 20),
               child: Column(
                 children: [
                   Column(
@@ -110,20 +109,6 @@ class _AddNoteState extends State<AddNote> {
                                     fontSize: 16,
                                     fontWeight: FontWeight.w600,
                                     color: Const.semiblack)),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              noteStatusController.increment();
-                            },
-                            child: Obx(() =>  Text(
-                              '${noteStatusController.count}',
-                              style: GoogleFonts.poppins(
-                                  textStyle: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w600,
-                                      color: Const.turq)),
-                            ),),
-
                           ),
                         ],
                       ),
@@ -148,7 +133,8 @@ class _AddNoteState extends State<AddNote> {
                         Padding(
                           padding: const EdgeInsets.only(bottom: 20),
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment:
+                            MainAxisAlignment.spaceBetween,
                             children: [
                               GestureDetector(
                                 onTap: () {
@@ -171,7 +157,8 @@ class _AddNoteState extends State<AddNote> {
                                 },
                                 child: Container(
                                   decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(15),
+                                      borderRadius:
+                                      BorderRadius.circular(15),
                                       color: s1 == true
                                           ? Color(0xffdadada)
                                           : null),
@@ -181,8 +168,8 @@ class _AddNoteState extends State<AddNote> {
                                     color: Color(0xffDADADA),
                                     // padding: EdgeInsets.all(6),
                                     child: ClipRRect(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(12)),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(12)),
                                       child: Container(
                                         padding: EdgeInsets.all(10),
                                         // height: 66,
@@ -193,8 +180,8 @@ class _AddNoteState extends State<AddNote> {
                                         // ),
                                         child: Text(
                                           '😊',
-                                          style:
-                                              GoogleFonts.poppins(fontSize: 40),
+                                          style: GoogleFonts.poppins(
+                                              fontSize: 40),
                                         ),
                                       ),
                                     ),
@@ -222,7 +209,8 @@ class _AddNoteState extends State<AddNote> {
                                 },
                                 child: Container(
                                   decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(15),
+                                      borderRadius:
+                                      BorderRadius.circular(15),
                                       color: s2 == true
                                           ? Color(0xffdadada)
                                           : null),
@@ -232,8 +220,8 @@ class _AddNoteState extends State<AddNote> {
                                     color: Color(0xffDADADA),
                                     // padding: EdgeInsets.all(6),
                                     child: ClipRRect(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(12)),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(12)),
                                       child: Container(
                                         padding: EdgeInsets.all(10),
                                         // height: 66,
@@ -244,8 +232,8 @@ class _AddNoteState extends State<AddNote> {
                                         // ),
                                         child: Text(
                                           '😋',
-                                          style:
-                                              GoogleFonts.poppins(fontSize: 40),
+                                          style: GoogleFonts.poppins(
+                                              fontSize: 40),
                                         ),
                                       ),
                                     ),
@@ -273,7 +261,8 @@ class _AddNoteState extends State<AddNote> {
                                 },
                                 child: Container(
                                   decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(15),
+                                      borderRadius:
+                                      BorderRadius.circular(15),
                                       color: s3 == true
                                           ? Color(0xffdadada)
                                           : null),
@@ -283,8 +272,8 @@ class _AddNoteState extends State<AddNote> {
                                     color: Color(0xffDADADA),
                                     // padding: EdgeInsets.all(6),
                                     child: ClipRRect(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(12)),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(12)),
                                       child: Container(
                                         padding: EdgeInsets.all(10),
                                         // height: 66,
@@ -295,8 +284,8 @@ class _AddNoteState extends State<AddNote> {
                                         // ),
                                         child: Text(
                                           '😍',
-                                          style:
-                                              GoogleFonts.poppins(fontSize: 40),
+                                          style: GoogleFonts.poppins(
+                                              fontSize: 40),
                                         ),
                                       ),
                                     ),
@@ -324,7 +313,8 @@ class _AddNoteState extends State<AddNote> {
                                 },
                                 child: Container(
                                   decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(15),
+                                      borderRadius:
+                                      BorderRadius.circular(15),
                                       color: s4 == true
                                           ? Color(0xffdadada)
                                           : null),
@@ -334,8 +324,8 @@ class _AddNoteState extends State<AddNote> {
                                     color: Color(0xffDADADA),
                                     // padding: EdgeInsets.all(6),
                                     child: ClipRRect(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(12)),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(12)),
                                       child: Container(
                                         padding: EdgeInsets.all(10),
                                         // height: 66,
@@ -346,8 +336,8 @@ class _AddNoteState extends State<AddNote> {
                                         // ),
                                         child: Text(
                                           '😕',
-                                          style:
-                                              GoogleFonts.poppins(fontSize: 40),
+                                          style: GoogleFonts.poppins(
+                                              fontSize: 40),
                                         ),
                                       ),
                                     ),
@@ -360,7 +350,8 @@ class _AddNoteState extends State<AddNote> {
                         Padding(
                           padding: const EdgeInsets.only(bottom: 20),
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment:
+                            MainAxisAlignment.spaceBetween,
                             children: [
                               GestureDetector(
                                 onTap: () {
@@ -383,7 +374,8 @@ class _AddNoteState extends State<AddNote> {
                                 },
                                 child: Container(
                                   decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(15),
+                                      borderRadius:
+                                      BorderRadius.circular(15),
                                       color: s5 == true
                                           ? Color(0xffdadada)
                                           : null),
@@ -393,8 +385,8 @@ class _AddNoteState extends State<AddNote> {
                                     color: Color(0xffDADADA),
                                     // padding: EdgeInsets.all(6),
                                     child: ClipRRect(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(12)),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(12)),
                                       child: Container(
                                         padding: EdgeInsets.all(10),
                                         // height: 66,
@@ -405,8 +397,8 @@ class _AddNoteState extends State<AddNote> {
                                         // ),
                                         child: Text(
                                           '😌',
-                                          style:
-                                              GoogleFonts.poppins(fontSize: 40),
+                                          style: GoogleFonts.poppins(
+                                              fontSize: 40),
                                         ),
                                       ),
                                     ),
@@ -434,7 +426,8 @@ class _AddNoteState extends State<AddNote> {
                                 },
                                 child: Container(
                                   decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(15),
+                                      borderRadius:
+                                      BorderRadius.circular(15),
                                       color: s6 == true
                                           ? Color(0xffdadada)
                                           : null),
@@ -444,8 +437,8 @@ class _AddNoteState extends State<AddNote> {
                                     color: Color(0xffDADADA),
                                     // padding: EdgeInsets.all(6),
                                     child: ClipRRect(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(12)),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(12)),
                                       child: Container(
                                         padding: EdgeInsets.all(10),
                                         // height: 66,
@@ -456,8 +449,8 @@ class _AddNoteState extends State<AddNote> {
                                         // ),
                                         child: Text(
                                           '🙂',
-                                          style:
-                                              GoogleFonts.poppins(fontSize: 40),
+                                          style: GoogleFonts.poppins(
+                                              fontSize: 40),
                                         ),
                                       ),
                                     ),
@@ -485,7 +478,8 @@ class _AddNoteState extends State<AddNote> {
                                 },
                                 child: Container(
                                   decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(15),
+                                      borderRadius:
+                                      BorderRadius.circular(15),
                                       color: s7 == true
                                           ? Color(0xffdadada)
                                           : null),
@@ -495,8 +489,8 @@ class _AddNoteState extends State<AddNote> {
                                     color: Color(0xffDADADA),
                                     // padding: EdgeInsets.all(6),
                                     child: ClipRRect(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(12)),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(12)),
                                       child: Container(
                                         padding: EdgeInsets.all(10),
                                         // height: 66,
@@ -507,8 +501,8 @@ class _AddNoteState extends State<AddNote> {
                                         // ),
                                         child: Text(
                                           '😴',
-                                          style:
-                                              GoogleFonts.poppins(fontSize: 40),
+                                          style: GoogleFonts.poppins(
+                                              fontSize: 40),
                                         ),
                                       ),
                                     ),
@@ -536,7 +530,8 @@ class _AddNoteState extends State<AddNote> {
                                 },
                                 child: Container(
                                   decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(15),
+                                      borderRadius:
+                                      BorderRadius.circular(15),
                                       color: s8 == true
                                           ? Color(0xffdadada)
                                           : null),
@@ -546,8 +541,8 @@ class _AddNoteState extends State<AddNote> {
                                     color: Color(0xffDADADA),
                                     // padding: EdgeInsets.all(6),
                                     child: ClipRRect(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(12)),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(12)),
                                       child: Container(
                                         padding: EdgeInsets.all(10),
                                         // height: 66,
@@ -558,8 +553,8 @@ class _AddNoteState extends State<AddNote> {
                                         // ),
                                         child: Text(
                                           '😉',
-                                          style:
-                                              GoogleFonts.poppins(fontSize: 40),
+                                          style: GoogleFonts.poppins(
+                                              fontSize: 40),
                                         ),
                                       ),
                                     ),
@@ -572,7 +567,8 @@ class _AddNoteState extends State<AddNote> {
                         Padding(
                           padding: const EdgeInsets.only(bottom: 20),
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment:
+                            MainAxisAlignment.spaceBetween,
                             children: [
                               GestureDetector(
                                 onTap: () {
@@ -595,7 +591,8 @@ class _AddNoteState extends State<AddNote> {
                                 },
                                 child: Container(
                                   decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(15),
+                                      borderRadius:
+                                      BorderRadius.circular(15),
                                       color: s9 == true
                                           ? Color(0xffdadada)
                                           : null),
@@ -605,8 +602,8 @@ class _AddNoteState extends State<AddNote> {
                                     color: Color(0xffDADADA),
                                     // padding: EdgeInsets.all(6),
                                     child: ClipRRect(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(12)),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(12)),
                                       child: Container(
                                         padding: EdgeInsets.all(10),
                                         // height: 66,
@@ -617,8 +614,8 @@ class _AddNoteState extends State<AddNote> {
                                         // ),
                                         child: Text(
                                           '😐',
-                                          style:
-                                              GoogleFonts.poppins(fontSize: 40),
+                                          style: GoogleFonts.poppins(
+                                              fontSize: 40),
                                         ),
                                       ),
                                     ),
@@ -646,7 +643,8 @@ class _AddNoteState extends State<AddNote> {
                                 },
                                 child: Container(
                                   decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(15),
+                                      borderRadius:
+                                      BorderRadius.circular(15),
                                       color: s10 == true
                                           ? Color(0xffdadada)
                                           : null),
@@ -656,8 +654,8 @@ class _AddNoteState extends State<AddNote> {
                                     color: Color(0xffDADADA),
                                     // padding: EdgeInsets.all(6),
                                     child: ClipRRect(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(12)),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(12)),
                                       child: Container(
                                         padding: EdgeInsets.all(10),
                                         // height: 66,
@@ -668,8 +666,8 @@ class _AddNoteState extends State<AddNote> {
                                         // ),
                                         child: Text(
                                           '😤',
-                                          style:
-                                              GoogleFonts.poppins(fontSize: 40),
+                                          style: GoogleFonts.poppins(
+                                              fontSize: 40),
                                         ),
                                       ),
                                     ),
@@ -697,7 +695,8 @@ class _AddNoteState extends State<AddNote> {
                                 },
                                 child: Container(
                                   decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(15),
+                                      borderRadius:
+                                      BorderRadius.circular(15),
                                       color: s11 == true
                                           ? Color(0xffdadada)
                                           : null),
@@ -707,8 +706,8 @@ class _AddNoteState extends State<AddNote> {
                                     color: Color(0xffDADADA),
                                     // padding: EdgeInsets.all(6),
                                     child: ClipRRect(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(12)),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(12)),
                                       child: Container(
                                         padding: EdgeInsets.all(10),
                                         // height: 66,
@@ -719,8 +718,8 @@ class _AddNoteState extends State<AddNote> {
                                         // ),
                                         child: Text(
                                           '😫',
-                                          style:
-                                              GoogleFonts.poppins(fontSize: 40),
+                                          style: GoogleFonts.poppins(
+                                              fontSize: 40),
                                         ),
                                       ),
                                     ),
@@ -748,7 +747,8 @@ class _AddNoteState extends State<AddNote> {
                                 },
                                 child: Container(
                                   decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(15),
+                                      borderRadius:
+                                      BorderRadius.circular(15),
                                       color: s12 == true
                                           ? Color(0xffdadada)
                                           : null),
@@ -758,8 +758,8 @@ class _AddNoteState extends State<AddNote> {
                                     color: Color(0xffDADADA),
                                     // padding: EdgeInsets.all(6),
                                     child: ClipRRect(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(12)),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(12)),
                                       child: Container(
                                         padding: EdgeInsets.all(10),
                                         // height: 66,
@@ -770,8 +770,8 @@ class _AddNoteState extends State<AddNote> {
                                         // ),
                                         child: Text(
                                           '😬',
-                                          style:
-                                              GoogleFonts.poppins(fontSize: 40),
+                                          style: GoogleFonts.poppins(
+                                              fontSize: 40),
                                         ),
                                       ),
                                     ),
@@ -825,7 +825,6 @@ class _AddNoteState extends State<AddNote> {
                       textStyle: TextStyle(
                           color: Colors.black, fontSize: 14, height: 1.3))),
             ),
-            
             Visibility(
               visible: isVisible,
               child: Container(
@@ -859,82 +858,110 @@ class _AddNoteState extends State<AddNote> {
             color: Color(0xffDADADA),
             child: Container(
               padding: EdgeInsets.only(top: 13),
-              height: 70,
-              margin: EdgeInsets.only(bottom: 20),
               // padding: EdgeInsets.only(bottom: 20),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              Text(
-                                selfie,
-                                style: GoogleFonts.poppins(
-                                  textStyle: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w600,
-                                    height: 1.3,
-                                    color: Color(0xff282828),
+              child: Container(
+                margin: EdgeInsets.only(top: 10, bottom: 20),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Text(
+                                  'Сделайте селфи',
+                                  style: GoogleFonts.poppins(
+                                    textStyle: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600,
+                                      height: 1.3,
+                                      color: Color(0xff282828),
+                                    ),
                                   ),
                                 ),
-                              ),
-                              SizedBox(
-                                width: 80,
-                              ),
-                            ],
-                          ),
-                          Text(
-                            'Или загрузите из альбомов',
-                            style: GoogleFonts.poppins(
-                              textStyle: TextStyle(
-                                fontSize: 14,
-                                height: 1.3,
-                                color: Color(0xffCFD7D9),
+                                SizedBox(
+                                  width: 80,
+                                ),
+                              ],
+                            ),
+                            Visibility(
+                              visible: selfie,
+                              child: Row(
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.only(
+                                        bottom: 10, top: 10),
+                                    decoration: Const.cont_turq_circ8,
+                                    // padding: EdgeInsets.only(top: 5),
+                                    child: Container(
+                                      margin: EdgeInsets.symmetric(
+                                          horizontal: 5, vertical: 5),
+                                      child: Center(
+                                        child: Text(
+                                          'Фото загружено',
+                                          style: Const.buttontextstyle,
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 75,
+                                  ),
+                                ],
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                      GestureDetector(
-                        onTap: () => pickImage(ImageSource.gallery),
-                        child: Container(
-                          // margin: EdgeInsets.only(left: 34),
-                          padding: EdgeInsets.only(
-                              left: 10.5, right: 10.5, top: 8, bottom: 8),
-                          decoration: BoxDecoration(
-                              color: Const.turq,
-                              borderRadius: BorderRadius.circular(8)),
-                          height: 40,
-                          width: 45,
-                          child: Image.asset(
-                            Const.icns + 'from_gallery.png',
+                            Text(
+                              'Или загрузите из альбомов',
+                              style: GoogleFonts.poppins(
+                                textStyle: TextStyle(
+                                  fontSize: 14,
+                                  height: 1.3,
+                                  color: Color(0xffCFD7D9),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        GestureDetector(
+                          onTap: () => pickImage(ImageSource.gallery),
+                          child: Container(
+                            // margin: EdgeInsets.only(left: 34),
+                            padding: EdgeInsets.only(
+                                left: 10.5, right: 10.5, top: 8, bottom: 8),
+                            decoration: BoxDecoration(
+                                color: Const.turq,
+                                borderRadius: BorderRadius.circular(8)),
+                            height: 40,
+                            width: 45,
+                            child: Image.asset(
+                              Const.icns + 'from_gallery.png',
+                            ),
                           ),
                         ),
-                      ),
-                      GestureDetector(
-                        onTap: () => pickImage(ImageSource.camera),
-                        child: Container(
-                          padding: EdgeInsets.only(
-                              left: 10.5, right: 10.5, top: 8, bottom: 8),
-                          decoration: BoxDecoration(
-                              color: Const.turq,
-                              borderRadius: BorderRadius.circular(8)),
-                          height: 40,
-                          width: 45,
-                          child: Image.asset(
-                            Const.icns + 'add_photo.png',
+                        GestureDetector(
+                          onTap: () => pickImage(ImageSource.camera),
+                          child: Container(
+                            padding: EdgeInsets.only(
+                                left: 10.5, right: 10.5, top: 8, bottom: 8),
+                            decoration: BoxDecoration(
+                                color: Const.turq,
+                                borderRadius: BorderRadius.circular(8)),
+                            height: 40,
+                            width: 45,
+                            child: Image.asset(
+                              Const.icns + 'add_photo.png',
+                            ),
                           ),
                         ),
-                      ),
-                    ],
-                  )
-                ],
+                      ],
+                    )
+                  ],
+                ),
               ),
             ),
           ),
@@ -945,18 +972,18 @@ class _AddNoteState extends State<AddNote> {
             onTap: () async {
               noteController.text == ''
                   ? ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Заполните поле для заметок')))
+                  SnackBar(content: Text('Заполните поле для заметок')))
                   : smile == ''
-                      ? ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('Выберите эмодзи')))
-                      : image == null
-                          ? ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text('Сделайте фото')))
-                          : await createNoteRequest(
-                              noteController.text,
-                              smile,
-                              image!,
-                            );
+                  ? ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('Выберите эмодзи')))
+                  : image == null
+                  ? ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('Сделайте фото')))
+                  : await createNoteRequest(
+                noteController.text,
+                smile,
+                image!,
+              );
 
               /** !!! Добавить GET OBS !!! **/
               // Get.defaultDialog(

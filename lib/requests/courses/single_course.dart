@@ -27,7 +27,7 @@ Future<void> singleCourse(id) async {
   if (response.statusCode == 200) {
     dynamic list = json.decode(responsed.body);
 
-    print(list['course_contents'][0]['title']);
+    print(list['course_contents'][0]['path']);
 
     // List<coursesList> datasheet = list.map((f) => coursesList.fromJson(f)).toList();
 
@@ -37,6 +37,7 @@ Future<void> singleCourse(id) async {
           list['course_contents'][0]['material_path'],
           list['course_contents'][0]['length'],
           list['course_contents'][0]['description'],
+          list['course_contents'][0]['path'],
 
         ]);
     // return Future<List<coursesList>>.value(datasheet);

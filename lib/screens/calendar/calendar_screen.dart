@@ -40,26 +40,26 @@ class _CalendarScreenState extends State<CalendarScreen> {
             ),
           ),
           actions: [
-            GestureDetector(
-              onTap: () => Get.to(
-                () => AllCalendarScreen(),
-                transition: Transition.rightToLeft,
-              ),
-              child: Container(
-                width: 45,
-                decoration: BoxDecoration(
-                  color: Color(0xff21cac8),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Center(
-                  child: Image.asset(
-                    Const.icns + 'calendar.png',
-                    width: 24,
-                    height: 24,
-                  ),
-                ),
-              ),
-            ),
+            // GestureDetector(
+            //   onTap: () => Get.to(
+            //     () => AllCalendarScreen(),
+            //     transition: Transition.rightToLeft,
+            //   ),
+            //   child: Container(
+            //     width: 45,
+            //     decoration: BoxDecoration(
+            //       color: Color(0xff21cac8),
+            //       borderRadius: BorderRadius.circular(8),
+            //     ),
+            //     child: Center(
+            //       child: Image.asset(
+            //         Const.icns + 'calendar.png',
+            //         width: 24,
+            //         height: 24,
+            //       ),
+            //     ),
+            //   ),
+            // ),
           ],
         ),
         backgroundColor: Colors.transparent,
@@ -123,80 +123,6 @@ class _CalendarScreenState extends State<CalendarScreen> {
                     child: Divider(
                       color: Color(0xffededed),
                     )),
-                // GestureDetector(
-                //   onTap: () {
-                //     Get.to(() => SingleNoteScreen(),
-                //         transition: Transition.rightToLeft);
-                //   },
-                //   child: Container(
-                //     margin: EdgeInsets.only(bottom: 12),
-                //     decoration: BoxDecoration(
-                //         color: Color(0xffF7FAFB),
-                //         borderRadius: BorderRadius.circular(15)),
-                //     child: Container(
-                //       margin: EdgeInsets.all(10),
-                //       child: Container(
-                //         decoration: BoxDecoration(
-                //           color: Color(0xffF7FAFB),
-                //           borderRadius: BorderRadius.circular(15),
-                //         ),
-                //         child: ListTile(
-                //           isThreeLine: true,
-                //           title: Padding(
-                //             padding: const EdgeInsets.only(bottom: 8),
-                //             child: Text(
-                //               'ячс',
-                //               style: GoogleFonts.poppins(
-                //                 textStyle: TextStyle(
-                //                     fontSize: 14,
-                //                     fontWeight: FontWeight.w600,
-                //                     color: Color(0xff4f4f4f),
-                //                     height: 1.3),
-                //               ),
-                //             ),
-                //           ),
-                //           subtitle: Row(
-                //             children: [
-                //               Image.asset(
-                //                 Const.icns + 'calendar.png',
-                //                 color: Color(
-                //                   0xff21cac8,
-                //                 ),
-                //                 width: 15,
-                //                 height: 15,
-                //               ),
-                //               SizedBox(
-                //                 width: 7,
-                //               ),
-                //               Text(
-                //                 'Вторник, 13 сентября',
-                //                 style: GoogleFonts.poppins(
-                //                   textStyle: TextStyle(
-                //                       fontSize: 12,
-                //                       fontWeight: FontWeight.w500,
-                //                       color: Color(0xff21cac8),
-                //                       height: 1.3),
-                //                 ),
-                //               ),
-                //             ],
-                //           ),
-                //           trailing: Container(
-                //             decoration: BoxDecoration(
-                //                 borderRadius: BorderRadius.circular(8),
-                //                 border: Border.all(color: Color(0xffc9d9de))),
-                //             child: Container(
-                //                 margin: EdgeInsets.all(10.5),
-                //                 child: Image.asset(
-                //                   Const.icns + 'smile_1.png',
-                //                   height: 24,
-                //                   width: 24,
-                //                 )),
-                //           ),
-                //         ),
-                //       ),
-                //     ),
-                //   ),
-                // ),
                 FutureBuilder(
                   future: calendarNotesRequest(),
                   builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -306,7 +232,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                   child: ListTile(
                     isThreeLine: true,
                     title: Padding(
-                      padding: const EdgeInsets.only(bottom: 8),
+                      padding: const EdgeInsets.only(bottom: 30),
                       child: Text(
                         note.title,
                         style: GoogleFonts.poppins(

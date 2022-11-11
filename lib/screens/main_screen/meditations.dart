@@ -211,42 +211,43 @@ class _MeditationsState extends State<Meditations> {
       children: items.map<Widget>(
         (medit) {
           return Container(
+
             decoration: BoxDecoration(
               color: Const.lowgrey,
               borderRadius: BorderRadius.circular(15),
             ),
             margin: EdgeInsets.only(top: 10, bottom: 10),
-            child: ListTile(
-              isThreeLine: true,
-              title: Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
-                child: Text(
-                  medit.title,
-                  style: GoogleFonts.poppins(
-                    textStyle:
-                        TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+            child: GestureDetector(
+              onTap: () {
+                Get.to(() => PlayerScreen(),
+                    transition: Transition.rightToLeft,
+                    arguments: [
+                      medit.id,
+                      medit.title,
+                      medit.description,
+                      medit.path,
+                      medit.length,
+                    ]);
+              },
+              child: ListTile(
+                isThreeLine: true,
+                title: Padding(
+                  padding: const EdgeInsets.only(bottom: 12),
+                  child: Text(
+                    medit.title,
+                    style: GoogleFonts.poppins(
+                      textStyle:
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+                    ),
                   ),
                 ),
-              ),
-              subtitle: Row(
-                children: [
-                  Icon(Icons.access_time_rounded),
-                  Text(' ${medit.length} мин'),
-                ],
-              ),
-              trailing: GestureDetector(
-                onTap: () {
-                  Get.to(() => PlayerScreen(),
-                      transition: Transition.rightToLeft,
-                      arguments: [
-                        medit.id,
-                        medit.title,
-                        medit.description,
-                        medit.path,
-                        medit.length,
-                      ]);
-                },
-                child: CircleAvatar(
+                subtitle: Row(
+                  children: [
+                    Icon(Icons.access_time_rounded),
+                    Text(' ${medit.length} мин'),
+                  ],
+                ),
+                trailing: CircleAvatar(
                   radius: 22.5,
                   backgroundColor: Const.turq,
                   child: Icon(
