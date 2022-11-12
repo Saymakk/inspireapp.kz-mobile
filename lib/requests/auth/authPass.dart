@@ -31,7 +31,7 @@ Future<void> authPass(code, phone) async {
   var responsed = await http.Response.fromStream(response);
 
   print(response.statusCode);
-  print(responsed.body);
+  // print(responsed.body);
   if (responsed.body == 'Пользователь не найден пожалуйста зарегистрируйтесь') {
     Get.defaultDialog(
       title: 'Ошибка!',

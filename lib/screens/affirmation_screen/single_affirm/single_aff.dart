@@ -1,18 +1,22 @@
 import 'dart:async';
+import 'dart:io';
 import 'dart:ui';
 import 'dart:math' as math;
 
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:blurrycontainer/blurrycontainer.dart';
+import 'package:dio/dio.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:inspire/constants/constants.dart';
 import 'package:inspire/requests/affirmations/affirm_done.dart';
+import 'package:path_provider/path_provider.dart';
 
 import 'affirm_end.dart';
 
@@ -29,39 +33,52 @@ class _SingleAffScreenState extends State<SingleAffScreen>
       AnimationController(vsync: this, duration: Duration(seconds: 2))
         ..repeat();
 
-
   String title = Get.arguments[0];
   int len = Get.arguments[1];
   int aff_id = Get.arguments[2];
+  String aff_path = Get.arguments[3];
+  final audioPlayer = AudioPlayer();
 
   bool active = false;
+
+  GetStorage local_audio = GetStorage();
 
   void activePress() {
     setState(() {
       active = true;
     });
+
     print(len);
   }
 
+  void inactivePress() {
+    setState(() {
+      active = false;
+    });
+  }
+
   @override
-  void initState() {
+  initState()  {
     // TODO: implement initState
     super.initState();
+    downloadFile();
 
     var counter = len;
+
+    active == true ?  audioPlayer.play(DeviceFileSource(
+        local_audio.read('audio'))) : audioPlayer.stop();
 
     Timer.periodic(const Duration(seconds: 1), (timer) async {
       // print(timer.tick);
       if (active == true) {
         counter--;
       } else {
-        if(active == false){
+        if (active == false) {
           setState(() {
             counter = len;
           });
         }
       }
-
       if (counter == 0) {
         print('Cancel timer');
         timer.cancel();
@@ -71,14 +88,6 @@ class _SingleAffScreenState extends State<SingleAffScreen>
     });
   }
 
-
-  void inactivePress() {
-    setState(() {
-      active = false;
-    });
-
-  }
-
   static const colorizeColors = [
     Color(0xff21cac8),
     Colors.white,
@@ -86,6 +95,8 @@ class _SingleAffScreenState extends State<SingleAffScreen>
 
   @override
   dispose() {
+    audioPlayer.dispose();
+
     _controller.dispose(); // you need this
     super.dispose();
   }
@@ -225,4 +236,24 @@ class _SingleAffScreenState extends State<SingleAffScreen>
       ),
     );
   }
+
+  Future<File?> downloadFile() async {
+    final appStorage = await getApplicationDocumentsDirectory();
+    final file = File('${appStorage.path}/aff_${aff_id}');
+    final response = await Dio().get(Const.domain + aff_path,
+        options: Options(
+          responseType: ResponseType.bytes,
+          followRedirects: false,
+          receiveTimeout: 0,
+        ));
+
+    final raf = file.openSync(mode: FileMode.write);
+    raf.writeFromSync(response.data);
+    await raf.close();
+    print(file.path);
+    await local_audio.write('audio_$aff_id', file.path);
+    return file;
+  }
+
+
 }

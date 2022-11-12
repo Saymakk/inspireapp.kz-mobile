@@ -29,12 +29,6 @@ class _MainScreenState extends State<MainScreen> {
   GetStorage auth = GetStorage();
   GetStorage user = GetStorage();
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    // profileRequest();
-  }
 
   @override
   Widget build(BuildContext context) {

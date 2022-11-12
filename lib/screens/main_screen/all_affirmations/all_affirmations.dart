@@ -163,7 +163,7 @@ class _AllAffirmationsScreenState extends State<AllAffirmationsScreen> {
                 // print(affirm.title);
                 Get.to(() => SingleAffScreen(),
                     transition: Transition.rightToLeft,
-                    arguments: [affirm.title, affirm.length]);
+                    arguments: [affirm.title, affirm.length, affirm.id, affirm.path]);
                 // singleAffRequest(affirm.id);
               },
               child: ListTile(

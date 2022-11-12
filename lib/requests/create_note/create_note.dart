@@ -37,7 +37,7 @@ Future<void> createNoteRequest(description, emoji, File? photo,) async {
   var responsed = await http.Response.fromStream(response);
 
   print(response.statusCode);
-  print(responsed.body);
+  // print(responsed.body);
 
   Get.defaultDialog(
     title: 'Ваша заметка успешно сохранена!',

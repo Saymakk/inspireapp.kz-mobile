@@ -163,7 +163,7 @@ class _AffirmationsState extends State<Affirmations> {
                 // affirmationsRequest();
                 Get.to(()=>SingleAffScreen(),
                     transition: Transition.rightToLeft,
-                    arguments: [affirm.title, affirm.length]);
+                    arguments: [affirm.title, affirm.length, affirm.id, affirm.path]);
                 // print(auth.read('token'));
                 // print(affirm.icon);
                 // print(affirm.title);

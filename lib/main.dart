@@ -4,7 +4,9 @@ import 'package:intl/date_symbol_data_local.dart';
 
 import 'screens/splash_screen.dart';
 
-void main() {
+Future<void> main() async {
+
+  // Plugin must be initialized before using
   initializeDateFormatting().then((_) => runApp(MyApp()));
 }
 

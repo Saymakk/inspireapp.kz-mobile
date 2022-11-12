@@ -23,13 +23,13 @@ Future<List<categoriesAff>> affirmationsRequestWithOffset() async {
   var responsed = await http.Response.fromStream(response);
 
   print(response.statusCode);
-  print(responsed.body);
+  // print(responsed.body);
 
 
   if (response.statusCode == 200) {
     Iterable list = json.decode(responsed.body)['data'];
 
-    print(list);
+    // print(list);
 
     List<categoriesAff> datasheet =
     list.map((f) => categoriesAff.fromJson(f)).toList();
