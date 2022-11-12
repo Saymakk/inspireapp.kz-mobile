@@ -45,11 +45,8 @@ class _PlayerScreenState extends State<PlayerScreen> {
 
 
     super.initState();
-    if(local_audio.read('medit_${audio_id}') == '') {
+
       downloadFile();
-    } else {
-      print('Загружать не надо');
-    }
     // setAudio();
     // audioPlayer.onPlayerStateChanged.listen((state) {
     //   setState(() {
@@ -325,7 +322,6 @@ class _PlayerScreenState extends State<PlayerScreen> {
     await raf.close();
     print(file.path);
 
-    print('localpath'+ localpath);
    await local_audio.write('medit_$audio_id', file.path);
     return file;
   }

@@ -47,7 +47,7 @@ class _SingleAffScreenState extends State<SingleAffScreen>
     setState(() {
       active = true;
     });
-
+    audioPlayer.play(AssetSource('audio/sound1.wav'));
     print(len);
   }
 
@@ -55,6 +55,7 @@ class _SingleAffScreenState extends State<SingleAffScreen>
     setState(() {
       active = false;
     });
+    audioPlayer.stop();
   }
 
   @override
@@ -65,8 +66,7 @@ class _SingleAffScreenState extends State<SingleAffScreen>
 
     var counter = len;
 
-    active == true ?  audioPlayer.play(DeviceFileSource(
-        local_audio.read('audio'))) : audioPlayer.stop();
+    active == true ?  audioPlayer.play(AssetSource('audio/sound1.wav')) : audioPlayer.stop();
 
     Timer.periodic(const Duration(seconds: 1), (timer) async {
       // print(timer.tick);
