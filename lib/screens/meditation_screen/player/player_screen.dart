@@ -35,7 +35,8 @@ class _PlayerScreenState extends State<PlayerScreen> {
   bool isPlaying = false;
   Duration duration = Duration.zero;
   Duration position = Duration.zero;
-  var localpath;
+  bool isFile = false;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -43,10 +44,15 @@ class _PlayerScreenState extends State<PlayerScreen> {
     print(local_audio.read('medit_${audio_id}'));
     print(local_audio.read('medit_${audio_id}').runtimeType);
 
-
     super.initState();
+    local_audio.write('medit_${audio_id}', '');
+    local_audio.read('medit_${audio_id}') != ''
+        ? isFile = true
+        : isFile = false;
+    // downloadFile();
 
-      downloadFile();
+    print(isFile);
+
     // setAudio();
     // audioPlayer.onPlayerStateChanged.listen((state) {
     //   setState(() {
@@ -87,8 +93,6 @@ class _PlayerScreenState extends State<PlayerScreen> {
     audioPlayer.dispose();
     super.dispose();
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -223,36 +227,64 @@ class _PlayerScreenState extends State<PlayerScreen> {
                             //       Icons.forward_10,
                             //       color: Colors.white,
                             //     )),
-                            CircleAvatar(
-                              backgroundColor: Colors.transparent,
-                              radius: 35,
-                              child:  isPlaying == false
-                                  ? IconButton(
-                                      icon: SvgPicture.asset(
-                                          'assets/icons/play_button.svg'),
-                                      iconSize: 50,
-                                      onPressed: () async {
-                                        print(local_audio.read('audio'));
-                                        await audioPlayer.play(DeviceFileSource(
-                                            local_audio.read('medit_$audio_id')));
-                                        // await audioPlayer.play(UrlSource(
-                                        //     'https://kz.inspireapp.kz/' +
-                                        //         audio_path));
-                                        setState(() {
-                                          isPlaying = true;
-                                        });
-                                      },
-                                    )
-                                  : IconButton(
-                                      icon: Icon(Icons.pause),
-                                      iconSize: 50,
-                                      onPressed: () async {
-                                        await audioPlayer.pause();
-                                        setState(() {
-                                          isPlaying = false;
-                                        });
-                                      },
-                                    ),
+                            Expanded(
+                              child: Container(
+                                margin: EdgeInsets.only(left: 48),
+                                child: CircleAvatar(
+                                  backgroundColor: Colors.transparent,
+                                  radius: 35,
+                                  child: isFile == true
+                                      ? isPlaying == false
+                                          ? IconButton(
+                                              icon: SvgPicture.asset(
+                                                  'assets/icons/play_button.svg'),
+                                              iconSize: 50,
+                                              onPressed: () async {
+                                                print(
+                                                    local_audio.read('audio'));
+                                                await audioPlayer.play(
+                                                    DeviceFileSource(
+                                                        local_audio.read(
+                                                            'medit_$audio_id')));
+                                                // await audioPlayer.play(UrlSource(
+                                                //     'https://kz.inspireapp.kz/' +
+                                                //         audio_path));
+                                                setState(() {
+                                                  isPlaying = true;
+                                                });
+                                              },
+                                            )
+                                          : IconButton(
+                                              icon: Icon(Icons.pause),
+                                              iconSize: 50,
+                                              onPressed: () async {
+                                                await audioPlayer.pause();
+                                                setState(() {
+                                                  isPlaying = false;
+                                                });
+                                              },
+                                            )
+                                      : IconButton(
+                                          icon: SvgPicture.asset(
+                                            'assets/icons/play_button.svg',
+                                            color: Colors.grey,
+                                          ),
+                                          iconSize: 50,
+                                          onPressed: () async {},
+                                        ),
+                                ),
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                downloadFile();
+                              },
+                              child: Container(
+                                  padding: EdgeInsets.only(right: 24),
+                                  child: Icon(Icons.download,
+                                      color: isFile == true
+                                          ? Colors.grey
+                                          : Colors.white)),
                             ),
                           ],
                         ),
@@ -321,8 +353,17 @@ class _PlayerScreenState extends State<PlayerScreen> {
     raf.writeFromSync(response.data);
     await raf.close();
     print(file.path);
-
-   await local_audio.write('medit_$audio_id', file.path);
+    if (file.path != null) {
+      setState(() {
+        isFile = true;
+      });
+    } else {
+      setState(() {
+        isFile = false;
+      });
+    }
+    ;
+    await local_audio.write('medit_$audio_id', file.path);
     return file;
   }
 }

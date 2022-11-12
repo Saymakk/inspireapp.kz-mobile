@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:inspire/constants/bottom_app_bar.dart';
 import 'package:inspire/constants/constants.dart';
@@ -60,8 +61,19 @@ Future<void> authPass(code, phone) async {
 
       Get.offAll(() => BottomNav(),
           transition: Transition.rightToLeft, arguments: [data['data']]);
-    } else {
-      print('error');
+    } else { if(response.statusCode != 200) {
+      Get.defaultDialog(
+        title: 'Что-то пошло не так!',
+        content: Text(
+            'Пожалуйста, попробуйте снова!'),
+        confirm: TextButton(
+          onPressed: () {
+          Get.back();
+          },
+          child: Text('Понятно'),
+        ),
+      );
+      }
     }
   }
 }
