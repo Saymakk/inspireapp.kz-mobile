@@ -277,6 +277,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                             ),
                             GestureDetector(
                               onTap: () {
+                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Ваша медитация скачивается!')));
                                 downloadFile();
                               },
                               child: Container(
