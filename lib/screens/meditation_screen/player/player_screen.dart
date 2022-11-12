@@ -358,6 +358,8 @@ class _PlayerScreenState extends State<PlayerScreen> {
       setState(() {
         isFile = true;
       });
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Ваша медитация успешно загружена!')));
+
     } else {
       setState(() {
         isFile = false;
