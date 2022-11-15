@@ -126,19 +126,10 @@ class _AuthorizationScreen2State extends State<AuthorizationScreen2> {
                     onTap: () {
                       setState(() {
                         circ = true;
-                        Timer.periodic(const Duration(seconds: 1), (timer) {
-                          print(timer.tick);
-                          if (circ == true) {
-                            counter--;
-                          }
-
-                          if (counter == 0) {
-                            setState(() {
-                              circ = false;
-                              counter = 5;
-                              timer.cancel();
-                            });
-                          }
+                      });
+                      Future.delayed(Duration(seconds: 5)).then((_) {
+                        setState(() {
+                          circ = false;
                         });
                       });
 

@@ -27,6 +27,7 @@ class _AddNoteState extends State<AddNote> {
 
   bool selfie = false;
 
+  bool active = false;
 
   File? image;
 
@@ -972,6 +973,15 @@ class _AddNoteState extends State<AddNote> {
           padding: const EdgeInsets.only(left: 24, right: 24),
           child: GestureDetector(
             onTap: () async {
+
+              setState(() {
+                active = true;
+              });
+              Future.delayed(Duration(seconds: 3)).then((_) {
+                setState(() {
+                  active = false;
+                });
+              });
               noteController.text == ''
                   ? ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text('Заполните поле для заметок')))
@@ -1004,11 +1014,11 @@ class _AddNoteState extends State<AddNote> {
               decoration: Const.cont_turq_circ8,
               // padding: EdgeInsets.only(top: 5),
               child: Center(
-                child: Text(
+                child: active == false ? Text(
                   'Сохранить своё настроение',
                   style: Const.buttontextstyle,
                   textAlign: TextAlign.center,
-                ),
+                ) : CircularProgressIndicator(),
               ),
             ),
           ),

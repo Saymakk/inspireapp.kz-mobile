@@ -28,6 +28,8 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
 
   File? image;
 
+  bool active = false;
+
   Future pickImage(ImageSource source) async {
     try {
       final image = await ImagePicker().pickImage(
@@ -996,23 +998,14 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
               child: GestureDetector(
                 onTap: () async {
 
-                  // setState(() {
-                  //   circ = true;
-                  //   Timer.periodic(const Duration(seconds: 1), (timer) {
-                  //     print(timer.tick);
-                  //     if (circ == true) {
-                  //       counter--;
-                  //     }
-                  //     ;
-                  //     if (counter == 0) {
-                  //       setState(() {
-                  //         circ = false;
-                  //         counter = 3;
-                  //         timer.cancel();
-                  //       });
-                  //     }
-                  //   });
-                  // });
+                  setState(() {
+                    active = true;
+                  });
+                  Future.delayed(Duration(seconds: 3)).then((_) {
+                    setState(() {
+                      active = false;
+                    });
+                  });
 
 
                   noteController.text == ''
@@ -1047,11 +1040,11 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
                   decoration: Const.cont_turq_circ8,
                   // padding: EdgeInsets.only(top: 5),
                   child: Center(
-                    child: Text(
+                    child: active == false ? Text(
                       'Сохранить своё настроение',
                       style: Const.buttontextstyle,
                       textAlign: TextAlign.center,
-                    ),
+                    ) : CircularProgressIndicator(),
                   ),
                 ),
               ),

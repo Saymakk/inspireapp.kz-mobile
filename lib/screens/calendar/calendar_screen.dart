@@ -63,136 +63,138 @@ class _CalendarScreenState extends State<CalendarScreen> {
           ],
         ),
         backgroundColor: Colors.transparent,
-        body: SafeArea(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                      color: Color(0xffe3f8ff),
-                      borderRadius: BorderRadius.circular(15)),
-                  margin: EdgeInsets.only(
-                    top: 25,
-                  ),
-                  child: Container(
-                    margin: EdgeInsets.all(19),
-                    child: Row(
-                      children: [
-                        Flexible(
-                          child: Text(
-                            'Напишите, какое у вас настроение сегодня',
-                            maxLines: 3,
-                            textAlign: TextAlign.start,
-                            style: GoogleFonts.poppins(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 14,
-                              color: Color(0xff4f4f4f),
-                              height: 1.3,
+        body: GestureDetector(
+          child: SafeArea(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      Get.to(
+                            () => AddMoodScreen(),
+                        transition: Transition.rightToLeft,
+                      );
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: Color(0xffe3f8ff),
+                          borderRadius: BorderRadius.circular(15)),
+                      margin: EdgeInsets.only(
+                        top: 25,
+                      ),
+                      child: Container(
+                        margin: EdgeInsets.all(19),
+                        child: Row(
+                          children: [
+                            Flexible(
+                              child: Text(
+                                'Напишите, какое у вас настроение сегодня',
+                                maxLines: 3,
+                                textAlign: TextAlign.start,
+                                style: GoogleFonts.poppins(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 14,
+                                  color: Color(0xff4f4f4f),
+                                  height: 1.3,
+                                ),
+                              ),
                             ),
-                          ),
+                            SizedBox(
+                              width: 33,
+                            ),
+                            Container(
+                              decoration: BoxDecoration(
+                                  color: Color(0xff21cac8),
+                                  borderRadius: BorderRadius.circular(8)),
+                              child: Container(
+                                  margin: EdgeInsets.all(10.5),
+                                  child: SvgPicture.asset(
+                                    Const.icns + 'plus.svg',
+                                    width: 24,
+                                    height: 24,
+                                  )),
+                            )
+                          ],
                         ),
-                        SizedBox(
-                          width: 33,
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Get.to(
-                              () => AddMoodScreen(),
-                              transition: Transition.rightToLeft,
-                            );
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                                color: Color(0xff21cac8),
-                                borderRadius: BorderRadius.circular(8)),
-                            child: Container(
-                                margin: EdgeInsets.all(10.5),
-                                child: SvgPicture.asset(
-                                  Const.icns + 'plus.svg',
-                                  width: 24,
-                                  height: 24,
-                                )),
-                          ),
-                        )
-                      ],
+                      ),
                     ),
                   ),
-                ),
-                Container(
-                    margin: EdgeInsets.symmetric(vertical: 26),
-                    child: Divider(
-                      color: Color(0xffededed),
-                    )),
-                FutureBuilder(
-                  future: calendarNotesRequest(),
-                  builder: (BuildContext context, AsyncSnapshot snapshot) {
-                    switch (snapshot.connectionState) {
-                      case ConnectionState.none:
-                        return Container(
-                          padding: EdgeInsets.only(top: 10),
-                          child: SkeletonLine(
-                            style: SkeletonLineStyle(
-                                height: 70,
-                                width: double.infinity,
-                                borderRadius: BorderRadius.circular(8)),
-                          ),
-                        );
-                      case ConnectionState.waiting:
-                        return Column(
-                          children: [
-                            Container(
-                              padding: EdgeInsets.only(top: 10),
-                              child: SkeletonLine(
-                                style: SkeletonLineStyle(
-                                    height: 70,
-                                    width: double.infinity,
-                                    borderRadius: BorderRadius.circular(8)),
-                              ),
-                            ),
-                            Container(
-                              padding: EdgeInsets.only(top: 10),
-                              child: SkeletonLine(
-                                style: SkeletonLineStyle(
-                                    height: 70,
-                                    width: double.infinity,
-                                    borderRadius: BorderRadius.circular(8)),
-                              ),
-                            ),
-                          ],
-                        );
-
-                      default:
-                        // return rideList(snapshot.data, context);
-                        if (snapshot.data == null) {
-                          return Center(
-                            child: Container(
-                              margin: EdgeInsets.only(top: 20),
-                              padding: EdgeInsets.only(
-                                  left: 19, right: 19, top: 13.5, bottom: 10.5),
-                              decoration: BoxDecoration(
-                                color: Color(0xffFFFEE3),
-                                borderRadius: BorderRadius.circular(15), ),
-                              child: ListTile(
-                                leading: Image.asset(
-                                  Const.icns + '!.png',
-                                  height: 37,
-                                  color: Color(0xffFFDD65),
-                                ),
-                                title: Text(
-                                  'Извините, здесь пока ничего нет',
-                                  maxLines: 4,
-                                  style: TextStyle(fontSize: 14, color: Const.deepgrey),
-                                ),
-                              ),
+                  Container(
+                      margin: EdgeInsets.symmetric(vertical: 26),
+                      child: Divider(
+                        color: Color(0xffededed),
+                      )),
+                  FutureBuilder(
+                    future: calendarNotesRequest(),
+                    builder: (BuildContext context, AsyncSnapshot snapshot) {
+                      switch (snapshot.connectionState) {
+                        case ConnectionState.none:
+                          return Container(
+                            padding: EdgeInsets.only(top: 10),
+                            child: SkeletonLine(
+                              style: SkeletonLineStyle(
+                                  height: 70,
+                                  width: double.infinity,
+                                  borderRadius: BorderRadius.circular(8)),
                             ),
                           );
-                        } else {
-                          return noteWidget(snapshot.data, context);
-                        }
-                    }
-                  },
-                ),
-              ],
+                        case ConnectionState.waiting:
+                          return Column(
+                            children: [
+                              Container(
+                                padding: EdgeInsets.only(top: 10),
+                                child: SkeletonLine(
+                                  style: SkeletonLineStyle(
+                                      height: 70,
+                                      width: double.infinity,
+                                      borderRadius: BorderRadius.circular(8)),
+                                ),
+                              ),
+                              Container(
+                                padding: EdgeInsets.only(top: 10),
+                                child: SkeletonLine(
+                                  style: SkeletonLineStyle(
+                                      height: 70,
+                                      width: double.infinity,
+                                      borderRadius: BorderRadius.circular(8)),
+                                ),
+                              ),
+                            ],
+                          );
+
+                        default:
+                          // return rideList(snapshot.data, context);
+                          if (snapshot.data == null) {
+                            return Center(
+                              child: Container(
+                                margin: EdgeInsets.only(top: 20),
+                                padding: EdgeInsets.only(
+                                    left: 19, right: 19, top: 13.5, bottom: 10.5),
+                                decoration: BoxDecoration(
+                                  color: Color(0xffFFFEE3),
+                                  borderRadius: BorderRadius.circular(15), ),
+                                child: ListTile(
+                                  leading: Image.asset(
+                                    Const.icns + '!.png',
+                                    height: 37,
+                                    color: Color(0xffFFDD65),
+                                  ),
+                                  title: Text(
+                                    'Извините, здесь пока ничего нет',
+                                    maxLines: 4,
+                                    style: TextStyle(fontSize: 14, color: Const.deepgrey),
+                                  ),
+                                ),
+                              ),
+                            );
+                          } else {
+                            return noteWidget(snapshot.data, context);
+                          }
+                      }
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         ),

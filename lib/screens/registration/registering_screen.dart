@@ -147,23 +147,13 @@ class _RegisteringScreenState extends State<RegisteringScreen> {
                   GestureDetector(
                     onTap: () {
 
+
                       setState(() {
                         active = true;
-                        Timer.periodic(const Duration(seconds: 1), (timer) {
-                          print(timer.tick);
-                          if (active == true){
-                            counter--;
-                          };
-                          if(counter == 0){
-                            setState(() {
-                              active = false;
-                              counter = 5;
-                              timer.cancel();
-
-                            });
-                          }
-
-
+                      });
+                      Future.delayed(Duration(seconds: 5)).then((_) {
+                        setState(() {
+                          active = false;
                         });
                       });
                       // Get.to(() => RegAgreed(), transition: Transition.rightToLeft);

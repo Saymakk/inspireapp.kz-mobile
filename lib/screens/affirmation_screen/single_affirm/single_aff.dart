@@ -68,6 +68,7 @@ class _SingleAffScreenState extends State<SingleAffScreen>
 
     active == true ?  audioPlayer.play(AssetSource('audio/sound1.wav')) : audioPlayer.stop();
 
+
     Timer.periodic(const Duration(seconds: 1), (timer) async {
       // print(timer.tick);
       if (active == true) {
