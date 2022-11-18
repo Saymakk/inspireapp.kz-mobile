@@ -40,26 +40,26 @@ class _CalendarScreenState extends State<CalendarScreen> {
             ),
           ),
           actions: [
-            // GestureDetector(
-            //   onTap: () => Get.to(
-            //     () => AllCalendarScreen(),
-            //     transition: Transition.rightToLeft,
-            //   ),
-            //   child: Container(
-            //     width: 45,
-            //     decoration: BoxDecoration(
-            //       color: Color(0xff21cac8),
-            //       borderRadius: BorderRadius.circular(8),
-            //     ),
-            //     child: Center(
-            //       child: Image.asset(
-            //         Const.icns + 'calendar.png',
-            //         width: 24,
-            //         height: 24,
-            //       ),
-            //     ),
-            //   ),
-            // ),
+            GestureDetector(
+              onTap: () => Get.to(
+                () => AllCalendarScreen(),
+                transition: Transition.rightToLeft,
+              ),
+              child: Container(
+                width: 45,
+                decoration: BoxDecoration(
+                  color: Color(0xff21cac8),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Center(
+                  child: Image.asset(
+                    Const.icns + 'calendar.png',
+                    width: 24,
+                    height: 24,
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
         backgroundColor: Colors.transparent,
@@ -71,7 +71,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                   GestureDetector(
                     onTap: () {
                       Get.to(
-                            () => AddMoodScreen(),
+                        () => AddMoodScreen(),
                         transition: Transition.rightToLeft,
                       );
                     },
@@ -169,10 +169,14 @@ class _CalendarScreenState extends State<CalendarScreen> {
                               child: Container(
                                 margin: EdgeInsets.only(top: 20),
                                 padding: EdgeInsets.only(
-                                    left: 19, right: 19, top: 13.5, bottom: 10.5),
+                                    left: 19,
+                                    right: 19,
+                                    top: 13.5,
+                                    bottom: 10.5),
                                 decoration: BoxDecoration(
                                   color: Color(0xffFFFEE3),
-                                  borderRadius: BorderRadius.circular(15), ),
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
                                 child: ListTile(
                                   leading: Image.asset(
                                     Const.icns + '!.png',
@@ -182,7 +186,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
                                   title: Text(
                                     'Извините, здесь пока ничего нет',
                                     maxLines: 4,
-                                    style: TextStyle(fontSize: 14, color: Const.deepgrey),
+                                    style: TextStyle(
+                                        fontSize: 14, color: Const.deepgrey),
                                   ),
                                 ),
                               ),
@@ -209,7 +214,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
           String date = note.created_at.substring(0, 10).replaceAll(('-'), '.');
           String d = note.created_at.substring(0, 10).substring(8, 10);
           String m = note.created_at.substring(0, 10).substring(5, 7);
-          String y = note.created_at.substring(0, 10).substring(0, 4);          return GestureDetector(
+          String y = note.created_at.substring(0, 10).substring(0, 4);
+          return GestureDetector(
             onTap: () {
               print('${d}' + '.' + '${m}' + '.' + '${y}');
               Get.to(() => SingleNoteScreen(),

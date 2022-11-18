@@ -9,7 +9,7 @@ import 'package:inspire/model/mini_courses_model.dart';
 import 'package:inspire/model/note_model.dart';
 import 'package:provider/provider.dart';
 
-Future<List<noteModel>> calendarNotesRequest() async {
+Future<List<noteModel>> calendarScreenRequest() async {
 
   GetStorage auth = GetStorage();
   GetStorage calendar = GetStorage();
