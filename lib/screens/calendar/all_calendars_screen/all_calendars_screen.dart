@@ -7,6 +7,7 @@ import 'package:inspire/event_provider/event_provider.dart';
 import 'package:inspire/model/note_model.dart';
 import 'package:inspire/requests/calendar/calendar.dart';
 import 'package:inspire/requests/calendar/calendar_screen_request.dart';
+import 'package:inspire/screens/calendar/all_calendars_screen/add_mood_on_calendar_screen/add_mood_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -70,37 +71,56 @@ class _AllCalendarScreenState extends State<AllCalendarScreen> {
         backgroundColor: Colors.transparent,
       ),
       body: SafeArea(
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 24),
-          child: FutureBuilder(
-            future: calendarScreenRequest(),
-            builder: (BuildContext context, AsyncSnapshot snapshot) {
-              if (snapshot.data != null) {
-                return SafeArea(
-                  child: Container(
-                      child: SfCalendar(
-                    firstDayOfWeek: 1,
-                    view: CalendarView.month,
-                    initialSelectedDate: DateTime.now(),
-                    cellBorderColor: Colors.transparent,
-                    // dataSource: MeetingDataSource(_getDataSource()),
-
-                    monthViewSettings: MonthViewSettings(
-                      showAgenda: true,
-                      navigationDirection: MonthNavigationDirection.vertical,
-                      appointmentDisplayMode:
-                          MonthAppointmentDisplayMode.appointment,
-                    ),
-                    dataSource: MeetingDataSource(snapshot.data),
-                  )),
-                );
-              } else {
-                return Container(
-                  child: Text('error'),
-                );
-              }
-            },
-          ),
+        child: Stack(
+          children: [
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 24),
+              child: FutureBuilder(
+                future: calendarScreenRequest(),
+                builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  if (snapshot.data != null) {
+                    return SafeArea(
+                      child: Container(
+                          child: SfCalendar(
+                        // headerStyle: CalendarHeaderStyle(),
+                        firstDayOfWeek: 1,
+                        view: CalendarView.month,
+                        initialSelectedDate: DateTime.now(),
+                        cellBorderColor: Colors.transparent,
+                        // dataSource: MeetingDataSource(_getDataSource()),
+                        showNavigationArrow: true,
+                        // showDatePickerButton: true,
+                        allowViewNavigation: true,
+                        showCurrentTimeIndicator: true,
+                        scheduleViewSettings: ScheduleViewSettings(),
+                        monthViewSettings: MonthViewSettings(
+                          showAgenda: true,
+                          navigationDirection:
+                              MonthNavigationDirection.vertical,
+                          appointmentDisplayMode:
+                              MonthAppointmentDisplayMode.appointment,
+                        ),
+                        dataSource: MeetingDataSource(snapshot.data),
+                      )),
+                    );
+                  } else {
+                    return Container(
+                      child: Text('error'),
+                    );
+                  }
+                },
+              ),
+            ),
+            Positioned(
+              bottom: 100,
+                right: 10,
+              child: FloatingActionButton.small(
+                backgroundColor: Color(0xff21cac8),
+                onPressed: () => Get.to((AddMoodScreenOnCalendarScreen())),
+                child: Icon(Icons.add),
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -133,7 +153,7 @@ class MeetingDataSource extends CalendarDataSource {
 
   @override
   Color getColor(int index) {
-    return Colors.grey;
+    return Color(0xffcdcdcd);
   }
 
   @override
