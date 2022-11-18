@@ -53,6 +53,7 @@ dependencies:
   permission_handler: ^10.2.0
   provider: ^6.0.4
   syncfusion_flutter_calendar: ^20.3.57
+  syncfusion_localizations: ^20.3.57
 #  icons_launcher: ^2.0.5
 
 dev_dependencies:

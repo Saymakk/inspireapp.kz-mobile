@@ -1,5 +1,7 @@
 import 'dart:convert';
-
+import 'package:inspire/screens/calendar/single_note/single_note_screen.dart';
+import 'package:intl/intl.dart';
+import 'package:syncfusion_localizations/syncfusion_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -25,25 +27,11 @@ class _AllCalendarScreenState extends State<AllCalendarScreen> {
   var today = DateTime.now();
   List<dynamic> calendar_data = [];
 
-  // void call() {
-  //   List<dynamic> calendar_data = calendar.read('calendar');
-  //   print(calendar_data.toList());
-  // }
-  //
-  // @override
-  // void initState() {
-  //   // TODO: implement initState
-  //   super.initState();
-  //   call();
-  // }
-
-  // late DateTime selectedDay;
-  // late List<CleanCalendarEvent> selectedEvent;
-  // final Map<DateTime, List<Clean>>
-
   @override
   Widget build(BuildContext context) {
-    final events = Provider.of<EventProvider>(context).events;
+    final events = Provider
+        .of<EventProvider>(context)
+        .events;
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -57,16 +45,11 @@ class _AllCalendarScreenState extends State<AllCalendarScreen> {
           ),
         ),
         // centerTitle: true,
-        titleSpacing: MediaQuery.of(context).size.width / 5.5,
-        // title: Row(
-        //   children: [
-        //     TextButton(onPressed: () {}, child: Text('Месяц')),
-        //     TextButton(onPressed: () {}, child: Text('Год')),
-        //   ],
-        // ),
-        // actions: [
-        //   TextButton(onPressed: () {}, child: Text('Сегодня')),
-        // ],
+        titleSpacing: MediaQuery
+            .of(context)
+            .size
+            .width / 5.5,
+
         elevation: 0,
         backgroundColor: Colors.transparent,
       ),
@@ -79,33 +62,52 @@ class _AllCalendarScreenState extends State<AllCalendarScreen> {
                 future: calendarScreenRequest(),
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
                   if (snapshot.data != null) {
+                    calendar_data.addAll(snapshot.data,);
+                    print('calendar_data ${calendar_data.asMap()['title']}');
                     return SafeArea(
+                      // child: TableCalendar(
+                      //   firstDay: DateTime.utc(2010, 10, 16),
+                      //   lastDay: DateTime.utc(2030, 3, 14),
+                      //   focusedDay: DateTime.now(),
+                      //   locale: 'ru_RU',
+                      //
+                      // ),
                       child: Container(
-                          child: SfCalendar(
-                        // headerStyle: CalendarHeaderStyle(),
-                        firstDayOfWeek: 1,
-                        view: CalendarView.month,
-                        initialSelectedDate: DateTime.now(),
-                        cellBorderColor: Colors.transparent,
-                        // dataSource: MeetingDataSource(_getDataSource()),
-                        showNavigationArrow: true,
-                        // showDatePickerButton: true,
-                        allowViewNavigation: true,
-                        showCurrentTimeIndicator: true,
-                        scheduleViewSettings: ScheduleViewSettings(),
-                        monthViewSettings: MonthViewSettings(
-                          showAgenda: true,
-                          navigationDirection:
-                              MonthNavigationDirection.vertical,
-                          appointmentDisplayMode:
-                              MonthAppointmentDisplayMode.appointment,
+                        child: SfCalendar(
+
+                          firstDayOfWeek: 1,
+                          view: CalendarView.month,
+                          initialSelectedDate: DateTime.now(),
+                          // selectionDecoration: BoxDecoration(),
+                          cellBorderColor: Colors.transparent,
+                          // dataSource: MeetingDataSource(_getDataSource()),
+                          showNavigationArrow: true,
+                          // showDatePickerButton: true,
+                          allowViewNavigation: true,
+                          showCurrentTimeIndicator: true,
+                          scheduleViewSettings: ScheduleViewSettings(),
+                          todayHighlightColor: Color(0xFF21cac8),
+                          monthViewSettings: MonthViewSettings(
+                            agendaViewHeight: 400,
+                            agendaItemHeight: 30,
+                            appointmentDisplayCount: 2,
+                            dayFormat: 'EEE',
+                            showAgenda: true,
+                            navigationDirection:
+                            MonthNavigationDirection.vertical,
+                            appointmentDisplayMode:
+                            MonthAppointmentDisplayMode.appointment,
+                          ),
+                          dataSource: MeetingDataSource(snapshot.data),
+                          onTap: calendarTapped,
                         ),
-                        dataSource: MeetingDataSource(snapshot.data),
-                      )),
+                      ),
                     );
                   } else {
-                    return Container(
-                      child: Text('error'),
+                    return Center(
+                      child: CircularProgressIndicator(
+                        color: Color(0xff21cac8),
+                      ),
                     );
                   }
                 },
@@ -113,10 +115,13 @@ class _AllCalendarScreenState extends State<AllCalendarScreen> {
             ),
             Positioned(
               bottom: 100,
-                right: 10,
+              right: 10,
               child: FloatingActionButton.small(
                 backgroundColor: Color(0xff21cac8),
-                onPressed: () => Get.to((AddMoodScreenOnCalendarScreen())),
+                onPressed: () =>
+                    Get.to(
+                      (AddMoodScreenOnCalendarScreen()),
+                    ),
                 child: Icon(Icons.add),
               ),
             ),
@@ -125,7 +130,21 @@ class _AllCalendarScreenState extends State<AllCalendarScreen> {
       ),
     );
   }
+  void calendarTapped(CalendarTapDetails details,) {
+    // print(calendar_data[0]);
+    // Get.to(()=>SingleNoteScreen(),  transition: Transition.rightToLeft,
+    //     arguments: [
+    //       // calendar_data.title,
+    //       // calendar_data.description,
+    //       // calendar_data.emoji,
+    //       // calendar_data.created_at.substring(0, 10),
+    //       // calendar_data.profile_photo_url,
+    //       // calendar_data.created_at.substring(11, 16)
+    //     ]);
+  }
+
 }
+
 
 class MeetingDataSource extends CalendarDataSource {
   MeetingDataSource(List<noteModel> source) {
@@ -135,14 +154,14 @@ class MeetingDataSource extends CalendarDataSource {
   @override
   DateTime getStartTime(int index) {
     DateTime datas = DateTime.parse(appointments![index].created_at);
-    print('Дата: ${datas}');
+    // print('Дата: ${datas}');
     return datas;
   }
 
   @override
   DateTime getEndTime(int index) {
     DateTime datas = DateTime.parse(appointments![index].created_at);
-    print('Дата: ${datas}');
+    // print('Дата: ${datas}');
     return datas;
   }
 
@@ -153,7 +172,7 @@ class MeetingDataSource extends CalendarDataSource {
 
   @override
   Color getColor(int index) {
-    return Color(0xffcdcdcd);
+    return Color(0xffececec);
   }
 
   @override
@@ -161,3 +180,4 @@ class MeetingDataSource extends CalendarDataSource {
     return true;
   }
 }
+

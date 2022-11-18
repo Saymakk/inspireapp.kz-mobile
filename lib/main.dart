@@ -4,6 +4,7 @@ import 'package:inspire/event_provider/event_provider.dart';
 import 'package:inspire/screens/calendar/add_mood/add_mood_screen.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
+import 'package:syncfusion_localizations/syncfusion_localizations.dart';
 
 import 'screens/splash_screen.dart';
 
@@ -25,6 +26,10 @@ class MyApp extends StatelessWidget {
           FocusScope.of(context).unfocus();
         },
         child: GetMaterialApp(
+          // localizationsDelegates: [
+          //   SfGlobalLocalizations.delegate
+          // ],
+          // locale: const Locale('ru'),
           debugShowCheckedModeBanner: false,
           title: 'Inspire',
           home: Scaffold(
@@ -34,4 +39,5 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
+
 }
