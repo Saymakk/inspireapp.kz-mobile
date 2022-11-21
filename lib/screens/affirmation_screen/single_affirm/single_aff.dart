@@ -75,9 +75,10 @@ class _SingleAffScreenState extends State<SingleAffScreen>
         counter--;
       } else {
         if (active == false) {
-          setState(() {
+          // setState(() {
             counter = len;
-          });
+            timer.cancel();
+          // });
         }
       }
       if (counter == 0) {
