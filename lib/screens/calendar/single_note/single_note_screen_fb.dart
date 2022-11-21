@@ -20,6 +20,7 @@ class _SingleNoteScreenFBState extends State<SingleNoteScreenFB> {
   String profile_photo_url = Get.arguments[4];
   String created_at_time = Get.arguments[5];
 
+  String mainDate = Get.arguments[3].substring(0, 10);
   String date = Get.arguments[3].replaceAll(('-'), '.');
   String d = Get.arguments[3].substring(8, 10);
   String m = Get.arguments[3].substring(5, 7);
@@ -99,8 +100,9 @@ class _SingleNoteScreenFBState extends State<SingleNoteScreenFB> {
         ),
       ),
       body: FutureBuilder(
-        // future: singleNoteRequest(),
+        // future: singleNoteRequest(mainDate),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
+          print(snapshot.data);
           return SafeArea(
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 24),

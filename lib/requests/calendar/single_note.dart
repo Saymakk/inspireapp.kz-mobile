@@ -13,7 +13,7 @@ import 'package:inspire/screens/calendar/single_note/single_note_screen.dart';
 GetStorage auth = GetStorage();
 
 
-Future  singleNoteRequest(date) async {
+Future singleNoteRequest(date) async {
 
   var headers = {
     'Authorization': 'Bearer ${auth.read('token').toString()}'
@@ -40,16 +40,20 @@ Future  singleNoteRequest(date) async {
 
     // List<noteModel> datasheet = list.map((f) => noteModel.fromJson(f)).toList();
     // print('list ${datasheet[0]}');
+    list['id'] != null ?
     Get.to(() => SingleNoteScreen(),
         transition: Transition.rightToLeft,
         arguments: [
+
+
+
           list['title'],
           list['description'],
           list['emoji'],
           list['created_at'].substring(0, 10),
           list['profile_photo_url'],
           list['created_at'].substring(11, 16)
-        ]);
+        ]) : null;
 
     // return Future<List<noteModel>>.value(list);
   } else {
