@@ -176,15 +176,15 @@ class _AllCalendarScreenState extends State<AllCalendarScreen> {
 
   void calendarTapped(CalendarTapDetails details) {
     // print(details.date);
-    singleNoteRequest(details.date.toString().substring(0, 10));
+    // singleNoteRequest(details.date.toString().substring(0, 10));
 
-    // Get.to(
-    //   () => SingleNoteScreenFB(),
-    //   transition: Transition.downToUp,
-    //   arguments: [
-    //     details.date.toString().substring(0, 10),
-    //   ],
-    // );
+    Get.to(
+      () => SingleNoteScreenFB(),
+      transition: Transition.downToUp,
+      arguments: [
+        details.date.toString().substring(0, 10),
+      ],
+    );
     // print(details.date.toString().substring(0, 10));
   }
 
