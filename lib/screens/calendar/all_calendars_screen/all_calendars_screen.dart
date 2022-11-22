@@ -178,14 +178,23 @@ class _AllCalendarScreenState extends State<AllCalendarScreen> {
     // print(details.date);
     // singleNoteRequest(details.date.toString().substring(0, 10));
 
-    Get.to(
-      () => SingleNoteScreenFB(),
-      transition: Transition.downToUp,
-      arguments: [
-        details.date.toString().substring(0, 10),
-      ],
-    );
-    // print(details.date.toString().substring(0, 10));
+    print(details.appointments?.length.toString());
+
+
+
+    if(details.appointments?.length != 0) {
+      print('не пусто');
+      Get.to(
+            () => SingleNoteScreenFB(),
+        transition: Transition.downToUp,
+        arguments: [
+          details.date.toString().substring(0, 10),
+        ],
+      );
+    } else {
+      print('пусто');
+
+    }
   }
 
   void calendarLongPressTapped(

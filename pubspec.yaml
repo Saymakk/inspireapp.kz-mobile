@@ -55,6 +55,9 @@ dependencies:
   syncfusion_flutter_calendar: ^20.3.57
   syncfusion_localizations: ^20.3.57
 #  icons_launcher: ^2.0.5
+  flutter_riverpod: ^2.1.1
+
+
 
 dev_dependencies:
   flutter_test:
