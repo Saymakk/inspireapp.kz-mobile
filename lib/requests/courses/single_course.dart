@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:get_storage/get_storage.dart';
 import 'package:inspire/constants/constants.dart';
@@ -14,7 +15,7 @@ var id;
 Future<void> singleCourse(id) async {
   GetStorage auth = GetStorage();
 
-  var headers = {'Authorization': 'Bearer ${auth.read('token').toString()}'};
+  var headers = {'Authorization': 'Bearer ${Hive.box('mybox').get(0)}'};
 
   final Uri url = Uri.parse(Const.domain + 'api/courses/$id');
   var request = http.MultipartRequest('GET', url);

@@ -5,6 +5,7 @@ class meditationsList {
   final String description;
   final String path;
   final String icon;
+  final String picture;
   final int length;
 
   meditationsList({
@@ -15,6 +16,7 @@ class meditationsList {
     required this.path,
     required this.length,
     required this.icon,
+    required this.picture,
 
   });
 
@@ -26,6 +28,7 @@ class meditationsList {
       description: (json['description']) != null ? (json['description']) : '',
       path: json['path'] != null ? (json['path']) : '',
       icon: json['icon'] != null ? (json['icon']) : '',
+      picture: json['picture'] != null ? (json['picture']) : '',
       length: json['length'] != null ?  (json['length']) : 0,
 
     );
@@ -39,6 +42,7 @@ class meditationsList {
     'path': path,
     'length': length,
     'icon': icon,
+    'picture': picture,
 
   };
 }

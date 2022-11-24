@@ -109,7 +109,8 @@ class _AllMeditationsScreenState extends State<AllMeditationsScreen> {
                   default:
                     // return rideList(snapshot.data, context);
                     if (snapshot.data == null) {
-                      return Container(
+                      return Container(                                width: 320,
+
                         margin: EdgeInsets.only(top: 20),
                         padding: EdgeInsets.only(
                             left: 19, right: 19, top: 13.5, bottom: 10.5),

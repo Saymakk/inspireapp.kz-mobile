@@ -224,12 +224,12 @@ class _RegAgreedState extends State<RegAgreed> {
                       ),
                       Container(
                         width: 302,
-                        child: Text(
-                          'Вы получите уведомление, когда мы откроем для вас доступ к прилоложению',
-                          style: Const.black14,
-                          textAlign: TextAlign.center,
-                          maxLines: 2,
-                        ),
+                        // child: Text(
+                        //   'Вы получите уведомление, когда мы откроем для вас доступ к прилоложению',
+                        //   style: Const.black14,
+                        //   textAlign: TextAlign.center,
+                        //   maxLines: 2,
+                        // ),
                       ),
                     ],
                   ),

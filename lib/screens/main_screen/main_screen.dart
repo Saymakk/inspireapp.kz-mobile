@@ -7,6 +7,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:inspire/constants/app_bar.dart';
 import 'package:inspire/constants/bottom_app_bar.dart';
 import 'package:inspire/constants/constants.dart';
@@ -32,7 +33,7 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var decoded = jsonDecode(data_list.read('data_list'));
+    var decoded = Hive.box('mybox').get(1);
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -57,7 +58,7 @@ class _MainScreenState extends State<MainScreen> {
                   ),
                   child: Row(
                     children: [
-                      Text('👋 Привет, ${decoded[0]['user']['name']}',
+                      Text('👋 Привет, ${decoded['user']['name']}',
                           style: GoogleFonts.poppins(
                               textStyle: TextStyle(
                                   color: Const.black,

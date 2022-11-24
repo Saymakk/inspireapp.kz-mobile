@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive/hive.dart';
 import 'package:inspire/constants/constants.dart';
 import 'package:inspire/requests/invited_users/invited_users_request.dart';
 import 'package:inspire/screens/ProfileScreen/profile_settings/profile_settings.dart';
@@ -408,11 +409,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                           default:
                             // return rideList(snapshot.data, context);
-                            // print(snapshot.data.toString());
+                            print(snapshot.data);
                             // return CoursesWidget(snapshot.data, context);
                           if(snapshot.data == null){
                             return Center(
                               child: Container(
+                                width: 320,
+
                                 margin: EdgeInsets.only(top: 20),
                                 padding: EdgeInsets.only(
                                     left: 19, right: 19, top: 13.5, bottom: 10.5),
@@ -451,6 +454,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     child: GestureDetector(
                       onTap: () async {
                         await auth.remove('token');
+                        await Hive.box('mybox').delete(0);
                         Get.offAll(()=>WelcomeScreen());
                       },
                       child: Container(

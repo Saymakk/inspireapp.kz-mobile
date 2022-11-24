@@ -24,6 +24,7 @@ class BottomNav extends StatefulWidget {
 
 class _BottomNavState extends State<BottomNav> {
   GetStorage data_list = GetStorage();
+  GetStorage auth = GetStorage();
 
   @override
   void initState() {
@@ -31,7 +32,7 @@ class _BottomNavState extends State<BottomNav> {
     super.initState();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky,
         overlays: [SystemUiOverlay.top]);
-    data_list.write('data_list', jsonEncode(Get.arguments));
+    data_list.write('data_list', jsonEncode(auth.read('userData')));
   }
 
   static const List<Widget> _widgetOptions = <Widget>[

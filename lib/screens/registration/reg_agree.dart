@@ -26,11 +26,11 @@ class RegisterAgreed extends StatelessWidget {
               Expanded(
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 15),
-                  child: Text(
-                    'Вы получите уведомление, когда мы откроем для вас доступ к прилоложению',
-                    style: Const.black14,
-                    textAlign: TextAlign.center,
-                  ),
+                  // child: Text(
+                  //   'Вы получите уведомление, когда мы откроем для вас доступ к прилоложению',
+                  //   style: Const.black14,
+                  //   textAlign: TextAlign.center,
+                  // ),
                 ),
               ),
               GestureDetector(

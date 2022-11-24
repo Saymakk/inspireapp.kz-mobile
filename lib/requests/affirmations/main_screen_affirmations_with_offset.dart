@@ -1,3 +1,4 @@
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:http/http.dart' as http;
 
 import 'dart:convert';
@@ -12,7 +13,7 @@ Future<List<categoriesAff>> affirmationsRequestWithOffset() async {
 
   var headers = {
     'Accept': 'application/json',
-    'Authorization': 'Bearer ${auth.read('token').toString()}'
+    'Authorization': 'Bearer ${Hive.box('mybox').get(0)}'
   };
 
   final Uri url = Uri.parse(Const.domain + 'api/affirmations?paginate=3&page=1');

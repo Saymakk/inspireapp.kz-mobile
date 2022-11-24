@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:inspire/constants/constants.dart';
 import 'package:inspire/screens/welcome_screen.dart';
@@ -14,7 +15,7 @@ GetStorage user = GetStorage();
 Future<void> profile_delete() async {
   var headers = {
     'Accept': 'application/json',
-    'Authorization': 'Bearer ${auth.read('token').toString()}'
+    'Authorization': 'Bearer ${Hive.box('mybox').get(0)}'
   };
 
   final Uri url = await Uri.parse(Const.domain + 'api/user/delete');

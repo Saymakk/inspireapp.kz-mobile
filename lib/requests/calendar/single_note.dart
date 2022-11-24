@@ -16,7 +16,7 @@
 // Future singleNoteRequest(date) async {
 //
 //   var headers = {
-//     'Authorization': 'Bearer ${auth.read('token').toString()}'
+//     'Authorization': 'Bearer ${Hive.box('mybox').get(0)}'
 //   };
 //
 //   final Uri url = await Uri.parse(Const.domain + 'api/user/note/date');
@@ -66,6 +66,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:inspire/constants/constants.dart';
 import 'package:inspire/model/mini_courses_model.dart';
@@ -78,7 +79,7 @@ GetStorage auth = GetStorage();
 Future singleNoteRequest(date) async {
   String domain = Const.domain + 'api/user/note/date';
   Map<String, String> headers = {
-    'Authorization': 'Bearer ${auth.read('token').toString()}',
+    'Authorization': 'Bearer ${Hive.box('mybox').get(0)}',
     'Content-Type': 'application/json'
   };
 
@@ -89,6 +90,7 @@ Future singleNoteRequest(date) async {
       'date': date,
     }),
   );
+
   if (response.statusCode == 200) {
     var jsonResponse = json.decode(response.body);
     // print(jsonResponse);

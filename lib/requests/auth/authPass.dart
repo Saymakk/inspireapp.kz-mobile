@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 import 'package:inspire/constants/bottom_app_bar.dart';
 import 'package:inspire/constants/constants.dart';
@@ -58,9 +59,13 @@ Future<void> authPass(code, phone) async {
 
       auth.write('reg_code', data['data']['code'].toString());
       auth.write('token', data['data']['token'].toString());
+      auth.write('userData', data['data']);
+      await Hive.box('mybox').put(0, data['data']['token'].toString());
+      await Hive.box('mybox').put(1, data['data']);
+
 
       Get.offAll(() => BottomNav(),
-          transition: Transition.rightToLeft, arguments: [data['data']]);
+          transition: Transition.rightToLeft, arguments: []);
     } else { if(response.statusCode != 200) {
       Get.defaultDialog(
         title: 'Что-то пошло не так!',

@@ -166,7 +166,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
                           // return rideList(snapshot.data, context);
                           if (snapshot.data == null) {
                             return Center(
-                              child: Container(
+                              child: Container(                                width: 320,
+
                                 margin: EdgeInsets.only(top: 20),
                                 padding: EdgeInsets.only(
                                     left: 19,

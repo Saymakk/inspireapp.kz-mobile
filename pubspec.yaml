@@ -56,7 +56,8 @@ dependencies:
   syncfusion_localizations: ^20.3.57
 #  icons_launcher: ^2.0.5
   flutter_riverpod: ^2.1.1
-
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
 
 
 dev_dependencies:

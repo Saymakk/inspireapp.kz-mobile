@@ -39,6 +39,7 @@ class coursesList {
     'description': description,
   };
 }
+
 class mini {
   final List<coursesList> course_contents;
 

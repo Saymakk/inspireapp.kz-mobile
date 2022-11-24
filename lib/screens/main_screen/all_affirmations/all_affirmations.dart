@@ -115,6 +115,8 @@ class _AllAffirmationsScreenState extends State<AllAffirmationsScreen> {
                     if (snapshot.data == null) {
                       return Center(
                         child: Container(
+                          width: 320,
+
                           margin: EdgeInsets.only(top: 20),
                           padding: EdgeInsets.only(
                               left: 19, right: 19, top: 13.5, bottom: 10.5),

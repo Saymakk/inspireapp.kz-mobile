@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:inspire/constants/constants.dart';
 import 'package:inspire/screens/ProfileScreen/profile_screen.dart';
@@ -17,7 +18,7 @@ GetStorage user = GetStorage();
 Future<void> profileRequest() async {
   var headers = {
     'Accept': 'application/json',
-    'Authorization': 'Bearer ${auth.read('token').toString()}'
+    'Authorization': 'Bearer ${Hive.box('mybox').get(0)}'
   };
 
   final Uri url = await Uri.parse(Const.domain + 'api/user');
@@ -55,7 +56,7 @@ Future<void> profileRequest() async {
 Future<void> userActivities() async {
   var headers = {
     'Accept': 'application/json',
-    'Authorization': 'Bearer ${auth.read('token').toString()}'
+    'Authorization': 'Bearer ${Hive.box('mybox').get(0)}'
   };
 
   final Uri url = await Uri.parse('https://kz.inspireapp.kz/api/user_activities');

@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:inspire/constants/bottom_app_bar.dart';
 import 'package:inspire/constants/constants.dart';
@@ -26,7 +27,7 @@ Future<void> userUpdateRequest(
 
   var headers = {
     'Accept': 'application/json',
-    'Authorization': 'Bearer ${auth.read('token').toString()}'
+    'Authorization': 'Bearer ${Hive.box('mybox').get(0)}'
   };
 
   final Uri url = await Uri.parse(Const.domain + 'api/user/update');
