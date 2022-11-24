@@ -30,57 +30,56 @@ class _AffirmationsState extends State<Affirmations> {
         left: 24,
         right: 24,
       ),
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(
-              bottom: 2,
-              top: 42,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Ваши аффирмации',
-                  style: GoogleFonts.poppins(
-                      textStyle: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                          color: Const.semiblack)),
+      child: FutureBuilder(
+        future: affirmationsRequestWithOffset(),
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          switch (snapshot.connectionState) {
+            case ConnectionState.none:
+              return Container(
+                padding: EdgeInsets.only(top: 10),
+                child: SkeletonLine(
+                  style: SkeletonLineStyle(
+                      height: 48,
+                      width: double.infinity,
+                      borderRadius: BorderRadius.circular(8)),
                 ),
-                GestureDetector(
-                  onTap: () => Get.to(
-                    () => AllAffirmationsScreen(),
-                    transition: Transition.rightToLeft,
+              );
+            case ConnectionState.waiting:
+              return Column(
+                children: [ Padding(
+                  padding: const EdgeInsets.only(
+                    bottom: 2,
+                    top: 42,
                   ),
-                  child: Text(
-                    'Смотреть все',
-                    style: GoogleFonts.poppins(
-                        textStyle: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            color: Const.turq)),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Ваши аффирмации',
+                        style: GoogleFonts.poppins(
+                            textStyle: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                                color: Const.semiblack)),
+                      ),
+                      GestureDetector(
+                        onTap: () => Get.to(
+                              () => AllAffirmationsScreen(),
+                          transition: Transition.rightToLeft,
+                        ),
+                        child: Text(
+                          'Смотреть все',
+                          style: GoogleFonts.poppins(
+                              textStyle: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                  color: Const.turq)),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              ],
-            ),
-          ),
-          FutureBuilder(
-            future: affirmationsRequestWithOffset(),
-            builder: (BuildContext context, AsyncSnapshot snapshot) {
-              switch (snapshot.connectionState) {
-                case ConnectionState.none:
-                  return Container(
-                    padding: EdgeInsets.only(top: 10),
-                    child: SkeletonLine(
-                      style: SkeletonLineStyle(
-                          height: 48,
-                          width: double.infinity,
-                          borderRadius: BorderRadius.circular(8)),
-                    ),
-                  );
-                case ConnectionState.waiting:
-                  return Column(
+                  Column(
                     children: [
                       Container(
                         padding: EdgeInsets.only(top: 10),
@@ -110,41 +109,41 @@ class _AffirmationsState extends State<Affirmations> {
                         ),
                       ),
                     ],
-                  );
+                  ),
+                ],
+              );
 
-                default:
-                  // return rideList(snapshot.data, context);
-                  if (snapshot.data == null) {
-                    print(auth.read('token'));
-                    return Container(
-                      width: 320,
+            default:
+              // return rideList(snapshot.data, context);
+              if (snapshot.data == null) {
+                print(auth.read('token'));
+                return Container(
+                  width: 320,
 
-                      margin: EdgeInsets.only(top: 20),
-                      padding: EdgeInsets.only(
-                          left: 19, right: 19, top: 13.5, bottom: 10.5),
-                      decoration: BoxDecoration(
-                        color: Color(0xffFFFEE3),
-                        borderRadius: BorderRadius.circular(15), ),
-                      child: ListTile(
-                        leading: Image.asset(
-                          Const.icns + '!.png',
-                          height: 37,
-                          color: Color(0xffFFDD65),
-                        ),
-                        title: Text(
-                          'Извините, здесь пока ничего нет',
-                          maxLines: 4,
-                          style: TextStyle(fontSize: 14, color: Const.deepgrey),
-                        ),
-                      ),
-                    );
-                  } else {
-                    return AffirmList(snapshot.data, context);
-                  }
+                  margin: EdgeInsets.only(top: 20),
+                  padding: EdgeInsets.only(
+                      left: 19, right: 19, top: 13.5, bottom: 10.5),
+                  decoration: BoxDecoration(
+                    color: Color(0xffFFFEE3),
+                    borderRadius: BorderRadius.circular(15), ),
+                  child: ListTile(
+                    leading: Image.asset(
+                      Const.icns + '!.png',
+                      height: 37,
+                      color: Color(0xffFFDD65),
+                    ),
+                    title: Text(
+                      'Извините, здесь пока ничего нет',
+                      maxLines: 4,
+                      style: TextStyle(fontSize: 14, color: Const.deepgrey),
+                    ),
+                  ),
+                );
+              } else {
+                return AffirmList(snapshot.data, context);
               }
-            },
-          ),
-        ],
+          }
+        },
       ),
     );
   }
