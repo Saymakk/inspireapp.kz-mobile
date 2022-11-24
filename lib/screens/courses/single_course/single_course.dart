@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:better_open_file/better_open_file.dart';
 import 'package:dio/dio.dart';
@@ -23,8 +24,9 @@ class _SingleCourseScreenState extends State<SingleCourseScreen> {
   String course_title = Get.arguments[0];
   String description = Get.arguments[3];
   var length = Get.arguments[2];
-  String material_path = Get.arguments[1];
+  String material_path = Get.arguments[1] == null ? '' : Get.arguments[1];
   String video = Get.arguments[4];
+  String picture = Get.arguments[5];
 
   @override
   Widget build(BuildContext context) {
@@ -71,19 +73,20 @@ class _SingleCourseScreenState extends State<SingleCourseScreen> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15),
                           image: DecorationImage(
-                              image: AssetImage(
-                                Const.imgs + 'kuralaj.png',
+                              image: NetworkImage(
+                                // Const.imgs + 'kuralaj.png',
+                                picture
                               ),
                               fit: BoxFit.cover)),
                     ),
-                    CircleAvatar(
-                        child: Icon(
-                          Icons.play_arrow,
-                          color: Colors.white,
-                          size: 24,
-                        ),
-                        radius: 22.5,
-                        backgroundColor: Color(0xff21cac8))
+                    // CircleAvatar(
+                    //     child: Icon(
+                    //       Icons.play_arrow,
+                    //       color: Colors.white,
+                    //       size: 24,
+                    //     ),
+                    //     radius: 22.5,
+                    //     backgroundColor: Color(0xff21cac8))
                   ],
                 ),
               ),

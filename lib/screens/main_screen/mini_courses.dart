@@ -141,7 +141,11 @@ class _MiniCoursesState extends State<MiniCourses> {
                               ),
                             );
                           } else {
-                            return CoursesWidget(snapshot.data, context);
+                            return Column(
+                              children: [
+                                CoursesWidget(snapshot.data, context),
+                              ],
+                            );
                           }
                       }
                     },

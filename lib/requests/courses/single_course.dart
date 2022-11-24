@@ -16,7 +16,7 @@ Future<void> singleCourse(id) async {
 
   var headers = {'Authorization': 'Bearer ${Hive.box('mybox').get(0)}'};
 
-  final Uri url = Uri.parse(Const.domain + 'api/courses/$id');
+  final Uri url = Uri.parse(Const.domain + 'api/courses/1/content/$id');
   var request = http.MultipartRequest('GET', url);
   request.headers.addAll(headers);
 
@@ -28,17 +28,18 @@ Future<void> singleCourse(id) async {
   if (response.statusCode == 200) {
     dynamic list = json.decode(responsed.body);
 
-    print(list['course_contents'][0]['path']);
+    print(list['path']);
 
     // List<coursesList> datasheet = list.map((f) => coursesList.fromJson(f)).toList();
 
     Get.to(() => SingleCourseScreen(),
         transition: Transition.rightToLeft, arguments: [
-          list['course_contents'][0]['title'],
-          list['course_contents'][0]['material_path'],
-          list['course_contents'][0]['length'],
-          list['course_contents'][0]['description'],
-          list['course_contents'][0]['path'],
+          list['title'],
+          list['material_path'],
+          list['length'],
+          list['description'],
+          list['path'],
+          list['picture'],
 
         ]);
     // return Future<List<coursesList>>.value(datasheet);
