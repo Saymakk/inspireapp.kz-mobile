@@ -61,6 +61,7 @@ Future<void> authPass(code, phone) async {
       auth.write('token', data['data']['token'].toString());
       auth.write('userData', data['data']);
       await Hive.box('mybox').put(0, data['data']['token'].toString());
+      await Hive.box('mybox').put('name', data['data']['name']);
       await Hive.box('mybox').put(1, data['data']);
 
 

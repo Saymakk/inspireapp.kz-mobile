@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 import 'package:inspire/constants/constants.dart';
 import 'package:inspire/screens/registration/reg_screen_two.dart';
@@ -42,7 +43,9 @@ Future<void> otpVerify(invite_code, pass, name) async {
     print('data : ${data['data']}');
 
     auth.write('reg_code', data['data']['code'].toString());
+    await Hive.box('mybox').put(1, data['data']);
 
+    await Hive.box('mybox').put(0, data['data']['token'].toString());
 
 
 

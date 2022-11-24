@@ -117,9 +117,7 @@ class _MeditationsState extends State<Meditations> {
                       // return rideList(snapshot.data, context);
                       if (snapshot.data == null) {
                         print(auth.read('token'));
-                        return Container(                                                                    width: 320,
-
-
+                        return Container(
                           margin: EdgeInsets.only(top: 20),
                           padding: EdgeInsets.only(
                               left: 19, right: 19, top: 13.5, bottom: 10.5),
@@ -234,7 +232,7 @@ class _MeditationsState extends State<Meditations> {
               child: ListTile(
                 isThreeLine: true,
                 title: Padding(
-                  padding: const EdgeInsets.only(bottom: 16),
+                  padding: const EdgeInsets.only(bottom: 12),
                   child: Text(
                     medit.title,
                     style: GoogleFonts.poppins(

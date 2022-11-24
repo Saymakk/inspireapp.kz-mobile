@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:inspire/constants/bottom_app_bar.dart';
 import 'package:inspire/constants/constants.dart';
 import 'package:inspire/screens/auth/authorization_screen.dart';
 
@@ -35,8 +36,9 @@ class RegisterAgreed extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  Get.off(() => AuthorizationScreen(),
-                      transition: Transition.rightToLeft);
+                  Get.offAll(()=>BottomNav());
+                  // Get.off(() => AuthorizationScreen(),
+                  //     transition: Transition.rightToLeft);
                 },
                 child: Container(
                   width: double.infinity,

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 import 'package:inspire/constants/bottom_app_bar.dart';
 import 'package:inspire/constants/constants.dart';
@@ -54,6 +55,8 @@ Future<void> otpVerifyFinal(
     print('data : ${data['data']}');
 
     auth.write('reg_code', data['data']['code'].toString());
+    await Hive.box('mybox').put(0, data['data']['token'].toString());
+    await Hive.box('mybox').put(1, data['data']);
 
     Get.to(RegisterAgreed());
 

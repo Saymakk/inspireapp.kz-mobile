@@ -19,7 +19,8 @@ class MiniCourses extends StatefulWidget {
 
 class _MiniCoursesState extends State<MiniCourses> {
   // AnchorScrollController _scrollController = this.scrollController;
-bool visible = false;
+  bool visible = true;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -114,13 +115,16 @@ bool visible = false;
                             return Center(
                               child: Container(
                                 width: 320,
-
                                 margin: EdgeInsets.only(top: 20),
                                 padding: EdgeInsets.only(
-                                    left: 19, right: 19, top: 13.5, bottom: 10.5),
+                                    left: 19,
+                                    right: 19,
+                                    top: 13.5,
+                                    bottom: 10.5),
                                 decoration: BoxDecoration(
                                   color: Color(0xffFFFEE3),
-                                  borderRadius: BorderRadius.circular(15), ),
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
                                 child: ListTile(
                                   leading: Image.asset(
                                     Const.icns + '!.png',
@@ -130,7 +134,8 @@ bool visible = false;
                                   title: Text(
                                     'Извините, здесь пока ничего нет',
                                     maxLines: 4,
-                                    style: TextStyle(fontSize: 14, color: Const.deepgrey),
+                                    style: TextStyle(
+                                        fontSize: 14, color: Const.deepgrey),
                                   ),
                                 ),
                               ),
@@ -199,10 +204,15 @@ bool visible = false;
                         children: [
                           ClipRRect(
                               borderRadius: BorderRadius.only(
-                                  topRight: Radius.circular(15),
-                                  topLeft: Radius.circular(15)),
-                              child: Image.network(course.picture,  fit: BoxFit.cover, width: 259,
-                                height: 144,)),
+                                topRight: Radius.circular(15),
+                                topLeft: Radius.circular(15),
+                              ),
+                              child: Image.network(
+                                course.picture,
+                                fit: BoxFit.cover,
+                                width: 259,
+                                height: 144,
+                              )),
                           // Image.asset(
                           //   Const.imgs + 'kuralaj.png',
                           //   fit: BoxFit.fill,
