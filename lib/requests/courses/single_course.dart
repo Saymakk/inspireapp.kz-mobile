@@ -10,7 +10,6 @@ import 'package:inspire/model/meditation_model.dart';
 import 'package:inspire/model/mini_courses_model.dart';
 import 'package:inspire/screens/courses/single_course/single_course.dart';
 
-var id;
 
 Future<void> singleCourse(id) async {
   GetStorage auth = GetStorage();

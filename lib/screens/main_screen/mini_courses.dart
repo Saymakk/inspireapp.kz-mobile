@@ -189,23 +189,24 @@ bool visible = false;
                 children: [
                   GestureDetector(
                     onTap: () {
-                      // print(course.id);
+                      print(course.id);
                       singleCourse(course.id);
                     },
-                    child: Container(
-                      margin: EdgeInsets.only(bottom: 12),
-                      width: 259,
-                      height: 144,
-                      decoration: BoxDecoration(
-                        color: Color(0xFFC6DAE1),
-                        borderRadius: BorderRadius.circular(15),
-                      ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 10),
                       child: Stack(
+                        alignment: Alignment.center,
                         children: [
-                          Image.asset(
-                            Const.imgs + 'kuralaj.png',
-                            fit: BoxFit.fill,
-                          ),
+                          ClipRRect(
+                              borderRadius: BorderRadius.only(
+                                  topRight: Radius.circular(15),
+                                  topLeft: Radius.circular(15)),
+                              child: Image.network(course.picture,  fit: BoxFit.cover, width: 259,
+                                height: 144,)),
+                          // Image.asset(
+                          //   Const.imgs + 'kuralaj.png',
+                          //   fit: BoxFit.fill,
+                          // ),
                           Center(
                               child: SvgPicture.asset(
                                   Const.icns + 'play_button.svg'))
@@ -242,7 +243,7 @@ bool visible = false;
                           ),
                         ),
                         Text(
-                          '18 мин',
+                          '${course.length.toString()} мин',
                           style: GoogleFonts.poppins(
                               textStyle: TextStyle(
                             fontWeight: FontWeight.w500,

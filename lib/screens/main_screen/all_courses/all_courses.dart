@@ -262,9 +262,12 @@ class _AllCoursesScreenState extends State<AllCoursesScreen> {
                                         ),
                                         child: Stack(
                                           children: [
-                                            Image.asset(
-                                              Const.imgs + 'kuralaj.png',
-                                              fit: BoxFit.fill,
+                                            ClipRRect(
+                                              borderRadius: BorderRadius.only(topRight: Radius.circular(15), topLeft: Radius.circular(15)),
+                                              child: Image.network(
+                                                snapshot.data[index].picture,
+                                                fit: BoxFit.fill,
+                                              ),
                                             ),
                                           ],
                                         ),
@@ -371,7 +374,7 @@ class _AllCoursesScreenState extends State<AllCoursesScreen> {
                       ),
                       child: Stack(
                         children: [
-                          Image.asset(
+                          Image.network(
                             Const.imgs + 'kuralaj.png',
                             fit: BoxFit.fill,
                           ),
