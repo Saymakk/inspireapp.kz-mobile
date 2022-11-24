@@ -257,7 +257,7 @@ class _MeditationScreenState extends State<MeditationScreen> {
               child: ListTile(
                 isThreeLine: true,
                 title: Padding(
-                  padding: const EdgeInsets.only(bottom: 8.0),
+                  padding: const EdgeInsets.only(bottom: 16),
                   child: Text(
                     medit.title,
                     style: GoogleFonts.poppins(

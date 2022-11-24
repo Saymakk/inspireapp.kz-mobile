@@ -19,7 +19,7 @@ class MiniCourses extends StatefulWidget {
 
 class _MiniCoursesState extends State<MiniCourses> {
   // AnchorScrollController _scrollController = this.scrollController;
-
+bool visible = false;
   @override
   Widget build(BuildContext context) {
     return Column(

@@ -39,105 +39,108 @@ class _AllMeditationsScreenState extends State<AllMeditationsScreen> {
       backgroundColor: Colors.white,
       body: Container(
         padding: EdgeInsets.all(24),
-        child: Column(
-          children: [
-            FutureBuilder(
-              future: meditationsRequest(),
-              builder: (BuildContext context, AsyncSnapshot snapshot) {
-                switch (snapshot.connectionState) {
-                  case ConnectionState.none:
-                    return Container(
-                      padding: EdgeInsets.only(top: 10),
-                      child: SkeletonLine(
-                        style: SkeletonLineStyle(
-                            height: 70,
-                            width: double.infinity,
-                            borderRadius: BorderRadius.circular(8)),
-                      ),
-                    );
-                  case ConnectionState.waiting:
-                    return Column(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.only(top: 10),
-                          child: SkeletonLine(
-                            style: SkeletonLineStyle(
-                                height: 70,
-                                width: double.infinity,
-                                borderRadius: BorderRadius.circular(8)),
-                          ),
-                        ),
-                        Container(
-                          padding: EdgeInsets.only(top: 10),
-                          child: SkeletonLine(
-                            style: SkeletonLineStyle(
-                                height: 70,
-                                width: double.infinity,
-                                borderRadius: BorderRadius.circular(8)),
-                          ),
-                        ),
-                        Container(
-                          padding: EdgeInsets.only(top: 10),
-                          child: SkeletonLine(
-                            style: SkeletonLineStyle(
-                                height: 70,
-                                width: double.infinity,
-                                borderRadius: BorderRadius.circular(8)),
-                          ),
-                        ),
-                        Container(
-                          padding: EdgeInsets.only(top: 10),
-                          child: SkeletonLine(
-                            style: SkeletonLineStyle(
-                                height: 70,
-                                width: double.infinity,
-                                borderRadius: BorderRadius.circular(8)),
-                          ),
-                        ),
-                        Container(
-                          padding: EdgeInsets.only(top: 10),
-                          child: SkeletonLine(
-                            style: SkeletonLineStyle(
-                                height: 70,
-                                width: double.infinity,
-                                borderRadius: BorderRadius.circular(8)),
-                          ),
-                        ),
-                      ],
-                    );
-
-                  default:
-                    // return rideList(snapshot.data, context);
-                    if (snapshot.data == null) {
-                      return Container(                                width: 320,
-
-                        margin: EdgeInsets.only(top: 20),
-                        padding: EdgeInsets.only(
-                            left: 19, right: 19, top: 13.5, bottom: 10.5),
-                        decoration: BoxDecoration(
-                          color: Color(0xffFFFEE3),
-                          borderRadius: BorderRadius.circular(15), ),
-                        child: ListTile(
-                          leading: Image.asset(
-                            Const.icns + '!.png',
-                            height: 37,
-                            color: Color(0xffFFDD65),
-                          ),
-                          title: Text(
-                            'Извините, здесь пока ничего нет',
-                            maxLines: 4,
-                            style: TextStyle(fontSize: 14, color: Const.deepgrey),
-                          ),
+        
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              FutureBuilder(
+                future: meditationsRequest(),
+                builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  switch (snapshot.connectionState) {
+                    case ConnectionState.none:
+                      return Container(
+                        padding: EdgeInsets.only(top: 10),
+                        child: SkeletonLine(
+                          style: SkeletonLineStyle(
+                              height: 70,
+                              width: double.infinity,
+                              borderRadius: BorderRadius.circular(8)),
                         ),
                       );
-                    } else {
-                      return MeditList(snapshot.data, context);
-                    }
-                }
-              },
-            ),
+                    case ConnectionState.waiting:
+                      return Column(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.only(top: 10),
+                            child: SkeletonLine(
+                              style: SkeletonLineStyle(
+                                  height: 70,
+                                  width: double.infinity,
+                                  borderRadius: BorderRadius.circular(8)),
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.only(top: 10),
+                            child: SkeletonLine(
+                              style: SkeletonLineStyle(
+                                  height: 70,
+                                  width: double.infinity,
+                                  borderRadius: BorderRadius.circular(8)),
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.only(top: 10),
+                            child: SkeletonLine(
+                              style: SkeletonLineStyle(
+                                  height: 70,
+                                  width: double.infinity,
+                                  borderRadius: BorderRadius.circular(8)),
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.only(top: 10),
+                            child: SkeletonLine(
+                              style: SkeletonLineStyle(
+                                  height: 70,
+                                  width: double.infinity,
+                                  borderRadius: BorderRadius.circular(8)),
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.only(top: 10),
+                            child: SkeletonLine(
+                              style: SkeletonLineStyle(
+                                  height: 70,
+                                  width: double.infinity,
+                                  borderRadius: BorderRadius.circular(8)),
+                            ),
+                          ),
+                        ],
+                      );
 
-          ],
+                    default:
+                      // return rideList(snapshot.data, context);
+                      if (snapshot.data == null) {
+                        return Container(                                width: 320,
+
+                          margin: EdgeInsets.only(top: 20),
+                          padding: EdgeInsets.only(
+                              left: 19, right: 19, top: 13.5, bottom: 10.5),
+                          decoration: BoxDecoration(
+                            color: Color(0xffFFFEE3),
+                            borderRadius: BorderRadius.circular(15), ),
+                          child: ListTile(
+                            leading: Image.asset(
+                              Const.icns + '!.png',
+                              height: 37,
+                              color: Color(0xffFFDD65),
+                            ),
+                            title: Text(
+                              'Извините, здесь пока ничего нет',
+                              maxLines: 4,
+                              style: TextStyle(fontSize: 14, color: Const.deepgrey),
+                            ),
+                          ),
+                        );
+                      } else {
+                        return MeditList(snapshot.data, context);
+                      }
+                  }
+                },
+              ),
+
+            ],
+          ),
         ),
       ),
     );
@@ -168,7 +171,7 @@ class _AllMeditationsScreenState extends State<AllMeditationsScreen> {
               child: ListTile(
                 isThreeLine: true,
                 title: Padding(
-                  padding: const EdgeInsets.only(bottom: 8.0),
+                  padding: const EdgeInsets.only(bottom: 16),
                   child: Text(
                     medit.title,
                     style: GoogleFonts.poppins(

@@ -409,30 +409,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                           default:
                             // return rideList(snapshot.data, context);
-                            print(snapshot.data);
+                            print(snapshot.data.length);
                             // return CoursesWidget(snapshot.data, context);
-                          if(snapshot.data == null){
-                            return Center(
-                              child: Container(
-                                width: 320,
+                          if(snapshot.data.length == 0){
+                            return Container(
+                              width: 320,
 
-                                margin: EdgeInsets.only(top: 20),
-                                padding: EdgeInsets.only(
-                                    left: 19, right: 19, top: 13.5, bottom: 10.5),
-                                decoration: BoxDecoration(
-                                  color: Color(0xffFFFEE3),
-                                  borderRadius: BorderRadius.circular(15), ),
-                                child: ListTile(
-                                  leading: Image.asset(
-                                    Const.icns + '!.png',
-                                    height: 37,
-                                    color: Color(0xffFFDD65),
-                                  ),
-                                  title: Text(
-                                    'Извините, здесь пока ничего нет',
-                                    maxLines: 4,
-                                    style: TextStyle(fontSize: 14, color: Const.deepgrey),
-                                  ),
+                              padding: EdgeInsets.only(
+                                  left: 19, right: 19, top: 13.5, bottom: 10.5),
+                              decoration: BoxDecoration(
+                                color: Color(0xffFFFEE3),
+                                borderRadius: BorderRadius.circular(15), ),
+                              child: ListTile(
+                                leading: Image.asset(
+                                  Const.icns + '!.png',
+                                  height: 37,
+                                  color: Color(0xffFFDD65),
+                                ),
+                                title: Text(
+                                  'Приглашённых пользователей пока нет',
+                                  maxLines: 4,
+                                  style: TextStyle(fontSize: 14, color: Const.deepgrey),
                                 ),
                               ),
                             );
