@@ -4,11 +4,11 @@
 // import 'package:get/get.dart';
 // import 'package:get_storage/get_storage.dart';
 // import 'package:http/http.dart' as http;
-// import 'package:inspire/constants/constants.dart';
-// import 'package:inspire/model/mini_courses_model.dart';
-// import 'package:inspire/model/note_model.dart';
-// import 'package:inspire/screens/auth/authorization_screen2.dart';
-// import 'package:inspire/screens/calendar/single_note/single_note_screen.dart';
+// import 'package:InspireApp/constants/constants.dart';
+// import 'package:InspireApp/model/mini_courses_model.dart';
+// import 'package:InspireApp/model/note_model.dart';
+// import 'package:InspireApp/screens/auth/authorization_screen2.dart';
+// import 'package:InspireApp/screens/calendar/single_note/single_note_screen.dart';
 //
 // GetStorage auth = GetStorage();
 //
@@ -68,11 +68,11 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:http/http.dart' as http;
-import 'package:inspire/constants/constants.dart';
-import 'package:inspire/model/mini_courses_model.dart';
-import 'package:inspire/model/note_model.dart';
-import 'package:inspire/screens/auth/authorization_screen2.dart';
-import 'package:inspire/screens/calendar/single_note/single_note_screen.dart';
+import 'package:InspireApp/constants/constants.dart';
+import 'package:InspireApp/model/mini_courses_model.dart';
+import 'package:InspireApp/model/note_model.dart';
+import 'package:InspireApp/screens/auth/authorization_screen2.dart';
+import 'package:InspireApp/screens/calendar/single_note/single_note_screen.dart';
 
 GetStorage auth = GetStorage();
 

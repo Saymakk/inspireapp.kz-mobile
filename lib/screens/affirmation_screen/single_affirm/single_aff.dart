@@ -14,8 +14,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:inspire/constants/constants.dart';
-import 'package:inspire/requests/affirmations/affirm_done.dart';
+import 'package:InspireApp/constants/constants.dart';
+import 'package:InspireApp/requests/affirmations/affirm_done.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'affirm_end.dart';

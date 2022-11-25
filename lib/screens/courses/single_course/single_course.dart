@@ -6,8 +6,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:inspire/constants/constants.dart';
-import 'package:inspire/screens/video/video_vimeo.dart';
+import 'package:InspireApp/constants/constants.dart';
+import 'package:InspireApp/screens/video/video_vimeo.dart';
 import 'package:path_provider/path_provider.dart';
 
 class SingleCourseScreen extends StatefulWidget {
@@ -23,8 +23,9 @@ class _SingleCourseScreenState extends State<SingleCourseScreen> {
   String course_title = Get.arguments[0];
   String description = Get.arguments[3];
   var length = Get.arguments[2];
-  String material_path = Get.arguments[1];
+  String? material_path = Get.arguments[1];
   String video = Get.arguments[4];
+  String picture = Get.arguments[5];
 
   @override
   Widget build(BuildContext context) {
@@ -71,9 +72,7 @@ class _SingleCourseScreenState extends State<SingleCourseScreen> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15),
                           image: DecorationImage(
-                              image: AssetImage(
-                                Const.imgs + 'kuralaj.png',
-                              ),
+                              image: NetworkImage(picture),
                               fit: BoxFit.cover)),
                     ),
                     CircleAvatar(
@@ -153,25 +152,25 @@ class _SingleCourseScreenState extends State<SingleCourseScreen> {
                   ),
                 ),
               ),
-              Text(
-                'Quis egestas amet nisi, nulla elementum in et nulla. Faucibus venenatis, in euismod ipsum non.',
-                style: GoogleFonts.poppins(
-                  height: 1.3,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 14,
-                  color: Color(0xff989898),
-                ),
-              ),
+              // Text(
+              //   'Quis egestas amet nisi, nulla elementum in et nulla. Faucibus venenatis, in euismod ipsum non.',
+              //   style: GoogleFonts.poppins(
+              //     height: 1.3,
+              //     fontWeight: FontWeight.w500,
+              //     fontSize: 14,
+              //     color: Color(0xff989898),
+              //   ),
+              // ),
               GestureDetector(
                 onTap: () async {
 
                     openFile(
                       url:
-                      'https://kz.inspireapp.kz/' + material_path,
+                      'https://kz.inspireapp.kz/' + material_path!,
                       fileName: '${course_title}.doc',
                     );
                     
-                  print('https://kz.inspireapp.kz/' + material_path);
+                  print('https://kz.inspireapp.kz/' + material_path!);
                 },
                 child: Container(
                   width: double.infinity,

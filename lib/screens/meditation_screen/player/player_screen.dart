@@ -1,8 +1,4 @@
-import 'dart:io';
-import 'dart:isolate';
 import 'dart:ui';
-import 'package:dio/dio.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 
 import 'package:audioplayers/audioplayers.dart';
@@ -11,9 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:inspire/constants/constants.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:permission_handler/permission_handler.dart';
+import 'package:InspireApp/constants/constants.dart';
 
 class PlayerScreen extends StatefulWidget {
   const PlayerScreen({Key? key}) : super(key: key);
@@ -23,7 +17,6 @@ class PlayerScreen extends StatefulWidget {
 }
 
 class _PlayerScreenState extends State<PlayerScreen> {
-  GetStorage local_audio = GetStorage();
 
   var audio_id = Get.arguments[0];
   var audio_title = Get.arguments[1];
@@ -35,25 +28,14 @@ class _PlayerScreenState extends State<PlayerScreen> {
   bool isPlaying = false;
   Duration duration = Duration.zero;
   Duration position = Duration.zero;
-  bool isFile = false;
 
   @override
   void initState() {
     // TODO: implement initState
-
-    print(local_audio.read('medit_${audio_id}'));
-    print(local_audio.read('medit_${audio_id}').runtimeType);
-
     super.initState();
-    local_audio.write('medit_${audio_id}', '');
-    local_audio.read('medit_${audio_id}') != ''
-        ? isFile = true
-        : isFile = false;
-    // downloadFile();
 
-    print(isFile);
+    setAudio();
 
-    // setAudio();
     // audioPlayer.onPlayerStateChanged.listen((state) {
     //   setState(() {
     //     isPlaying = (state = PlayerState.playing) as bool;
@@ -82,11 +64,11 @@ class _PlayerScreenState extends State<PlayerScreen> {
     return [if (duration.inHours > 0) hours, minutes, seconds].join(':');
   }
 
-  // Future setAudio() async {
-  //   audioPlayer.setReleaseMode(ReleaseMode.loop);
-  //   String url = 'https://kz.inspireapp.kz/ + ${audio_path}';
-  //   audioPlayer.setSourceUrl(url);
-  // }
+  Future setAudio() async {
+    audioPlayer.setReleaseMode(ReleaseMode.loop);
+    String url = 'https://kz.inspireapp.kz/ + ${audio_path}';
+    audioPlayer.setSourceUrl(url);
+  }
 
   @override
   void dispose() {
@@ -165,7 +147,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                           GestureDetector(
                             onTap: () {},
                             child: Text(
-                              '$audio_length мин',
+                              '15 мин',
                               textAlign: TextAlign.center,
                               style: GoogleFonts.poppins(
                                   color: Colors.white,
@@ -197,13 +179,13 @@ class _PlayerScreenState extends State<PlayerScreen> {
                             height: 1.3,
                           ),
                         ),
+
                       ],
                     ),
                   ),
                 ),
-                Expanded(child: SizedBox()),
                 Container(
-                  margin: EdgeInsets.only(top: 20, bottom: 60),
+                  margin: EdgeInsets.only(top: 20),
                   // height: 186,
                   width: double.infinity,
                   decoration: BoxDecoration(
@@ -227,65 +209,34 @@ class _PlayerScreenState extends State<PlayerScreen> {
                             //       Icons.forward_10,
                             //       color: Colors.white,
                             //     )),
-                            Expanded(
-                              child: Container(
-                                margin: EdgeInsets.only(left: 48),
-                                child: CircleAvatar(
-                                  backgroundColor: Colors.transparent,
-                                  radius: 35,
-                                  child: isFile == true
-                                      ? isPlaying == false
-                                          ? IconButton(
-                                              icon: SvgPicture.asset(
-                                                  'assets/icons/play_button.svg'),
-                                              iconSize: 50,
-                                              onPressed: () async {
-                                                print(
-                                                    local_audio.read('audio'));
-                                                await audioPlayer.play(
-                                                    DeviceFileSource(
-                                                        local_audio.read(
-                                                            'medit_$audio_id')));
-                                                // await audioPlayer.play(UrlSource(
-                                                //     'https://kz.inspireapp.kz/' +
-                                                //         audio_path));
-                                                setState(() {
-                                                  isPlaying = true;
-                                                });
-                                              },
-                                            )
-                                          : IconButton(
-                                              icon: Icon(Icons.pause),
-                                              iconSize: 50,
-                                              onPressed: () async {
-                                                await audioPlayer.pause();
-                                                setState(() {
-                                                  isPlaying = false;
-                                                });
-                                              },
-                                            )
-                                      : IconButton(
-                                          icon: SvgPicture.asset(
-                                            'assets/icons/play_button.svg',
-                                            color: Colors.grey,
-                                          ),
-                                          iconSize: 50,
-                                          onPressed: () async {},
-                                        ),
-                                ),
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Ваша медитация скачивается!')));
-                                downloadFile();
-                              },
-                              child: Container(
-                                  padding: EdgeInsets.only(right: 24),
-                                  child: Icon(Icons.download,
-                                      color: isFile == true
-                                          ? Colors.grey
-                                          : Colors.white)),
+                            CircleAvatar(
+                              backgroundColor: Colors.transparent,
+                              radius: 35,
+                              child: isPlaying == false
+                                  ? IconButton(
+                                      icon: SvgPicture.asset(
+                                          'assets/icons/play_button.svg'),
+                                      iconSize: 50,
+                                      onPressed: () async {
+                                        // await audioPlayer
+                                        //     .play(AssetSource('audio/nu1.mp3'));
+                                        await audioPlayer.play(UrlSource(
+                                            'https://kz.inspireapp.kz/' + audio_path));
+                                        setState(() {
+                                          isPlaying = true;
+                                        });
+                                      },
+                                    )
+                                  : IconButton(
+                                      icon: Icon(Icons.pause),
+                                      iconSize: 50,
+                                      onPressed: () async {
+                                        await audioPlayer.pause();
+                                        setState(() {
+                                          isPlaying = false;
+                                        });
+                                      },
+                                    ),
                             ),
                           ],
                         ),
@@ -336,37 +287,5 @@ class _PlayerScreenState extends State<PlayerScreen> {
         ),
       ),
     );
-  }
-
-  bool canplay = false;
-
-  Future<File?> downloadFile() async {
-    final appStorage = await getApplicationDocumentsDirectory();
-    final file = File('${appStorage.path}/medit_${audio_id}');
-    final response = await Dio().get(Const.domain + audio_path,
-        options: Options(
-          responseType: ResponseType.bytes,
-          followRedirects: false,
-          receiveTimeout: 0,
-        ));
-
-    final raf = file.openSync(mode: FileMode.write);
-    raf.writeFromSync(response.data);
-    await raf.close();
-    print(file.path);
-    if (file.path != null) {
-      setState(() {
-        isFile = true;
-      });
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Ваша медитация успешно загружена!')));
-
-    } else {
-      setState(() {
-        isFile = false;
-      });
-    }
-    ;
-    await local_audio.write('medit_$audio_id', file.path);
-    return file;
   }
 }

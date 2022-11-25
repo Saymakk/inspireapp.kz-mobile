@@ -3,12 +3,12 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:inspire/constants/bottom_app_bar.dart';
-import 'package:inspire/constants/constants.dart';
-import 'package:inspire/requests/registering/otpVerify.dart';
-import 'package:inspire/requests/registering/otpVerifyFinal.dart';
-import 'package:inspire/screens/auth/authorization_screen.dart';
-import 'package:inspire/screens/registration/registering_screen.dart';
+import 'package:InspireApp/constants/bottom_app_bar.dart';
+import 'package:InspireApp/constants/constants.dart';
+import 'package:InspireApp/requests/registering/otpVerify.dart';
+import 'package:InspireApp/requests/registering/otpVerifyFinal.dart';
+import 'package:InspireApp/screens/auth/authorization_screen.dart';
+import 'package:InspireApp/screens/registration/registering_screen.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:oktoast/oktoast.dart';
 

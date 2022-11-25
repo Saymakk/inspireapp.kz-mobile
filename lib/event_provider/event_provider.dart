@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:inspire/model/mini_courses_model.dart';
+import 'package:InspireApp/model/mini_courses_model.dart';
 
 class EventProvider extends ChangeNotifier{
 final List<coursesList> _events = [];

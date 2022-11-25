@@ -1,13 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:vimeo_video_player/vimeo_video_player.dart';
+// import 'package:vimeo_video_player/vimeo_video_player.dart';
+import 'package:pod_player/pod_player.dart';
 
-class VideoPlayer extends StatelessWidget {
-  VideoPlayer({Key? key}) : super(key: key);
+class VideoPlayer extends StatefulWidget {
+  const VideoPlayer({Key? key}) : super(key: key);
+
+  @override
+  State<VideoPlayer> createState() =>
+      _VideoPlayerState();
+}
+
+class _VideoPlayerState
+    extends State<VideoPlayer> {
+  late final PodPlayerController controller;
 
   String video = Get.arguments[1];
   String video_title = Get.arguments[0];
+
+  @override
+  void initState() {
+    // String videoId = '518228118';
+    // String token = 'dd900159caf99d76f291fc694abc8f9b';
+    // final Map<String, String> headers = <String, String>{};
+    // headers['Authorization'] = 'Bearer ${token}';
+    //
+    // controller = PodPlayerController(
+    //   playVideoFrom: PlayVideoFrom.vimeoPrivateVideos(
+    //       videoId,
+    //       httpHeaders: headers
+    //   ),
+    // )..initialise();
+    // super.initState();
+
+    controller = PodPlayerController(
+      playVideoFrom: PlayVideoFrom.vimeo(video),
+    )..initialise();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,23 +62,6 @@ class VideoPlayer extends StatelessWidget {
                 ),
                 preferredSize: Size(0.0, 0.0),
               ),
-        body: ListView(children: <Widget>[
-          VimeoVideoPlayer(
-            vimeoPlayerModel: VimeoPlayerModel(
-              url: 'https://vimeo.com/$video',
-              deviceOrientation: DeviceOrientation.landscapeRight,
-              systemUiOverlay: const [
-                SystemUiOverlay.top,
-                SystemUiOverlay.bottom,
-              ],
-            ),
-          ),
-          //   id: video.toString(),
-          //   autoPlay: true,
-          //   loaderColor: Colors.pink,
-          //   fullScreenByDefault: true,
-          //   loaderBackgroundColor: Color(0xff21cac8),
-          // ),
-        ]));
+        body: PodVideoPlayer(controller: controller));
   }
 }

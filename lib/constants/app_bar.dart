@@ -4,8 +4,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:inspire/requests/profile/profile.dart';
-import 'package:inspire/screens/ProfileScreen/profile_screen.dart';
+import 'package:InspireApp/requests/profile/profile.dart';
+import 'package:InspireApp/screens/ProfileScreen/profile_screen.dart';
 
 import 'constants.dart';
 

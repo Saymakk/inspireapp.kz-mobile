@@ -3,10 +3,10 @@ import 'dart:convert';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:get_storage/get_storage.dart';
-import 'package:inspire/constants/constants.dart';
-import 'package:inspire/model/affirmation_model.dart';
-import 'package:inspire/model/meditation_model.dart';
-import 'package:inspire/model/single_affirm.dart';
+import 'package:InspireApp/constants/constants.dart';
+import 'package:InspireApp/model/affirmation_model.dart';
+import 'package:InspireApp/model/meditation_model.dart';
+import 'package:InspireApp/model/single_affirm.dart';
 
 Future<List<categoriesAff>> affirmationsRequest() async {
   GetStorage auth = GetStorage();

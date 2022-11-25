@@ -3,11 +3,11 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:inspire/constants/bottom_app_bar.dart';
-import 'package:inspire/constants/constants.dart';
-import 'package:inspire/requests/auth/authPass.dart';
-import 'package:inspire/requests/auth/otpAuth.dart';
-import 'package:inspire/requests/registering/otpVerify.dart';
+import 'package:InspireApp/constants/bottom_app_bar.dart';
+import 'package:InspireApp/constants/constants.dart';
+import 'package:InspireApp/requests/auth/authPass.dart';
+import 'package:InspireApp/requests/auth/otpAuth.dart';
+import 'package:InspireApp/requests/registering/otpVerify.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class AuthorizationScreen2 extends StatefulWidget {
