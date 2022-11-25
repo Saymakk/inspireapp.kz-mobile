@@ -234,7 +234,7 @@ class _AffirmationsState extends State<Affirmations> {
                       height: 40,
                       width: 45,
                       child: Icon(
-                        Icons.add,
+                        Icons.play_arrow,
                         color: Colors.white,
                       )),
                 ),
