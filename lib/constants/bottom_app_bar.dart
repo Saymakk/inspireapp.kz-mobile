@@ -7,11 +7,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:inspire/screens/affirmation_screen/affirmation_screen.dart';
-import 'package:inspire/screens/calendar/calendar_screen.dart';
-import 'package:inspire/screens/courses/courses_screen.dart';
-import 'package:inspire/screens/main_screen/main_screen.dart';
-import 'package:inspire/screens/meditation_screen/meditation_screen.dart';
+import 'package:InspireApp/screens/affirmation_screen/affirmation_screen.dart';
+import 'package:InspireApp/screens/calendar/calendar_screen.dart';
+import 'package:InspireApp/screens/courses/courses_screen.dart';
+import 'package:InspireApp/screens/main_screen/main_screen.dart';
+import 'package:InspireApp/screens/meditation_screen/meditation_screen.dart';
 
 import 'constants.dart';
 

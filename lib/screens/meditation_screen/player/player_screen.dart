@@ -1,8 +1,10 @@
 import 'dart:io';
 import 'dart:isolate';
 import 'dart:ui';
+import 'package:InspireApp/constants/constants.dart';
 import 'package:dio/dio.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/intl.dart';
 
 import 'package:audioplayers/audioplayers.dart';
@@ -11,7 +13,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:inspire/constants/constants.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -24,6 +25,7 @@ class PlayerScreen extends StatefulWidget {
 
 class _PlayerScreenState extends State<PlayerScreen> {
   GetStorage local_audio = GetStorage();
+  var hive_medit = Hive.box('db');
 
   var audio_id = Get.arguments[0];
   var audio_title = Get.arguments[1];
@@ -41,12 +43,18 @@ class _PlayerScreenState extends State<PlayerScreen> {
   void initState() {
     // TODO: implement initState
 
-    print(local_audio.read('medit_${audio_id}'));
-    print(local_audio.read('medit_${audio_id}').runtimeType);
+    print(hive_medit.get('medit_${audio_id}'));
+    print(hive_medit.get('medit_${audio_id}').runtimeType);
+
+    // print(local_audio.read('medit_${audio_id}'));
+    // print(local_audio.read('medit_${audio_id}').runtimeType);
 
     super.initState();
-    local_audio.write('medit_${audio_id}', '');
-    local_audio.read('medit_${audio_id}') != ''
+    // local_audio.write('medit_${audio_id}', '');
+    // local_audio.read('medit_${audio_id}') != ''
+    //     ? isFile = true
+    //     : isFile = false;
+    hive_medit.get('medit_${audio_id}') != null
         ? isFile = true
         : isFile = false;
     // downloadFile();
@@ -240,12 +248,12 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                                   'assets/icons/play_button.svg'),
                                               iconSize: 50,
                                               onPressed: () async {
-                                                print(
-                                                    local_audio.read('audio'));
+                                                print(hive_medit
+                                                    .get('medit_${audio_id}'));
                                                 await audioPlayer.play(
                                                     DeviceFileSource(
-                                                        local_audio.read(
-                                                            'medit_$audio_id')));
+                                                        hive_medit.get(
+                                                            'medit_${audio_id}')));
                                                 // await audioPlayer.play(UrlSource(
                                                 //     'https://kz.inspireapp.kz/' +
                                                 //         audio_path));
@@ -277,7 +285,10 @@ class _PlayerScreenState extends State<PlayerScreen> {
                             ),
                             GestureDetector(
                               onTap: () {
-                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Ваша медитация скачивается!')));
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                        content: Text(
+                                            'Ваша медитация скачивается!')));
                                 downloadFile();
                               },
                               child: Container(
@@ -358,15 +369,14 @@ class _PlayerScreenState extends State<PlayerScreen> {
       setState(() {
         isFile = true;
       });
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Ваша медитация успешно загружена!')));
-
     } else {
       setState(() {
         isFile = false;
       });
     }
     ;
-    await local_audio.write('medit_$audio_id', file.path);
+    await hive_medit.put('medit_${audio_id}', file.path);
+    // await local_audio.write('medit_$audio_id', file.path);
     return file;
   }
 }

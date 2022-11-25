@@ -7,13 +7,13 @@ import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
-import 'package:inspire/constants/bottom_app_bar.dart';
-import 'package:inspire/constants/constants.dart';
-import 'package:inspire/screens/main_screen/main_screen.dart';
-import 'package:inspire/screens/registration/reg_agree.dart';
-import 'package:inspire/screens/registration/reg_screen_two.dart';
-import 'package:inspire/screens/registration/registering_screen.dart';
-import 'package:inspire/screens/welcome_screen.dart';
+import 'package:InspireApp/constants/bottom_app_bar.dart';
+import 'package:InspireApp/constants/constants.dart';
+import 'package:InspireApp/screens/main_screen/main_screen.dart';
+import 'package:InspireApp/screens/registration/reg_agree.dart';
+import 'package:InspireApp/screens/registration/reg_screen_two.dart';
+import 'package:InspireApp/screens/registration/registering_screen.dart';
+import 'package:InspireApp/screens/welcome_screen.dart';
 
 GetStorage auth = GetStorage();
 

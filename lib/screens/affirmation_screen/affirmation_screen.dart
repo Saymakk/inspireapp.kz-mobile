@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:inspire/constants/app_bar.dart';
-import 'package:inspire/constants/constants.dart';
-import 'package:inspire/requests/affirmations/main_screen_affirmations.dart';
+import 'package:InspireApp/constants/app_bar.dart';
+import 'package:InspireApp/constants/constants.dart';
+import 'package:InspireApp/requests/affirmations/main_screen_affirmations.dart';
 import 'package:skeletons/skeletons.dart';
 
 import 'modal_bottom_sheet.dart';
@@ -248,7 +248,7 @@ class _AffirmationScreenState extends State<AffirmationScreen> {
                 // print(affirm.title);
                 Get.to(() => SingleAffScreen(),
                     transition: Transition.rightToLeft,
-                    arguments: [affirm.title, affirm.length, affirm.id, affirm.path]);
+                    arguments: [affirm.title, affirm.length, affirm.id, affirm.path, affirm.description]);
                 // singleAffRequest(affirm.id);
               },
               child: ListTile(
@@ -273,7 +273,7 @@ class _AffirmationScreenState extends State<AffirmationScreen> {
                       height: 40,
                       width: 45,
                       child: Icon(
-                        Icons.add,
+                        Icons.play_arrow,
                         color: Colors.white,
                       )),
                 ),

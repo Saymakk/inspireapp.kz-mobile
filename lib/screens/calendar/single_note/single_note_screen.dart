@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:inspire/constants/constants.dart';
-import 'package:inspire/screens/calendar/single_note/photo_view.dart';
+import 'package:InspireApp/constants/constants.dart';
+import 'package:InspireApp/screens/calendar/single_note/photo_view.dart';
 
 class SingleNoteScreen extends StatefulWidget {
   const SingleNoteScreen({Key? key}) : super(key: key);

@@ -5,9 +5,9 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
-import 'package:inspire/constants/constants.dart';
-import 'package:inspire/screens/registration/reg_screen_two.dart';
-import 'package:inspire/screens/registration/registering_screen.dart';
+import 'package:InspireApp/constants/constants.dart';
+import 'package:InspireApp/screens/registration/reg_screen_two.dart';
+import 'package:InspireApp/screens/registration/registering_screen.dart';
 
 GetStorage auth = GetStorage();
 

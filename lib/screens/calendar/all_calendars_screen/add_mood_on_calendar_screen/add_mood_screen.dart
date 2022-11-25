@@ -7,10 +7,10 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:inspire/constants/constants.dart';
-import 'package:inspire/controllers/success_controller.dart';
-import 'package:inspire/requests/create_note/create_note.dart';
-import 'package:inspire/screens/calendar/all_calendars_screen/all_calendars_screen.dart';
+import 'package:InspireApp/constants/constants.dart';
+import 'package:InspireApp/controllers/success_controller.dart';
+import 'package:InspireApp/requests/create_note/create_note.dart';
+import 'package:InspireApp/screens/calendar/all_calendars_screen/all_calendars_screen.dart';
 
 class AddMoodScreenOnCalendarScreen extends StatefulWidget {
   const AddMoodScreenOnCalendarScreen({Key? key}) : super(key: key);

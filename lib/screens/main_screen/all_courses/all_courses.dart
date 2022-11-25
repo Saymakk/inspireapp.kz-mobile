@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:inspire/constants/constants.dart';
-import 'package:inspire/requests/courses/courses.dart';
-import 'package:inspire/requests/courses/single_course.dart';
-import 'package:inspire/requests/meditations/main_screen_meditations.dart';
-import 'package:inspire/screens/courses/single_course/single_course.dart';
-import 'package:inspire/screens/meditation_screen/player/player_screen.dart';
+import 'package:InspireApp/constants/constants.dart';
+import 'package:InspireApp/requests/courses/courses.dart';
+import 'package:InspireApp/requests/courses/single_course.dart';
+import 'package:InspireApp/requests/meditations/main_screen_meditations.dart';
+import 'package:InspireApp/screens/courses/single_course/single_course.dart';
+import 'package:InspireApp/screens/meditation_screen/player/player_screen.dart';
 import 'package:skeletons/skeletons.dart';
 
 class AllCoursesScreen extends StatefulWidget {
@@ -375,7 +375,7 @@ class _AllCoursesScreenState extends State<AllCoursesScreen> {
                       child: Stack(
                         children: [
                           Image.network(
-                            Const.imgs + 'kuralaj.png',
+                            course.picture,
                             fit: BoxFit.fill,
                           ),
                           Center(

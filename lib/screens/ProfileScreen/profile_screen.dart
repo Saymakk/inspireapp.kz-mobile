@@ -5,10 +5,10 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
-import 'package:inspire/constants/constants.dart';
-import 'package:inspire/requests/invited_users/invited_users_request.dart';
-import 'package:inspire/screens/ProfileScreen/profile_settings/profile_settings.dart';
-import 'package:inspire/screens/welcome_screen.dart';
+import 'package:InspireApp/constants/constants.dart';
+import 'package:InspireApp/requests/invited_users/invited_users_request.dart';
+import 'package:InspireApp/screens/ProfileScreen/profile_settings/profile_settings.dart';
+import 'package:InspireApp/screens/welcome_screen.dart';
 import 'package:skeletons/skeletons.dart';
 
 class ProfileScreen extends StatefulWidget {

@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:inspire/constants/constants.dart';
-import 'package:inspire/requests/courses/courses.dart';
-import 'package:inspire/requests/courses/single_course.dart';
-import 'package:inspire/screens/ProfileScreen/profile_screen.dart';
-import 'package:inspire/screens/courses/single_course/single_course.dart';
+import 'package:InspireApp/constants/constants.dart';
+import 'package:InspireApp/requests/courses/courses.dart';
+import 'package:InspireApp/requests/courses/single_course.dart';
+import 'package:InspireApp/screens/ProfileScreen/profile_screen.dart';
+import 'package:InspireApp/screens/courses/single_course/single_course.dart';
 import 'package:skeletons/skeletons.dart';
 
 class CoursesScreen extends StatefulWidget {
@@ -53,13 +53,52 @@ class _CoursesScreenState extends State<CoursesScreen> {
                           padding: EdgeInsets.only(top: 10),
                           child: SkeletonLine(
                             style: SkeletonLineStyle(
+                              height: 130,
+                              width: 160,
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(
+                            top: 24,
+                            right: 15,
+                            left: 15,
+                          ),
+                          padding: EdgeInsets.only(top: 10),
+                          child: SkeletonLine(
+                            style: SkeletonLineStyle(
+                              height: 130,
+                              width: 160,
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(
+                            top: 24,
+                            right: 15,
+                            left: 15,
+                          ),
+                          padding: EdgeInsets.only(top: 10),
+                          child: SkeletonLine(
+                            style: SkeletonLineStyle(
                                 height: 130,
                                 width: 160,
                                 borderRadius: BorderRadius.circular(15)),
                           ),
                         ),
                         Container(
-                          margin: EdgeInsets.only(top: 24, right: 15, left: 15),
+                          margin: EdgeInsets.only(
+                            top: 24,
+                            right: 15,
+                            left: 15,
+                          ),
                           padding: EdgeInsets.only(top: 10),
                           child: SkeletonLine(
                             style: SkeletonLineStyle(
@@ -74,48 +113,33 @@ class _CoursesScreenState extends State<CoursesScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Container(
-                          margin: EdgeInsets.only(top: 24, right: 15, left: 15),
+                          margin: EdgeInsets.only(
+                            top: 24,
+                            right: 15,
+                            left: 15,
+                          ),
                           padding: EdgeInsets.only(top: 10),
                           child: SkeletonLine(
                             style: SkeletonLineStyle(
-                                height: 130,
-                                width: 160,
-                                borderRadius: BorderRadius.circular(15)),
+                              height: 130,
+                              width: 160,
+                              borderRadius: BorderRadius.circular(15),
+                            ),
                           ),
                         ),
                         Container(
-                          margin: EdgeInsets.only(top: 24, right: 15, left: 15),
-                          padding: EdgeInsets.only(top: 10),
-                          child: SkeletonLine(
-                            style: SkeletonLineStyle(
-                                height: 130,
-                                width: 160,
-                                borderRadius: BorderRadius.circular(15)),
+                          margin: EdgeInsets.only(
+                            top: 24,
+                            right: 15,
+                            left: 15,
                           ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(top: 24, right: 15, left: 15),
                           padding: EdgeInsets.only(top: 10),
                           child: SkeletonLine(
                             style: SkeletonLineStyle(
-                                height: 130,
-                                width: 160,
-                                borderRadius: BorderRadius.circular(15)),
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(top: 24, right: 15, left: 15),
-                          padding: EdgeInsets.only(top: 10),
-                          child: SkeletonLine(
-                            style: SkeletonLineStyle(
-                                height: 130,
-                                width: 160,
-                                borderRadius: BorderRadius.circular(15)),
+                              height: 130,
+                              width: 160,
+                              borderRadius: BorderRadius.circular(15),
+                            ),
                           ),
                         ),
                       ],
@@ -192,8 +216,8 @@ class _CoursesScreenState extends State<CoursesScreen> {
                           margin: EdgeInsets.only(top: 24, right: 15, left: 15),
                           padding: EdgeInsets.only(top: 10),
                           child: SkeletonLine(
-                            style: SkeletonLineStyle(  
-                                height: 130  ,
+                            style: SkeletonLineStyle(
+                                height: 130,
                                 width: 160,
                                 borderRadius: BorderRadius.circular(15)),
                           ),
@@ -206,14 +230,15 @@ class _CoursesScreenState extends State<CoursesScreen> {
               default:
                 if (snapshot.data == null) {
                   return Center(
-                    child:Container(                                width: 320,
-
+                    child: Container(
+                      width: 320,
                       margin: EdgeInsets.only(top: 20),
                       padding: EdgeInsets.only(
                           left: 19, right: 19, top: 13.5, bottom: 10.5),
                       decoration: BoxDecoration(
                         color: Color(0xffFFFEE3),
-                        borderRadius: BorderRadius.circular(15), ),
+                        borderRadius: BorderRadius.circular(15),
+                      ),
                       child: ListTile(
                         leading: Image.asset(
                           Const.icns + '!.png',
@@ -229,7 +254,8 @@ class _CoursesScreenState extends State<CoursesScreen> {
                     ),
                   );
                 } else {
-                  return Container(margin: EdgeInsets.only(top: 10),
+                  return Container(
+                    margin: EdgeInsets.only(top: 10),
                     child: GridView.builder(
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
@@ -244,24 +270,32 @@ class _CoursesScreenState extends State<CoursesScreen> {
                                 onTap: () =>
                                     singleCourse(snapshot.data[index].id),
                                 child: Container(
-                                  width: MediaQuery.of(context).size.width / 2.3,
+                                  width:
+                                      MediaQuery.of(context).size.width / 2.3,
                                   color: Color(0xffF7FAFB),
                                   // padding: EdgeInsets.only(right: 24),
                                   child: Column(
                                     children: [
                                       Container(
-                                         decoration: BoxDecoration(
+                                        decoration: BoxDecoration(
                                           color: Color(0xFFC6DAE1),
                                           borderRadius: BorderRadius.only(
-                                              topRight: Radius.circular(15),
-                                              topLeft: Radius.circular(15)),
+                                            topRight: Radius.circular(15),
+                                            topLeft: Radius.circular(15),
+                                          ),
                                         ),
                                         child: Stack(
                                           children: [
-                                            Image.asset(
-                                              Const.imgs + 'kuralaj.png',
-                                              fit: BoxFit.fill,
-                                            ),
+                                            ClipRRect(
+                                              borderRadius: BorderRadius.only(
+                                                topRight: Radius.circular(15),
+                                                topLeft: Radius.circular(15),
+                                              ),
+                                              child: Image.network(
+                                                snapshot.data[index].picture,
+                                                fit: BoxFit.fill,
+                                              ),
+                                            )
                                           ],
                                         ),
                                       ),
@@ -269,25 +303,28 @@ class _CoursesScreenState extends State<CoursesScreen> {
                                         child: Column(
                                           children: [
                                             Padding(
-                                              padding:
-                                                  const EdgeInsets.only(left: 10, top: 10),
+                                              padding: const EdgeInsets.only(
+                                                  left: 10, top: 10),
                                               child: Row(
                                                 children: [
                                                   Text(
                                                     snapshot.data[index].title,
                                                     style: GoogleFonts.poppins(
-                                                        textStyle: TextStyle(
-                                                      fontWeight: FontWeight.w600,
-                                                      fontSize: 14,
-                                                      color: Color(0xff343434),
-                                                    )),
+                                                      textStyle: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        fontSize: 14,
+                                                        color:
+                                                            Color(0xff343434),
+                                                      ),
+                                                    ),
                                                   ),
                                                 ],
                                               ),
                                             ),
                                             Padding(
-                                              padding:
-                                                  const EdgeInsets.only(left: 10, bottom: 10),
+                                              padding: const EdgeInsets.only(
+                                                  left: 10, bottom: 10),
                                               child: Row(
                                                 children: [
                                                   Padding(
@@ -304,7 +341,8 @@ class _CoursesScreenState extends State<CoursesScreen> {
                                                     '${snapshot.data[index].length} мин',
                                                     style: GoogleFonts.poppins(
                                                         textStyle: TextStyle(
-                                                      fontWeight: FontWeight.w500,
+                                                      fontWeight:
+                                                          FontWeight.w500,
                                                       fontSize: 12,
                                                       color: Color(0xff343434),
                                                     )),

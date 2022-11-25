@@ -7,10 +7,10 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:inspire/constants/constants.dart';
-import 'package:inspire/controllers/success_controller.dart';
-import 'package:inspire/requests/create_note/create_note.dart';
-import 'package:inspire/screens/main_screen/freepage.dart';
+import 'package:InspireApp/constants/constants.dart';
+import 'package:InspireApp/controllers/success_controller.dart';
+import 'package:InspireApp/requests/create_note/create_note.dart';
+import 'package:InspireApp/screens/main_screen/freepage.dart';
 
 class AddNote extends StatefulWidget {
   const AddNote({Key? key}) : super(key: key);

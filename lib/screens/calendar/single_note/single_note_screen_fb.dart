@@ -1,9 +1,9 @@
 // import 'package:flutter/material.dart';
 // import 'package:get/get.dart';
 // import 'package:google_fonts/google_fonts.dart';
-// import 'package:inspire/constants/constants.dart';
-// import 'package:inspire/requests/calendar/single_note.dart';
-// import 'package:inspire/screens/calendar/single_note/photo_view.dart';
+// import 'package:InspireApp/constants/constants.dart';
+// import 'package:InspireApp/requests/calendar/single_note.dart';
+// import 'package:InspireApp/screens/calendar/single_note/photo_view.dart';
 //
 // class SingleNoteScreenFB extends StatefulWidget {
 //   const SingleNoteScreenFB({Key? key}) : super(key: key);
@@ -174,9 +174,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:inspire/constants/constants.dart';
-import 'package:inspire/requests/calendar/single_note.dart';
-import 'package:inspire/screens/calendar/single_note/photo_view.dart';
+import 'package:InspireApp/constants/constants.dart';
+import 'package:InspireApp/requests/calendar/single_note.dart';
+import 'package:InspireApp/screens/calendar/single_note/photo_view.dart';
 
 class SingleNoteScreenFB extends StatefulWidget {
   const SingleNoteScreenFB({Key? key}) : super(key: key);

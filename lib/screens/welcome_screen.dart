@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:inspire/constants/constants.dart';
-import 'package:inspire/screens/registration/registering_screen.dart';
-import 'package:inspire/screens/registration/reg_screen_one.dart';
+import 'package:InspireApp/constants/constants.dart';
+import 'package:InspireApp/screens/registration/registering_screen.dart';
+import 'package:InspireApp/screens/registration/reg_screen_one.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({Key? key}) : super(key: key);

@@ -7,12 +7,12 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:inspire/constants/constants.dart';
-import 'package:inspire/requests/lists/country_list_request.dart';
-import 'package:inspire/requests/profile/profile_delete.dart';
-import 'package:inspire/requests/profile/profile_settings_requests.dart';
-import 'package:inspire/screens/registration/registering_screen.dart';
-import 'package:inspire/screens/welcome_screen.dart';
+import 'package:InspireApp/constants/constants.dart';
+import 'package:InspireApp/requests/lists/country_list_request.dart';
+import 'package:InspireApp/requests/profile/profile_delete.dart';
+import 'package:InspireApp/requests/profile/profile_settings_requests.dart';
+import 'package:InspireApp/screens/registration/registering_screen.dart';
+import 'package:InspireApp/screens/welcome_screen.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:skeletons/skeletons.dart';
 

@@ -14,8 +14,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:inspire/constants/constants.dart';
-import 'package:inspire/requests/affirmations/affirm_done.dart';
+import 'package:InspireApp/constants/constants.dart';
+import 'package:InspireApp/requests/affirmations/affirm_done.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'affirm_end.dart';
@@ -37,6 +37,7 @@ class _SingleAffScreenState extends State<SingleAffScreen>
   int len = Get.arguments[1];
   int aff_id = Get.arguments[2];
   String aff_path = Get.arguments[3];
+  // String aff_desc = Get.arguments[4];
   final audioPlayer = AudioPlayer();
 
   bool active = false;
@@ -47,7 +48,8 @@ class _SingleAffScreenState extends State<SingleAffScreen>
     setState(() {
       active = true;
     });
-    audioPlayer.play(AssetSource('audio/sound1.wav'));
+    // audioPlayer.play(AssetSource('audio/sound1.wav'));
+    audioPlayer.play(UrlSource(Const.domain + aff_path));
     print(len);
   }
 
@@ -66,7 +68,8 @@ class _SingleAffScreenState extends State<SingleAffScreen>
 
     var counter = len;
 
-    active == true ?  audioPlayer.play(AssetSource('audio/sound1.wav')) : audioPlayer.stop();
+    // active == true ?  audioPlayer.play(AssetSource('audio/sound1.wav')) : audioPlayer.stop();
+    active == true ?   audioPlayer.play(UrlSource(Const.domain + aff_path)) : audioPlayer.stop();
 
 
     Timer.periodic(const Duration(seconds: 1), (timer) async {

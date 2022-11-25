@@ -3,14 +3,14 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:inspire/constants/constants.dart';
-import 'package:inspire/model/mini_courses_model.dart';
-import 'package:inspire/requests/affirmations/main_screen_affirmations.dart';
-import 'package:inspire/requests/affirmations/main_screen_affirmations_with_offset.dart';
-import 'package:inspire/requests/affirmations/single_affirm.dart';
-import 'package:inspire/requests/courses/courses.dart';
-import 'package:inspire/screens/affirmation_screen/single_affirm/single_aff.dart';
-import 'package:inspire/screens/main_screen/all_affirmations/all_affirmations.dart';
+import 'package:InspireApp/constants/constants.dart';
+import 'package:InspireApp/model/mini_courses_model.dart';
+import 'package:InspireApp/requests/affirmations/main_screen_affirmations.dart';
+import 'package:InspireApp/requests/affirmations/main_screen_affirmations_with_offset.dart';
+import 'package:InspireApp/requests/affirmations/single_affirm.dart';
+import 'package:InspireApp/requests/courses/courses.dart';
+import 'package:InspireApp/screens/affirmation_screen/single_affirm/single_aff.dart';
+import 'package:InspireApp/screens/main_screen/all_affirmations/all_affirmations.dart';
 import 'package:skeletons/skeletons.dart';
 
 class Affirmations extends StatefulWidget {
@@ -140,7 +140,48 @@ class _AffirmationsState extends State<Affirmations> {
                   ),
                 );
               } else {
-                return AffirmList(snapshot.data, context);
+                return
+
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      bottom: 2,
+                      top: 42,
+
+                    ),
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Ваши аффирмации',
+                              style: GoogleFonts.poppins(
+                                  textStyle: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                      color: Const.semiblack)),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                Get.to(() => AllAffirmationsScreen(),
+                                    transition: Transition.rightToLeft);
+                              },
+                              child: Text(
+                                'Смотреть все',
+                                style: GoogleFonts.poppins(
+                                    textStyle: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                        color: Const.turq)),
+                              ),
+                            ),
+                          ],
+                        ),
+                    AffirmList(snapshot.data, context),
+                      ],
+                    ),
+                  );
+
               }
           }
         },

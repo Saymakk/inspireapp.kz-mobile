@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:inspire/constants/constants.dart';
-import 'package:inspire/screens/meditation_screen/player/player_screen.dart';
+import 'package:InspireApp/constants/constants.dart';
+import 'package:InspireApp/screens/meditation_screen/player/player_screen.dart';
 
 class ThanksScreen extends StatefulWidget {
   const ThanksScreen({Key? key}) : super(key: key);

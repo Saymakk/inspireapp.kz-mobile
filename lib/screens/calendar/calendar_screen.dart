@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:inspire/constants/constants.dart';
-import 'package:inspire/requests/calendar/calendar.dart';
-import 'package:inspire/screens/calendar/add_mood/add_mood_screen.dart';
-import 'package:inspire/screens/calendar/all_calendars_screen/all_calendars_screen.dart';
-import 'package:inspire/screens/calendar/single_note/single_note_screen.dart';
-import 'package:inspire/screens/meditation_screen/player/player_screen.dart';
+import 'package:InspireApp/constants/constants.dart';
+import 'package:InspireApp/requests/calendar/calendar.dart';
+import 'package:InspireApp/screens/calendar/add_mood/add_mood_screen.dart';
+import 'package:InspireApp/screens/calendar/all_calendars_screen/all_calendars_screen.dart';
+import 'package:InspireApp/screens/calendar/single_note/single_note_screen.dart';
+import 'package:InspireApp/screens/meditation_screen/player/player_screen.dart';
 import 'package:skeletons/skeletons.dart';
 
 class CalendarScreen extends StatefulWidget {

@@ -7,6 +7,7 @@ class categoriesAff {
   final String title;
   final String picture;
   final String path;
+  final String description;
   final dynamic subcategory;
 
   categoriesAff({
@@ -19,6 +20,7 @@ class categoriesAff {
     required this.category_id,
     required this.icon,
     required this.picture,
+    required this.description,
   });
 
   factory categoriesAff.fromJson(Map<String, dynamic> json) {
@@ -33,6 +35,7 @@ class categoriesAff {
       icon: json['icon'] != null ? (json['icon']) : '',
       picture: json['picture'] != null ? (json['picture']) : '',
       subcategory: json['subcategory'] != null ? (json['subcategory']) : '',
+      description: json['description'] != null ? (json['description']) : '',
       // subcategory: (json['subcategory'] as List ?? []).map((c) {
       //   return singleAff.fromJson(c);
       // }).toList(),
@@ -49,6 +52,7 @@ class categoriesAff {
         'category_id': category_id,
         'icon': icon,
         'picture': picture,
+        'description': description,
       };
 }
 

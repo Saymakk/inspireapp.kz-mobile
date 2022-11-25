@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:inspire/controllers/success_controller.dart';
+import 'package:InspireApp/controllers/success_controller.dart';
 
 class freepage extends StatelessWidget {
   freepage({Key? key}) : super(key: key);
