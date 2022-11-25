@@ -1,13 +1,22 @@
+import 'package:InspireApp/requests/affirmations/affirm_done.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:InspireApp/constants/constants.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
-class CongratAffirm extends StatelessWidget {
-   CongratAffirm({Key? key}) : super(key: key);
+class CongratAffirm extends StatefulWidget {
+  CongratAffirm({Key? key}) : super(key: key);
 
+  @override
+  State<CongratAffirm> createState() => _CongratAffirmState();
+}
+
+class _CongratAffirmState extends State<CongratAffirm> {
   GetStorage auth = GetStorage();
+var aff_id = Get.arguments[0];
+  bool like = false;
 
   @override
   Widget build(BuildContext context) {
@@ -61,9 +70,29 @@ class CongratAffirm extends StatelessWidget {
                               fontSize: 20),
                         ),
                       ),
+                      IconButton(
+                        onPressed: () async {
+                          await affirmDoneRequest(aff_id);
+                          setState((){
+                            like = !like;
+
+                          });
+                        },
+                        icon: like == false
+                            ? Icon(
+                                Icons.favorite_border,
+                                size: 40,
+                                color: Colors.white,
+                              )
+                            : Icon(Icons.favorite, size: 40, color: Colors.red,),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
                       GestureDetector(
                         onTap: () {
-                          print(auth.read('token'));
+                          print(Hive.box('mybox').get(0));
+                          print(aff_id);
                           Get.back();
                           Get.back();
                         },
@@ -75,7 +104,6 @@ class CongratAffirm extends StatelessWidget {
                           margin: EdgeInsets.only(
                             bottom: 70,
                             top: 15,
-
                           ),
                           child: Center(
                             child: Text(

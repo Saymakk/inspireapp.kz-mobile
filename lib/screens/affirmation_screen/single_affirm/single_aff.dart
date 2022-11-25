@@ -37,6 +37,7 @@ class _SingleAffScreenState extends State<SingleAffScreen>
   int len = Get.arguments[1];
   int aff_id = Get.arguments[2];
   String aff_path = Get.arguments[3];
+
   // String aff_desc = Get.arguments[4];
   final audioPlayer = AudioPlayer();
 
@@ -61,7 +62,7 @@ class _SingleAffScreenState extends State<SingleAffScreen>
   }
 
   @override
-  initState()  {
+  initState() {
     // TODO: implement initState
     super.initState();
     downloadFile();
@@ -69,8 +70,9 @@ class _SingleAffScreenState extends State<SingleAffScreen>
     var counter = len;
 
     // active == true ?  audioPlayer.play(AssetSource('audio/sound1.wav')) : audioPlayer.stop();
-    active == true ?   audioPlayer.play(UrlSource(Const.domain + aff_path)) : audioPlayer.stop();
-
+    active == true
+        ? audioPlayer.play(UrlSource(Const.domain + aff_path))
+        : audioPlayer.stop();
 
     Timer.periodic(const Duration(seconds: 1), (timer) async {
       // print(timer.tick);
@@ -79,16 +81,19 @@ class _SingleAffScreenState extends State<SingleAffScreen>
       } else {
         if (active == false) {
           // setState(() {
-            counter = len;
-            timer.cancel();
+          counter = len;
+          timer.cancel();
           // });
         }
       }
       if (counter == 0) {
         print('Cancel timer');
         timer.cancel();
-        await affirmDoneRequest(aff_id);
-        Get.to(() => CongratAffirm());
+
+        Get.to(
+          () => CongratAffirm(),
+          arguments: [aff_id],
+        );
       }
     });
   }
@@ -216,7 +221,10 @@ class _SingleAffScreenState extends State<SingleAffScreen>
                             //     active = !active;
                             //   });
                             // },
+                            // onTapDown: (_) => activePress(),
                             onTapDown: (_) => activePress(),
+                            // onTapDown: (_) => Get.to(()=>CongratAffirm(),
+                            //   arguments: [aff_id],),
 
                             onTapUp: (_) => inactivePress(),
 
@@ -259,6 +267,4 @@ class _SingleAffScreenState extends State<SingleAffScreen>
     await local_audio.write('audio_$aff_id', file.path);
     return file;
   }
-
-
 }
