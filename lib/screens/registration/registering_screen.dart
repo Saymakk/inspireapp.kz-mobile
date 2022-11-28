@@ -240,7 +240,7 @@ class _RegAgreedState extends State<RegAgreed> {
                         title: 'Поздравляем с регистрацией!',
                         content: Container(
                           child: Text(
-                            'Вы успешно зарегистрированы! Пока ваш аккаунт не активируют, большая часть функций будет вам недоступна!',
+                            'Вы успешно зарегистрированы!',
                           ),
                         ),
                         confirm: TextButton(
