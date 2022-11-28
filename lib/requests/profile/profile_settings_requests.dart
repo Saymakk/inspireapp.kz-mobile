@@ -23,7 +23,7 @@ Future<void> userUpdateRequest(
   String description,
   image,
 ) async {
-  print(image.path);
+  // print('Длина ${image}');
 
   var headers = {
     'Accept': 'application/json',
@@ -35,11 +35,30 @@ Future<void> userUpdateRequest(
 
   request.headers.addAll(headers);
 
+  if (description.length == 0) {
+    description = ' ';
+  } else {
+    description = description;
+  }
+  print(description.length);
+  if (image == null) {
     request.fields['name'] = name;
     request.fields['last_name'] = lastName;
-    request.fields['description'] = description;
+    // if(description.length == 0) {request.fields['description'] = 'Описание';} else {
+    //   request.fields['description'] = description;
+    // }
+    // request.fields['description'] = description;
     request.fields['city_id'] = city.toString();
-    request.files.add(await http.MultipartFile.fromPath("photo", image.path));
+  } else {
+    request.fields['name'] = name;
+    request.fields['last_name'] = lastName;
+    // if(description.length == 0) {request.fields['description'] = 'Описание';} else {
+    //   request.fields['description'] = description;
+    // }    request.fields['city_id'] = city.toString();
+    request.files.add(
+      await http.MultipartFile.fromPath("photo", image.path),
+    );
+  }
 
   var response = await request.send();
 
@@ -50,7 +69,7 @@ Future<void> userUpdateRequest(
   if (response.statusCode == 200) {
     // var data = json.decode(responsed.body);
 
-   return Get.defaultDialog(
+    return Get.defaultDialog(
       title: 'Сохранить изменения',
       content: Text('Вы внесли изменения в свой аккаунт.'),
       confirm: TextButton(
@@ -60,10 +79,7 @@ Future<void> userUpdateRequest(
           },
           child: Text('Продолжить')),
     );
-
-
   } else {
     print('Какая-то ошибка');
   }
-
 }

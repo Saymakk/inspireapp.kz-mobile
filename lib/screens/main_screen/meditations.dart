@@ -19,7 +19,6 @@ class Meditations extends StatefulWidget {
 }
 
 class _MeditationsState extends State<Meditations> {
-
   GetStorage auth = GetStorage();
 
   @override
@@ -31,38 +30,38 @@ class _MeditationsState extends State<Meditations> {
       ),
       child: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.only(
-              bottom: 2,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Ваши медитации',
-                  style: GoogleFonts.poppins(
-                      textStyle: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                          color: Const.semiblack)),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Get.to(() => AllMeditationsScreen(),
-                        transition: Transition.rightToLeft);
-                  },
-                  child: Text(
-                    'Смотреть все',
-                    style: GoogleFonts.poppins(
-                        textStyle: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            color: Const.turq)),
-                  ),
-                ),
-              ],
-            ),
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.only(
+          //     bottom: 2,
+          //   ),
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //     children: [
+          //       Text(
+          //         'Ваши медитации',
+          //         style: GoogleFonts.poppins(
+          //             textStyle: TextStyle(
+          //                 fontSize: 16,
+          //                 fontWeight: FontWeight.w600,
+          //                 color: Const.semiblack)),
+          //       ),
+          //       GestureDetector(
+          //         onTap: () {
+          //           Get.to(() => AllMeditationsScreen(),
+          //               transition: Transition.rightToLeft);
+          //         },
+          //         child: Text(
+          //           'Смотреть все',
+          //           style: GoogleFonts.poppins(
+          //               textStyle: TextStyle(
+          //                   fontSize: 16,
+          //                   fontWeight: FontWeight.w600,
+          //                   color: Const.turq)),
+          //         ),
+          //       ),
+          //     ],
+          //   ),
+          // ),
           Column(
             children: [
               FutureBuilder(
@@ -115,30 +114,71 @@ class _MeditationsState extends State<Meditations> {
 
                     default:
                       // return rideList(snapshot.data, context);
-                      if (snapshot.data == null) {
-                        print(auth.read('token'));
-                        return Container(
-                          margin: EdgeInsets.only(top: 20),
-                          padding: EdgeInsets.only(
-                              left: 19, right: 19, top: 13.5, bottom: 10.5),
-                          decoration: BoxDecoration(
-                            color: Color(0xffFFFEE3),
-                            borderRadius: BorderRadius.circular(15), ),
-                          child: ListTile(
-                            leading: Image.asset(
-                              Const.icns + '!.png',
-                              height: 37,
-                              color: Color(0xffFFDD65),
-                            ),
-                            title: Text(
-                              'Извините, здесь пока ничего нет',
-                              maxLines: 4,
-                              style: TextStyle(fontSize: 14, color: Const.deepgrey),
-                            ),
+                      if (snapshot.data.length != 0) {
+                        return Padding(
+                          padding: const EdgeInsets.only(
+                            bottom: 2,
+                            // top: 42,
+                          ),
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'Ваши медитации',
+                                    style: GoogleFonts.poppins(
+                                        textStyle: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w600,
+                                            color: Const.semiblack)),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      Get.to(() => AllMeditationsScreen(),
+                                          transition: Transition.rightToLeft);
+                                    },
+                                    child: Text(
+                                      'Смотреть все',
+                                      style: GoogleFonts.poppins(
+                                          textStyle: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w600,
+                                              color: Const.turq)),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              MeditList(snapshot.data, context),
+                            ],
                           ),
                         );
+                        print(auth.read('token'));
                       } else {
-                        return MeditList(snapshot.data, context);
+                        print(auth.read('token'));
+                        return SizedBox();
+                        // return Container(
+                        //   margin: EdgeInsets.only(top: 20),
+                        //   padding: EdgeInsets.only(
+                        //       left: 19, right: 19, top: 13.5, bottom: 10.5),
+                        //   decoration: BoxDecoration(
+                        //     color: Color(0xffFFFEE3),
+                        //     borderRadius: BorderRadius.circular(15), ),
+                        //   child: ListTile(
+                        //     leading: Image.asset(
+                        //       Const.icns + '!.png',
+                        //       height: 37,
+                        //       color: Color(0xffFFDD65),
+                        //     ),
+                        //     title: Text(
+                        //       'Извините, здесь пока ничего нет',
+                        //       maxLines: 4,
+                        //       style: TextStyle(fontSize: 14, color: Const.deepgrey),
+                        //     ),
+                        //   ),
+                        // );
+
                       }
                   }
                 },
@@ -211,7 +251,6 @@ class _MeditationsState extends State<Meditations> {
       children: items.map<Widget>(
         (medit) {
           return Container(
-
             decoration: BoxDecoration(
               color: Const.lowgrey,
               borderRadius: BorderRadius.circular(15),

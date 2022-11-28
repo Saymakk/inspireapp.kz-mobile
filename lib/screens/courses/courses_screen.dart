@@ -228,7 +228,7 @@ class _CoursesScreenState extends State<CoursesScreen> {
                 );
 
               default:
-                if (snapshot.data == null) {
+                if (snapshot.data.length == 0) {
                   return Center(
                     child: Container(
                       width: 320,

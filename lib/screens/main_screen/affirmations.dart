@@ -46,39 +46,40 @@ class _AffirmationsState extends State<Affirmations> {
               );
             case ConnectionState.waiting:
               return Column(
-                children: [ Padding(
-                  padding: const EdgeInsets.only(
-                    bottom: 2,
-                    top: 42,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Ваши аффирмации',
-                        style: GoogleFonts.poppins(
-                            textStyle: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                                color: Const.semiblack)),
-                      ),
-                      GestureDetector(
-                        onTap: () => Get.to(
-                              () => AllAffirmationsScreen(),
-                          transition: Transition.rightToLeft,
-                        ),
-                        child: Text(
-                          'Смотреть все',
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      bottom: 2,
+                      top: 42,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Ваши аффирмации',
                           style: GoogleFonts.poppins(
                               textStyle: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w600,
-                                  color: Const.turq)),
+                                  color: Const.semiblack)),
                         ),
-                      ),
-                    ],
+                        GestureDetector(
+                          onTap: () => Get.to(
+                            () => AllAffirmationsScreen(),
+                            transition: Transition.rightToLeft,
+                          ),
+                          child: Text(
+                            'Смотреть все',
+                            style: GoogleFonts.poppins(
+                                textStyle: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                    color: Const.turq)),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
                   Column(
                     children: [
                       Container(
@@ -119,13 +120,13 @@ class _AffirmationsState extends State<Affirmations> {
                 print(auth.read('token'));
                 return Container(
                   width: 320,
-
                   margin: EdgeInsets.only(top: 20),
                   padding: EdgeInsets.only(
                       left: 19, right: 19, top: 13.5, bottom: 10.5),
                   decoration: BoxDecoration(
                     color: Color(0xffFFFEE3),
-                    borderRadius: BorderRadius.circular(15), ),
+                    borderRadius: BorderRadius.circular(15),
+                  ),
                   child: ListTile(
                     leading: Image.asset(
                       Const.icns + '!.png',
@@ -140,48 +141,44 @@ class _AffirmationsState extends State<Affirmations> {
                   ),
                 );
               } else {
-                return
-
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      bottom: 2,
-                      top: 42,
-
-                    ),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Ваши аффирмации',
+                return Padding(
+                  padding: const EdgeInsets.only(
+                    bottom: 2,
+                    top: 42,
+                  ),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Ваши аффирмации',
+                            style: GoogleFonts.poppins(
+                                textStyle: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                    color: Const.semiblack)),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Get.to(() => AllAffirmationsScreen(),
+                                  transition: Transition.rightToLeft);
+                            },
+                            child: Text(
+                              'Смотреть все',
                               style: GoogleFonts.poppins(
                                   textStyle: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w600,
-                                      color: Const.semiblack)),
+                                      color: Const.turq)),
                             ),
-                            GestureDetector(
-                              onTap: () {
-                                Get.to(() => AllAffirmationsScreen(),
-                                    transition: Transition.rightToLeft);
-                              },
-                              child: Text(
-                                'Смотреть все',
-                                style: GoogleFonts.poppins(
-                                    textStyle: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w600,
-                                        color: Const.turq)),
-                              ),
-                            ),
-                          ],
-                        ),
-                    AffirmList(snapshot.data, context),
-                      ],
-                    ),
-                  );
-
+                          ),
+                        ],
+                      ),
+                      AffirmList(snapshot.data, context),
+                    ],
+                  ),
+                );
               }
           }
         },
@@ -203,9 +200,14 @@ class _AffirmationsState extends State<Affirmations> {
             child: GestureDetector(
               onTap: () {
                 // affirmationsRequest();
-                Get.to(()=>SingleAffScreen(),
+                Get.to(() => SingleAffScreen(),
                     transition: Transition.rightToLeft,
-                    arguments: [affirm.title, affirm.length, affirm.id, affirm.path]);
+                    arguments: [
+                      affirm.title,
+                      affirm.length,
+                      affirm.id,
+                      affirm.path
+                    ]);
                 // print(auth.read('token'));
                 // print(affirm.icon);
                 // print(affirm.title);
@@ -225,7 +227,6 @@ class _AffirmationsState extends State<Affirmations> {
                           color: Const.semigrey)),
                 ),
                 trailing: GestureDetector(
-
                   child: Container(
                       decoration: BoxDecoration(
                         color: Const.turq,

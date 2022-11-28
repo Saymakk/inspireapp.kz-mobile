@@ -20,7 +20,6 @@ class RegScreenOne extends StatefulWidget {
 }
 
 class _RegScreenOneState extends State<RegScreenOne> {
-
   GetStorage auth = GetStorage();
 
   TextEditingController phoneController = TextEditingController();
@@ -65,7 +64,7 @@ class _RegScreenOneState extends State<RegScreenOne> {
                         keyboardType: TextInputType.phone,
                         controller: phoneController,
                         decoration: InputDecoration(
-                          hintText: '+7 (___) __-__-  ',
+                          hintText: '+7 (___) ___-__-__',
                           hintStyle: Const.hint_text_style,
                           focusedBorder: OutlineInputBorder(
                             borderSide:
@@ -89,8 +88,6 @@ class _RegScreenOneState extends State<RegScreenOne> {
                   ),
                   GestureDetector(
                     onTap: () async {
-
-
                       setState(() {
                         active = true;
                       });
@@ -102,7 +99,15 @@ class _RegScreenOneState extends State<RegScreenOne> {
 
                       // print(phoneController.text);
                       auth.write('phone', phoneController.text);
-                       otpAuth(phoneController.text);
+                      phoneController.text.length >= 15
+                          ? otpAuth(phoneController.text)
+                          : ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text(
+                              'Введите номер телефона!',
+                              style: GoogleFonts.poppins(
+                                fontWeight: FontWeight.w400,
+                              ),
+                            )));
 
                       // Get.to(() => RegScreenTwo(),
                       //     transition: Transition.rightToLeft,
@@ -116,17 +121,17 @@ class _RegScreenOneState extends State<RegScreenOne> {
                       // padding: EdgeInsets.only(top: 5),
                       child: Center(
                         child: active == true
-                            ? CircularProgressIndicator() : Text(
-                          'Зарегистрироваться',
-                          style: Const.buttontextstyle,
-                          textAlign: TextAlign.center,
-                        ),
+                            ? CircularProgressIndicator()
+                            : Text(
+                                'Зарегистрироваться',
+                                style: Const.buttontextstyle,
+                                textAlign: TextAlign.center,
+                              ),
                       ),
                     ),
                   ),
                   GestureDetector(
                     onTap: () {
-
                       Get.to(() => AuthorizationScreen(),
                           transition: Transition.rightToLeft);
                     },

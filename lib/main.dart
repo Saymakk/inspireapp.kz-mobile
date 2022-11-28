@@ -15,7 +15,13 @@ Future<void> main() async {
   var box = await Hive.openBox('mybox');
   var hive_db = await Hive.openBox('db');
   // Plugin must be initialized before using
-  initializeDateFormatting().then((_) => runApp(ProviderScope(child: MyApp())));
+  initializeDateFormatting().then(
+    (_) => runApp(
+      ProviderScope(
+        child: MyApp(),
+      ),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -23,11 +29,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     // print('HB1 ${Hive.box('mybox').get(11)}');
 
     return GestureDetector(
-      onTap: (){
+      onTap: () {
         FocusScope.of(context).unfocus();
       },
       child: GetMaterialApp(
@@ -43,5 +48,4 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
-
 }

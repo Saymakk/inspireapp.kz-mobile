@@ -48,16 +48,16 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
   TextEditingController lastNameController = TextEditingController();
   TextEditingController descController = TextEditingController();
 
-  List<String> cities_list = [
-    'Алматы',
-    'Астана',
-    'Актау',
-    'Тараз',
-  ];
-
-  List<String> countries_list = [
-    'Казахстан',
-  ];
+  // List<String> cities_list = [
+  //   'Алматы',
+  //   'Астана',
+  //   'Актау',
+  //   'Тараз',
+  // ];
+  //
+  // List<String> countries_list = [
+  //   'Казахстан',
+  // ];
 
   dynamic selected_city;
   dynamic selected_country;
@@ -400,22 +400,22 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
                     onTap: () {
                       nameController.text == '' ||
                               lastNameController.text == '' ||
-                              selected_city == null ||
-                              descController.text == '' ||
-                              image!.path == null
-                          ? ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              selected_city == null ?
+                      // descController.text == '' ||
+                              // image!.path == null
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               content: Text(
-                              'Все поля обязательны к заполнению. Также, не забудьте выбрать город и сделать фото!',
+                              'Обязательно укажите имя, фамилию и город!',
                               style: GoogleFonts.poppins(
                                 fontWeight: FontWeight.w400,
                               ),
                             )))
                           : userUpdateRequest(
-                              nameController.text,
-                              lastNameController.text,
+                              nameController!.text,
+                              lastNameController!.text,
                               selected_city!,
                               descController.text,
-                              image!);
+                              image);
                     },
                     /** !!! Отправка запроса на редактирование аккаунта !!! **/
                     child: Container(

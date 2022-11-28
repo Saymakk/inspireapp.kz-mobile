@@ -37,8 +37,8 @@ Future<void> profileRequest() async {
     print('response.statusCode : ${response.statusCode}');
     print('data : ${data}');
 
-    await user.write('username', data['full_name']);
-    await Hive.box('mybox').put('name', data['full_name']);
+    await user.write('username', data);
+    await Hive.box('mybox').put('UserData', data);
 
     Get.to(() => ProfileScreen(),
         transition: Transition.rightToLeft,

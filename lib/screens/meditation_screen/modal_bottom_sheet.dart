@@ -46,6 +46,29 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
                   color: Color(0xffa5adaf)),
             ),
           ),
+          Container(
+            width: double.infinity,
+
+            margin: EdgeInsets.only(top: 20),
+            padding: EdgeInsets.only(
+                left: 19, right: 19, top: 13.5, bottom: 10.5),
+            decoration: BoxDecoration(
+              color: Color(0xffFFE3E3),
+              borderRadius: BorderRadius.circular(15), ),
+            child: ListTile(
+              leading: Image.asset(
+                Const.icns + '!.png',
+                height: 37,
+                color: Color(0xffFF6565),
+              ),
+              title: Text(
+                'Вы еще не добавили ни одной медитации в избранное.',
+                maxLines: 4,
+                style: TextStyle(fontSize: 14, color: Const.deepgrey),
+              ),
+            ),
+          ),
+
           // GestureDetector(
           //   onTap: () =>
           //   {

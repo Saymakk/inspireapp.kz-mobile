@@ -49,7 +49,7 @@ class _AllCalendarScreenState extends State<AllCalendarScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final events = Provider.of<EventProvider>(context).events;
+    // final events = Provider.of<EventProvider>(context).events;
 
     return Scaffold(
       extendBodyBehindAppBar: true,
