@@ -10,6 +10,7 @@ import 'screens/splash_screen.dart';
 final nameProvider = StateProvider((ref) => 0);
 
 Future<void> main() async {
+
   await Hive.initFlutter();
 
   var box = await Hive.openBox('mybox');

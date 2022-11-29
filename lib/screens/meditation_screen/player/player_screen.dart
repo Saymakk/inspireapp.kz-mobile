@@ -325,7 +325,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                               inactiveColor: Color(0xffBCC9C5),
                               activeColor: Color(0xff5bb4b9),
                               min: 0,
-                              max: duration.inSeconds.toDouble(),
+                              max: duration.inSeconds.toDouble() + 1,
                               value: position.inSeconds.toDouble(),
                               onChanged: (value) async {
                                 final position =
@@ -334,7 +334,9 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                 await audioPlayer.resume();
                                 setState(() {
                                   isPlaying = true;
+
                                 });
+
                               }),
                         ),
                       ],

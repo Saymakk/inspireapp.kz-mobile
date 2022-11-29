@@ -31,7 +31,7 @@ class SingleAffScreen extends StatefulWidget {
 class _SingleAffScreenState extends State<SingleAffScreen>
     with SingleTickerProviderStateMixin {
   late final AnimationController _controller =
-      AnimationController(vsync: this, duration: Duration(seconds: 2))
+      AnimationController(vsync: this, duration: Duration(milliseconds: 2000))
         ..repeat();
 
   bool isFile = false;
@@ -85,14 +85,14 @@ class _SingleAffScreenState extends State<SingleAffScreen>
         ? audioPlayer.play(DeviceFileSource(hive_aff.get('aff_${aff_id}')))
         : audioPlayer.stop();
 
-    Timer.periodic(const Duration(seconds: 1), (timer) async {
+    Timer.periodic(const Duration(milliseconds: 1000), (timer) async {
       // print(timer.tick);
       if (active == true) {
         counter--;
       } else {
         if (active == false) {
           // setState(() {
-          counter = len;
+          counter = len * 1000;
           timer.cancel();
           // });
         }
@@ -268,6 +268,11 @@ class _SingleAffScreenState extends State<SingleAffScreen>
                         margin: EdgeInsets.only(bottom: 50),
                         child: IconButton(
                           onPressed: () {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text('Ваша аффирмация скачивается!'),
+                              ),
+                            );
                             print(hive_aff.get('aff_$aff_id'));
 
                             downloadFile();
