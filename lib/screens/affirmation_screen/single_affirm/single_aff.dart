@@ -16,6 +16,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:InspireApp/constants/constants.dart';
 import 'package:InspireApp/requests/affirmations/affirm_done.dart';
+import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'affirm_end.dart';
@@ -32,6 +33,11 @@ class _SingleAffScreenState extends State<SingleAffScreen>
   late final AnimationController _controller =
       AnimationController(vsync: this, duration: Duration(seconds: 2))
         ..repeat();
+
+  bool isFile = false;
+
+  // bool playerButton = false;
+  var hive_aff = Hive.box('db');
 
   String title = Get.arguments[0];
   int len = Get.arguments[1];
@@ -50,7 +56,7 @@ class _SingleAffScreenState extends State<SingleAffScreen>
       active = true;
     });
     // audioPlayer.play(AssetSource('audio/sound1.wav'));
-    audioPlayer.play(UrlSource(Const.domain + aff_path));
+    audioPlayer.play(DeviceFileSource(hive_aff.get('aff_${aff_id}')));
     print(len);
   }
 
@@ -65,13 +71,18 @@ class _SingleAffScreenState extends State<SingleAffScreen>
   initState() {
     // TODO: implement initState
     super.initState();
-    downloadFile();
+
+    print(hive_aff.get('aff_${aff_path}'));
+    print(hive_aff.get('aff_${aff_path}').runtimeType);
+
+    // downloadFile();
 
     var counter = len;
 
     // active == true ?  audioPlayer.play(AssetSource('audio/sound1.wav')) : audioPlayer.stop();
     active == true
-        ? audioPlayer.play(UrlSource(Const.domain + aff_path))
+        // ? audioPlayer.play(UrlSource(Const.domain + aff_path))
+        ? audioPlayer.play(DeviceFileSource(hive_aff.get('aff_${aff_id}')))
         : audioPlayer.stop();
 
     Timer.periodic(const Duration(seconds: 1), (timer) async {
@@ -96,6 +107,7 @@ class _SingleAffScreenState extends State<SingleAffScreen>
         );
       }
     });
+    hive_aff.get('aff_${aff_id}') != null ? isFile = true : isFile = false;
   }
 
   static const colorizeColors = [
@@ -113,6 +125,8 @@ class _SingleAffScreenState extends State<SingleAffScreen>
 
   @override
   Widget build(BuildContext context) {
+    print('путь файлы ' + aff_path.toString());
+
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
@@ -131,10 +145,11 @@ class _SingleAffScreenState extends State<SingleAffScreen>
           elevation: 0,
           actions: [
             IconButton(
-                onPressed: () {
-                  Get.back();
-                },
-                icon: Icon(Icons.close)),
+              onPressed: () {
+                Get.back();
+              },
+              icon: Icon(Icons.close),
+            ),
           ],
         ),
         extendBodyBehindAppBar: true,
@@ -163,7 +178,9 @@ class _SingleAffScreenState extends State<SingleAffScreen>
                               ),
                               textAlign: TextAlign.center,
                               colors: colorizeColors,
-                              speed: Duration(milliseconds: 200),
+                              speed: Duration(
+                                milliseconds: len * 1000,
+                              ),
                               // cursor: '',
                             ),
                           ],
@@ -184,61 +201,88 @@ class _SingleAffScreenState extends State<SingleAffScreen>
                       ),
                     ),
                   ),
-                  Container(
-                    margin: EdgeInsets.only(
-                      bottom: 70,
-                    ),
-                    child: Stack(
-                      children: [
-                        AnimatedBuilder(
-                          animation: _controller,
-                          builder: (_, child) {
-                            return Transform.rotate(
-                              angle: active == true
-                                  ? (_controller.value * 2 * math.pi)
-                                  : 0,
-                              child: child,
-                            );
-                          },
-                          child: DottedBorder(
-                            dashPattern: [100, 65],
-                            color: Colors.white,
-                            strokeWidth: 2,
-                            borderType: BorderType.Circle,
-                            child: Container(
-                                margin: EdgeInsets.all(70),
-                                child: SizedBox(
-                                  width: 74,
-                                  height: 74,
-                                )),
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.all(70),
-                          child: GestureDetector(
-                            // onTap: () {
-                            //   setState(() {
-                            //     active = !active;
-                            //   });
-                            // },
-                            // onTapDown: (_) => activePress(),
-                            onTapDown: (_) => activePress(),
-                            // onTapDown: (_) => Get.to(()=>CongratAffirm(),
-                            //   arguments: [aff_id],),
-
-                            onTapUp: (_) => inactivePress(),
-
-                            child: SvgPicture.asset(
-                              Const.icns + 'finger.svg',
-                              color: active == true
-                                  ? Color(0xff21cac8)
-                                  : Colors.white,
-                              height: 74,
-                              width: 74,
+                  Visibility(
+                    visible: isFile,
+                    child: Container(
+                      margin: EdgeInsets.only(
+                        bottom: 70,
+                      ),
+                      child: Stack(
+                        children: [
+                          AnimatedBuilder(
+                            animation: _controller,
+                            builder: (_, child) {
+                              return Transform.rotate(
+                                angle: active == true
+                                    ? (_controller.value * 2 * math.pi)
+                                    : 0,
+                                child: child,
+                              );
+                            },
+                            child: DottedBorder(
+                              dashPattern: [100, 65],
+                              color: Colors.white,
+                              strokeWidth: 2,
+                              borderType: BorderType.Circle,
+                              child: Container(
+                                  margin: EdgeInsets.all(70),
+                                  child: SizedBox(
+                                    width: 74,
+                                    height: 74,
+                                  )),
                             ),
                           ),
+                          Container(
+                            margin: EdgeInsets.all(70),
+                            child: GestureDetector(
+                              // onTap: () {
+                              //   setState(() {
+                              //     active = !active;
+                              //   });
+                              // },
+                              // onTapDown: (_) => activePress(),
+                              onTapDown: (_) => activePress(),
+                              // onTapDown: (_) => Get.to(()=>CongratAffirm(),
+                              //   arguments: [aff_id],),
+
+                              onTapUp: (_) => inactivePress(),
+
+                              child: SvgPicture.asset(
+                                Const.icns + 'finger.svg',
+                                color: active == true
+                                    ? Color(0xff21cac8)
+                                    : Colors.white,
+                                height: 74,
+                                width: 74,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Visibility(
+                    visible: !isFile,
+                    child: GestureDetector(
+                      child: Container(
+                        margin: EdgeInsets.only(bottom: 50),
+                        child: IconButton(
+                          onPressed: () {
+                            print(hive_aff.get('aff_$aff_id'));
+
+                            downloadFile();
+
+                            // setState(() {
+                            //   isFile = !isFile;
+                            // });
+                          },
+                          icon: Icon(
+                            Icons.download,
+                            color: Colors.white,
+                            size: 40,
+                          ),
                         ),
-                      ],
+                      ),
                     ),
                   ),
                 ],
@@ -264,7 +308,19 @@ class _SingleAffScreenState extends State<SingleAffScreen>
     raf.writeFromSync(response.data);
     await raf.close();
     print(file.path);
+    if (file.path != null) {
+      setState(() {
+        isFile = true;
+      });
+    } else {
+      setState(() {
+        isFile = false;
+      });
+    }
+    ;
+
     await local_audio.write('audio_$aff_id', file.path);
+    await hive_aff.put('aff_$aff_id', '${appStorage.path}/aff_${aff_id}');
     return file;
   }
 }

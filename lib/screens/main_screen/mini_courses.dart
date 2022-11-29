@@ -108,7 +108,7 @@ class _MiniCoursesState extends State<MiniCourses> {
 
               default:
                 // return rideList(snapshot.data, context);
-                if (snapshot.data.length == 0) {
+                if (snapshot.data.length  == 0) {
                   // return Center(
                   //   child: Container(
                   //     width: 320,
@@ -193,33 +193,33 @@ class _MiniCoursesState extends State<MiniCourses> {
                                     ),
                                   ],
                                 ))),
-                        GestureDetector(
-                          onTap: () {
-                            Get.to(
-                              () => AllCoursesScreen(),
-                              transition: Transition.rightToLeft,
-                            );
-                          },
-                          child: Container(
-                            width: double.infinity,
-                            height: 40,
-                            decoration: Const.cont_turq_circ8,
-                            // padding: EdgeInsets.only(top: 5),
-                            margin: EdgeInsets.only(
-                              bottom: 42,
-                              top: 15,
-                              left: 24,
-                              right: 24,
-                            ),
-                            child: Center(
-                              child: Text(
-                                'Открыть все мини-курсы',
-                                style: Const.buttontextstyle,
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                          ),
-                        ),
+                        // GestureDetector(
+                        //   onTap: () {
+                        //     Get.to(
+                        //       () => AllCoursesScreen(),
+                        //       transition: Transition.rightToLeft,
+                        //     );
+                        //   },
+                        //   child: Container(
+                        //     width: double.infinity,
+                        //     height: 40,
+                        //     decoration: Const.cont_turq_circ8,
+                        //     // padding: EdgeInsets.only(top: 5),
+                        //     margin: EdgeInsets.only(
+                        //       bottom: 42,
+                        //       top: 15,
+                        //       left: 24,
+                        //       right: 24,
+                        //     ),
+                        //     child: Center(
+                        //       child: Text(
+                        //         'Открыть все мини-курсы',
+                        //         style: Const.buttontextstyle,
+                        //         textAlign: TextAlign.center,
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
                       ],
                     ),
                   );
