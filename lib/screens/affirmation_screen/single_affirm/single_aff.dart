@@ -314,6 +314,11 @@ class _SingleAffScreenState extends State<SingleAffScreen>
     await raf.close();
     print(file.path);
     if (file.path != null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Ваша аффирмация загрузилась!'),
+        ),
+      );
       setState(() {
         isFile = true;
       });
