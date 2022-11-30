@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:InspireApp/constants/app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -25,17 +26,9 @@ class _CoursesScreenState extends State<CoursesScreen> {
       extendBodyBehindAppBar: true,
       extendBody: true,
       backgroundColor: Color(0xffffffff),
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        title: Text(
-          'Мини-курсы',
-          style: GoogleFonts.poppins(
-            color: Colors.black,
-            fontSize: 20,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
+      appBar: PreferredSize(
+        preferredSize: Size(double.infinity, 59),
+        child: AppBarWidget(),
       ),
       body: SafeArea(
         child: FutureBuilder(
@@ -255,7 +248,7 @@ class _CoursesScreenState extends State<CoursesScreen> {
                   );
                 } else {
                   return Container(
-                    margin: EdgeInsets.only(top: 10),
+                    margin: EdgeInsets.only(top: 30),
                     child: GridView.builder(
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,

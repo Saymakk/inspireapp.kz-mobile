@@ -1,8 +1,11 @@
+import 'package:InspireApp/requests/meditations/likedmedit.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:InspireApp/constants/constants.dart';
+import 'package:skeletons/skeletons.dart';
 
+import 'player/player_screen.dart';
 import 'thanks/thanks_screen.dart';
 
 class ModalBottomSheet extends StatefulWidget {
@@ -46,27 +49,117 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
                   color: Color(0xffa5adaf)),
             ),
           ),
-          Container(
-            width: double.infinity,
 
-            margin: EdgeInsets.only(top: 20),
-            padding: EdgeInsets.only(
-                left: 19, right: 19, top: 13.5, bottom: 10.5),
-            decoration: BoxDecoration(
-              color: Color(0xffFFE3E3),
-              borderRadius: BorderRadius.circular(15), ),
-            child: ListTile(
-              leading: Image.asset(
-                Const.icns + '!.png',
-                height: 37,
-                color: Color(0xffFF6565),
-              ),
-              title: Text(
-                'Вы еще не добавили ни одной медитации в избранное.',
-                maxLines: 4,
-                style: TextStyle(fontSize: 14, color: Const.deepgrey),
-              ),
-            ),
+          FutureBuilder(
+            future: likedMedit(),
+            // future: meditationsRequest(),
+            builder: (BuildContext context, AsyncSnapshot snapshot) {
+              switch (snapshot.connectionState) {
+                case ConnectionState.none:
+                  return Container(
+                    padding: EdgeInsets.only(top: 10),
+                    child: SkeletonLine(
+                      style: SkeletonLineStyle(
+                          height: 70,
+                          width: double.infinity,
+                          borderRadius: BorderRadius.circular(8)),
+                    ),
+                  );
+                case ConnectionState.waiting:
+                  return Column(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.only(top: 10),
+                        child: SkeletonLine(
+                          style: SkeletonLineStyle(
+                              height: 70,
+                              width: double.infinity,
+                              borderRadius: BorderRadius.circular(8)),
+                        ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.only(top: 10),
+                        child: SkeletonLine(
+                          style: SkeletonLineStyle(
+                              height: 70,
+                              width: double.infinity,
+                              borderRadius: BorderRadius.circular(8)),
+                        ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.only(top: 10),
+                        child: SkeletonLine(
+                          style: SkeletonLineStyle(
+                              height: 70,
+                              width: double.infinity,
+                              borderRadius: BorderRadius.circular(8)),
+                        ),
+                      ),
+                    ],
+                  );
+
+                default:
+                  // return rideList(snapshot.data, context);
+                  if (snapshot.data.length != 0) {
+                    return Padding(
+                      padding: const EdgeInsets.only(
+                        bottom: 2,
+                        // top: 42,
+                      ),
+                      child: MeditList(snapshot.data, context),
+                    );
+                    print(auth.read('token'));
+                  } else {
+                    print(auth.read('token'));
+                    return Center(
+                      child: Container(
+                        width: double.infinity,
+                        margin: EdgeInsets.only(top: 20),
+                        padding: EdgeInsets.only(
+                            left: 19, right: 19, top: 13.5, bottom: 10.5),
+                        decoration: BoxDecoration(
+                          color: Color(0xffFFE3E3),
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        child: ListTile(
+                          leading: Image.asset(
+                            Const.icns + '!.png',
+                            height: 37,
+                            color: Color(0xffFF6565),
+                          ),
+                          title: Text(
+                            'Вы еще не добавили ни одной медитации в избранное.',
+                            maxLines: 4,
+                            style:
+                                TextStyle(fontSize: 14, color: Const.deepgrey),
+                          ),
+                        ),
+                      ),
+                    );
+                    // return Container(
+                    //   margin: EdgeInsets.only(top: 20),
+                    //   padding: EdgeInsets.only(
+                    //       left: 19, right: 19, top: 13.5, bottom: 10.5),
+                    //   decoration: BoxDecoration(
+                    //     color: Color(0xffFFFEE3),
+                    //     borderRadius: BorderRadius.circular(15), ),
+                    //   child: ListTile(
+                    //     leading: Image.asset(
+                    //       Const.icns + '!.png',
+                    //       height: 37,
+                    //       color: Color(0xffFFDD65),
+                    //     ),
+                    //     title: Text(
+                    //       'Извините, здесь пока ничего нет',
+                    //       maxLines: 4,
+                    //       style: TextStyle(fontSize: 14, color: Const.deepgrey),
+                    //     ),
+                    //   ),
+                    // );
+
+                  }
+              }
+            },
           ),
 
           // GestureDetector(
@@ -230,6 +323,63 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
           // ),
         ],
       ),
+    );
+  }
+
+  Widget MeditList(List items, context) {
+    return Column(
+      children: items.map<Widget>(
+        (medit) {
+          return Container(
+            decoration: BoxDecoration(
+              color: Const.lowgrey,
+              borderRadius: BorderRadius.circular(15),
+            ),
+            margin: EdgeInsets.only(top: 10, bottom: 10),
+            child: GestureDetector(
+              onTap: () {
+                Get.to(() => PlayerScreen(),
+                    transition: Transition.rightToLeft,
+                    arguments: [
+                      medit.id,
+                      medit.title,
+                      medit.description,
+                      medit.path,
+                      medit.length,
+                    ]);
+              },
+              child: ListTile(
+                isThreeLine: true,
+                title: Padding(
+                  padding: const EdgeInsets.only(bottom: 16),
+                  child: Text(
+                    medit.title,
+                    style: GoogleFonts.poppins(
+                      textStyle:
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                ),
+                subtitle: Row(
+                  children: [
+                    Icon(Icons.access_time_rounded),
+                    Text(' ${medit.length} мин'),
+                  ],
+                ),
+                trailing: CircleAvatar(
+                  radius: 22.5,
+                  backgroundColor: Const.turq,
+                  child: Icon(
+                    Icons.play_arrow,
+                    size: 24,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+          );
+        },
+      ).toList(),
     );
   }
 }
