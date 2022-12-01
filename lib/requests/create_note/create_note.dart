@@ -39,19 +39,26 @@ Future<void> createNoteRequest(description, emoji, File? photo,) async {
 
   print(response.statusCode);
   // print(responsed.body);
+if(response.statusCode == 200) {
+    Get.defaultDialog(
+      title: 'Ваша заметка успешно сохранена!',
+      titleStyle: GoogleFonts.poppins(),
+      content: Text(
+        'Проведите этот день с пользой!',
+        style: GoogleFonts.poppins(),
+      ),
+      confirm: TextButton(
+        onPressed: () {
+          Get.back();
+          Get.back();
+        },
+        child: Text('Продолжить'),
+      ),
+    );
+  } else {
+  OKToast(child: Text('Что-то пошло не так! Попробуйте снова.'),);
 
-  Get.defaultDialog(
-    title: 'Ваша заметка успешно сохранена!',
-    titleStyle: GoogleFonts.poppins(),
-    content: Text(
-      'Проведите этот день с пользой!',
-      style: GoogleFonts.poppins(),
-    ),
-    confirm: TextButton(onPressed: (){
-      Get.back();
-      Get.back();
-    }, child: Text('Продолжить'),),
-  );
+}
 
   // noteStatusController.currentNoteValue('asdasd');
 

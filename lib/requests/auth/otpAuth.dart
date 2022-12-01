@@ -47,5 +47,7 @@ Future<void> otpAuth(phone) async {
         arguments: [data['data']['code'].toString(), r_phone.toString()]);
   } else {
     print('error');
+    OKToast(child: Text('Что-то пошло не так! Попробуйте снова.'),);
+
   }
 }

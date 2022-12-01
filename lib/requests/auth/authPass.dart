@@ -13,6 +13,7 @@ import 'package:InspireApp/screens/registration/reg_screen_one.dart';
 import 'package:InspireApp/screens/registration/reg_screen_two.dart';
 import 'package:InspireApp/screens/registration/registering_screen.dart';
 import 'package:InspireApp/screens/welcome_screen.dart';
+import 'package:oktoast/oktoast.dart';
 
 GetStorage auth = GetStorage();
 
@@ -67,19 +68,9 @@ Future<void> authPass(code, phone) async {
 
       Get.offAll(() => BottomNav(),
           transition: Transition.rightToLeft, arguments: []);
-    } else { if(response.statusCode != 200) {
-      Get.defaultDialog(
-        title: 'Что-то пошло не так!',
-        content: Text(
-            'Пожалуйста, попробуйте снова!'),
-        confirm: TextButton(
-          onPressed: () {
-          Get.back();
-          },
-          child: Text('Понятно'),
-        ),
-      );
-      }
+    } else {
+      OKToast(child: Text('Что-то пошло не так! Попробуйте снова.'),);
+
     }
   }
 }

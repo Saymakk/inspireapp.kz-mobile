@@ -31,7 +31,7 @@ class SingleAffScreen extends StatefulWidget {
 class _SingleAffScreenState extends State<SingleAffScreen>
     with SingleTickerProviderStateMixin {
   late final AnimationController _controller =
-      AnimationController(vsync: this, duration: Duration(milliseconds: 2000))
+      AnimationController(vsync: this, duration: Duration(seconds: 2))
         ..repeat();
 
   bool isFile = false;
@@ -85,14 +85,14 @@ class _SingleAffScreenState extends State<SingleAffScreen>
         ? audioPlayer.play(DeviceFileSource(hive_aff.get('aff_${aff_id}')))
         : audioPlayer.stop();
 
-    Timer.periodic(const Duration(milliseconds: 1000), (timer) async {
+    Timer.periodic(const Duration(seconds: 1), (timer) async {
       // print(timer.tick);
       if (active == true) {
         counter--;
       } else {
         if (active == false) {
           // setState(() {
-          counter = len * 1000;
+          counter = len;
           timer.cancel();
           // });
         }
@@ -179,7 +179,7 @@ class _SingleAffScreenState extends State<SingleAffScreen>
                               textAlign: TextAlign.center,
                               colors: colorizeColors,
                               speed: Duration(
-                                milliseconds: len * 1000,
+                                seconds: len,
                               ),
                               // cursor: '',
                             ),

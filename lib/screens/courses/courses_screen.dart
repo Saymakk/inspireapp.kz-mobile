@@ -247,113 +247,136 @@ class _CoursesScreenState extends State<CoursesScreen> {
                     ),
                   );
                 } else {
-                  return Container(
-                    margin: EdgeInsets.only(top: 30),
-                    child: GridView.builder(
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          crossAxisSpacing: 0,
-                          mainAxisSpacing: 0),
-                      itemCount: snapshot.data.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return SingleChildScrollView(
-                          child: Column(
-                            children: [
-                              GestureDetector(
-                                onTap: () =>
-                                    singleCourse(snapshot.data[index].id),
-                                child: Container(
-                                  width:
-                                      MediaQuery.of(context).size.width / 2.3,
-                                  color: Color(0xffF7FAFB),
-                                  // padding: EdgeInsets.only(right: 24),
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        decoration: BoxDecoration(
-                                          color: Color(0xFFC6DAE1),
-                                          borderRadius: BorderRadius.only(
-                                            topRight: Radius.circular(15),
-                                            topLeft: Radius.circular(15),
-                                          ),
-                                        ),
-                                        child: Stack(
-                                          children: [
-                                            ClipRRect(
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    child: Column(
+                      children: [
+                        Container(alignment: Alignment.centerLeft,
+                            margin: EdgeInsets.only(top: 20),
+                            child: Text(
+                              'Мини-курсы',
+                              style: GoogleFonts.poppins(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.black),
+                            )),
+                        Container(
+                          height: (snapshot.data.length * 250).toDouble(),
+                          margin: EdgeInsets.only(top: 24),
+                          child: GridView.builder(
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2,
+                                    crossAxisSpacing: 2,
+                                    mainAxisSpacing: 0),
+                            itemCount: snapshot.data.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return Column(
+                                children: [
+                                  GestureDetector(
+                                    onTap: () =>
+                                        singleCourse(snapshot.data[index].id),
+                                    child: Container(
+                                      width:
+                                          MediaQuery.of(context).size.width / 2.3,
+                                      color: Color(0xffF7FAFB),
+                                      // padding: EdgeInsets.only(right: 24),
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                            decoration: BoxDecoration(
+                                              color: Color(0xFFC6DAE1),
                                               borderRadius: BorderRadius.only(
                                                 topRight: Radius.circular(15),
                                                 topLeft: Radius.circular(15),
                                               ),
-                                              child: Image.network(
-                                                snapshot.data[index].picture,
-                                                fit: BoxFit.fill,
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                      Container(
-                                        child: Column(
-                                          children: [
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 10, top: 10),
-                                              child: Row(
-                                                children: [
-                                                  Text(
-                                                    snapshot.data[index].title,
-                                                    style: GoogleFonts.poppins(
-                                                      textStyle: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                        fontSize: 14,
-                                                        color:
-                                                            Color(0xff343434),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
                                             ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 10, bottom: 10),
-                                              child: Row(
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            right: 7),
-                                                    child: Icon(
-                                                      Icons.access_time_rounded,
-                                                      size: 15,
-                                                      color: Color(0xFF50546A),
-                                                    ),
+                                            child: Stack(
+                                              children: [
+                                                ClipRRect(
+                                                  borderRadius: BorderRadius.only(
+                                                    topRight: Radius.circular(15),
+                                                    topLeft: Radius.circular(15),
                                                   ),
-                                                  Text(
-                                                    '${snapshot.data[index].length} мин',
-                                                    style: GoogleFonts.poppins(
-                                                        textStyle: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      fontSize: 12,
-                                                      color: Color(0xff343434),
-                                                    )),
+                                                  child: Image.network(
+                                                    snapshot.data[index].picture,
+                                                    fit: BoxFit.fill,
                                                   ),
-                                                ],
-                                              ),
-                                            )
-                                          ],
-                                        ),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                          Container(
+                                            child: Column(
+                                              children: [
+                                                Padding(
+                                                  padding: const EdgeInsets.only(
+                                                      left: 10, top: 10),
+                                                  child: Row(
+                                                    children: [
+                                                      Text(
+                                                        snapshot
+                                                            .data[index].title,
+                                                        style:
+                                                            GoogleFonts.poppins(
+                                                          textStyle: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.w600,
+                                                            fontSize: 14,
+                                                            color:
+                                                                Color(0xff343434),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsets.only(
+                                                      left: 10, bottom: 10),
+                                                  child: Row(
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets.only(
+                                                                right: 7),
+                                                        child: Icon(
+                                                          Icons
+                                                              .access_time_rounded,
+                                                          size: 15,
+                                                          color:
+                                                              Color(0xFF50546A),
+                                                        ),
+                                                      ),
+                                                      Text(
+                                                        '${snapshot.data[index].length} мин',
+                                                        style:
+                                                            GoogleFonts.poppins(
+                                                                textStyle:
+                                                                    TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          fontSize: 12,
+                                                          color:
+                                                              Color(0xff343434),
+                                                        )),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                    ],
+                                    ),
                                   ),
-                                ),
-                              ),
-                            ],
+                                ],
+                              );
+                            },
                           ),
-                        );
-                      },
+                        ),
+                      ],
                     ),
                   );
                 }
