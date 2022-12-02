@@ -57,6 +57,7 @@ Future<void> otpVerifyFinal(
     auth.write('reg_code', data['data']['code'].toString());
     await Hive.box('mybox').put(0, data['data']['token'].toString());
     await Hive.box('mybox').put(1, data['data']);
+    await Hive.box('mybox').put('name', data['data']['user']['name']);
 
     Get.to(RegisterAgreed());
 

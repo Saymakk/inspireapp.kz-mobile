@@ -15,7 +15,7 @@ import 'package:oktoast/oktoast.dart';
 GetStorage auth = GetStorage();
 GetStorage user = GetStorage();
 
-Future<void> profileRequest() async {
+Future<void> profileRequestInit() async {
   var headers = {
     'Accept': 'application/json',
     'Authorization': 'Bearer ${Hive.box('mybox').get(0)}'
@@ -41,15 +41,6 @@ Future<void> profileRequest() async {
     await Hive.box('mybox').put('UserData', data);
     await Hive.box('mybox').put('name', data['name']);
 
-    Get.to(() => ProfileScreen(),
-        transition: Transition.rightToLeft,
-        arguments: [
-          data['code'],
-          data['full_name'],
-          data['description'],
-          data['phone'],
-          data['profile_photo_url']
-        ]);
   } else {
     print('error');
   }

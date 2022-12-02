@@ -106,7 +106,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 margin: EdgeInsets.only(bottom: 11),
                                 width: MediaQuery.of(context).size.width / 2.7,
                                 child: Text(
-                                  Hive.box('mybox').get('UserData')['name'],
+                                  Hive.box('mybox').get('name'),
                                   softWrap: true,
                                   style: GoogleFonts.poppins(
                                     textStyle: TextStyle(

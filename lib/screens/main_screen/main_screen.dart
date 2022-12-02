@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:InspireApp/requests/profile/profile_init.dart';
 import 'package:anchor_scroll_controller/anchor_scroll_controller.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
@@ -30,6 +31,12 @@ class _MainScreenState extends State<MainScreen> {
   GetStorage auth = GetStorage();
   GetStorage user = GetStorage();
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    profileRequestInit();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +57,6 @@ class _MainScreenState extends State<MainScreen> {
             color: Color(0xffffffff),
             child: Column(
               children: [
-
                 Container(
                   padding: EdgeInsets.only(
                     left: 24,
@@ -58,7 +64,7 @@ class _MainScreenState extends State<MainScreen> {
                   ),
                   child: Row(
                     children: [
-                      Text('👋 Привет, ${decoded['user']['name']}',
+                      Text('👋 Привет, ${Hive.box('mybox').get('name')}',
                           style: GoogleFonts.poppins(
                               textStyle: TextStyle(
                                   color: Const.black,
@@ -83,7 +89,12 @@ class _MainScreenState extends State<MainScreen> {
 
   Widget MoodButton() {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Get.to(
+              () => AddMoodScreen(),
+          transition: Transition.rightToLeft,
+        );
+      },
       child: Container(
         margin: EdgeInsets.only(
           top: 12,
@@ -100,7 +111,12 @@ class _MainScreenState extends State<MainScreen> {
           borderRadius: BorderRadius.circular(15),
         ),
         child: ListTile(
-          onTap: () {},
+          onTap: () {
+            Get.to(
+                  () => AddMoodScreen(),
+              transition: Transition.rightToLeft,
+            );
+          },
           leading: Text(
             '💃',
             style: TextStyle(fontSize: 35),
@@ -114,23 +130,15 @@ class _MainScreenState extends State<MainScreen> {
               color: Const.semiblack,
             ),
           ),
-          trailing: GestureDetector(
-            onTap: () {
-              Get.to(
-                () => AddMoodScreen(),
-                transition: Transition.rightToLeft,
-              );
-            },
-            child: Container(
-                decoration: BoxDecoration(
-                    color: Const.turq, borderRadius: BorderRadius.circular(8)),
-                height: 40,
-                width: 45,
-                child: Icon(
-                  Icons.add,
-                  color: Colors.white,
-                )),
-          ),
+          trailing: Container(
+              decoration: BoxDecoration(
+                  color: Const.turq, borderRadius: BorderRadius.circular(8)),
+              height: 40,
+              width: 45,
+              child: Icon(
+                Icons.add,
+                color: Colors.white,
+              )),
         ),
       ),
     );

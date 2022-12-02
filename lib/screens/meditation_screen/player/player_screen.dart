@@ -38,6 +38,8 @@ class _PlayerScreenState extends State<PlayerScreen> {
   Duration duration = Duration.zero;
   Duration position = Duration.zero;
   bool isFile = false;
+  bool looped = false;
+  bool liked = false;
 
   @override
   void initState() {
@@ -79,6 +81,30 @@ class _PlayerScreenState extends State<PlayerScreen> {
         position = newPosition;
       });
     });
+  }
+
+  void loop() {
+    audioPlayer.setReleaseMode(ReleaseMode.loop);
+  }
+
+  void backward() {
+    setState(() {
+     var posi = position.inSeconds - 5;
+     audioPlayer.seek(Duration(seconds: posi));
+     audioPlayer.resume();
+    });
+
+
+  }
+
+  void forward() {
+    setState(() {
+      var posi = position.inSeconds + 5;
+      audioPlayer.seek(Duration(seconds: posi));
+      audioPlayer.resume();
+    });
+
+
   }
 
   String formatTime(Duration duration) {
@@ -222,7 +248,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                     child: Column(
                       children: [
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             // IconButton(
                             //     onPressed: () async {
@@ -235,68 +261,120 @@ class _PlayerScreenState extends State<PlayerScreen> {
                             //       Icons.forward_10,
                             //       color: Colors.white,
                             //     )),
-                            Expanded(
-                              child: Container(
-                                margin: EdgeInsets.only(left: 48),
-                                child: CircleAvatar(
-                                  backgroundColor: Colors.transparent,
-                                  radius: 35,
-                                  child: isFile == true
-                                      ? isPlaying == false
-                                          ? IconButton(
-                                              icon: SvgPicture.asset(
-                                                  'assets/icons/play_button.svg'),
-                                              iconSize: 50,
-                                              onPressed: () async {
-                                                print(hive_medit
-                                                    .get('medit_${audio_id}'));
-                                                await audioPlayer.play(
-                                                    DeviceFileSource(
-                                                        hive_medit.get(
-                                                            'medit_${audio_id}')));
-                                                // await audioPlayer.play(UrlSource(
-                                                //     'https://kz.inspireapp.kz/' +
-                                                //         audio_path));
-                                                setState(() {
-                                                  isPlaying = true;
-                                                });
-                                              },
-                                            )
-                                          : IconButton(
-                                              icon: Icon(Icons.pause),
-                                              iconSize: 50,
-                                              onPressed: () async {
-                                                await audioPlayer.pause();
-                                                setState(() {
-                                                  isPlaying = false;
-                                                });
-                                              },
-                                            )
-                                      : IconButton(
-                                          icon: SvgPicture.asset(
-                                            'assets/icons/play_button.svg',
-                                            color: Colors.grey,
-                                          ),
-                                          iconSize: 50,
-                                          onPressed: () async {},
+                            IconButton(
+                              icon: SvgPicture.asset(
+                                'assets/icons/loop.svg',
+                                color: looped == false
+                                    ? Colors.grey
+                                    : Colors.white,
+                              ),
+                              iconSize: 24,
+                              onPressed: () async {
+                                setState(() {
+                                  looped = !looped;
+                                });
+                                if (looped == true) {
+                                  print(looped);
+                                  return loop();
+                                } else {
+                                  print(looped);
+                                }
+                              },
+                            ),
+                            IconButton(
+                              icon: SvgPicture.asset(
+                                  'assets/icons/play_back.svg'),
+                              iconSize: 48,
+                              onPressed: () async {
+                                return backward();
+                                // setState(() {
+                                //   looped = !looped;
+                                // });
+                                // looped == true ? (audioPlayer.setReleaseMode(
+                                //     ReleaseMode.loop)
+                                // ) : null;
+                              },
+                            ),
+
+                            Container(
+                              // margin: EdgeInsets.only(left: 48),
+                              child: CircleAvatar(
+                                backgroundColor: Colors.transparent,
+                                radius: 35,
+                                child: isFile == true
+                                    ? isPlaying == false
+                                        ? IconButton(
+                                            icon: SvgPicture.asset(
+                                                'assets/icons/play_button.svg'),
+                                            iconSize: 48,
+                                            onPressed: () async {
+                                              print(hive_medit
+                                                  .get('medit_${audio_id}'));
+                                              await audioPlayer.play(
+                                                  DeviceFileSource(
+                                                      hive_medit.get(
+                                                          'medit_${audio_id}')));
+                                              // await audioPlayer.play(UrlSource(
+                                              //     'https://kz.inspireapp.kz/' +
+                                              //         audio_path));
+                                              setState(() {
+                                                isPlaying = true;
+                                              });
+                                            },
+                                          )
+                                        : IconButton(
+                                            icon: Icon(Icons.pause),
+                                            iconSize: 48,
+                                            onPressed: () async {
+                                              await audioPlayer.pause();
+                                              setState(() {
+                                                isPlaying = false;
+                                              });
+                                            },
+                                          )
+                                    : IconButton(
+                                        icon: SvgPicture.asset(
+                                          'assets/icons/play_button.svg',
+                                          color: Colors.grey,
                                         ),
-                                ),
+                                        iconSize: 48,
+                                        onPressed: () async {},
+                                      ),
                               ),
                             ),
-                            GestureDetector(
-                              onTap: () {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                        content: Text(
-                                            'Ваша медитация скачивается!')));
-                                downloadFile();
+                            IconButton(
+                              icon: SvgPicture.asset(
+                                  'assets/icons/play_forward.svg'),
+                              iconSize: 48,
+                              onPressed: () async {
+                                return forward();
+
                               },
-                              child: Container(
-                                  padding: EdgeInsets.only(right: 24),
-                                  child: Icon(Icons.download,
-                                      color: isFile == true
-                                          ? Colors.grey
-                                          : Colors.white)),
+                            ),
+                            Visibility(
+                              visible: !isFile,
+                              child: GestureDetector(
+                                onTap: () {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                          content: Text(
+                                              'Ваша медитация скачивается!')));
+                                  downloadFile();
+                                },
+                                child:
+                                    Icon(Icons.download, color: Colors.white),
+                              ),
+                            ),
+                            Visibility(
+                              visible: isFile,
+                              child: IconButton(
+                                icon: SvgPicture.asset(
+                                  'assets/icons/like.svg',
+                                  color: Colors.grey,
+                                ),
+                                iconSize: 24,
+                                onPressed: () async {},
+                              ),
                             ),
                           ],
                         ),
@@ -334,9 +412,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                 await audioPlayer.resume();
                                 setState(() {
                                   isPlaying = true;
-
                                 });
-
                               }),
                         ),
                       ],
