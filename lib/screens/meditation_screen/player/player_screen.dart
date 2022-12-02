@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:isolate';
 import 'dart:ui';
 import 'package:InspireApp/constants/constants.dart';
+import 'package:InspireApp/requests/affirmations/do_like.dart';
 import 'package:dio/dio.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -91,7 +92,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
     setState(() {
      var posi = position.inSeconds - 5;
      audioPlayer.seek(Duration(seconds: posi));
-     audioPlayer.resume();
+     // audioPlayer.resume();
     });
 
 
@@ -101,7 +102,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
     setState(() {
       var posi = position.inSeconds + 5;
       audioPlayer.seek(Duration(seconds: posi));
-      audioPlayer.resume();
+      // audioPlayer.resume();
     });
 
 
@@ -368,12 +369,20 @@ class _PlayerScreenState extends State<PlayerScreen> {
                             Visibility(
                               visible: isFile,
                               child: IconButton(
-                                icon: SvgPicture.asset(
-                                  'assets/icons/like.svg',
+                                icon: liked == false ? SvgPicture.asset(
+                                 'assets/icons/like.svg' ,
                                   color: Colors.grey,
+                                ) : SvgPicture.asset(
+                                  'assets/icons/like_filled.svg' ,
                                 ),
                                 iconSize: 24,
-                                onPressed: () async {},
+                                onPressed: () async {
+                                  print(audio_id);
+                                 await doLike(audio_id);
+                                 setState(() {
+                                   liked = !liked;
+                                 });
+                                },
                               ),
                             ),
                           ],
