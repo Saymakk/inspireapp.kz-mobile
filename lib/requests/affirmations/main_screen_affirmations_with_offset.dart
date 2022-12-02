@@ -16,7 +16,7 @@ Future<List<categoriesAff>> affirmationsRequestWithOffset() async {
     'Authorization': 'Bearer ${Hive.box('mybox').get(0)}'
   };
 
-  final Uri url = Uri.parse(Const.domain + 'api/affirmations?paginate=3&page=1');
+  final Uri url = Uri.parse(Const.domain + 'api/affirmations/categories?paginate=3&page=1');
   var request = http.MultipartRequest('GET', url);
   request.headers.addAll(headers);
 

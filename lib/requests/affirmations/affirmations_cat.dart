@@ -8,15 +8,17 @@ import 'package:InspireApp/model/affirmation_model.dart';
 import 'package:InspireApp/model/meditation_model.dart';
 import 'package:InspireApp/model/single_affirm.dart';
 
-Future<List<categoriesAff>> affirmationsRequest() async {
+Future<List<categoriesAff>> affirmationsCatRequest(id) async {
   GetStorage auth = GetStorage();
+
+  print(id);
 
   var headers = {
     'Accept': 'application/json',
     'Authorization': 'Bearer ${Hive.box('mybox').get(0)}'
   };
 
-  final Uri url = Uri.parse(Const.domain + 'api/affirmations/categories');
+  final Uri url = Uri.parse(Const.domain + 'api/affirmations/categories/$id');
   var request = http.MultipartRequest('GET', url);
   request.headers.addAll(headers);
 
@@ -26,7 +28,7 @@ Future<List<categoriesAff>> affirmationsRequest() async {
   print(response.statusCode);
 
   if (response.statusCode == 200) {
-    Iterable list = json.decode(responsed.body);
+    Iterable list = json.decode(responsed.body)[0]['contents'];
     List<categoriesAff> datasheet =
         list.map((f) => categoriesAff.fromJson(f)).toList();
 

@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:InspireApp/screens/affirmation_screen/aff_cat_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -121,7 +122,6 @@ class _AffirmationScreenState extends State<AffirmationScreen> {
                       height: 1,
                       color: Color(0xffEDEDED),
                     )),
-
                 FutureBuilder(
                   future: affirmationsRequest(),
                   builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -192,14 +192,15 @@ class _AffirmationScreenState extends State<AffirmationScreen> {
 
                         if (snapshot.data == null) {
                           return Center(
-                            child: Container(                                width: 320,
-
+                            child: Container(
+                              width: 320,
                               margin: EdgeInsets.only(top: 20),
                               padding: EdgeInsets.only(
                                   left: 19, right: 19, top: 13.5, bottom: 10.5),
                               decoration: BoxDecoration(
                                 color: Color(0xffFFFEE3),
-                                borderRadius: BorderRadius.circular(15), ),
+                                borderRadius: BorderRadius.circular(15),
+                              ),
                               child: ListTile(
                                 leading: Image.asset(
                                   Const.icns + '!.png',
@@ -209,7 +210,8 @@ class _AffirmationScreenState extends State<AffirmationScreen> {
                                 title: Text(
                                   'Извините, здесь пока ничего нет',
                                   maxLines: 4,
-                                  style: TextStyle(fontSize: 14, color: Const.deepgrey),
+                                  style: TextStyle(
+                                      fontSize: 14, color: Const.deepgrey),
                                 ),
                               ),
                             ),
@@ -220,7 +222,6 @@ class _AffirmationScreenState extends State<AffirmationScreen> {
                     }
                   },
                 ),
-
                 SizedBox(
                   height: 100,
                 ),
@@ -245,15 +246,16 @@ class _AffirmationScreenState extends State<AffirmationScreen> {
             // padding: EdgeInsets.all(20),
             child: GestureDetector(
               onTap: () {
+Get.to(()=>AffCatScreen(), arguments: [affirm.id, affirm.title]);
                 // print(affirm.title);
-                Get.to(() => SingleAffScreen(),
-                    transition: Transition.rightToLeft,
-                    arguments: [affirm.title, affirm.length, affirm.id, affirm.path, affirm.description]);
+                // Get.to(() => SingleAffScreen(),
+                //     transition: Transition.rightToLeft,
+                //     arguments: [affirm.title, affirm.length, affirm.id, affirm.path, affirm.description]);
                 // singleAffRequest(affirm.id);
               },
               child: ListTile(
                 leading: SvgPicture.network(
-                  'https://kz.inspireapp.kz/${affirm.subcategory['icon']}',
+                  'https://kz.inspireapp.kz/${affirm.icon}',
                   height: 24,
                 ),
                 title: Text(
@@ -265,17 +267,26 @@ class _AffirmationScreenState extends State<AffirmationScreen> {
                           color: Const.semigrey)),
                 ),
                 trailing: GestureDetector(
-
+                  onTap: () {
+                    print(affirm.contents_count);
+                  },
                   child: Container(
-                      decoration: BoxDecoration(
-                          color: Const.turq,
-                          borderRadius: BorderRadius.circular(8)),
-                      height: 40,
-                      width: 45,
-                      child: Icon(
-                        Icons.play_arrow,
-                        color: Colors.white,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      shape: BoxShape.circle,
+                    ),
+                    width: 45,
+                    height: 45,
+                    child: Center(
+                      child: Container(
+                          // margin: EdgeInsets.all(11),
+                          child: Text(
+                            affirm.contents_count.toString(),
+                        style: GoogleFonts.poppins(
+                            fontSize: 22, color: Color(0xff21cac8)),
                       )),
+                    ),
+                  ),
                 ),
               ),
             ),

@@ -30,10 +30,6 @@ class SingleAffScreen extends StatefulWidget {
 
 class _SingleAffScreenState extends State<SingleAffScreen>
     with SingleTickerProviderStateMixin {
-  late final AnimationController _controller =
-      AnimationController(vsync: this, duration: Duration(seconds: 2))
-        ..repeat();
-
   bool isFile = false;
 
   // bool playerButton = false;
@@ -43,6 +39,10 @@ class _SingleAffScreenState extends State<SingleAffScreen>
   int len = Get.arguments[1];
   int aff_id = Get.arguments[2];
   String aff_path = Get.arguments[3];
+
+  late final AnimationController _controller =
+      AnimationController(vsync: this, duration: Duration(seconds: 3))
+        ..repeat();
 
   // String aff_desc = Get.arguments[4];
   final audioPlayer = AudioPlayer();
@@ -89,23 +89,29 @@ class _SingleAffScreenState extends State<SingleAffScreen>
       // print(timer.tick);
       if (active == true) {
         counter--;
+        print(counter);
+        if (counter == 0) {
+/** Разобраться с таймером **/
+       setState(() {
+         print('Cancel timer');
+         timer.cancel();
+
+         Get.to(
+               () => CongratAffirm(),
+           arguments: [aff_id],
+         );
+       });
+
+        }
       } else {
         if (active == false) {
-          // setState(() {
+          setState(() {
           counter = len;
           timer.cancel();
-          // });
+          });
         }
       }
-      if (counter == 0) {
-        print('Cancel timer');
-        timer.cancel();
 
-        Get.to(
-          () => CongratAffirm(),
-          arguments: [aff_id],
-        );
-      }
     });
     hive_aff.get('aff_${aff_id}') != null ? isFile = true : isFile = false;
   }

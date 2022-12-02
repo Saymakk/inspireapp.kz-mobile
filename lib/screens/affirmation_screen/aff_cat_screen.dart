@@ -1,53 +1,54 @@
-import 'package:InspireApp/screens/affirmation_screen/aff_cat_screen.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:InspireApp/constants/constants.dart';
 import 'package:InspireApp/requests/affirmations/main_screen_affirmations.dart';
-import 'package:InspireApp/requests/affirmations/single_affirm.dart';
-import 'package:InspireApp/requests/meditations/main_screen_meditations.dart';
 import 'package:InspireApp/screens/affirmation_screen/single_affirm/single_aff.dart';
-import 'package:InspireApp/screens/meditation_screen/player/player_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:skeletons/skeletons.dart';
 
-class AllAffirmationsScreen extends StatefulWidget {
-  const AllAffirmationsScreen({Key? key}) : super(key: key);
+import '../../requests/affirmations/affirmations_cat.dart';
+
+class AffCatScreen extends StatefulWidget {
+  const AffCatScreen({Key? key}) : super(key: key);
 
   @override
-  State<AllAffirmationsScreen> createState() => _AllAffirmationsScreenState();
+  State<AffCatScreen> createState() => _AffCatScreenState();
 }
 
-class _AllAffirmationsScreenState extends State<AllAffirmationsScreen> {
+class _AffCatScreenState extends State<AffCatScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBody: true,
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            Get.back();
-          },
-          icon: Icon(
-            Icons.arrow_back,
-            color: Colors.black,
+    return Container(
+      child: Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+            onPressed: () {
+              Get.back();
+            },
+            icon: Icon(
+              Icons.arrow_back,
+              color: Colors.black,
+              size: 28,
+            ),
+          ),
+          elevation: 0,
+          centerTitle: false,
+          backgroundColor: Colors.transparent,
+          title: Text(
+            Get.arguments[1].toString(),
+            style: GoogleFonts.poppins(
+              fontWeight: FontWeight.w600,
+              fontSize: 20,
+              color: Colors.black,
+            ),
           ),
         ),
-        title: Text(
-          'Мои аффирмации',
-          style: GoogleFonts.poppins(
-              color: Colors.black, fontWeight: FontWeight.w600, fontSize: 20),
-        ),
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-      ),
-      backgroundColor: Colors.white,
-      body: Container(
-        padding: EdgeInsets.all(24),
-        child: Column(
-          children: [
-            FutureBuilder(
-              future: affirmationsRequest(),
+        body: SafeArea(
+          child: Container(
+            padding: EdgeInsets.all(24),
+            child: FutureBuilder(
+              future: affirmationsCatRequest(Get.arguments[0]),
               builder: (BuildContext context, AsyncSnapshot snapshot) {
                 switch (snapshot.connectionState) {
                   case ConnectionState.none:
@@ -113,6 +114,7 @@ class _AllAffirmationsScreenState extends State<AllAffirmationsScreen> {
 
                   default:
                     // return rideList(snapshot.data, context);
+
                     if (snapshot.data == null) {
                       return Center(
                         child: Container(
@@ -145,7 +147,61 @@ class _AllAffirmationsScreenState extends State<AllAffirmationsScreen> {
                 }
               },
             ),
-          ],
+            // child: Column(
+            //   children: [
+            //     Container(
+            //       decoration: BoxDecoration(
+            //         color: Const.lowgrey,
+            //         borderRadius: BorderRadius.circular(15),
+            //       ),
+            //       margin: EdgeInsets.only(top: 10, bottom: 10),
+            //       child: GestureDetector(
+            //         onTap: () {
+            //           // Get.to(
+            //           // () => PlayerScreen(),
+            //           // transition: Transition.rightToLeft,
+            //           // arguments: [
+            //           //   medit.id,
+            //           //   medit.title,
+            //           //   medit.description,
+            //           //   medit.path,
+            //           //   medit.length,
+            //           // ],
+            //           // );
+            //         },
+            //         child: ListTile(
+            //           isThreeLine: true,
+            //           title: Padding(
+            //             padding: const EdgeInsets.only(bottom: 16),
+            //             child: Text(
+            //               'medit.title',
+            //               style: GoogleFonts.poppins(
+            //                 textStyle: TextStyle(
+            //                     fontSize: 14, fontWeight: FontWeight.w600),
+            //               ),
+            //             ),
+            //           ),
+            //           subtitle: Row(
+            //             children: [
+            //               Icon(Icons.access_time_rounded),
+            //               Text(' 111 мин'),
+            //             ],
+            //           ),
+            //           trailing: CircleAvatar(
+            //             radius: 22.5,
+            //             backgroundColor: Const.turq,
+            //             child: Icon(
+            //               Icons.play_arrow,
+            //               size: 24,
+            //               color: Colors.white,
+            //             ),
+            //           ),
+            //         ),
+            //       ),
+            //     ),
+            //   ],
+            // ),
+          ),
         ),
       ),
     );
@@ -160,39 +216,46 @@ class _AllAffirmationsScreenState extends State<AllAffirmationsScreen> {
               color: Const.lowgrey,
               borderRadius: BorderRadius.circular(15),
             ),
-            margin: EdgeInsets.only(top: 12),
-            // padding: EdgeInsets.all(20),
+            margin: EdgeInsets.only(top: 10, bottom: 10),
             child: GestureDetector(
               onTap: () {
-                // print(affirm.title);
-                Get.to(() => AffCatScreen(),
+                Get.to(() => SingleAffScreen(),
                     transition: Transition.rightToLeft,
-                    arguments: [affirm.id, affirm.title]);
-                // singleAffRequest(affirm.id);
+                    arguments: [
+                      affirm.affirmation_texts,
+                      affirm.length,
+                      affirm.id,
+                      affirm.path,
+                      affirm.description
+                    ]);
               },
               child: ListTile(
-                leading: SvgPicture.network(
-                  'https://kz.inspireapp.kz/${affirm.icon}',
-                  height: 24,
+                isThreeLine: true,
+                title: Padding(
+                  padding: const EdgeInsets.only(bottom: 16),
+                  child: Text(
+                    affirm.title,
+                    style: GoogleFonts.poppins(
+                      textStyle:
+                      TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+                    ),
+                  ),
                 ),
-                title: Text(
-                  affirm.title,
-                  style: GoogleFonts.poppins(
-                      textStyle: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 14,
-                          color: Const.semigrey)),
+                subtitle: Row(
+                  children: [
+                    Icon(Icons.access_time_rounded),
+                    Text(' ${affirm.length} мин'),
+                  ],
                 ),
-                trailing: Container(
-                    decoration: BoxDecoration(
-                        color: Const.turq,
-                        borderRadius: BorderRadius.circular(8)),
-                    height: 40,
-                    width: 45,
-                    child: Icon(
-                      Icons.play_arrow,
-                      color: Colors.white,
-                    )),
+                trailing: CircleAvatar(
+                  radius: 22.5,
+                  backgroundColor: Const.turq,
+                  child: Icon(
+                    Icons.play_arrow,
+                    size: 24,
+                    color: Colors.white,
+                  ),
+                ),
               ),
             ),
           );

@@ -13,6 +13,8 @@ import 'package:InspireApp/screens/affirmation_screen/single_affirm/single_aff.d
 import 'package:InspireApp/screens/main_screen/all_affirmations/all_affirmations.dart';
 import 'package:skeletons/skeletons.dart';
 
+import '../affirmation_screen/aff_cat_screen.dart';
+
 class Affirmations extends StatefulWidget {
   const Affirmations({Key? key}) : super(key: key);
 
@@ -201,14 +203,15 @@ class _AffirmationsState extends State<Affirmations> {
             child: GestureDetector(
               onTap: () {
                 // affirmationsRequest();
-                Get.to(() => SingleAffScreen(),
-                    transition: Transition.rightToLeft,
-                    arguments: [
-                      affirm.title,
-                      affirm.length,
-                      affirm.id,
-                      affirm.path
-                    ]);
+                Get.to(()=>AffCatScreen(), arguments: [affirm.id, affirm.title]);
+                // Get.to(() => SingleAffScreen(),
+                //     transition: Transition.rightToLeft,
+                //     arguments: [
+                //       affirm.title,
+                //       affirm.length,
+                //       affirm.id,
+                //       affirm.path
+                //     ]);
                 // print(auth.read('token'));
                 // print(affirm.icon);
                 // print(affirm.title);
@@ -216,7 +219,7 @@ class _AffirmationsState extends State<Affirmations> {
               },
               child: ListTile(
                 leading: SvgPicture.network(
-                  'https://kz.inspireapp.kz/${affirm.subcategory['icon']}',
+                  'https://kz.inspireapp.kz/${affirm.icon}',
                   height: 24,
                 ),
                 title: Text(
