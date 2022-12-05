@@ -1,10 +1,11 @@
 import 'dart:ui';
 
+import 'package:InspireApp/screens/meditation_screen/medit_cat_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:InspireApp/constants/app_bar.dart';
+import 'package:InspireApp/widgets/app_bar.dart';
 import 'package:InspireApp/constants/constants.dart';
 import 'package:InspireApp/requests/meditations/main_screen_meditations.dart';
 import 'package:skeletons/skeletons.dart';
@@ -235,50 +236,57 @@ class _MeditationScreenState extends State<MeditationScreen> {
   Widget MeditList(List items, context) {
     return Column(
       children: items.map<Widget>(
-        (medit) {
+            (medit) {
           return Container(
             decoration: BoxDecoration(
               color: Const.lowgrey,
               borderRadius: BorderRadius.circular(15),
             ),
-            margin: EdgeInsets.only(top: 10, bottom: 10),
+            margin: EdgeInsets.only(top: 12),
+            // padding: EdgeInsets.all(20),
             child: GestureDetector(
               onTap: () {
-                Get.to(() => PlayerScreen(),
-                    transition: Transition.rightToLeft,
-                    arguments: [
-                      medit.id,
-                      medit.title,
-                      medit.description,
-                      medit.path,
-                      medit.length,
-                    ]);
+                Get.to(() => MeditCatScreen(),
+                    arguments: [medit.id, medit.title]);
+                // print(affirm.title);
+                // Get.to(() => SingleAffScreen(),
+                //     transition: Transition.rightToLeft,
+                //     arguments: [affirm.title, affirm.length, affirm.id, affirm.path, affirm.description]);
+                // singleAffRequest(affirm.id);
               },
               child: ListTile(
-                isThreeLine: true,
-                title: Padding(
-                  padding: const EdgeInsets.only(bottom: 16),
-                  child: Text(
-                    medit.title,
-                    style: GoogleFonts.poppins(
-                      textStyle:
-                          TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+                leading: SvgPicture.network(
+                  'https://kz.inspireapp.kz/${medit.icon}',
+                  height: 24,
+                ),
+                title: Text(
+                  medit.title,
+                  style: GoogleFonts.poppins(
+                      textStyle: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 14,
+                          color: Const.semigrey)),
+                ),
+                trailing: GestureDetector(
+                  onTap: () {
+                    print(medit.contents_count);
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      shape: BoxShape.circle,
                     ),
-                  ),
-                ),
-                subtitle: Row(
-                  children: [
-                    Icon(Icons.access_time_rounded),
-                    Text(' ${medit.length} мин'),
-                  ],
-                ),
-                trailing: CircleAvatar(
-                  radius: 22.5,
-                  backgroundColor: Const.turq,
-                  child: Icon(
-                    Icons.play_arrow,
-                    size: 24,
-                    color: Colors.white,
+                    width: 45,
+                    height: 45,
+                    child: Center(
+                      child: Container(
+                        // margin: EdgeInsets.all(11),
+                          child: Text(
+                            medit.contents_count.toString(),
+                            style: GoogleFonts.poppins(
+                                fontSize: 22, color: Color(0xff21cac8)),
+                          )),
+                    ),
                   ),
                 ),
               ),

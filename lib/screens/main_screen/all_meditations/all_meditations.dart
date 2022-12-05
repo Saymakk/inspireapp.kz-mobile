@@ -1,4 +1,6 @@
+import 'package:InspireApp/screens/meditation_screen/medit_cat_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:InspireApp/constants/constants.dart';
@@ -155,46 +157,42 @@ class _AllMeditationsScreenState extends State<AllMeditationsScreen> {
               color: Const.lowgrey,
               borderRadius: BorderRadius.circular(15),
             ),
-            margin: EdgeInsets.only(top: 10, bottom: 10),
+            margin: EdgeInsets.only(top: 12),
+            // padding: EdgeInsets.all(20),
             child: GestureDetector(
               onTap: () {
-                Get.to(() => PlayerScreen(),
-                    transition: Transition.rightToLeft,
-                    arguments: [
-                      medit.id,
-                      medit.title,
-                      medit.description,
-                      medit.path,
-                      medit.length,
-                    ]);
+                Get.to(() => MeditCatScreen(),
+                    arguments: [medit.id, medit.title]);
+                // print(affirm.title);
+                // Get.to(() => SingleAffScreen(),
+                //     transition: Transition.rightToLeft,
+                //     arguments: [affirm.title, affirm.length, affirm.id, affirm.path, affirm.description]);
+                // singleAffRequest(affirm.id);
               },
               child: ListTile(
-                isThreeLine: true,
-                title: Padding(
-                  padding: const EdgeInsets.only(bottom: 16),
-                  child: Text(
-                    medit.title,
-                    style: GoogleFonts.poppins(
-                      textStyle:
-                          TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+                leading: SvgPicture.network(
+                  'https://kz.inspireapp.kz/${medit.icon}',
+                  height: 24,
+                ),
+                title: Text(
+                  medit.title,
+                  style: GoogleFonts.poppins(
+                      textStyle: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 14,
+                          color: Const.semigrey)),
+                ),
+                trailing:  Container(
+                    decoration: BoxDecoration(
+                      color: Const.turq,
+                      borderRadius: BorderRadius.circular(8),
                     ),
-                  ),
-                ),
-                subtitle: Row(
-                  children: [
-                    Icon(Icons.access_time_rounded),
-                    Text(' ${medit.length} мин'),
-                  ],
-                ),
-                trailing: CircleAvatar(
-                  radius: 22.5,
-                  backgroundColor: Const.turq,
-                  child: Icon(
-                    Icons.play_arrow,
-                    size: 24,
-                    color: Colors.white,
-                  ),
-                ),
+                    height: 40,
+                    width: 45,
+                    child: Icon(
+                      Icons.play_arrow,
+                      color: Colors.white,
+                    )),
               ),
             ),
           );

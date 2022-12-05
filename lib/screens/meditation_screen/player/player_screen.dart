@@ -88,14 +88,16 @@ class _PlayerScreenState extends State<PlayerScreen> {
     audioPlayer.setReleaseMode(ReleaseMode.loop);
   }
 
+  void unloop() {
+    audioPlayer.setReleaseMode(ReleaseMode.release);
+  }
+
   void backward() {
     setState(() {
-     var posi = position.inSeconds - 5;
-     audioPlayer.seek(Duration(seconds: posi));
-     // audioPlayer.resume();
+      var posi = position.inSeconds - 5;
+      audioPlayer.seek(Duration(seconds: posi));
+      // audioPlayer.resume();
     });
-
-
   }
 
   void forward() {
@@ -104,8 +106,6 @@ class _PlayerScreenState extends State<PlayerScreen> {
       audioPlayer.seek(Duration(seconds: posi));
       // audioPlayer.resume();
     });
-
-
   }
 
   String formatTime(Duration duration) {
@@ -278,7 +278,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                   print(looped);
                                   return loop();
                                 } else {
-                                  print(looped);
+                                  return unloop();
                                 }
                               },
                             ),
@@ -349,7 +349,6 @@ class _PlayerScreenState extends State<PlayerScreen> {
                               iconSize: 48,
                               onPressed: () async {
                                 return forward();
-
                               },
                             ),
                             Visibility(
@@ -369,19 +368,21 @@ class _PlayerScreenState extends State<PlayerScreen> {
                             Visibility(
                               visible: isFile,
                               child: IconButton(
-                                icon: liked == false ? SvgPicture.asset(
-                                 'assets/icons/like.svg' ,
-                                  color: Colors.grey,
-                                ) : SvgPicture.asset(
-                                  'assets/icons/like_filled.svg' ,
-                                ),
+                                icon: liked == false
+                                    ? SvgPicture.asset(
+                                        'assets/icons/like.svg',
+                                        color: Colors.grey,
+                                      )
+                                    : SvgPicture.asset(
+                                        'assets/icons/like_filled.svg',
+                                      ),
                                 iconSize: 24,
                                 onPressed: () async {
                                   print(audio_id);
-                                 await doLike(audio_id);
-                                 setState(() {
-                                   liked = !liked;
-                                 });
+                                  await doLike(audio_id);
+                                  setState(() {
+                                    liked = !liked;
+                                  });
                                 },
                               ),
                             ),

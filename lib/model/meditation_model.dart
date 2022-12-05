@@ -7,6 +7,7 @@ class meditationsList {
   final String icon;
   final String picture;
   final int length;
+  final int contents_count;
 
   meditationsList({
     required this.id,
@@ -17,6 +18,7 @@ class meditationsList {
     required this.length,
     required this.icon,
     required this.picture,
+    required this.contents_count,
 
   });
 
@@ -30,6 +32,7 @@ class meditationsList {
       icon: json['icon'] != null ? (json['icon']) : '',
       picture: json['picture'] != null ? (json['picture']) : '',
       length: json['length'] != null ?  (json['length']) : 0,
+      contents_count: json['contents_count'] ?? 0,
 
     );
   }
@@ -43,6 +46,7 @@ class meditationsList {
     'length': length,
     'icon': icon,
     'picture': picture,
+    'contents_count': contents_count,
 
   };
 }

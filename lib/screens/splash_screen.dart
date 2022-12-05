@@ -1,7 +1,7 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:InspireApp/constants/bottom_app_bar.dart';
+import 'package:InspireApp/widgets/bottom_app_bar.dart';
 import 'package:InspireApp/screens/welcome_screen.dart';
 
 class SplashScreen extends StatefulWidget {

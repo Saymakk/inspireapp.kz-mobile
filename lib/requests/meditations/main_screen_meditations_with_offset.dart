@@ -16,7 +16,7 @@ Future<List<meditationsList>> meditationsRequestWithOffset() async {
   };
 
   final Uri url = Uri.parse(
-    Const.domain + 'api/meditations?paginate=3&page=1',
+    Const.domain + 'api/meditations/categories?paginate=3&page=1',
   );
 
   var request = http.MultipartRequest('GET', url);

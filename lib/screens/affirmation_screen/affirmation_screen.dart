@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:InspireApp/constants/app_bar.dart';
+import 'package:InspireApp/widgets/app_bar.dart';
 import 'package:InspireApp/constants/constants.dart';
 import 'package:InspireApp/requests/affirmations/main_screen_affirmations.dart';
 import 'package:skeletons/skeletons.dart';
@@ -246,7 +246,8 @@ class _AffirmationScreenState extends State<AffirmationScreen> {
             // padding: EdgeInsets.all(20),
             child: GestureDetector(
               onTap: () {
-Get.to(()=>AffCatScreen(), arguments: [affirm.id, affirm.title]);
+                Get.to(() => AffCatScreen(),
+                    arguments: [affirm.id, affirm.title]);
                 // print(affirm.title);
                 // Get.to(() => SingleAffScreen(),
                 //     transition: Transition.rightToLeft,
@@ -281,7 +282,7 @@ Get.to(()=>AffCatScreen(), arguments: [affirm.id, affirm.title]);
                       child: Container(
                           // margin: EdgeInsets.all(11),
                           child: Text(
-                            affirm.contents_count.toString(),
+                        affirm.contents_count.toString(),
                         style: GoogleFonts.poppins(
                             fontSize: 22, color: Color(0xff21cac8)),
                       )),

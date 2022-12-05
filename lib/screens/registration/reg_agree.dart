@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:InspireApp/constants/bottom_app_bar.dart';
+import 'package:InspireApp/widgets/bottom_app_bar.dart';
 import 'package:InspireApp/constants/constants.dart';
 import 'package:InspireApp/screens/auth/authorization_screen.dart';
 

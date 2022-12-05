@@ -13,7 +13,7 @@ import 'package:InspireApp/screens/courses/courses_screen.dart';
 import 'package:InspireApp/screens/main_screen/main_screen.dart';
 import 'package:InspireApp/screens/meditation_screen/meditation_screen.dart';
 
-import 'constants.dart';
+import '../constants/constants.dart';
 
 class BottomNav extends StatefulWidget {
   const BottomNav({Key? key}) : super(key: key);

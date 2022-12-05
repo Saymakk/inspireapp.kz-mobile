@@ -6,7 +6,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:http/http.dart' as http;
-import 'package:InspireApp/constants/bottom_app_bar.dart';
+import 'package:InspireApp/widgets/bottom_app_bar.dart';
 import 'package:InspireApp/constants/constants.dart';
 import 'package:InspireApp/controllers/success_controller.dart';
 import 'package:InspireApp/requests/profile/profile.dart';

@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import 'package:InspireApp/requests/profile/profile.dart';
 import 'package:InspireApp/screens/ProfileScreen/profile_screen.dart';
 
-import 'constants.dart';
+import '../constants/constants.dart';
 
 class AppBarWidget extends StatefulWidget {
   const AppBarWidget({Key? key}) : super(key: key);

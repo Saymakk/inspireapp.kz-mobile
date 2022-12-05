@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:InspireApp/constants/bottom_app_bar.dart';
+import 'package:InspireApp/widgets/bottom_app_bar.dart';
 import 'package:InspireApp/constants/constants.dart';
 import 'package:InspireApp/requests/auth/authPass.dart';
 import 'package:InspireApp/requests/auth/otpAuth.dart';
