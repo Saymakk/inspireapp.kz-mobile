@@ -27,64 +27,70 @@ class _AppBarWidgetState extends State<AppBarWidget> {
   }
 
   var counter = 5;
+  bool _allow = false;
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      // foregroundColor: Colors.white,
-      flexibleSpace: ClipRect(
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
-          child: Container(
-            color: Colors.transparent,
+    return WillPopScope(
+      onWillPop: () {
+        return Future.value(_allow); // if true allow back else block it
+      },
+      child: AppBar(
+        // foregroundColor: Colors.white,
+        flexibleSpace: ClipRect(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
+            child: Container(
+              color: Colors.transparent,
+            ),
           ),
         ),
-      ),
-      toolbarHeight: 59,
-      backgroundColor: Colors.white.withOpacity(.9),
-      elevation: 1,
-      centerTitle: false,
-      automaticallyImplyLeading: false,
-      shadowColor: Const.bottommenuborder,
-      title: Image.asset(
-        'assets/images/logo.png',
-        width: 100,
-      ),
-      actions: [
-        Padding(
-          padding: const EdgeInsets.only(right: 24.0),
-          child: GestureDetector(
-              onTap: () async {
-                setState(() {
-                  active = true;
-                });
-                Future.delayed(Duration(seconds: 5)).then((_) {
-                  setState(() {
-                    active = false;
-                  });
-                });
-                await userActivities();
-                await profileRequest();
-                // Get.to(()=>ProfileScreen());
-              },
-              child: Padding(
-                padding: const EdgeInsets.only(top: 15),
-                child: Stack(
-                  children: [
-                    Container(
-                        child:
-                            SvgPicture.asset('assets/icons/profileButton.svg')),
-                    Visibility(
-                      visible: active,
-                      child: CircularProgressIndicator(
-                        strokeWidth: 2,
-                      ),
-                    ),
-                  ],
-                ),
-              )),
+        toolbarHeight: 59,
+        backgroundColor: Colors.white.withOpacity(.9),
+        elevation: 1,
+        centerTitle: false,
+        automaticallyImplyLeading: false,
+        shadowColor: Const.bottommenuborder,
+        title: Image.asset(
+          'assets/images/logo.png',
+          width: 100,
         ),
-      ],
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 24.0),
+            child: GestureDetector(
+                onTap: () async {
+                  setState(() {
+                    active = true;
+                  });
+                  Future.delayed(Duration(seconds: 5)).then((_) {
+                    setState(() {
+                      active = false;
+                    });
+                  });
+                  await userActivities();
+                  await profileRequest();
+                  // Get.to(()=>ProfileScreen());
+                },
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 15),
+                  child: Stack(
+                    children: [
+                      Container(
+                          child:
+                              SvgPicture.asset('assets/icons/profileButton.svg')),
+                      Visibility(
+                        visible: active,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                        ),
+                      ),
+                    ],
+                  ),
+                )),
+          ),
+        ],
+      ),
     );
   }
 }

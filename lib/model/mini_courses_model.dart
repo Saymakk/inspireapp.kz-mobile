@@ -7,6 +7,8 @@ class coursesList {
   final String length;
   final String description;
   final String picture;
+  // final List<mini> course_contents;
+  final dynamic course_contents;
 
   coursesList({
     required this.id,
@@ -17,6 +19,7 @@ class coursesList {
     required this.length,
     required this.description,
     required this.picture,
+    required this.course_contents,
   });
 
   factory coursesList.fromJson(Map<String, dynamic> json) {
@@ -29,6 +32,7 @@ class coursesList {
       length: json['length'] != null ? (json['length']) : '',
       description: json['description'] != null ? (json['description']) : '',
       picture: json['picture'] != null ? (json['picture']) : '',
+      course_contents: json['course_contents'] ?? '',
     );
   }
 
@@ -41,6 +45,7 @@ class coursesList {
     'length': length,
     'description': description,
     'picture': picture,
+    'course_contents': course_contents,
   };
 }
 

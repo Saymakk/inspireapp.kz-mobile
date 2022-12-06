@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:ui';
 
+import 'package:InspireApp/requests/affirmations/liked.dart';
+import 'package:InspireApp/requests/meditations/likedmedit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -30,6 +32,8 @@ class _BottomNavState extends State<BottomNav> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    likedMedit();
+    likedAff();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky,
         overlays: [SystemUiOverlay.top]);
     data_list.write('data_list', jsonEncode(auth.read('userData')));
@@ -53,131 +57,137 @@ class _BottomNavState extends State<BottomNav> {
       _selectedIndex = index;
     });
   }
+  bool _allow = false;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      extendBody: true,
-      extendBodyBehindAppBar: true,
-      bottomNavigationBar: ClipRect(
-        child: BackdropFilter(
-          filter: ImageFilter.blur(
-            sigmaX: 2.0,
-            sigmaY: 2.0,
-          ),
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.white.withOpacity(.9),
-              border: Border(
-                top: BorderSide(
-                  color: Const.bottommenuborder,
-                  width: 1.0,
+    return WillPopScope(
+      onWillPop: () {
+        return Future.value(_allow);
+      },
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        extendBody: true,
+        extendBodyBehindAppBar: true,
+        bottomNavigationBar: ClipRect(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(
+              sigmaX: 2.0,
+              sigmaY: 2.0,
+            ),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(.9),
+                border: Border(
+                  top: BorderSide(
+                    color: Const.bottommenuborder,
+                    width: 1.0,
+                  ),
                 ),
               ),
-            ),
-            height: 88,
-            child: Align(
-              alignment: Alignment.topCenter,
-              child: ClipRect(
-                child: BackdropFilter(
-                  filter: ImageFilter.blur(
-                    sigmaX: 2.0,
-                    sigmaY: 2.0,
-                  ),
-                  child: BottomNavigationBar(
-                    elevation: 0.0,
-                    backgroundColor: Colors.transparent,
-                    iconSize: 35,
-                    type: BottomNavigationBarType.fixed,
+              height: 88,
+              child: Align(
+                alignment: Alignment.topCenter,
+                child: ClipRect(
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(
+                      sigmaX: 2.0,
+                      sigmaY: 2.0,
+                    ),
+                    child: BottomNavigationBar(
+                      elevation: 0.0,
+                      backgroundColor: Colors.transparent,
+                      iconSize: 35,
+                      type: BottomNavigationBarType.fixed,
 
-                    // selectedFontSize: 0,
-                    selectedLabelStyle:
-                        GoogleFonts.poppins(textStyle: TextStyle(fontSize: 9)),
-                    unselectedLabelStyle:
-                        GoogleFonts.poppins(textStyle: TextStyle(fontSize: 9)),
-                    unselectedItemColor: Const.icongrey,
-                    selectedItemColor: Const.turq,
-                    // showSelectedLabels: true,
-                    // showUnselectedLabels: true,
-                    items: const <BottomNavigationBarItem>[
-                      BottomNavigationBarItem(
-                        icon: ImageIcon(
-                          AssetImage(Const.icns + 'menu_house.png'),
-                          // color: Const.icongrey,
-                          // size: 32,
+                      // selectedFontSize: 0,
+                      selectedLabelStyle:
+                          GoogleFonts.poppins(textStyle: TextStyle(fontSize: 9)),
+                      unselectedLabelStyle:
+                          GoogleFonts.poppins(textStyle: TextStyle(fontSize: 9)),
+                      unselectedItemColor: Const.icongrey,
+                      selectedItemColor: Const.turq,
+                      // showSelectedLabels: true,
+                      // showUnselectedLabels: true,
+                      items: const <BottomNavigationBarItem>[
+                        BottomNavigationBarItem(
+                          icon: ImageIcon(
+                            AssetImage(Const.icns + 'menu_house.png'),
+                            // color: Const.icongrey,
+                            // size: 32,
+                          ),
+                          activeIcon: ImageIcon(
+                            AssetImage(Const.icns + 'menu_house.png'),
+                            // color: Const.turq,
+                            // size: 32,
+                          ),
+                          label: 'Главная',
                         ),
-                        activeIcon: ImageIcon(
-                          AssetImage(Const.icns + 'menu_house.png'),
-                          // color: Const.turq,
-                          // size: 32,
+                        BottomNavigationBarItem(
+                          icon: ImageIcon(
+                            AssetImage(Const.icns + 'menu_play.png'),
+                            // color: Const.icongrey,
+                            // size: 32,
+                          ),
+                          activeIcon: ImageIcon(
+                            AssetImage(Const.icns + 'menu_play.png'),
+                            // color: Const.turq,
+                            // size: 32,
+                          ),
+                          label: 'Мини-курсы',
                         ),
-                        label: 'Главная',
-                      ),
-                      BottomNavigationBarItem(
-                        icon: ImageIcon(
-                          AssetImage(Const.icns + 'menu_play.png'),
-                          // color: Const.icongrey,
-                          // size: 32,
+                        BottomNavigationBarItem(
+                          icon: ImageIcon(
+                            AssetImage(Const.icns + 'menu_medit.png'),
+                            // color: Const.icongrey,
+                            // size: 32,
+                          ),
+                          activeIcon: ImageIcon(
+                            AssetImage(Const.icns + 'menu_medit.png'),
+                            // color: Const.turq,
+                            // size: 32,
+                          ),
+                          label: 'Медитация',
                         ),
-                        activeIcon: ImageIcon(
-                          AssetImage(Const.icns + 'menu_play.png'),
-                          // color: Const.turq,
-                          // size: 32,
+                        BottomNavigationBarItem(
+                          icon: ImageIcon(
+                            AssetImage(Const.icns + 'menu_brain.png'),
+                            // color: Const.icongrey,
+                            // size: 32,
+                          ),
+                          activeIcon: ImageIcon(
+                            AssetImage(Const.icns + 'menu_brain.png'),
+                            // color: Const.turq,
+                            // size: 32,
+                          ),
+                          label: 'Аффирмация',
                         ),
-                        label: 'Мини-курсы',
-                      ),
-                      BottomNavigationBarItem(
-                        icon: ImageIcon(
-                          AssetImage(Const.icns + 'menu_medit.png'),
-                          // color: Const.icongrey,
-                          // size: 32,
+                        BottomNavigationBarItem(
+                          icon: ImageIcon(
+                            AssetImage(Const.icns + 'menu_smile.png'),
+                            // color: Const.icongrey,
+                            // size: 32,
+                          ),
+                          activeIcon: ImageIcon(
+                            AssetImage(Const.icns + 'menu_smile.png'),
+                            // color: Const.turq,
+                            // size: 32,
+                          ),
+                          label: 'Календарь',
                         ),
-                        activeIcon: ImageIcon(
-                          AssetImage(Const.icns + 'menu_medit.png'),
-                          // color: Const.turq,
-                          // size: 32,
-                        ),
-                        label: 'Медитация',
-                      ),
-                      BottomNavigationBarItem(
-                        icon: ImageIcon(
-                          AssetImage(Const.icns + 'menu_brain.png'),
-                          // color: Const.icongrey,
-                          // size: 32,
-                        ),
-                        activeIcon: ImageIcon(
-                          AssetImage(Const.icns + 'menu_brain.png'),
-                          // color: Const.turq,
-                          // size: 32,
-                        ),
-                        label: 'Аффирмация',
-                      ),
-                      BottomNavigationBarItem(
-                        icon: ImageIcon(
-                          AssetImage(Const.icns + 'menu_smile.png'),
-                          // color: Const.icongrey,
-                          // size: 32,
-                        ),
-                        activeIcon: ImageIcon(
-                          AssetImage(Const.icns + 'menu_smile.png'),
-                          // color: Const.turq,
-                          // size: 32,
-                        ),
-                        label: 'Календарь',
-                      ),
-                    ],
-                    currentIndex: _selectedIndex,
-                    onTap: _onItemTapped,
+                      ],
+                      currentIndex: _selectedIndex,
+                      onTap: _onItemTapped,
+                    ),
                   ),
                 ),
               ),
             ),
           ),
         ),
-      ),
-      body: Container(
-        child: _widgetOptions.elementAt(_selectedIndex),
+        body: Container(
+          child: _widgetOptions.elementAt(_selectedIndex),
+        ),
       ),
     );
   }

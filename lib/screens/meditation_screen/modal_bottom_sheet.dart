@@ -100,7 +100,7 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
 
                 default:
                   // return rideList(snapshot.data, context);
-                  if (snapshot.data.length != 0) {
+                  if (snapshot.data != null) {
                     return Padding(
                       padding: const EdgeInsets.only(
                         bottom: 2,

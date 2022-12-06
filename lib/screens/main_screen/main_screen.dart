@@ -41,45 +41,51 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     var decoded = Hive.box('mybox').get(1);
+    bool _allow = false;
 
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      backgroundColor: Colors.white,
-      appBar: PreferredSize(
-        preferredSize: Size(double.infinity, 59),
-        child: AppBarWidget(),
-      ),
-      // bottomNavigationBar: BottomNav(),
-      body: SingleChildScrollView(
-        child: SafeArea(
-          child: Container(
-            padding: EdgeInsets.only(top: 30),
-            color: Color(0xffffffff),
-            child: Column(
-              children: [
-                Container(
-                  padding: EdgeInsets.only(
-                    left: 24,
-                    right: 24,
+    return WillPopScope(
+      onWillPop: () {
+        return Future.value(_allow);
+      },
+      child: Scaffold(
+        extendBodyBehindAppBar: true,
+        backgroundColor: Colors.white,
+        appBar: PreferredSize(
+          preferredSize: Size(double.infinity, 59),
+          child: AppBarWidget(),
+        ),
+        // bottomNavigationBar: BottomNav(),
+        body: SingleChildScrollView(
+          child: SafeArea(
+            child: Container(
+              padding: EdgeInsets.only(top: 30),
+              color: Color(0xffffffff),
+              child: Column(
+                children: [
+                  Container(
+                    padding: EdgeInsets.only(
+                      left: 24,
+                      right: 24,
+                    ),
+                    child: Row(
+                      children: [
+                        Text('👋 Привет, ${Hive.box('mybox').get('name')}',
+                            style: GoogleFonts.poppins(
+                                textStyle: TextStyle(
+                                    color: Const.black,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 24)))
+                      ],
+                    ),
                   ),
-                  child: Row(
-                    children: [
-                      Text('👋 Привет, ${Hive.box('mybox').get('name')}',
-                          style: GoogleFonts.poppins(
-                              textStyle: TextStyle(
-                                  color: Const.black,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 24)))
-                    ],
-                  ),
-                ),
-                MoodButton(),
-                Meditations(),
-                Affirmations(),
-                MiniCourses(),
-                AddNote(),
-                // DoSelfie(),
-              ],
+                  MoodButton(),
+                  Meditations(),
+                  Affirmations(),
+                  MiniCourses(),
+                  AddNote(),
+                  // DoSelfie(),
+                ],
+              ),
             ),
           ),
         ),

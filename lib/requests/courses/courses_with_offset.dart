@@ -26,7 +26,7 @@ Future<List<coursesList>> coursesRequestWithOffset() async {
   // print(response.statusCode);
 
   if (response.statusCode == 200) {
-    Iterable list = json.decode(responsed.body)['data'][0]['course_contents'];
+    Iterable list = json.decode(responsed.body)['data'];
     List<coursesList> datasheet = list.map((f) => coursesList.fromJson(f)).toList();
 
     // print(list);

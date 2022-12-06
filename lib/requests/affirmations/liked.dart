@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -39,8 +40,9 @@ Future<List<categoriesAff>> likedAff() async {
     List<categoriesAff> datasheet =
     list.map((f) => categoriesAff.fromJson(f)).toList();
 
-    print(list == [] ? 'null' : 'notnull');
-    print(datasheet.length);
+    print(list.length == 0 ? 'null' : 'notnull');
+    print(list.length);
+    Hive.box('db').put('affirmliked', datasheet.length);
 
     return Future<List<categoriesAff>>.value(datasheet);
   } else {

@@ -46,7 +46,6 @@ class _SingleCourseScreenState extends ConsumerState<SingleCourseScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var num = ref.watch(nameProvider);
 
     return Scaffold(
       backgroundColor: Colors.white,

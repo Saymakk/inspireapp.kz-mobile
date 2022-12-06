@@ -149,10 +149,11 @@ class _PlayerScreenState extends State<PlayerScreen> {
           elevation: 0,
           actions: [
             IconButton(
-                onPressed: () {
-                  Get.back();
-                },
-                icon: Icon(Icons.close)),
+              onPressed: () {
+                Get.back();
+              },
+              icon: Icon(Icons.close),
+            ),
           ],
         ),
         extendBodyBehindAppBar: true,

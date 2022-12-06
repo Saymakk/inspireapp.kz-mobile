@@ -61,7 +61,7 @@ class _MiniCoursesState extends State<MiniCourses> {
           // ),
         ),
         FutureBuilder(
-          future: coursesRequestWithOffset(),
+          future: coursesRequest(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.none:
@@ -108,7 +108,7 @@ class _MiniCoursesState extends State<MiniCourses> {
 
               default:
                 // return rideList(snapshot.data, context);
-                if (snapshot.data.length  == 0) {
+                if (snapshot.data == null) {
                   // return Center(
                   //   child: Container(
                   //     width: 320,

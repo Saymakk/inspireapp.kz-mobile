@@ -2,26 +2,32 @@ import 'dart:ui';
 
 import 'package:InspireApp/screens/meditation_screen/medit_cat_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:InspireApp/widgets/app_bar.dart';
 import 'package:InspireApp/constants/constants.dart';
 import 'package:InspireApp/requests/meditations/main_screen_meditations.dart';
+import 'package:hive/hive.dart';
 import 'package:skeletons/skeletons.dart';
 
 import '../ProfileScreen/profile_screen.dart';
 import 'modal_bottom_sheet.dart';
 import 'player/player_screen.dart';
 
-class MeditationScreen extends StatefulWidget {
+
+
+class MeditationScreen extends ConsumerStatefulWidget {
   const MeditationScreen({Key? key}) : super(key: key);
 
   @override
-  State<MeditationScreen> createState() => _MeditationScreenState();
+  ConsumerState<MeditationScreen> createState() => _MeditationScreenState();
 }
 
-class _MeditationScreenState extends State<MeditationScreen> {
+class _MeditationScreenState extends ConsumerState<MeditationScreen> {
+
+  
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -106,7 +112,7 @@ class _MeditationScreenState extends State<MeditationScreen> {
                               child: Container(
                                   // margin: EdgeInsets.all(11),
                                   child: Text(
-                                '0',
+                                '${Hive.box('db').get('meditliked')}',
                                 style: GoogleFonts.poppins(
                                     fontSize: 22, color: Color(0xff21cac8)),
                               )),
@@ -123,7 +129,6 @@ class _MeditationScreenState extends State<MeditationScreen> {
                       height: 1,
                       color: Color(0xffEDEDED),
                     )),
-
                 FutureBuilder(
                   future: meditationsRequest(),
                   builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -193,14 +198,15 @@ class _MeditationScreenState extends State<MeditationScreen> {
                         // return rideList(snapshot.data, context);
                         if (snapshot.data == null) {
                           return Center(
-                            child: Container(                                width: 320,
-
+                            child: Container(
+                              width: 320,
                               margin: EdgeInsets.only(top: 20),
                               padding: EdgeInsets.only(
                                   left: 19, right: 19, top: 13.5, bottom: 10.5),
                               decoration: BoxDecoration(
                                 color: Color(0xffFFFEE3),
-                                borderRadius: BorderRadius.circular(15), ),
+                                borderRadius: BorderRadius.circular(15),
+                              ),
                               child: ListTile(
                                 leading: Image.asset(
                                   Const.icns + '!.png',
@@ -210,7 +216,8 @@ class _MeditationScreenState extends State<MeditationScreen> {
                                 title: Text(
                                   'Извините, здесь пока ничего нет',
                                   maxLines: 4,
-                                  style: TextStyle(fontSize: 14, color: Const.deepgrey),
+                                  style: TextStyle(
+                                      fontSize: 14, color: Const.deepgrey),
                                 ),
                               ),
                             ),
@@ -221,7 +228,6 @@ class _MeditationScreenState extends State<MeditationScreen> {
                     }
                   },
                 ),
-
                 SizedBox(
                   height: 100,
                 ),
@@ -236,7 +242,7 @@ class _MeditationScreenState extends State<MeditationScreen> {
   Widget MeditList(List items, context) {
     return Column(
       children: items.map<Widget>(
-            (medit) {
+        (medit) {
           return Container(
             decoration: BoxDecoration(
               color: Const.lowgrey,
@@ -280,12 +286,12 @@ class _MeditationScreenState extends State<MeditationScreen> {
                     height: 45,
                     child: Center(
                       child: Container(
-                        // margin: EdgeInsets.all(11),
+                          // margin: EdgeInsets.all(11),
                           child: Text(
-                            medit.contents_count.toString(),
-                            style: GoogleFonts.poppins(
-                                fontSize: 22, color: Color(0xff21cac8)),
-                          )),
+                        medit.contents_count.toString(),
+                        style: GoogleFonts.poppins(
+                            fontSize: 22, color: Color(0xff21cac8)),
+                      )),
                     ),
                   ),
                 ),

@@ -2,25 +2,27 @@ import 'dart:ui';
 
 import 'package:InspireApp/screens/affirmation_screen/aff_cat_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:InspireApp/widgets/app_bar.dart';
 import 'package:InspireApp/constants/constants.dart';
 import 'package:InspireApp/requests/affirmations/main_screen_affirmations.dart';
+import 'package:hive/hive.dart';
 import 'package:skeletons/skeletons.dart';
 
 import 'modal_bottom_sheet.dart';
 import 'single_affirm/single_aff.dart';
 
-class AffirmationScreen extends StatefulWidget {
+class AffirmationScreen extends ConsumerStatefulWidget {
   const AffirmationScreen({Key? key}) : super(key: key);
 
   @override
-  State<AffirmationScreen> createState() => _AffirmationScreenState();
+  ConsumerState<AffirmationScreen> createState() => _AffirmationScreenState();
 }
 
-class _AffirmationScreenState extends State<AffirmationScreen> {
+class _AffirmationScreenState extends ConsumerState<AffirmationScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -105,7 +107,7 @@ class _AffirmationScreenState extends State<AffirmationScreen> {
                               child: Container(
                                   // margin: EdgeInsets.all(11),
                                   child: Text(
-                                '0',
+                                '${Hive.box('db').get('affirmliked')}',
                                 style: GoogleFonts.poppins(
                                     fontSize: 22, color: Color(0xff21cac8)),
                               )),
