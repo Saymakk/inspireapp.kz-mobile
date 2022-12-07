@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:InspireApp/model/meditation_model.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:http/http.dart' as http;

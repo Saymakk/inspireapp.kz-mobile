@@ -7,16 +7,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:InspireApp/constants/constants.dart';
 import 'package:skeletons/skeletons.dart';
 
-import 'thanks/thanks_screen.dart';
-
-class ModalBottomSheet extends StatefulWidget {
-  const ModalBottomSheet({Key? key}) : super(key: key);
+class AffirmModalBottomSheet extends StatefulWidget {
+  const AffirmModalBottomSheet({Key? key}) : super(key: key);
 
   @override
-  State<ModalBottomSheet> createState() => _ModalBottomSheetState();
+  State<AffirmModalBottomSheet> createState() => _AffirmModalBottomSheetState();
 }
 
-class _ModalBottomSheetState extends State<ModalBottomSheet> {
+class _AffirmModalBottomSheetState extends State<AffirmModalBottomSheet> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -126,7 +124,8 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
                           left: 19, right: 19, top: 13.5, bottom: 10.5),
                       decoration: BoxDecoration(
                         color: Color(0xffFFE3E3),
-                        borderRadius: BorderRadius.circular(15), ),
+                        borderRadius: BorderRadius.circular(15),
+                      ),
                       child: ListTile(
                         leading: Image.asset(
                           Const.icns + '!.png',
@@ -139,7 +138,6 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
                           style: TextStyle(fontSize: 14, color: Const.deepgrey),
                         ),
                       ),
-
                     );
                   } else {
                     return AffirmList(snapshot.data, context);
@@ -147,28 +145,6 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
               }
             },
           ),
-          // Container(
-          //   width: double.infinity,
-          //
-          //   margin: EdgeInsets.only(top: 20),
-          //   padding: EdgeInsets.only(
-          //       left: 19, right: 19, top: 13.5, bottom: 10.5),
-          //   decoration: BoxDecoration(
-          //     color: Color(0xffFFE3E3),
-          //     borderRadius: BorderRadius.circular(15), ),
-          //   child: ListTile(
-          //     leading: Image.asset(
-          //       Const.icns + '!.png',
-          //       height: 37,
-          //       color: Color(0xffFF6565),
-          //     ),
-          //     title: Text(
-          //       'Вы еще не добавили ни одной аффирмации в избранное.',
-          //       maxLines: 4,
-          //       style: TextStyle(fontSize: 14, color: Const.deepgrey),
-          //     ),
-          //   ),
-          // ),
         ],
       ),
     );

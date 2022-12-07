@@ -4,7 +4,6 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:get_storage/get_storage.dart';
 import 'package:InspireApp/constants/constants.dart';
-import 'package:InspireApp/model/meditPaginated.dart';
 import 'package:InspireApp/model/meditation_model.dart';
 
 Future<List<meditationsList>> meditationsRequestWithOffset() async {

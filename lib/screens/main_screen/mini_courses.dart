@@ -1,11 +1,9 @@
-import 'package:anchor_scroll_controller/anchor_scroll_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:InspireApp/constants/constants.dart';
 import 'package:InspireApp/requests/courses/courses.dart';
-import 'package:InspireApp/requests/courses/courses_with_offset.dart';
 import 'package:InspireApp/requests/courses/single_course.dart';
 import 'package:InspireApp/screens/main_screen/all_courses/all_courses.dart';
 import 'package:skeletons/skeletons.dart';
@@ -32,33 +30,6 @@ class _MiniCoursesState extends State<MiniCourses> {
             left: 24,
             right: 24,
           ),
-          // child: Row(
-          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //   children: [
-          //     Text(
-          //       'Мини-курсы',
-          //       style: GoogleFonts.poppins(
-          //           textStyle: TextStyle(
-          //               fontSize: 16,
-          //               fontWeight: FontWeight.w600,
-          //               color: Const.semiblack)),
-          //     ),
-          //     GestureDetector(
-          //       onTap: () {
-          //         Get.to(() => AllCoursesScreen(),
-          //             transition: Transition.rightToLeft);
-          //       },
-          //       child: Text(
-          //         'Смотреть все',
-          //         style: GoogleFonts.poppins(
-          //             textStyle: TextStyle(
-          //                 fontSize: 16,
-          //                 fontWeight: FontWeight.w600,
-          //                 color: Const.turq)),
-          //       ),
-          //     ),
-          //   ],
-          // ),
         ),
         FutureBuilder(
           future: coursesRequest(),

@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:isolate';
 import 'dart:ui';
 import 'package:InspireApp/constants/constants.dart';
 import 'package:InspireApp/requests/affirmations/do_like.dart';
@@ -15,7 +14,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 class PlayerScreen extends StatefulWidget {
   const PlayerScreen({Key? key}) : super(key: key);
@@ -117,11 +115,6 @@ class _PlayerScreenState extends State<PlayerScreen> {
     return [if (duration.inHours > 0) hours, minutes, seconds].join(':');
   }
 
-  // Future setAudio() async {
-  //   audioPlayer.setReleaseMode(ReleaseMode.loop);
-  //   String url = 'https://kz.inspireapp.kz/ + ${audio_path}';
-  //   audioPlayer.setSourceUrl(url);
-  // }
 
   @override
   void dispose() {

@@ -8,14 +8,14 @@ import 'package:skeletons/skeletons.dart';
 import 'player/player_screen.dart';
 import 'thanks/thanks_screen.dart';
 
-class ModalBottomSheet extends StatefulWidget {
-  const ModalBottomSheet({Key? key}) : super(key: key);
+class MeditModalBottomSheet extends StatefulWidget {
+  const MeditModalBottomSheet({Key? key}) : super(key: key);
 
   @override
-  State<ModalBottomSheet> createState() => _ModalBottomSheetState();
+  State<MeditModalBottomSheet> createState() => _MeditModalBottomSheetState();
 }
 
-class _ModalBottomSheetState extends State<ModalBottomSheet> {
+class _MeditModalBottomSheetState extends State<MeditModalBottomSheet> {
   @override
   Widget build(BuildContext context) {
     return Container(

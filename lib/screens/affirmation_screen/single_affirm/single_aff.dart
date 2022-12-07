@@ -5,17 +5,14 @@ import 'dart:math' as math;
 
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:audioplayers/audioplayers.dart';
-import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:dio/dio.dart';
 import 'package:dotted_border/dotted_border.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:InspireApp/constants/constants.dart';
-import 'package:InspireApp/requests/affirmations/affirm_done.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 

@@ -12,10 +12,7 @@ import 'package:InspireApp/requests/meditations/main_screen_meditations.dart';
 import 'package:hive/hive.dart';
 import 'package:skeletons/skeletons.dart';
 
-import '../ProfileScreen/profile_screen.dart';
 import 'modal_bottom_sheet.dart';
-import 'player/player_screen.dart';
-
 
 
 class MeditationScreen extends ConsumerStatefulWidget {
@@ -27,9 +24,12 @@ class MeditationScreen extends ConsumerStatefulWidget {
 
 class _MeditationScreenState extends ConsumerState<MeditationScreen> {
 
-  
+
   @override
   Widget build(BuildContext context) {
+
+    var liked =  Hive.box('db').get('meditliked');
+
     return Container(
       child: Scaffold(
         extendBody: true,
@@ -79,7 +79,7 @@ class _MeditationScreenState extends ConsumerState<MeditationScreen> {
                             context: context,
                             isScrollControlled: true,
                             builder: (context) {
-                              return ModalBottomSheet();
+                              return MeditModalBottomSheet();
                             });
                       },
                       child: Row(
@@ -112,7 +112,7 @@ class _MeditationScreenState extends ConsumerState<MeditationScreen> {
                               child: Container(
                                   // margin: EdgeInsets.all(11),
                                   child: Text(
-                                '${Hive.box('db').get('meditliked')}',
+                                '${liked}',
                                 style: GoogleFonts.poppins(
                                     fontSize: 22, color: Color(0xff21cac8)),
                               )),

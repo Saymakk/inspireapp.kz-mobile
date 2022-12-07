@@ -74,7 +74,7 @@ class _AffirmationScreenState extends ConsumerState<AffirmationScreen> {
                             context: context,
                             isScrollControlled: true,
                             builder: (context) {
-                              return ModalBottomSheet();
+                              return AffirmModalBottomSheet();
                             });
                       },
                       child: Row(
