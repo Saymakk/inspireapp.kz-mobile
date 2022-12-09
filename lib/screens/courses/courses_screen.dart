@@ -263,7 +263,7 @@ class _CoursesScreenState extends State<CoursesScreen> {
                         Container(
                           height: (snapshot.data.length * 250).toDouble(),
                           margin: EdgeInsets.only(top: 24),
-                          child: GridView.builder(
+                          child: GridView.builder (
                             gridDelegate:
                                 SliverGridDelegateWithFixedCrossAxisCount(
                                     crossAxisCount: 2,
