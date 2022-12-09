@@ -23,181 +23,181 @@ class _MiniCoursesState extends State<MiniCourses> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Padding(
-          padding: const EdgeInsets.only(
-            bottom: 2,
-            top: 42,
-            left: 24,
-            right: 24,
+        GestureDetector(
+          onTap: () {
+            Get.to(
+                  () => AllCoursesScreen(),
+              transition: Transition.rightToLeft,
+            );
+          },
+          child: Container(
+            width: double.infinity,
+            height: 40,
+            decoration: Const.cont_turq_circ8,
+            // padding: EdgeInsets.only(top: 5),
+            margin: EdgeInsets.only(
+              top: 40,
+              left: 24,
+              right: 24,
+            ),
+            child: Center(
+              child: Text(
+                'Открыть все курсы',
+                style: Const.buttontextstyle,
+                textAlign: TextAlign.center,
+              ),
+            ),
           ),
         ),
-        FutureBuilder(
-          future: coursesRequest(),
-          builder: (BuildContext context, AsyncSnapshot snapshot) {
-            switch (snapshot.connectionState) {
-              case ConnectionState.none:
-                return Container(
-                  margin: EdgeInsets.only(top: 24, right: 15),
-                  padding: EdgeInsets.only(top: 10),
-                  child: SkeletonLine(
-                    style: SkeletonLineStyle(
-                        height: 150,
-                        width: 240,
-                        borderRadius: BorderRadius.circular(15)),
-                  ),
-                );
-              case ConnectionState.waiting:
-                return Container(
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(top: 10, right: 15, left: 24),
-                          padding: EdgeInsets.only(top: 10),
-                          child: SkeletonLine(
-                            style: SkeletonLineStyle(
-                                height: 150,
-                                width: 240,
-                                borderRadius: BorderRadius.circular(15)),
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(top: 10, right: 15),
-                          padding: EdgeInsets.only(top: 10),
-                          child: SkeletonLine(
-                            style: SkeletonLineStyle(
-                                height: 150,
-                                width: 240,
-                                borderRadius: BorderRadius.circular(15)),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                );
 
-              default:
-                // return rideList(snapshot.data, context);
-                if (snapshot.data == null) {
-                  // return Center(
-                  //   child: Container(
-                  //     width: 320,
-                  //     margin: EdgeInsets.only(top: 20),
-                  //     padding: EdgeInsets.only(
-                  //         left: 19,
-                  //         right: 19,
-                  //         top: 13.5,
-                  //         bottom: 10.5),
-                  //     decoration: BoxDecoration(
-                  //       color: Color(0xffFFFEE3),
-                  //       borderRadius: BorderRadius.circular(15),
-                  //     ),
-                  //     child: ListTile(
-                  //       leading: Image.asset(
-                  //         Const.icns + '!.png',
-                  //         height: 37,
-                  //         color: Color(0xffFFDD65),
-                  //       ),
-                  //       title: Text(
-                  //         'Извините, здесь пока ничего нет',
-                  //         maxLines: 4,
-                  //         style: TextStyle(
-                  //             fontSize: 14, color: Const.deepgrey),
-                  //       ),
-                  //     ),
-                  //   ),
-                  // );
-                  return SizedBox();
-                } else {
-                  return Padding(
-                    padding: const EdgeInsets.only(
-                      bottom: 2,
-                      top: 42,
-                      left: 24,
-                      right: 24,
-                    ),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Мини-курсы',
-                              style: GoogleFonts.poppins(
-                                  textStyle: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w600,
-                                      color: Const.semiblack)),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                Get.to(() => AllCoursesScreen(),
-                                    transition: Transition.rightToLeft);
-                              },
-                              child: Text(
-                                'Смотреть все',
-                                style: GoogleFonts.poppins(
-                                  textStyle: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                    color: Const.turq,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Container(
-                                transform: Matrix4.translationValues(
-                                  24.0,
-                                  0.0,
-                                  0.0,
-                                ),
-                                child: Row(
-                                  children: [
-                                    CoursesWidget(
-                                      snapshot.data,
-                                      context,
-                                    ),
-                                  ],
-                                ))),
-                        // GestureDetector(
-                        //   onTap: () {
-                        //     Get.to(
-                        //       () => AllCoursesScreen(),
-                        //       transition: Transition.rightToLeft,
-                        //     );
-                        //   },
-                        //   child: Container(
-                        //     width: double.infinity,
-                        //     height: 40,
-                        //     decoration: Const.cont_turq_circ8,
-                        //     // padding: EdgeInsets.only(top: 5),
-                        //     margin: EdgeInsets.only(
-                        //       bottom: 42,
-                        //       top: 15,
-                        //       left: 24,
-                        //       right: 24,
-                        //     ),
-                        //     child: Center(
-                        //       child: Text(
-                        //         'Открыть все мини-курсы',
-                        //         style: Const.buttontextstyle,
-                        //         textAlign: TextAlign.center,
-                        //       ),
-                        //     ),
-                        //   ),
-                        // ),
-                      ],
-                    ),
-                  );
-                }
-            }
-          },
-        ),
+        // Padding(
+        //   padding: const EdgeInsets.only(
+        //     bottom: 2,
+        //     top: 42,
+        //     left: 24,
+        //     right: 24,
+        //   ),
+        // ),
+        // FutureBuilder(
+        //   future: coursesRequest(),
+        //   builder: (BuildContext context, AsyncSnapshot snapshot) {
+        //     switch (snapshot.connectionState) {
+        //       case ConnectionState.none:
+        //         return Container(
+        //           margin: EdgeInsets.only(top: 24, right: 15),
+        //           padding: EdgeInsets.only(top: 10),
+        //           child: SkeletonLine(
+        //             style: SkeletonLineStyle(
+        //                 height: 150,
+        //                 width: 240,
+        //                 borderRadius: BorderRadius.circular(15)),
+        //           ),
+        //         );
+        //       case ConnectionState.waiting:
+        //         return Container(
+        //           child: SingleChildScrollView(
+        //             scrollDirection: Axis.horizontal,
+        //             child: Row(
+        //               children: [
+        //                 Container(
+        //                   margin: EdgeInsets.only(top: 10, right: 15, left: 24),
+        //                   padding: EdgeInsets.only(top: 10),
+        //                   child: SkeletonLine(
+        //                     style: SkeletonLineStyle(
+        //                         height: 150,
+        //                         width: 240,
+        //                         borderRadius: BorderRadius.circular(15)),
+        //                   ),
+        //                 ),
+        //                 Container(
+        //                   margin: EdgeInsets.only(top: 10, right: 15),
+        //                   padding: EdgeInsets.only(top: 10),
+        //                   child: SkeletonLine(
+        //                     style: SkeletonLineStyle(
+        //                         height: 150,
+        //                         width: 240,
+        //                         borderRadius: BorderRadius.circular(15)),
+        //                   ),
+        //                 ),
+        //               ],
+        //             ),
+        //           ),
+        //         );
+        //
+        //       default:
+        //         // return rideList(snapshot.data, context);
+        //         if (snapshot.data == null) {
+        //           // return Center(
+        //           //   child: Container(
+        //           //     width: 320,
+        //           //     margin: EdgeInsets.only(top: 20),
+        //           //     padding: EdgeInsets.only(
+        //           //         left: 19,
+        //           //         right: 19,
+        //           //         top: 13.5,
+        //           //         bottom: 10.5),
+        //           //     decoration: BoxDecoration(
+        //           //       color: Color(0xffFFFEE3),
+        //           //       borderRadius: BorderRadius.circular(15),
+        //           //     ),
+        //           //     child: ListTile(
+        //           //       leading: Image.asset(
+        //           //         Const.icns + '!.png',
+        //           //         height: 37,
+        //           //         color: Color(0xffFFDD65),
+        //           //       ),
+        //           //       title: Text(
+        //           //         'Извините, здесь пока ничего нет',
+        //           //         maxLines: 4,
+        //           //         style: TextStyle(
+        //           //             fontSize: 14, color: Const.deepgrey),
+        //           //       ),
+        //           //     ),
+        //           //   ),
+        //           // );
+        //           return SizedBox();
+        //         } else {
+        //           return Padding(
+        //             padding: const EdgeInsets.only(
+        //               bottom: 2,
+        //               top: 42,
+        //               left: 24,
+        //               right: 24,
+        //             ),
+        //             child: Column(
+        //               children: [
+        //                 // Row(
+        //                 //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //                 //   children: [
+        //                 //     Text(
+        //                 //       'Мини-курсы',
+        //                 //       style: GoogleFonts.poppins(
+        //                 //           textStyle: TextStyle(
+        //                 //               fontSize: 16,
+        //                 //               fontWeight: FontWeight.w600,
+        //                 //               color: Const.semiblack)),
+        //                 //     ),
+        //                 //     GestureDetector(
+        //                 //       onTap: () {
+        //                 //         Get.to(() => AllCoursesScreen(),
+        //                 //             transition: Transition.rightToLeft);
+        //                 //       },
+        //                 //       child: Text(
+        //                 //         'Смотреть все',
+        //                 //         style: GoogleFonts.poppins(
+        //                 //           textStyle: TextStyle(
+        //                 //             fontSize: 16,
+        //                 //             fontWeight: FontWeight.w600,
+        //                 //             color: Const.turq,
+        //                 //           ),
+        //                 //         ),
+        //                 //       ),
+        //                 //     ),
+        //                 //   ],
+        //                 // ),
+        //                 // SingleChildScrollView(
+        //                 //     scrollDirection: Axis.horizontal,
+        //                 //     child: Container(
+        //                 //         transform: Matrix4.translationValues(
+        //                 //           24.0,
+        //                 //           0.0,
+        //                 //           0.0,
+        //                 //         ),
+        //                 //         child: Row(
+        //                 //           children: [
+        //                 //             CoursesWidget(
+        //                 //               snapshot.data,
+        //                 //               context,
+        //                 //             ),
+        //                 //           ],
+        //                 //         ))),
+        //               ],
+        //             ),
+        //           );
+        //         }
+        //     }
+        //   },
+        // ),
       ],
     );
   }

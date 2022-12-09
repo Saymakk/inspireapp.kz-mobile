@@ -8,7 +8,7 @@ import 'package:InspireApp/model/affirmation_model.dart';
 import 'package:InspireApp/model/meditation_model.dart';
 import 'package:InspireApp/model/mini_courses_model.dart';
 
-Future<List<coursesList>> coursesRequest() async {
+Future<List<coursesList>> coursesListRequest() async {
 
   GetStorage auth = GetStorage();
 
@@ -16,7 +16,7 @@ Future<List<coursesList>> coursesRequest() async {
     'Authorization': 'Bearer ${Hive.box('mybox').get(0)}'
   };
 
-  final Uri url = Uri.parse(Const.domain + 'api/courses');
+  final Uri url = Uri.parse(Const.domain + 'api/courses?paginate=10&page=1');
   var request = http.MultipartRequest('GET', url);
   request.headers.addAll(headers);
 
@@ -29,7 +29,7 @@ Future<List<coursesList>> coursesRequest() async {
     Iterable list = json.decode(responsed.body);
     List<coursesList> datasheet = list.map((f) => coursesList.fromJson(f)).toList();
 
-    print(list);
+    // print(list);
 
     return Future<List<coursesList>>.value(datasheet);
   } else {
