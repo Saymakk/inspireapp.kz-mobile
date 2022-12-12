@@ -96,15 +96,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             borderRadius: BorderRadius.circular(16),
                             color: Color(0xFFD9DCDD),
                           ),
-                          child: Hive.box('mybox').get('photo')  == null ? Image.asset(
-                            Const.icns + 'add_photo.png',
-                          ) :
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(16),
-                            child: Image.network(
-                              '${Hive.box('mybox').get('photo').toString()}', fit: BoxFit.cover,
-                            ),
-                          ),
+                          child:( Hive.box('mybox').get('photo') == null) ^
+                                  (Hive.box('mybox').get('photo') ==
+                                      'https://ui-avatars.com/api/?name=z&color=7F9CF5&background=EBF4FF')
+                              ? Padding(
+                                  padding: const EdgeInsets.all(25.0),
+                                  child: Image.asset(
+                                    Const.icns + 'add_photo.png',
+                                  ),
+                                )
+                              : ClipRRect(
+                                  borderRadius: BorderRadius.circular(16),
+                                  child: Image.network(
+                                    '${Hive.box('mybox').get('photo').toString()}',
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
                         ),
                       ),
                       Column(
@@ -455,7 +462,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                           default:
                             // return rideList(snapshot.data, context);
-                            // print(snapshot.data.length);
+                            print(snapshot.data.length);
                             // return CoursesWidget(snapshot.data, context);
                             if (snapshot.data.length < 1) {
                               return Container(

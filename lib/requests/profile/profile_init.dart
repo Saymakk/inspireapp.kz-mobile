@@ -41,6 +41,7 @@ Future<void> profileRequestInit() async {
     await Hive.box('mybox').put('UserData', data);
     await Hive.box('mybox').put('name', data['name']);
     await Hive.box('mybox').put('photo', data['profile_photo_url']);
+    await Hive.box('mybox').put('photo2', data['profile_photo_url']);
 
     print(Hive.box('mybox').get('photo').toString() + ' ЗДЕСЬ ФОТО');
     print(data['city_id'].toString() + ' это айди города');
