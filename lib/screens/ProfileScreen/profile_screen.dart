@@ -229,8 +229,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         maxLines: 2,
                                         style: GoogleFonts.poppins(
                                           textStyle: TextStyle(
-                                              fontWeight: FontWeight.w600,
-                                              fontSize: 14),
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 14,
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -263,8 +264,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         maxLines: 2,
                                         style: GoogleFonts.poppins(
                                           textStyle: TextStyle(
-                                              fontWeight: FontWeight.w600,
-                                              fontSize: 14),
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 14,
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -394,7 +396,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         switch (snapshot.connectionState) {
                           case ConnectionState.none:
                             return Container(
-                              margin: EdgeInsets.only(top: 24, right: 15),
+                              margin: EdgeInsets.only(
+                                top: 24,
+                                right: 15,
+                              ),
                               padding: EdgeInsets.only(top: 10),
                               child: SkeletonLine(
                                 style: SkeletonLineStyle(
@@ -480,7 +485,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 ),
                               );
                             } else {
-                              return InvitedUsersWidget(snapshot.data, context);
+                              return InvitedUsersWidget(
+                                snapshot.data,
+                                context,
+                              );
                             }
                         }
                       },

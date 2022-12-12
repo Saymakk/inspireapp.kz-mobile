@@ -29,6 +29,7 @@ Future<void> userUpdateRequest(
     'Accept': 'application/json',
     'Authorization': 'Bearer ${Hive.box('mybox').get(0)}'
   };
+  print(Hive.box('mybox').get(0));
 
   final Uri url = await Uri.parse(Const.domain + 'api/user/update');
   var request = await http.MultipartRequest('POST', url);
@@ -41,6 +42,7 @@ Future<void> userUpdateRequest(
     description = description;
   }
   print(description.length);
+
   if (image == null) {
     request.fields['name'] = name;
     request.fields['last_name'] = lastName;
@@ -55,8 +57,10 @@ Future<void> userUpdateRequest(
     // if(description.length == 0) {request.fields['description'] = 'Описание';} else {
     //   request.fields['description'] = description;
     // }    request.fields['city_id'] = city.toString();
+    request.fields['city_id'] = city.toString();
+
     request.files.add(
-      await http.MultipartFile.fromPath("photo", image.path),
+      await http.MultipartFile.fromPath("photo", image.path.toString()),
     );
   }
 
@@ -64,6 +68,7 @@ Future<void> userUpdateRequest(
 
   // var responsed = await http.Response.fromStream(response);
 
+  print(response.headers.toString());
   print(response.statusCode);
 
   if (response.statusCode == 200) {

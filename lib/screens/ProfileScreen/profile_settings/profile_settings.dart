@@ -33,7 +33,11 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
   Future pickImage(ImageSource source) async {
     try {
       final image = await ImagePicker().pickImage(
-          source: source, maxWidth: 640, maxHeight: 480, imageQuality: 50);
+        source: source,
+        maxWidth: 500,
+        maxHeight: 500,
+        imageQuality: 50,
+      );
       if (image == null) return;
 
       final imageTemp = File(image.path);
@@ -400,9 +404,10 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
                     onTap: () {
                       nameController.text == '' ||
                               lastNameController.text == '' ||
-                              selected_city == null ?
-                      // descController.text == '' ||
-                              // image!.path == null
+                              selected_city == null
+                          ?
+                          // descController.text == '' ||
+                          // image!.path == null
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               content: Text(
                               'Обязательно укажите имя, фамилию и город!',
@@ -415,7 +420,8 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
                               lastNameController!.text,
                               selected_city!,
                               descController.text,
-                              image);
+                              image,
+                            );
                     },
                     /** !!! Отправка запроса на редактирование аккаунта !!! **/
                     child: Container(
