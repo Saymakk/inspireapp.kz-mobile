@@ -89,7 +89,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           print(Get.arguments[4]);
                         },
                         child: Container(
-                          padding: EdgeInsets.all(27.5),
                           margin: EdgeInsets.only(right: 25),
                           height: 96,
                           width: 96,
@@ -97,12 +96,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             borderRadius: BorderRadius.circular(16),
                             color: Color(0xFFD9DCDD),
                           ),
-                          child: Image.asset(
+                          child: Hive.box('mybox').get('photo')  == null ? Image.asset(
                             Const.icns + 'add_photo.png',
+                          ) :
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(16),
+                            child: Image.network(
+                              '${Hive.box('mybox').get('photo').toString()}', fit: BoxFit.cover,
+                            ),
                           ),
-                          // child: Image.network(
-                          //   '${Get.arguments[4]}',
-                          // ),
                         ),
                       ),
                       Column(
@@ -455,7 +457,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             // return rideList(snapshot.data, context);
                             // print(snapshot.data.length);
                             // return CoursesWidget(snapshot.data, context);
-                            if (snapshot.data.length == 0) {
+                            if (snapshot.data.length < 1) {
                               return Container(
                                 width: 320,
                                 padding: EdgeInsets.only(

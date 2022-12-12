@@ -40,6 +40,10 @@ Future<void> profileRequest() async {
     await user.write('username', data);
     await Hive.box('mybox').put('UserData', data);
     await Hive.box('mybox').put('name', data['name']);
+    await Hive.box('mybox').put('photo', data['profile_photo_url']);
+
+    print(Hive.box('mybox').get('photo').toString() + ' ЗДЕСЬ ФОТО');
+
 
     Get.to(() => ProfileScreen(),
         transition: Transition.rightToLeft,

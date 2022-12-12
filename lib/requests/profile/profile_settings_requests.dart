@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 // import 'package:dio/dio.dart';
+import 'package:InspireApp/requests/profile/profile_init.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -73,6 +74,8 @@ Future<void> userUpdateRequest(
 
   if (response.statusCode == 200) {
     // var data = json.decode(responsed.body);
+
+    await profileRequestInit();
 
     return Get.defaultDialog(
       title: 'Сохранить изменения',

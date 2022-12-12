@@ -1,11 +1,15 @@
+import 'dart:convert';
 import 'dart:io';
+import 'package:http/http.dart' as http;
 
+import 'package:InspireApp/model/cities_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:InspireApp/constants/constants.dart';
 import 'package:InspireApp/requests/lists/country_list_request.dart';
@@ -34,9 +38,9 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
     try {
       final image = await ImagePicker().pickImage(
         source: source,
-        maxWidth: 500,
-        maxHeight: 500,
-        imageQuality: 50,
+        maxWidth: 720,
+        maxHeight: 480,
+        imageQuality: 100,
       );
       if (image == null) return;
 
@@ -48,20 +52,19 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
     }
   }
 
+  @override
+  initState()  {
+    // TODO: implement initState
+    super.initState();
+     citiesListRequest();
+
+    print(Hive.box('db').get('list'));
+
+  }
+
   TextEditingController nameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
   TextEditingController descController = TextEditingController();
-
-  // List<String> cities_list = [
-  //   'Алматы',
-  //   'Астана',
-  //   'Актау',
-  //   'Тараз',
-  // ];
-  //
-  // List<String> countries_list = [
-  //   'Казахстан',
-  // ];
 
   dynamic selected_city;
   dynamic selected_country;
@@ -263,114 +266,114 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
                           ),
                           Visibility(
                             visible: city_list,
-                            child: FutureBuilder(
-                              future: citiesListRequest(),
-                              builder: (BuildContext context,
-                                  AsyncSnapshot snapshot) {
-                                switch (snapshot.connectionState) {
-                                  case ConnectionState.none:
-                                    return Container(
-                                      padding: EdgeInsets.only(top: 10),
-                                      child: SkeletonLine(
-                                        style: SkeletonLineStyle(
-                                            height: 48,
-                                            width: double.infinity,
-                                            borderRadius:
-                                                BorderRadius.circular(8)),
-                                      ),
-                                    );
-                                  case ConnectionState.waiting:
-                                    return Column(
-                                      children: [
-                                        Container(
-                                          padding: EdgeInsets.only(top: 10),
-                                          child: SkeletonLine(
-                                            style: SkeletonLineStyle(
-                                                height: 48,
-                                                width: double.infinity,
-                                                borderRadius:
-                                                    BorderRadius.circular(8)),
-                                          ),
-                                        ),
-                                        Container(
-                                          padding: EdgeInsets.only(top: 10),
-                                          child: SkeletonLine(
-                                            style: SkeletonLineStyle(
-                                                height: 48,
-                                                width: double.infinity,
-                                                borderRadius:
-                                                    BorderRadius.circular(8)),
-                                          ),
-                                        ),
-                                        Container(
-                                          padding: EdgeInsets.only(top: 10),
-                                          child: SkeletonLine(
-                                            style: SkeletonLineStyle(
-                                                height: 48,
-                                                width: double.infinity,
-                                                borderRadius:
-                                                    BorderRadius.circular(8)),
-                                          ),
-                                        ),
-                                      ],
-                                    );
-
-                                  default:
-                                    // return rideList(snapshot.data, context);
-
-                                    return CityListWidget(
-                                        snapshot.data, context);
-                                }
-                              },
-                            ),
-                            // child: Column(
-                            //   children: [
-                            //     Container(
-                            //         margin: EdgeInsets.only(top: 10),
-                            //         child: ListView.builder(
-                            //             physics: NeverScrollableScrollPhysics(),
-                            //             shrinkWrap: true,
-                            //             itemCount: cities_list.length,
-                            //             itemBuilder: (context, index) {
-                            //               return GestureDetector(
-                            //                 onTap: () {
-                            //                   setState(() {
-                            //                     selected_city = cities_list[index];
-                            //                   });
-                            //                   print(selected_city);
-                            //                 },
-                            //                 child: Container(
-                            //                     margin:
-                            //                         EdgeInsets.only(top: 10),
-                            //                     decoration: BoxDecoration(
-                            //                         color: selected_city ==
-                            //                                 cities_list[index]
-                            //                             ? Color(0xff21cac8)
-                            //                             : Colors.white,
-                            //                         borderRadius:
-                            //                             BorderRadius.circular(
-                            //                                 8)),
-                            //                     child: Container(
-                            //                       margin: EdgeInsets.symmetric(
-                            //                           vertical: 5,
-                            //                           horizontal: 10),
-                            //                       child: Text(
-                            //                         cities_list[index],
-                            //                         style: selected_city ==
-                            //                                 cities_list[index]
-                            //                             ? GoogleFonts.poppins(
-                            //                                 fontSize: 14,
-                            //                                 color: Colors.white)
-                            //                             : GoogleFonts.poppins(
-                            //                                 fontSize: 14,
-                            //                                 color:
-                            //                                     Colors.black),
-                            //                       ),
-                            //                     )),
-                            //               );
-                            //             })),
-                            //   ],
+                            // child: FutureBuilder<List>(
+                            //   future: citiesListRequest(),
+                            //   builder: (BuildContext context,
+                            //       AsyncSnapshot snapshot) {
+                            //     switch (snapshot.connectionState) {
+                            //       case ConnectionState.none:
+                            //         return Container(
+                            //           padding: EdgeInsets.only(top: 10),
+                            //           child: SkeletonLine(
+                            //             style: SkeletonLineStyle(
+                            //                 height: 48,
+                            //                 width: double.infinity,
+                            //                 borderRadius:
+                            //                     BorderRadius.circular(8)),
+                            //           ),
+                            //         );
+                            //       case ConnectionState.waiting:
+                            //         return Column(
+                            //           children: [
+                            //             Container(
+                            //               padding: EdgeInsets.only(top: 10),
+                            //               child: SkeletonLine(
+                            //                 style: SkeletonLineStyle(
+                            //                     height: 48,
+                            //                     width: double.infinity,
+                            //                     borderRadius:
+                            //                         BorderRadius.circular(8)),
+                            //               ),
+                            //             ),
+                            //             Container(
+                            //               padding: EdgeInsets.only(top: 10),
+                            //               child: SkeletonLine(
+                            //                 style: SkeletonLineStyle(
+                            //                     height: 48,
+                            //                     width: double.infinity,
+                            //                     borderRadius:
+                            //                         BorderRadius.circular(8)),
+                            //               ),
+                            //             ),
+                            //             Container(
+                            //               padding: EdgeInsets.only(top: 10),
+                            //               child: SkeletonLine(
+                            //                 style: SkeletonLineStyle(
+                            //                     height: 48,
+                            //                     width: double.infinity,
+                            //                     borderRadius:
+                            //                         BorderRadius.circular(8)),
+                            //               ),
+                            //             ),
+                            //           ],
+                            //         );
+                            //
+                            //       default:
+                            //         // return rideList(snapshot.data, context);
+                            //
+                            //         return CityListWidget(
+                            //             snapshot.data, context);
+                            //     }
+                            //   },
                             // ),
+                            child: Column(
+                              children: [
+                                Container(
+                                    margin: EdgeInsets.only(top: 10),
+                                    child: ListView.builder(
+                                        physics: NeverScrollableScrollPhysics(),
+                                        shrinkWrap: true,
+                                        itemCount: Hive.box('db').get('list').length,
+                                        itemBuilder: (context, index) {
+                                          return GestureDetector(
+                                            onTap: () {
+                                              setState(() {
+                                                selected_city = Hive.box('db').get('list')[index]['id'];
+                                              });
+                                              print(selected_city);
+                                            },
+                                            child: Container(
+                                                margin:
+                                                    EdgeInsets.only(top: 10),
+                                                decoration: BoxDecoration(
+                                                    color: selected_city ==
+                                                        Hive.box('db').get('list')[index]['id']
+                                                        ? Color(0xff21cac8)
+                                                        : Colors.white,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8)),
+                                                child: Container(
+                                                  margin: EdgeInsets.symmetric(
+                                                      vertical: 5,
+                                                      horizontal: 10),
+                                                  child: Text(
+                                                    Hive.box('db').get('list')[index]['title'],
+                                                    style: selected_city ==
+                                                        Hive.box('db').get('list')[index]['id']
+                                                        ? GoogleFonts.poppins(
+                                                            fontSize: 14,
+                                                            color: Colors.white)
+                                                        : GoogleFonts.poppins(
+                                                            fontSize: 14,
+                                                            color:
+                                                                Colors.black),
+                                                  ),
+                                                )),
+                                          );
+                                        })),
+                              ],
+                            ),
                           ),
                         ],
                       ),
