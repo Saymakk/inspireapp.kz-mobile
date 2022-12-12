@@ -79,8 +79,8 @@ class _SingleCourseScreenState extends ConsumerState<SingleCourseScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               GestureDetector(
-                // onTap: () => Get.to(() => VideoPlayer(),
-                //     arguments: [course_title, video]),
+                onTap: () => Get.to(() => VideoPlayer(),
+                    arguments: [course_title, video]),
                 child: Stack(
                   alignment: AlignmentDirectional.center,
                   children: [
@@ -106,19 +106,19 @@ class _SingleCourseScreenState extends ConsumerState<SingleCourseScreen> {
                       radius: 22.5,
                       backgroundColor: Color(0xff21cac8),
                     ),
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(15),
-                      child: VimeoVideoPlayer(
-                        vimeoPlayerModel: VimeoPlayerModel(
-                          deviceOrientation: DeviceOrientation.landscapeLeft,
-                          url: 'https://vimeo.com/$video',
-                          systemUiOverlay: const [
-                            SystemUiOverlay.top,
-                            SystemUiOverlay.bottom,
-                          ],
-                        ),
-                      ),
-                    )
+                    // ClipRRect(
+                    //   borderRadius: BorderRadius.circular(15),
+                    //   child: VimeoVideoPlayer(
+                    //     vimeoPlayerModel: VimeoPlayerModel(
+                    //       deviceOrientation: DeviceOrientation.landscapeLeft,
+                    //       url: 'https://vimeo.com/$video',
+                    //       systemUiOverlay: const [
+                    //         SystemUiOverlay.top,
+                    //         SystemUiOverlay.bottom,
+                    //       ],
+                    //     ),
+                    //   ),
+                    // )
                   ],
                 ),
               ),

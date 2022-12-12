@@ -27,7 +27,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   String phone = Get.arguments[3];
   String? photo = Get.arguments[4];
 
- GetStorage auth = GetStorage();
+  GetStorage auth = GetStorage();
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
           shadowColor: null,
           elevation: 0,
           leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios, color: Color(0xff000000)),
+            icon: Icon(
+              Icons.arrow_back_ios,
+              color: Color(0xff000000),
+            ),
             onPressed: () {
               Get.back();
             },
@@ -49,20 +52,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
             'Профиль',
             style: GoogleFonts.poppins(
               textStyle: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
-                  color: Color(0xff000000)),
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
+                color: Color(0xff000000),
+              ),
             ),
           ),
           actions: [
             Padding(
               padding: const EdgeInsets.only(right: 24.0),
               child: GestureDetector(
-                  onTap: () {
-                    Get.to(() => ProfileSettingsScreen(),
-                        transition: Transition.rightToLeft);
-                  },
-                  child: SvgPicture.asset('assets/icons/settings_button.svg')),
+                onTap: () {
+                  Get.to(
+                    () => ProfileSettingsScreen(),
+                    transition: Transition.rightToLeft,
+                  );
+                },
+                child: SvgPicture.asset('assets/icons/settings_button.svg'),
+              ),
             ),
           ],
         ),
@@ -110,9 +117,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   softWrap: true,
                                   style: GoogleFonts.poppins(
                                     textStyle: TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 22,
-                                        height: 1.15),
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 22,
+                                      height: 1.15,
+                                    ),
                                   ),
                                   maxLines: 2,
                                 ),
@@ -123,16 +131,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             children: [
                               GestureDetector(
                                 onTap: () async {
-                                  final copied = await ClipboardData(text: code.toString());
+                                  final copied = await ClipboardData(
+                                    text: code.toString(),
+                                  );
                                   Clipboard.setData(copied);
-                                  if(copied.text != ''){
-                                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                        content: Text(
-                                          'Вы скопировали код! Поделитесь им с вашими друзьями',
-                                          style: GoogleFonts.poppins(
-                                            fontWeight: FontWeight.w400,
-                                          ),
-                                        )));
+                                  if (copied.text != '') {
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(SnackBar(
+                                            content: Text(
+                                      'Вы скопировали код! Поделитесь им с вашими друзьями',
+                                      style: GoogleFonts.poppins(
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    )));
                                   }
                                   print(copied.text);
                                 },
@@ -141,18 +152,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   width: 143,
                                   height: 34,
                                   decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      border:
-                                          Border.all(color: Color(0xffe5ebed))),
+                                    borderRadius: BorderRadius.circular(10),
+                                    border: Border.all(
+                                      color: Color(0xffe5ebed),
+                                    ),
+                                  ),
                                   child: Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceAround,
                                     children: [
-                                      Text(code.toString(),
-                                          style: GoogleFonts.poppins(
-                                              textStyle: TextStyle(
-                                                  fontSize: 19,
-                                                  color: Color(0xff21cac8)))),
+                                      Text(
+                                        code.toString(),
+                                        style: GoogleFonts.poppins(
+                                          textStyle: TextStyle(
+                                            fontSize: 19,
+                                            color: Color(0xff21cac8),
+                                          ),
+                                        ),
+                                      ),
                                       Padding(
                                         padding:
                                             const EdgeInsets.only(bottom: 15),
@@ -197,10 +214,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       child: Text(
                                         user.read('meditation').toString(),
                                         style: GoogleFonts.poppins(
-                                            textStyle: TextStyle(
-                                                fontSize: 38,
-                                                fontWeight: FontWeight.w600,
-                                                color: Color(0xff21cac8))),
+                                          textStyle: TextStyle(
+                                            fontSize: 38,
+                                            fontWeight: FontWeight.w600,
+                                            color: Color(0xff21cac8),
+                                          ),
+                                        ),
                                       ),
                                     ),
                                     Container(
@@ -209,9 +228,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         textAlign: TextAlign.start,
                                         maxLines: 2,
                                         style: GoogleFonts.poppins(
-                                            textStyle: TextStyle(
-                                                fontWeight: FontWeight.w600,
-                                                fontSize: 14)),
+                                          textStyle: TextStyle(
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 14),
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -228,10 +248,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       child: Text(
                                         user.read('affirmations').toString(),
                                         style: GoogleFonts.poppins(
-                                            textStyle: TextStyle(
-                                                fontSize: 38,
-                                                fontWeight: FontWeight.w600,
-                                                color: Color(0xff21cac8))),
+                                          textStyle: TextStyle(
+                                            fontSize: 38,
+                                            fontWeight: FontWeight.w600,
+                                            color: Color(0xff21cac8),
+                                          ),
+                                        ),
                                       ),
                                     ),
                                     Container(
@@ -240,9 +262,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         textAlign: TextAlign.start,
                                         maxLines: 2,
                                         style: GoogleFonts.poppins(
-                                            textStyle: TextStyle(
-                                                fontWeight: FontWeight.w600,
-                                                fontSize: 14)),
+                                          textStyle: TextStyle(
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 14),
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -264,10 +287,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     child: Text(
                                       user.read('courses').toString(),
                                       style: GoogleFonts.poppins(
-                                          textStyle: TextStyle(
-                                              fontSize: 38,
-                                              fontWeight: FontWeight.w600,
-                                              color: Color(0xff21cac8))),
+                                        textStyle: TextStyle(
+                                          fontSize: 38,
+                                          fontWeight: FontWeight.w600,
+                                          color: Color(0xff21cac8),
+                                        ),
+                                      ),
                                     ),
                                   ),
                                   Container(
@@ -276,9 +301,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       textAlign: TextAlign.start,
                                       maxLines: 2,
                                       style: GoogleFonts.poppins(
-                                          textStyle: TextStyle(
-                                              fontWeight: FontWeight.w600,
-                                              fontSize: 14)),
+                                        textStyle: TextStyle(
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 14,
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -297,10 +324,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     child: Text(
                                       user.read('invited_users').toString(),
                                       style: GoogleFonts.poppins(
-                                          textStyle: TextStyle(
-                                              fontSize: 38,
-                                              fontWeight: FontWeight.w600,
-                                              color: Color(0xff21cac8))),
+                                        textStyle: TextStyle(
+                                          fontSize: 38,
+                                          fontWeight: FontWeight.w600,
+                                          color: Color(0xff21cac8),
+                                        ),
+                                      ),
                                     ),
                                   ),
                                   Container(
@@ -309,9 +338,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       textAlign: TextAlign.start,
                                       maxLines: 2,
                                       style: GoogleFonts.poppins(
-                                          textStyle: TextStyle(
-                                              fontWeight: FontWeight.w600,
-                                              fontSize: 14)),
+                                        textStyle: TextStyle(
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 14,
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -328,9 +359,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   child: Text(
                     'Приглашенные пользователи',
                     style: GoogleFonts.poppins(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 20,
-                        height: 1.15),
+                      fontWeight: FontWeight.w600,
+                      fontSize: 20,
+                      height: 1.15,
+                    ),
                   ),
                 ),
                 // Container(
@@ -366,17 +398,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               padding: EdgeInsets.only(top: 10),
                               child: SkeletonLine(
                                 style: SkeletonLineStyle(
-                                    height: 150,
-                                    width: 259,
-                                    borderRadius: BorderRadius.circular(15)),
+                                  height: 150,
+                                  width: 259,
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
                               ),
                             );
                           case ConnectionState.waiting:
                             return Column(
                               children: [
                                 Container(
-                                  margin:
-                                      EdgeInsets.only(right: 15, bottom: 10),
+                                  margin: EdgeInsets.only(
+                                    right: 15,
+                                    bottom: 10,
+                                  ),
                                   child: SkeletonLine(
                                     style: SkeletonLineStyle(
                                       height: 24,
@@ -385,8 +420,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   ),
                                 ),
                                 Container(
-                                  margin:
-                                      EdgeInsets.only(right: 15, bottom: 10),
+                                  margin: EdgeInsets.only(
+                                    right: 15,
+                                    bottom: 10,
+                                  ),
                                   child: SkeletonLine(
                                     style: SkeletonLineStyle(
                                       height: 24,
@@ -395,8 +432,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   ),
                                 ),
                                 Container(
-                                  margin:
-                                      EdgeInsets.only(right: 15, bottom: 10),
+                                  margin: EdgeInsets.only(
+                                    right: 15,
+                                    bottom: 10,
+                                  ),
                                   child: SkeletonLine(
                                     style: SkeletonLineStyle(
                                       height: 24,
@@ -409,31 +448,38 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                           default:
                             // return rideList(snapshot.data, context);
-                            print(snapshot.data.length);
+                            // print(snapshot.data.length);
                             // return CoursesWidget(snapshot.data, context);
-                          if(snapshot.data.length == 0){
-                            return Container(
-                              width: 320,
-
-                              padding: EdgeInsets.only(
-                                  left: 19, right: 19, top: 13.5, bottom: 10.5),
-                              decoration: BoxDecoration(
-                                color: Color(0xffFFFEE3),
-                                borderRadius: BorderRadius.circular(15), ),
-                              child: ListTile(
-                                leading: Image.asset(
-                                  Const.icns + '!.png',
-                                  height: 37,
-                                  color: Color(0xffFFDD65),
+                            if (snapshot.data.length == 0) {
+                              return Container(
+                                width: 320,
+                                padding: EdgeInsets.only(
+                                  left: 19,
+                                  right: 19,
+                                  top: 13.5,
+                                  bottom: 10.5,
                                 ),
-                                title: Text(
-                                  'Приглашённых пользователей пока нет',
-                                  maxLines: 4,
-                                  style: TextStyle(fontSize: 14, color: Const.deepgrey),
+                                decoration: BoxDecoration(
+                                  color: Color(0xffFFFEE3),
+                                  borderRadius: BorderRadius.circular(15),
                                 ),
-                              ),
-                            );
-                          } else {
+                                child: ListTile(
+                                  leading: Image.asset(
+                                    Const.icns + '!.png',
+                                    height: 37,
+                                    color: Color(0xffFFDD65),
+                                  ),
+                                  title: Text(
+                                    'Приглашённых пользователей пока нет',
+                                    maxLines: 4,
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      color: Const.deepgrey,
+                                    ),
+                                  ),
+                                ),
+                              );
+                            } else {
                               return InvitedUsersWidget(snapshot.data, context);
                             }
                         }
@@ -452,7 +498,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       onTap: () async {
                         await auth.remove('token');
                         await Hive.box('mybox').delete(0);
-                        Get.offAll(()=>WelcomeScreen());
+                        Get.offAll(() => WelcomeScreen());
                       },
                       child: Container(
                         width: 165,
@@ -467,11 +513,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           child: Text(
                             'Выйти',
                             style: GoogleFonts.poppins(
-                                textStyle: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w100,
-                              color: Color(0xff21cac8),
-                            )),
+                              textStyle: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w100,
+                                color: Color(0xff21cac8),
+                              ),
+                            ),
                           ),
                         ),
                       ),
@@ -504,9 +551,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       child: Text(
                         invited.id.toString(),
                         style: GoogleFonts.poppins(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 14,
-                            height: 1.65),
+                          fontWeight: FontWeight.w600,
+                          fontSize: 14,
+                          height: 1.65,
+                        ),
                       ),
                     ),
                     Padding(
@@ -521,10 +569,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       child: Text(
                         invited.full_name,
                         style: GoogleFonts.poppins(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 14,
-                            height: 1.65,
-                            color: Color(0xff000000)),
+                          fontWeight: FontWeight.w600,
+                          fontSize: 14,
+                          height: 1.65,
+                          color: Color(0xff000000),
+                        ),
                       ),
                     ),
                     invited.isActive != ''
@@ -532,16 +581,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             height: 24,
                             width: 80,
                             decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                color: Color(0xff21cac8)),
+                              borderRadius: BorderRadius.circular(5),
+                              color: Color(0xff21cac8),
+                            ),
                             child: Center(
                               child: Text(
                                 'Активный',
                                 style: GoogleFonts.poppins(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 11,
-                                    height: 1.45,
-                                    color: Colors.white),
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 11,
+                                  height: 1.45,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                           )
@@ -549,16 +600,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             height: 24,
                             width: 80,
                             decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                color: Color(0xff282828)),
+                              borderRadius: BorderRadius.circular(5),
+                              color: Color(0xff282828),
+                            ),
                             child: Center(
                               child: Text(
                                 'Неактивный',
                                 style: GoogleFonts.poppins(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 11,
-                                    height: 1.45,
-                                    color: Colors.white),
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 11,
+                                  height: 1.45,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                           )

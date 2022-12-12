@@ -306,17 +306,21 @@ class _AllCoursesScreenState extends State<AllCoursesScreen> {
                                             ),
                                             Container(
                                               height: (course[index]
-                                                              .course_contents
-                                                              .length *
-                                                          200 )
+                                                          .course_contents
+                                                          .length *
+                                                      200)
                                                   .toDouble(),
                                               margin: EdgeInsets.only(top: 24),
                                               child: GridView.builder(
+                                                physics: NeverScrollableScrollPhysics(),
                                                 gridDelegate:
                                                     SliverGridDelegateWithFixedCrossAxisCount(
-                                                        crossAxisCount: 2,
-                                                        crossAxisSpacing: 2,
-                                                        mainAxisSpacing: 0),
+
+                                                  crossAxisCount: 2,
+                                                  crossAxisSpacing: 2,
+                                                  mainAxisSpacing: 0,
+
+                                                ),
                                                 itemCount: snapshot.data[index]
                                                     .course_contents.length,
                                                 itemBuilder:
