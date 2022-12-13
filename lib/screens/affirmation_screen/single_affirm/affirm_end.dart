@@ -33,6 +33,7 @@ var aff_id = Get.arguments[0];
               onPressed: () {
                 Get.back();
                 Get.back();
+                Get.back();
               },
               icon: Icon(Icons.arrow_back)),
           backgroundColor: Colors.transparent,
@@ -40,6 +41,7 @@ var aff_id = Get.arguments[0];
           actions: [
             IconButton(
                 onPressed: () {
+                  Get.back();
                   Get.back();
                   Get.back();
                 },

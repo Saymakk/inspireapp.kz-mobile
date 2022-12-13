@@ -38,7 +38,7 @@ class _SingleAffScreenState extends State<SingleAffScreen>
   String aff_path = Get.arguments[3];
 
   late final AnimationController _controller =
-      AnimationController(vsync: this, duration: Duration(seconds: 3))
+      AnimationController(vsync: this, duration: Duration(seconds: 1))
         ..repeat();
 
   // String aff_desc = Get.arguments[4];
@@ -52,6 +52,7 @@ class _SingleAffScreenState extends State<SingleAffScreen>
     setState(() {
       active = true;
     });
+    print(active);
     // audioPlayer.play(AssetSource('audio/sound1.wav'));
     audioPlayer.play(DeviceFileSource(hive_aff.get('aff_${aff_id}')));
     print(len);
@@ -61,6 +62,7 @@ class _SingleAffScreenState extends State<SingleAffScreen>
     setState(() {
       active = false;
     });
+    print(active);
     audioPlayer.stop();
   }
 
@@ -82,34 +84,32 @@ class _SingleAffScreenState extends State<SingleAffScreen>
         ? audioPlayer.play(DeviceFileSource(hive_aff.get('aff_${aff_id}')))
         : audioPlayer.stop();
 
-    Timer.periodic(const Duration(seconds: 1), (timer) async {
-      // print(timer.tick);
-      if (active == true) {
-        counter--;
-        print(counter);
-        if (counter == 0) {
-/** Разобраться с таймером **/
-       setState(() {
-         print('Cancel timer');
-         timer.cancel();
-
-         Get.to(
-               () => CongratAffirm(),
-           arguments: [aff_id],
-         );
-       });
-
-        }
-      } else {
-        if (active == false) {
-          setState(() {
-          counter = len;
-          timer.cancel();
-          });
-        }
-      }
-
-    });
+    // Timer.periodic(const Duration(seconds: 1), (timer) async {
+    //   // print(timer.tick);
+    //   if (active == true) {
+    //     counter--;
+    //     print(counter);
+    //     if (counter == 0) {
+    //       /** Разобраться с таймером **/
+    //       setState(() {
+    //         print('Cancel timer');
+    //         timer.cancel();
+    //
+    //         Get.off(
+    //           () => CongratAffirm(),
+    //           arguments: [aff_id],
+    //         );
+    //       });
+    //     }
+    //   } else {
+    //     if (active == false) {
+    //       setState(() {
+    //         counter = len;
+    //         timer.cancel();
+    //       });
+    //     }
+    //   }
+    // });
     hive_aff.get('aff_${aff_id}') != null ? isFile = true : isFile = false;
   }
 
@@ -168,28 +168,41 @@ class _SingleAffScreenState extends State<SingleAffScreen>
                 children: [
                   Visibility(
                     visible: active,
-                    child: Expanded(
-                      child: Container(
-                        child: AnimatedTextKit(
-                          animatedTexts: [
-                            ColorizeAnimatedText(
-                              '$title',
-                              textStyle: GoogleFonts.poppins(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 20,
-                              ),
-                              textAlign: TextAlign.center,
-                              colors: colorizeColors,
-                              speed: Duration(
-                                seconds: len,
-                              ),
-                              // cursor: '',
+                    child:
+                  Expanded(
+                    child: Container(
+                      child: AnimatedTextKit(
+isRepeatingAnimation: false,
+                        pause: Duration(seconds: 0),
+                        displayFullTextOnTap: true,
+                        totalRepeatCount: 1,
+                        stopPauseOnTap: active,
+                        onFinished: () {
+                          audioPlayer.stop();
+                          Get.to(
+                                () => CongratAffirm(),
+                            arguments: [aff_id],
+                          );
+                        },
+                        animatedTexts: [
+                          ColorizeAnimatedText(
+                            '$title',
+                            textStyle: GoogleFonts.poppins(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 20,
                             ),
-                          ],
-                        ),
+                            textAlign: TextAlign.center,
+                            colors: colorizeColors,
+                            speed: Duration(
+                              milliseconds: active == true ? 30 : 0,
+                            ),
+                            // cursor: '',
+                          ),
+                        ],
                       ),
                     ),
+                  ),
                   ),
                   Visibility(
                     visible: !active,
@@ -204,90 +217,99 @@ class _SingleAffScreenState extends State<SingleAffScreen>
                       ),
                     ),
                   ),
-                  Visibility(
-                    visible: isFile,
-                    child: Container(
-                      margin: EdgeInsets.only(
-                        bottom: 70,
-                      ),
-                      child: Stack(
-                        children: [
-                          AnimatedBuilder(
-                            animation: _controller,
-                            builder: (_, child) {
-                              return Transform.rotate(
-                                angle: active == true
-                                    ? (_controller.value * 2 * math.pi)
-                                    : 0,
-                                child: child,
-                              );
-                            },
-                            child: DottedBorder(
-                              dashPattern: [100, 65],
-                              color: Colors.white,
-                              strokeWidth: 2,
-                              borderType: BorderType.Circle,
-                              child: Container(
-                                  margin: EdgeInsets.all(70),
-                                  child: SizedBox(
-                                    width: 74,
-                                    height: 74,
-                                  )),
-                            ),
+                  Expanded(
+                    child: Visibility(
+                      visible: isFile,
+                      child: Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Container(
+                          margin: EdgeInsets.only(
+                            bottom: 70,
                           ),
-                          Container(
-                            margin: EdgeInsets.all(70),
-                            child: GestureDetector(
-                              // onTap: () {
-                              //   setState(() {
-                              //     active = !active;
-                              //   });
-                              // },
-                              // onTapDown: (_) => activePress(),
-                              onTapDown: (_) => activePress(),
-                              // onTapDown: (_) => Get.to(()=>CongratAffirm(),
-                              //   arguments: [aff_id],),
-
-                              onTapUp: (_) => inactivePress(),
-
-                              child: SvgPicture.asset(
-                                Const.icns + 'finger.svg',
-                                color: active == true
-                                    ? Color(0xff21cac8)
-                                    : Colors.white,
-                                height: 74,
-                                width: 74,
+                          child: Stack(
+                            children: [
+                              AnimatedBuilder(
+                                animation: _controller,
+                                builder: (_, child) {
+                                  return Transform.rotate(
+                                    angle: active == true
+                                        ? (_controller.value * 2 * math.pi)
+                                        : 0,
+                                    child: child,
+                                  );
+                                },
+                                child: DottedBorder(
+                                  dashPattern: [100, 65],
+                                  color: Colors.white,
+                                  strokeWidth: 2,
+                                  borderType: BorderType.Circle,
+                                  child: Container(
+                                    margin: EdgeInsets.all(70),
+                                    child: SizedBox(
+                                      width: 74,
+                                      height: 74,
+                                    ),
+                                  ),
+                                ),
                               ),
-                            ),
+                              Container(
+                                margin: EdgeInsets.all(70),
+                                child: GestureDetector(
+                                  // onTap: () {
+                                  //   setState(() {
+                                  //     active = !active;
+                                  //   });
+                                  // },
+                                  // onTapDown: (_) => activePress(),
+                                  onTapDown: (_) => activePress(),
+                                  // onTapDown: (_) => Get.to(()=>CongratAffirm(),
+                                  //   arguments: [aff_id],),
+
+                                  onTapUp: (_) => inactivePress(),
+
+                                  child: SvgPicture.asset(
+                                    Const.icns + 'finger.svg',
+                                    color: active == true
+                                        ? Color(0xff21cac8)
+                                        : Colors.white,
+                                    height: 74,
+                                    width: 74,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                        ],
+                        ),
                       ),
                     ),
                   ),
                   Visibility(
                     visible: !isFile,
-                    child: GestureDetector(
-                      child: Container(
-                        margin: EdgeInsets.only(bottom: 50),
-                        child: IconButton(
-                          onPressed: () {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text('Ваша аффирмация скачивается!'),
-                              ),
-                            );
-                            print(hive_aff.get('aff_$aff_id'));
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: GestureDetector(
+                        child: Container(
+                          margin: EdgeInsets.only(bottom: 50),
+                          child: IconButton(
+                            onPressed: () {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text('Ваша аффирмация скачивается!'),
+                                ),
+                              );
+                              print(hive_aff.get('aff_$aff_id'));
 
-                            downloadFile();
+                              downloadFile();
 
-                            // setState(() {
-                            //   isFile = !isFile;
-                            // });
-                          },
-                          icon: Icon(
-                            Icons.download,
-                            color: Colors.white,
-                            size: 40,
+                              // setState(() {
+                              //   isFile = !isFile;
+                              // });
+                            },
+                            icon: Icon(
+                              Icons.download,
+                              color: Colors.white,
+                              size: 40,
+                            ),
                           ),
                         ),
                       ),
