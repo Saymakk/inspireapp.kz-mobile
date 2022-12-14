@@ -45,7 +45,9 @@ class _PlayerScreenState extends State<PlayerScreen> {
     // TODO: implement initState
 
     print(hive_medit.get('medit_${audio_id}'));
-    print(hive_medit.get('medit_${audio_id}').runtimeType);
+    print(hive_medit
+        .get('medit_${audio_id}')
+        .runtimeType);
 
     // print(local_audio.read('medit_${audio_id}'));
     // print(local_audio.read('medit_${audio_id}').runtimeType);
@@ -81,6 +83,17 @@ class _PlayerScreenState extends State<PlayerScreen> {
       setState(() {
         position = newPosition;
       });
+      if ((duration.inSeconds - position.inSeconds == 0) & (audioPlayer
+          .releaseMode.toString() == 'ReleaseMode.release')) {
+        setState(() {
+          audioPlayer.stop();
+          isPlaying = false;
+        });
+      } else {
+        return;
+      }
+      print(duration.inSeconds - position.inSeconds);
+      print(audioPlayer.releaseMode);
     });
   }
 
@@ -299,43 +312,43 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                 radius: 35,
                                 child: isFile == true
                                     ? isPlaying == false
-                                        ? IconButton(
-                                            icon: SvgPicture.asset(
-                                                'assets/icons/play_button.svg'),
-                                            iconSize: 48,
-                                            onPressed: () async {
-                                              print(hive_medit
-                                                  .get('medit_${audio_id}'));
-                                              await audioPlayer.play(
-                                                  DeviceFileSource(
-                                                      hive_medit.get(
-                                                          'medit_${audio_id}')));
-                                              // await audioPlayer.play(UrlSource(
-                                              //     'https://kz.inspireapp.kz/' +
-                                              //         audio_path));
-                                              setState(() {
-                                                isPlaying = true;
-                                              });
-                                            },
-                                          )
-                                        : IconButton(
-                                            icon: Icon(Icons.pause),
-                                            iconSize: 48,
-                                            onPressed: () async {
-                                              await audioPlayer.pause();
-                                              setState(() {
-                                                isPlaying = false;
-                                              });
-                                            },
-                                          )
+                                    ? IconButton(
+                                  icon: SvgPicture.asset(
+                                      'assets/icons/play_button.svg'),
+                                  iconSize: 48,
+                                  onPressed: () async {
+                                    print(hive_medit
+                                        .get('medit_${audio_id}'));
+                                    await audioPlayer.play(
+                                        DeviceFileSource(
+                                            hive_medit.get(
+                                                'medit_${audio_id}')));
+                                    // await audioPlayer.play(UrlSource(
+                                    //     'https://kz.inspireapp.kz/' +
+                                    //         audio_path));
+                                    setState(() {
+                                      isPlaying = true;
+                                    });
+                                  },
+                                )
                                     : IconButton(
-                                        icon: SvgPicture.asset(
-                                          'assets/icons/play_button.svg',
-                                          color: Colors.grey,
-                                        ),
-                                        iconSize: 48,
-                                        onPressed: () async {},
-                                      ),
+                                  icon: Icon(Icons.pause),
+                                  iconSize: 48,
+                                  onPressed: () async {
+                                    await audioPlayer.pause();
+                                    setState(() {
+                                      isPlaying = false;
+                                    });
+                                  },
+                                )
+                                    : IconButton(
+                                  icon: SvgPicture.asset(
+                                    'assets/icons/play_button.svg',
+                                    color: Colors.grey,
+                                  ),
+                                  iconSize: 48,
+                                  onPressed: () async {},
+                                ),
                               ),
                             ),
                             IconButton(
@@ -360,7 +373,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                   downloadFile();
                                 },
                                 child:
-                                    Icon(Icons.download, color: Colors.white),
+                                Icon(Icons.download, color: Colors.white),
                               ),
                             ),
                             Visibility(
@@ -368,12 +381,12 @@ class _PlayerScreenState extends State<PlayerScreen> {
                               child: IconButton(
                                 icon: liked == false
                                     ? SvgPicture.asset(
-                                        'assets/icons/like.svg',
-                                        color: Colors.grey,
-                                      )
+                                  'assets/icons/like.svg',
+                                  color: Colors.grey,
+                                )
                                     : SvgPicture.asset(
-                                        'assets/icons/like_filled.svg',
-                                      ),
+                                  'assets/icons/like_filled.svg',
+                                ),
                                 iconSize: 24,
                                 onPressed: () async {
                                   print(audio_id);
@@ -405,7 +418,10 @@ class _PlayerScreenState extends State<PlayerScreen> {
                           ),
                         ),
                         Container(
-                          width: MediaQuery.of(context).size.width,
+                          width: MediaQuery
+                              .of(context)
+                              .size
+                              .width,
                           // width: double.infinity,
                           child: Slider(
                             inactiveColor: Color(0xffBCC9C5),
@@ -418,21 +434,13 @@ class _PlayerScreenState extends State<PlayerScreen> {
                               await audioPlayer.seek(position);
                               await audioPlayer.resume();
                               setState(
-                                () {
-
+                                    () {
                                   isPlaying = true;
-                                  value.toInt() ==  duration.inSeconds ?
-                                  print('НОЛЬ') : print(00000);
+                                  value.toInt() == duration.inSeconds
+                                      ? print('НОЛЬ')
+                                      : print(00000);
                                 },
                               );
-
-                              print( position.inSeconds);
-                              print( duration.inSeconds);
-                              print(value.toInt());
-
-
-
-
                             },
                           ),
                         ),
