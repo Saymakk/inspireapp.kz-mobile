@@ -4,6 +4,7 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
+import 'constants/app_routing.dart';
 import 'screens/splash_screen.dart';
 
 Future<void> main() async {
@@ -34,6 +35,8 @@ class MyApp extends StatelessWidget {
         FocusScope.of(context).unfocus();
       },
       child: GetMaterialApp(
+        initialRoute: '/',
+        getPages: AppRoutes.routes,
         debugShowCheckedModeBanner: false,
         title: 'Inspire',
         home: Scaffold(

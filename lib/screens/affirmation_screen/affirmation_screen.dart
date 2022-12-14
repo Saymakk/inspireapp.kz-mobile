@@ -249,7 +249,10 @@ class _AffirmationScreenState extends ConsumerState<AffirmationScreen> {
             child: GestureDetector(
               onTap: () {
                 Get.to(() => AffCatScreen(),
-                    arguments: [affirm.id, affirm.title]);
+                    arguments: [affirm.id, affirm.title], );
+                //
+                // Get.toNamed('aff_cat_screen', parameters: {'id' : affirm.id.toString()},arguments: [affirm.id, affirm.title],);
+
                 // print(affirm.title);
                 // Get.to(() => SingleAffScreen(),
                 //     transition: Transition.rightToLeft,

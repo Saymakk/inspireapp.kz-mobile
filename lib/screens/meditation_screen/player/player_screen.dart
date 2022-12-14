@@ -62,6 +62,8 @@ class _PlayerScreenState extends State<PlayerScreen> {
 
     print(isFile);
 
+    int values = 1;
+
     // setAudio();
     // audioPlayer.onPlayerStateChanged.listen((state) {
     //   setState(() {
@@ -114,7 +116,6 @@ class _PlayerScreenState extends State<PlayerScreen> {
 
     return [if (duration.inHours > 0) hours, minutes, seconds].join(':');
   }
-
 
   @override
   void dispose() {
@@ -350,9 +351,12 @@ class _PlayerScreenState extends State<PlayerScreen> {
                               child: GestureDetector(
                                 onTap: () {
                                   ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                          content: Text(
-                                              'Ваша медитация скачивается!')));
+                                    SnackBar(
+                                      content: Text(
+                                        'Ваша медитация скачивается!',
+                                      ),
+                                    ),
+                                  );
                                   downloadFile();
                                 },
                                 child:
@@ -404,20 +408,33 @@ class _PlayerScreenState extends State<PlayerScreen> {
                           width: MediaQuery.of(context).size.width,
                           // width: double.infinity,
                           child: Slider(
-                              inactiveColor: Color(0xffBCC9C5),
-                              activeColor: Color(0xff5bb4b9),
-                              min: 0,
-                              max: duration.inSeconds.toDouble() + 1,
-                              value: position.inSeconds.toDouble(),
-                              onChanged: (value) async {
-                                final position =
-                                    Duration(seconds: value.toInt());
-                                await audioPlayer.seek(position);
-                                await audioPlayer.resume();
-                                setState(() {
+                            inactiveColor: Color(0xffBCC9C5),
+                            activeColor: Color(0xff5bb4b9),
+                            min: 0,
+                            max: duration.inSeconds.toDouble() + 1,
+                            value: position.inSeconds.toDouble(),
+                            onChanged: (value) async {
+                              final position = Duration(seconds: value.toInt());
+                              await audioPlayer.seek(position);
+                              await audioPlayer.resume();
+                              setState(
+                                () {
+
                                   isPlaying = true;
-                                });
-                              }),
+                                  value.toInt() ==  duration.inSeconds ?
+                                  print('НОЛЬ') : print(00000);
+                                },
+                              );
+
+                              print( position.inSeconds);
+                              print( duration.inSeconds);
+                              print(value.toInt());
+
+
+
+
+                            },
+                          ),
                         ),
                       ],
                     ),

@@ -47,7 +47,7 @@ class _BottomNavState extends State<BottomNav> {
     CalendarScreen(),
   ];
 
-  int _selectedIndex = 0;
+  int _selectedIndex = Get.arguments[0] == null ? 0 : Get.arguments[0];
 
   // static const TextStyle optionStyle =
   //     TextStyle(fontSize: 9, fontWeight: FontWeight.w500);

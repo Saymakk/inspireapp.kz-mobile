@@ -1,4 +1,5 @@
 import 'package:InspireApp/requests/affirmations/affirm_done.dart';
+import 'package:InspireApp/widgets/bottom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -28,26 +29,26 @@ var aff_id = Get.arguments[0];
         ),
       ),
       child: Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-              onPressed: () {
-                Get.back();
-                Get.back();
-                Get.back();
-              },
-              icon: Icon(Icons.arrow_back)),
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          actions: [
-            IconButton(
-                onPressed: () {
-                  Get.back();
-                  Get.back();
-                  Get.back();
-                },
-                icon: Icon(Icons.close)),
-          ],
-        ),
+        // appBar: AppBar(
+        //   leading: IconButton(
+        //       onPressed: () {
+        //         Get.back();
+        //         Get.back();
+        //         Get.back();
+        //       },
+        //       icon: Icon(Icons.arrow_back)),
+        //   backgroundColor: Colors.transparent,
+        //   elevation: 0,
+        //   actions: [
+        //     IconButton(
+        //         onPressed: () {
+        //           Get.back();
+        //           Get.back();
+        //           Get.back();
+        //         },
+        //         icon: Icon(Icons.close)),
+        //   ],
+        // ),
         extendBodyBehindAppBar: true,
         // extendBody: true,
         backgroundColor: Colors.transparent,
@@ -95,8 +96,9 @@ var aff_id = Get.arguments[0];
                         onTap: () {
                           print(Hive.box('mybox').get(0));
                           print(aff_id);
-                          Get.back();
-                          Get.back();
+                          // Get.back();
+                          // Get.back();
+                          Get.offAll(BottomNav(), arguments: [3]);
                         },
                         child: Container(
                           width: double.infinity,
