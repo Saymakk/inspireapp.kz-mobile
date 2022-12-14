@@ -98,7 +98,8 @@ var aff_id = Get.arguments[0];
                           print(aff_id);
                           // Get.back();
                           // Get.back();
-                          Get.offAll(BottomNav(), arguments: [3]);
+                          Hive.box('db').put('page_index', 3);
+                          Get.offAll(BottomNav());
                         },
                         child: Container(
                           width: double.infinity,

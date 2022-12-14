@@ -35,8 +35,7 @@ class MyApp extends StatelessWidget {
         FocusScope.of(context).unfocus();
       },
       child: GetMaterialApp(
-        initialRoute: '/',
-        getPages: AppRoutes.routes,
+        // getPages: AppRoutes.routes,
         debugShowCheckedModeBanner: false,
         title: 'Inspire',
         home: Scaffold(

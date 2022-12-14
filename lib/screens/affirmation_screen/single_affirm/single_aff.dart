@@ -168,41 +168,41 @@ class _SingleAffScreenState extends State<SingleAffScreen>
                 children: [
                   Visibility(
                     visible: active,
-                    child:
-                  Expanded(
-                    child: Container(
-                      child: AnimatedTextKit(
-isRepeatingAnimation: false,
-                        pause: Duration(seconds: 0),
-                        displayFullTextOnTap: true,
-                        totalRepeatCount: 1,
-                        stopPauseOnTap: active,
-                        onFinished: () {
-                          audioPlayer.stop();
-                          Get.to(
-                                () => CongratAffirm(),
-                            arguments: [aff_id],
-                          );
-                        },
-                        animatedTexts: [
-                          ColorizeAnimatedText(
-                            '$title',
-                            textStyle: GoogleFonts.poppins(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 20,
+                    child: Expanded(
+                      child: Container(
+                        child: AnimatedTextKit(
+                          isRepeatingAnimation: false,
+                          pause: Duration(seconds: 0),
+                          displayFullTextOnTap: true,
+                          totalRepeatCount: 1,
+                          stopPauseOnTap: active,
+                          onFinished: () {
+                            audioPlayer.stop();
+                            Get.to(
+                              () => CongratAffirm(),
+                              arguments: [aff_id],
+                            );
+                          },
+                          animatedTexts: [
+
+                            ColorizeAnimatedText(
+                              '$title',
+                              textStyle: GoogleFonts.poppins(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 17,
+                              ),
+                              textAlign: TextAlign.center,
+                              colors: colorizeColors,
+                              speed: Duration(
+                                milliseconds: active == true ? 25 : 0,
+                              ),
+                              // cursor: '',
                             ),
-                            textAlign: TextAlign.center,
-                            colors: colorizeColors,
-                            speed: Duration(
-                              milliseconds: active == true ? 30 : 0,
-                            ),
-                            // cursor: '',
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
-                  ),
                   ),
                   Visibility(
                     visible: !active,
@@ -211,9 +211,10 @@ isRepeatingAnimation: false,
                         '$title',
                         textAlign: TextAlign.center,
                         style: GoogleFonts.poppins(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 20),
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 17,
+                        ),
                       ),
                     ),
                   ),

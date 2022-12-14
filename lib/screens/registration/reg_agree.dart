@@ -36,7 +36,7 @@ class RegisterAgreed extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  Get.offAll(()=>BottomNav());
+                  Get.offAll(()=>BottomNav(), arguments: []);
                   // Get.off(() => AuthorizationScreen(),
                   //     transition: Transition.rightToLeft);
                 },

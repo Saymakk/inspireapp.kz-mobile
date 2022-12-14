@@ -14,6 +14,7 @@ import 'package:InspireApp/screens/calendar/calendar_screen.dart';
 import 'package:InspireApp/screens/courses/courses_screen.dart';
 import 'package:InspireApp/screens/main_screen/main_screen.dart';
 import 'package:InspireApp/screens/meditation_screen/meditation_screen.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 import '../constants/constants.dart';
 
@@ -32,6 +33,7 @@ class _BottomNavState extends State<BottomNav> {
   void initState() {
     // TODO: implement initState
     super.initState();
+
     likedMedit();
     likedAff();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky,
@@ -47,7 +49,9 @@ class _BottomNavState extends State<BottomNav> {
     CalendarScreen(),
   ];
 
-  int _selectedIndex = Get.arguments[0] == null ? 0 : Get.arguments[0];
+  int page_index = Hive.box('db').get('page_index') != null ? Hive.box('db').get('page_index') : 0;
+
+  int _selectedIndex = Hive.box('db').get('page_index') != null ? Hive.box('db').get('page_index') : 0;
 
   // static const TextStyle optionStyle =
   //     TextStyle(fontSize: 9, fontWeight: FontWeight.w500);
@@ -57,10 +61,14 @@ class _BottomNavState extends State<BottomNav> {
       _selectedIndex = index;
     });
   }
+
   bool _allow = false;
 
   @override
   Widget build(BuildContext context) {
+    print(page_index.toString() + ' current page index');
+    print(Hive.box('db').get('page_index').toString() + ' current page index 2');
+    Hive.box('db').delete('page_index');
     return WillPopScope(
       onWillPop: () {
         return Future.value(_allow);
@@ -101,10 +109,10 @@ class _BottomNavState extends State<BottomNav> {
                       type: BottomNavigationBarType.fixed,
 
                       // selectedFontSize: 0,
-                      selectedLabelStyle:
-                          GoogleFonts.poppins(textStyle: TextStyle(fontSize: 9)),
-                      unselectedLabelStyle:
-                          GoogleFonts.poppins(textStyle: TextStyle(fontSize: 9)),
+                      selectedLabelStyle: GoogleFonts.poppins(
+                          textStyle: TextStyle(fontSize: 9)),
+                      unselectedLabelStyle: GoogleFonts.poppins(
+                          textStyle: TextStyle(fontSize: 9)),
                       unselectedItemColor: Const.icongrey,
                       selectedItemColor: Const.turq,
                       // showSelectedLabels: true,

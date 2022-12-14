@@ -58,6 +58,7 @@ dependencies:
       ref: master # branch name
   vimeo_video_player: ^0.0.6
   go_router: ^5.2.1
+  flutter_animate: ^2.0.1
 
 
 dev_dependencies:
