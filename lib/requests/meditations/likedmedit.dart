@@ -32,9 +32,9 @@ Future<List<meditationsList>> likedMedit() async {
 
     print(list == [] ? 'null' : 'notnull');
     print(datasheet.length);
-    Hive.box('db').put('meditliked', datasheet.length);
+    await Hive.box('db').put('meditliked', datasheet.length);
 
-     medlen = datasheet.length.toString(); //вот это значение надо записать
+    medlen = datasheet.length.toString(); //вот это значение надо записать
 
     return Future<List<meditationsList>>.value(datasheet);
   } else {

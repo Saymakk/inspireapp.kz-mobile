@@ -163,15 +163,16 @@ class _AffirmModalBottomSheetState extends State<AffirmModalBottomSheet> {
             // padding: EdgeInsets.all(20),
             child: GestureDetector(
               onTap: () {
-                // print(affirm.title);
+                // print(affirm.affirmation_texts);
                 Get.to(() => SingleAffScreen(),
                     transition: Transition.rightToLeft,
                     arguments: [
-                      affirm.title,
+                      affirm.affirmation_texts,
                       affirm.length,
                       affirm.id,
                       affirm.path,
-                      affirm.description
+                      affirm.description,
+                      affirm.affirmation_texts
                     ]);
                 // singleAffRequest(affirm.id);
               },

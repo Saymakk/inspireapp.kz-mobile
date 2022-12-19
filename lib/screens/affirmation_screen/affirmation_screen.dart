@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:InspireApp/requests/affirmations/liked.dart';
 import 'package:InspireApp/screens/affirmation_screen/aff_cat_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -23,8 +24,26 @@ class AffirmationScreen extends ConsumerStatefulWidget {
 }
 
 class _AffirmationScreenState extends ConsumerState<AffirmationScreen> {
+
+
+ @override
+  void  initState() {
+    // TODO: implement initState
+    super.initState();
+    likedAff();
+  }
+
   @override
   Widget build(BuildContext context) {
+    var a = Hive.box('db').get('affirmliked') != null
+        ? Hive.box('db').get('affirmliked')
+        : 0;
+
+    Stream<dynamic> getAff() async* {
+      yield Hive.box('db').get('affirmliked') != null
+          ? Hive.box('db').get('affirmliked')
+          : 0;
+    }
     return Container(
       child: Scaffold(
         extendBody: true,
@@ -106,10 +125,26 @@ class _AffirmationScreenState extends ConsumerState<AffirmationScreen> {
                             child: Center(
                               child: Container(
                                   // margin: EdgeInsets.all(11),
-                                  child: Text(
-                                '${Hive.box('db').get('affirmliked')}',
-                                style: GoogleFonts.poppins(
-                                    fontSize: 22, color: Color(0xff21cac8)),
+                                  child: StreamBuilder(
+                                stream: getAff(),
+                                builder: (context, snapshot) {
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.waiting) {
+                                    return Text(
+                                      '${a}',
+                                      style: GoogleFonts.poppins(
+                                          fontSize: 22,
+                                          color: Color(0xff21cac8)),
+                                    );
+                                  } else {
+                                    return Text(
+                                      '${snapshot.data}',
+                                      style: GoogleFonts.poppins(
+                                          fontSize: 22,
+                                          color: Color(0xff21cac8)),
+                                    );
+                                  }
+                                },
                               )),
                             ),
                           ),
@@ -248,8 +283,10 @@ class _AffirmationScreenState extends ConsumerState<AffirmationScreen> {
             // padding: EdgeInsets.all(20),
             child: GestureDetector(
               onTap: () {
-                Get.to(() => AffCatScreen(),
-                    arguments: [affirm.id, affirm.title], );
+                Get.to(
+                  () => AffCatScreen(),
+                  arguments: [affirm.id, affirm.title],
+                );
                 //
                 // Get.toNamed('aff_cat_screen', parameters: {'id' : affirm.id.toString()},arguments: [affirm.id, affirm.title],);
 

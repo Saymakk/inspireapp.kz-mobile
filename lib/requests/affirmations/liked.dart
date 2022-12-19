@@ -42,7 +42,7 @@ Future<List<categoriesAff>> likedAff() async {
 
     print(list.length == 0 ? 'null' : 'notnull');
     print(list.length);
-    Hive.box('db').put('affirmliked', datasheet.length);
+  await  Hive.box('db').put('affirmliked', datasheet.length);
 
     return Future<List<categoriesAff>>.value(datasheet);
   } else {

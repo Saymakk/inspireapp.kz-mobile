@@ -21,8 +21,8 @@ Future<void> affirmDoneRequest(int id) async {
     'Authorization': 'Bearer ${Hive.box('mybox').get(0)}'
   };
 
-  final Uri url = await Uri.parse(Const.domain + 'api/user/audio_activity');
-  var request = await http.MultipartRequest('POST', url);
+  final Uri url = await Uri.parse(Const.domain + 'api/user/like_audio/$id');
+  var request = await http.MultipartRequest('GET', url);
   print(Const.domain);
   request.headers.addAll(headers);
 

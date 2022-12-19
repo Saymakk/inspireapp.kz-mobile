@@ -8,6 +8,8 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:dio/dio.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/animate.dart';
+import 'package:flutter_animate/effects/effects.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -28,6 +30,8 @@ class SingleAffScreen extends StatefulWidget {
 class _SingleAffScreenState extends State<SingleAffScreen>
     with SingleTickerProviderStateMixin {
   bool isFile = false;
+
+  late AnimationController _animationController;
 
   // bool playerButton = false;
   var hive_aff = Hive.box('db');
@@ -170,37 +174,57 @@ class _SingleAffScreenState extends State<SingleAffScreen>
                     visible: active,
                     child: Expanded(
                       child: Container(
-                        child: AnimatedTextKit(
-                          isRepeatingAnimation: false,
-                          pause: Duration(seconds: 0),
-                          displayFullTextOnTap: true,
-                          totalRepeatCount: 1,
-                          stopPauseOnTap: active,
-                          onFinished: () {
-                            audioPlayer.stop();
-                            Get.to(
-                              () => CongratAffirm(),
-                              arguments: [aff_id],
-                            );
-                          },
-                          animatedTexts: [
-
-                            ColorizeAnimatedText(
-                              '$title',
-                              textStyle: GoogleFonts.poppins(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 17,
-                              ),
-                              textAlign: TextAlign.center,
-                              colors: colorizeColors,
-                              speed: Duration(
-                                milliseconds: active == true ? 25 : 0,
-                              ),
-                              // cursor: '',
-                            ),
-                          ],
+                        child: Text(
+                          '$title',
+                          style: GoogleFonts.poppins(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 17,
+                          ),
+                          textAlign: TextAlign.center,
+                        ).animate(onComplete: (controller) {
+                          audioPlayer.stop();
+                          Get.to(
+                                () => CongratAffirm(),
+                            arguments: [aff_id],
+                          );
+                        }).tint(
+                          color: Color(0xff21cac8),
+                          delay: .5.seconds,
+                          end: .8,
+                          duration: len.seconds,
                         ),
+                        // child: AnimatedTextKit(
+                        //   isRepeatingAnimation: false,
+                        //   pause: Duration(seconds: 0),
+                        //   displayFullTextOnTap: true,
+                        //   totalRepeatCount: 1,
+                        //   stopPauseOnTap: active,
+                        //   onFinished: () {
+                        //     audioPlayer.stop();
+                        //     Get.to(
+                        //       () => CongratAffirm(),
+                        //       arguments: [aff_id],
+                        //     );
+                        //   },
+                        //   animatedTexts: [
+                        //
+                        //     ColorizeAnimatedText(
+                        //       '$title',
+                        //       textStyle: GoogleFonts.poppins(
+                        //         color: Colors.white,
+                        //         fontWeight: FontWeight.w600,
+                        //         fontSize: 17,
+                        //       ),
+                        //       textAlign: TextAlign.center,
+                        //       colors: colorizeColors,
+                        //       speed: Duration(
+                        //         milliseconds: active == true ? 25 : 0,
+                        //       ),
+                        //       // cursor: '',
+                        //     ),
+                        //   ],
+                        // ),
                       ),
                     ),
                   ),

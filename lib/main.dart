@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -19,7 +21,7 @@ Future<void> main() async {
         onWillPop: () {
           return Future.value(_allow); // if true allow back else block it
         },
-        child: MyApp(),
+        child: ProviderScope(child: MyApp()),
       ),
     ),
   );
@@ -35,6 +37,7 @@ class MyApp extends StatelessWidget {
         FocusScope.of(context).unfocus();
       },
       child: GetMaterialApp(
+
         // getPages: AppRoutes.routes,
         debugShowCheckedModeBanner: false,
         title: 'Inspire',

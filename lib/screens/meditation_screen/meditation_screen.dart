@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:InspireApp/requests/meditations/likedmedit.dart';
 import 'package:InspireApp/screens/meditation_screen/medit_cat_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -14,7 +15,6 @@ import 'package:skeletons/skeletons.dart';
 
 import 'modal_bottom_sheet.dart';
 
-
 class MeditationScreen extends ConsumerStatefulWidget {
   const MeditationScreen({Key? key}) : super(key: key);
 
@@ -23,12 +23,21 @@ class MeditationScreen extends ConsumerStatefulWidget {
 }
 
 class _MeditationScreenState extends ConsumerState<MeditationScreen> {
-
+  @override
+  void initState() {
+    super.initState();
+    likedMedit();
+  }
 
   @override
   Widget build(BuildContext context) {
+    int liked = Hive.box('db').get('meditliked') != null
+        ? Hive.box('db').get('meditliked')
+        : 0;
 
-    var liked =  Hive.box('db').get('meditliked');
+    Stream<dynamic> getMed() async* {
+      yield liked;
+    }
 
     return Container(
       child: Scaffold(
@@ -111,10 +120,26 @@ class _MeditationScreenState extends ConsumerState<MeditationScreen> {
                             child: Center(
                               child: Container(
                                   // margin: EdgeInsets.all(11),
-                                  child: Text(
-                                '${liked}',
-                                style: GoogleFonts.poppins(
-                                    fontSize: 22, color: Color(0xff21cac8)),
+                                  child: StreamBuilder(
+                                stream: getMed(),
+                                builder: (context, snapshot) {
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.waiting) {
+                                    return Text(
+                                      '${liked}',
+                                      style: GoogleFonts.poppins(
+                                          fontSize: 22,
+                                          color: Color(0xff21cac8)),
+                                    );
+                                  } else {
+                                    return Text(
+                                      '${snapshot.data!}',
+                                      style: GoogleFonts.poppins(
+                                          fontSize: 22,
+                                          color: Color(0xff21cac8)),
+                                    );
+                                  }
+                                },
                               )),
                             ),
                           ),
