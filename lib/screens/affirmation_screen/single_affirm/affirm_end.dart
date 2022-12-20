@@ -16,7 +16,7 @@ class CongratAffirm extends StatefulWidget {
 
 class _CongratAffirmState extends State<CongratAffirm> {
   GetStorage auth = GetStorage();
-var aff_id = Get.arguments[0];
+  var aff_id = Get.arguments[0];
   bool like = false;
 
   @override
@@ -54,10 +54,18 @@ var aff_id = Get.arguments[0];
         backgroundColor: Colors.transparent,
         body: SafeArea(
           child: Container(
-            padding: EdgeInsets.only(left: 24, right: 24, top: 70),
+            padding: EdgeInsets.only(
+              left: 24,
+              right: 24,
+              top: 70,
+            ),
             child: Center(
               child: Container(
-                padding: EdgeInsets.only(left: 24, right: 24, top: 70),
+                padding: EdgeInsets.only(
+                  left: 24,
+                  right: 24,
+                  top: 70,
+                ),
                 child: Center(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -68,17 +76,17 @@ var aff_id = Get.arguments[0];
                           'Поздравляем! \nВы прошли аффирмацию!',
                           textAlign: TextAlign.center,
                           style: GoogleFonts.poppins(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 20),
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 20,
+                          ),
                         ),
                       ),
                       IconButton(
                         onPressed: () async {
                           await affirmDoneRequest(aff_id);
-                          setState((){
+                          setState(() {
                             like = !like;
-
                           });
                         },
                         icon: like == false
@@ -87,7 +95,11 @@ var aff_id = Get.arguments[0];
                                 size: 40,
                                 color: Colors.white,
                               )
-                            : Icon(Icons.favorite, size: 40, color: Colors.red,),
+                            : Icon(
+                                Icons.favorite,
+                                size: 40,
+                                color: Colors.red,
+                              ),
                       ),
                       SizedBox(
                         height: 20,
@@ -98,7 +110,10 @@ var aff_id = Get.arguments[0];
                           print(aff_id);
                           // Get.back();
                           // Get.back();
-                          Hive.box('db').put('page_index', 3);
+                          Hive.box('db').put(
+                            'page_index',
+                            3,
+                          );
                           Get.offAll(BottomNav());
                         },
                         child: Container(

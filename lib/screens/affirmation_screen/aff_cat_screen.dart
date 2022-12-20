@@ -56,9 +56,10 @@ class _AffCatScreenState extends State<AffCatScreen> {
                       padding: EdgeInsets.only(top: 10),
                       child: SkeletonLine(
                         style: SkeletonLineStyle(
-                            height: 48,
-                            width: double.infinity,
-                            borderRadius: BorderRadius.circular(8)),
+                          height: 48,
+                          width: double.infinity,
+                          borderRadius: BorderRadius.circular(8),
+                        ),
                       ),
                     );
                   case ConnectionState.waiting:
@@ -68,45 +69,50 @@ class _AffCatScreenState extends State<AffCatScreen> {
                           padding: EdgeInsets.only(top: 10),
                           child: SkeletonLine(
                             style: SkeletonLineStyle(
-                                height: 48,
-                                width: double.infinity,
-                                borderRadius: BorderRadius.circular(8)),
+                              height: 48,
+                              width: double.infinity,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
                           ),
                         ),
                         Container(
                           padding: EdgeInsets.only(top: 10),
                           child: SkeletonLine(
                             style: SkeletonLineStyle(
-                                height: 48,
-                                width: double.infinity,
-                                borderRadius: BorderRadius.circular(8)),
+                              height: 48,
+                              width: double.infinity,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
                           ),
                         ),
                         Container(
                           padding: EdgeInsets.only(top: 10),
                           child: SkeletonLine(
                             style: SkeletonLineStyle(
-                                height: 48,
-                                width: double.infinity,
-                                borderRadius: BorderRadius.circular(8)),
+                              height: 48,
+                              width: double.infinity,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
                           ),
                         ),
                         Container(
                           padding: EdgeInsets.only(top: 10),
                           child: SkeletonLine(
                             style: SkeletonLineStyle(
-                                height: 48,
-                                width: double.infinity,
-                                borderRadius: BorderRadius.circular(8)),
+                              height: 48,
+                              width: double.infinity,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
                           ),
                         ),
                         Container(
                           padding: EdgeInsets.only(top: 10),
                           child: SkeletonLine(
                             style: SkeletonLineStyle(
-                                height: 48,
-                                width: double.infinity,
-                                borderRadius: BorderRadius.circular(8)),
+                              height: 48,
+                              width: double.infinity,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
                           ),
                         ),
                       ],
@@ -121,7 +127,11 @@ class _AffCatScreenState extends State<AffCatScreen> {
                           width: 320,
                           margin: EdgeInsets.only(top: 20),
                           padding: EdgeInsets.only(
-                              left: 19, right: 19, top: 13.5, bottom: 10.5),
+                            left: 19,
+                            right: 19,
+                            top: 13.5,
+                            bottom: 10.5,
+                          ),
                           decoration: BoxDecoration(
                             color: Color(0xffFFFEE3),
                             borderRadius: BorderRadius.circular(15),
@@ -136,13 +146,18 @@ class _AffCatScreenState extends State<AffCatScreen> {
                               'Извините, здесь пока ничего нет',
                               maxLines: 4,
                               style: TextStyle(
-                                  fontSize: 14, color: Const.deepgrey),
+                                fontSize: 14,
+                                color: Const.deepgrey,
+                              ),
                             ),
                           ),
                         ),
                       );
                     } else {
-                      return AffirmList(snapshot.data, context);
+                      return AffirmList(
+                        snapshot.data,
+                        context,
+                      );
                     }
                 }
               },
@@ -216,18 +231,23 @@ class _AffCatScreenState extends State<AffCatScreen> {
               color: Const.lowgrey,
               borderRadius: BorderRadius.circular(15),
             ),
-            margin: EdgeInsets.only(top: 10, bottom: 10),
+            margin: EdgeInsets.only(
+              top: 10,
+              bottom: 10,
+            ),
             child: GestureDetector(
               onTap: () {
-                Get.to(() => SingleAffScreen(),
-                    transition: Transition.rightToLeft,
-                    arguments: [
-                      affirm.affirmation_texts,
-                      affirm.length,
-                      affirm.id,
-                      affirm.path,
-                      affirm.description
-                    ]);
+                Get.to(
+                  () => SingleAffScreen(),
+                  transition: Transition.rightToLeft,
+                  arguments: [
+                    affirm.affirmation_texts,
+                    affirm.length,
+                    affirm.id,
+                    affirm.path,
+                    affirm.description,
+                  ],
+                );
               },
               child: ListTile(
                 isThreeLine: true,
@@ -236,8 +256,10 @@ class _AffCatScreenState extends State<AffCatScreen> {
                   child: Text(
                     affirm.title,
                     style: GoogleFonts.poppins(
-                      textStyle:
-                      TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+                      textStyle: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ),
                 ),

@@ -24,10 +24,8 @@ class AffirmationScreen extends ConsumerStatefulWidget {
 }
 
 class _AffirmationScreenState extends ConsumerState<AffirmationScreen> {
-
-
- @override
-  void  initState() {
+  @override
+  void initState() {
     // TODO: implement initState
     super.initState();
     likedAff();
@@ -44,12 +42,16 @@ class _AffirmationScreenState extends ConsumerState<AffirmationScreen> {
           ? Hive.box('db').get('affirmliked')
           : 0;
     }
+
     return Container(
       child: Scaffold(
         extendBody: true,
         backgroundColor: Color(0xffffffff),
         appBar: PreferredSize(
-          preferredSize: Size(double.infinity, 59),
+          preferredSize: Size(
+            double.infinity,
+            59,
+          ),
           child: AppBarWidget(),
         ),
         body: Container(
@@ -71,19 +73,24 @@ class _AffirmationScreenState extends ConsumerState<AffirmationScreen> {
                 Text(
                   'Ежедневные аффирмации созданы для трансформации человека день за днем',
                   style: GoogleFonts.poppins(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 14,
-                      color: Color(0xffA5ADAF)),
+                    fontWeight: FontWeight.w400,
+                    fontSize: 14,
+                    color: Color(0xffA5ADAF),
+                  ),
                 ),
                 Container(
                   margin: EdgeInsets.only(
                     top: 32,
                   ),
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: Color(0xffE3F8FF)),
+                    borderRadius: BorderRadius.circular(15),
+                    color: Color(0xffE3F8FF),
+                  ),
                   child: Container(
-                    margin: EdgeInsets.symmetric(horizontal: 17, vertical: 18),
+                    margin: EdgeInsets.symmetric(
+                      horizontal: 17,
+                      vertical: 18,
+                    ),
                     child: GestureDetector(
                       onTap: () {
                         showModalBottomSheet(
@@ -110,9 +117,10 @@ class _AffirmationScreenState extends ConsumerState<AffirmationScreen> {
                             child: Text(
                               'Избранные аффирмации',
                               style: GoogleFonts.poppins(
-                                  color: Color(0xff4f4f4f),
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 14),
+                                color: Color(0xff4f4f4f),
+                                fontWeight: FontWeight.w600,
+                                fontSize: 14,
+                              ),
                             ),
                           ),
                           Container(
@@ -133,15 +141,17 @@ class _AffirmationScreenState extends ConsumerState<AffirmationScreen> {
                                     return Text(
                                       '${a}',
                                       style: GoogleFonts.poppins(
-                                          fontSize: 22,
-                                          color: Color(0xff21cac8)),
+                                        fontSize: 22,
+                                        color: Color(0xff21cac8),
+                                      ),
                                     );
                                   } else {
                                     return Text(
                                       '${snapshot.data}',
                                       style: GoogleFonts.poppins(
-                                          fontSize: 22,
-                                          color: Color(0xff21cac8)),
+                                        fontSize: 22,
+                                        color: Color(0xff21cac8),
+                                      ),
                                     );
                                   }
                                 },
@@ -168,9 +178,10 @@ class _AffirmationScreenState extends ConsumerState<AffirmationScreen> {
                           padding: EdgeInsets.only(top: 10),
                           child: SkeletonLine(
                             style: SkeletonLineStyle(
-                                height: 48,
-                                width: double.infinity,
-                                borderRadius: BorderRadius.circular(8)),
+                              height: 48,
+                              width: double.infinity,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
                           ),
                         );
                       case ConnectionState.waiting:
@@ -180,45 +191,50 @@ class _AffirmationScreenState extends ConsumerState<AffirmationScreen> {
                               padding: EdgeInsets.only(top: 10),
                               child: SkeletonLine(
                                 style: SkeletonLineStyle(
-                                    height: 48,
-                                    width: double.infinity,
-                                    borderRadius: BorderRadius.circular(8)),
+                                  height: 48,
+                                  width: double.infinity,
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
                               ),
                             ),
                             Container(
                               padding: EdgeInsets.only(top: 10),
                               child: SkeletonLine(
                                 style: SkeletonLineStyle(
-                                    height: 48,
-                                    width: double.infinity,
-                                    borderRadius: BorderRadius.circular(8)),
+                                  height: 48,
+                                  width: double.infinity,
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
                               ),
                             ),
                             Container(
                               padding: EdgeInsets.only(top: 10),
                               child: SkeletonLine(
                                 style: SkeletonLineStyle(
-                                    height: 48,
-                                    width: double.infinity,
-                                    borderRadius: BorderRadius.circular(8)),
+                                  height: 48,
+                                  width: double.infinity,
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
                               ),
                             ),
                             Container(
                               padding: EdgeInsets.only(top: 10),
                               child: SkeletonLine(
                                 style: SkeletonLineStyle(
-                                    height: 48,
-                                    width: double.infinity,
-                                    borderRadius: BorderRadius.circular(8)),
+                                  height: 48,
+                                  width: double.infinity,
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
                               ),
                             ),
                             Container(
                               padding: EdgeInsets.only(top: 10),
                               child: SkeletonLine(
                                 style: SkeletonLineStyle(
-                                    height: 48,
-                                    width: double.infinity,
-                                    borderRadius: BorderRadius.circular(8)),
+                                  height: 48,
+                                  width: double.infinity,
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
                               ),
                             ),
                           ],
@@ -233,7 +249,11 @@ class _AffirmationScreenState extends ConsumerState<AffirmationScreen> {
                               width: 320,
                               margin: EdgeInsets.only(top: 20),
                               padding: EdgeInsets.only(
-                                  left: 19, right: 19, top: 13.5, bottom: 10.5),
+                                left: 19,
+                                right: 19,
+                                top: 13.5,
+                                bottom: 10.5,
+                              ),
                               decoration: BoxDecoration(
                                 color: Color(0xffFFFEE3),
                                 borderRadius: BorderRadius.circular(15),
@@ -248,13 +268,18 @@ class _AffirmationScreenState extends ConsumerState<AffirmationScreen> {
                                   'Извините, здесь пока ничего нет',
                                   maxLines: 4,
                                   style: TextStyle(
-                                      fontSize: 14, color: Const.deepgrey),
+                                    fontSize: 14,
+                                    color: Const.deepgrey,
+                                  ),
                                 ),
                               ),
                             ),
                           );
                         } else {
-                          return AffirmList(snapshot.data, context);
+                          return AffirmList(
+                            snapshot.data,
+                            context,
+                          );
                         }
                     }
                   },
@@ -304,10 +329,12 @@ class _AffirmationScreenState extends ConsumerState<AffirmationScreen> {
                 title: Text(
                   affirm.title,
                   style: GoogleFonts.poppins(
-                      textStyle: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 14,
-                          color: Const.semigrey)),
+                    textStyle: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 14,
+                      color: Const.semigrey,
+                    ),
+                  ),
                 ),
                 trailing: GestureDetector(
                   onTap: () {
@@ -326,7 +353,9 @@ class _AffirmationScreenState extends ConsumerState<AffirmationScreen> {
                           child: Text(
                         affirm.contents_count.toString(),
                         style: GoogleFonts.poppins(
-                            fontSize: 22, color: Color(0xff21cac8)),
+                          fontSize: 22,
+                          color: Color(0xff21cac8),
+                        ),
                       )),
                     ),
                   ),

@@ -41,9 +41,10 @@ class _SingleAffScreenState extends State<SingleAffScreen>
   int aff_id = Get.arguments[2];
   String aff_path = Get.arguments[3];
 
-  late final AnimationController _controller =
-      AnimationController(vsync: this, duration: Duration(seconds: 3))
-        ..repeat();
+  late final AnimationController _controller = AnimationController(
+    vsync: this,
+    duration: Duration(seconds: 3),
+  )..repeat();
 
   // String aff_desc = Get.arguments[4];
   final audioPlayer = AudioPlayer();
@@ -53,7 +54,6 @@ class _SingleAffScreenState extends State<SingleAffScreen>
   GetStorage local_audio = GetStorage();
 
   void activePress() {
-
     setState(
       () {
         active = true;
@@ -92,7 +92,9 @@ class _SingleAffScreenState extends State<SingleAffScreen>
     // TODO: implement initState
     super.initState();
 
-    print(hive_aff.get('aff_${aff_path}'));
+    print(
+      hive_aff.get('aff_${aff_path}'),
+    );
     print(hive_aff.get('aff_${aff_path}').runtimeType);
 
     // downloadFile();
@@ -102,7 +104,11 @@ class _SingleAffScreenState extends State<SingleAffScreen>
     // active == true ?  audioPlayer.play(AssetSource('audio/sound1.wav')) : audioPlayer.stop();
     active == true
         // ? audioPlayer.play(UrlSource(Const.domain + aff_path))
-        ? audioPlayer.play(DeviceFileSource(hive_aff.get('aff_${aff_id}')))
+        ? audioPlayer.play(
+            DeviceFileSource(
+              hive_aff.get('aff_${aff_id}'),
+            ),
+          )
         : audioPlayer.stop();
 
     // Timer.periodic(const Duration(seconds: 1), (timer) async {
@@ -149,7 +155,9 @@ class _SingleAffScreenState extends State<SingleAffScreen>
 
   @override
   Widget build(BuildContext context) {
-    print('путь файлы ' + aff_path.toString());
+    print(
+      'путь файлы ' + aff_path.toString(),
+    );
 
     return Container(
       decoration: BoxDecoration(
@@ -161,10 +169,11 @@ class _SingleAffScreenState extends State<SingleAffScreen>
       child: Scaffold(
         appBar: AppBar(
           leading: IconButton(
-              onPressed: () {
-                Get.back();
-              },
-              icon: Icon(Icons.arrow_back)),
+            onPressed: () {
+              Get.back();
+            },
+            icon: Icon(Icons.arrow_back),
+          ),
           backgroundColor: Colors.transparent,
           elevation: 0,
           actions: [
@@ -181,7 +190,11 @@ class _SingleAffScreenState extends State<SingleAffScreen>
         backgroundColor: Colors.transparent,
         body: SafeArea(
           child: Container(
-            padding: EdgeInsets.only(left: 24, right: 24, top: 70),
+            padding: EdgeInsets.only(
+              left: 24,
+              right: 24,
+              top: 70,
+            ),
             child: Center(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -368,12 +381,14 @@ class _SingleAffScreenState extends State<SingleAffScreen>
   Future<File?> downloadFile() async {
     final appStorage = await getApplicationDocumentsDirectory();
     final file = File('${appStorage.path}/aff_${aff_id}');
-    final response = await Dio().get(Const.domain + aff_path,
-        options: Options(
-          responseType: ResponseType.bytes,
-          followRedirects: false,
-          receiveTimeout: 0,
-        ));
+    final response = await Dio().get(
+      Const.domain + aff_path,
+      options: Options(
+        responseType: ResponseType.bytes,
+        followRedirects: false,
+        receiveTimeout: 0,
+      ),
+    );
 
     final raf = file.openSync(mode: FileMode.write);
     raf.writeFromSync(response.data);
