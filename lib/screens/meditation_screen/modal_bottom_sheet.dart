@@ -108,9 +108,9 @@ class _MeditModalBottomSheetState extends State<MeditModalBottomSheet> {
                       ),
                       child: MeditList(snapshot.data, context),
                     );
-                    print(auth.read('token'));
+                    // print(auth.read('token'));
                   } else {
-                    print(auth.read('token'));
+                    // print(auth.read('token'));
                     return Center(
                       child: Container(
                         width: double.infinity,

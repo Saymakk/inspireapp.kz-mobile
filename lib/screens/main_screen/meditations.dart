@@ -155,9 +155,9 @@ class _MeditationsState extends State<Meditations> {
                             ],
                           ),
                         );
-                        print(auth.read('token'));
+                        // print(auth.read('token'));
                       } else {
-                        print(auth.read('token'));
+                        // print(auth.read('token'));
                         return SizedBox();
                         // return Container(
                         //   margin: EdgeInsets.only(top: 20),

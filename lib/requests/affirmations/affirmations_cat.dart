@@ -11,7 +11,7 @@ import 'package:InspireApp/model/single_affirm.dart';
 Future<List<categoriesAff>> affirmationsCatRequest(id) async {
   GetStorage auth = GetStorage();
 
-  print(id);
+  // print(id);
 
   var headers = {
     'Accept': 'application/json',

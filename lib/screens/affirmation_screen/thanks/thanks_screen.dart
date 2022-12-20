@@ -38,7 +38,7 @@ class _TanksScreenState extends State<ThanksScreen> {
             maxLines: 3,
             textAlign: TextAlign.center,
             style: GoogleFonts.poppins(
-                color: Colors.black, fontWeight: FontWeight.w600, fontSize: 20),
+                color: Colors.black, fontWeight: FontWeight.w600, fontSize: 20,),
           ),
         ),
         elevation: 0,
@@ -59,7 +59,7 @@ class _TanksScreenState extends State<ThanksScreen> {
                 margin: EdgeInsets.only(bottom: 15),
                 decoration: BoxDecoration(
                     color: Color(0xffE3F8FF),
-                    borderRadius: BorderRadius.circular(19)),
+                    borderRadius: BorderRadius.circular(19),),
                 child: Container(
                   margin: EdgeInsets.all(22),
                   child: Column(

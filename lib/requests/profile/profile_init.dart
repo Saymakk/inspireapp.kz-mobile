@@ -35,7 +35,7 @@ Future<void> profileRequestInit() async {
     var data = await json.decode(responsed.body);
 
     print('response.statusCode : ${response.statusCode}');
-    print('data : ${data}');
+    // print('data : ${data}');
 
     await user.write('username', data);
     await Hive.box('mybox').put('UserData', data);
@@ -43,8 +43,8 @@ Future<void> profileRequestInit() async {
     await Hive.box('mybox').put('photo', data['profile_photo_url']);
     await Hive.box('mybox').put('photo2', data['profile_photo_url']);
 
-    print(Hive.box('mybox').get('photo').toString() + ' ЗДЕСЬ ФОТО');
-    print(data['city_id'].toString() + ' это айди города');
+    // print(Hive.box('mybox').get('photo').toString() + ' ЗДЕСЬ ФОТО');
+    // print(data['city_id'].toString() + ' это айди города');
 
   } else {
     print('error');

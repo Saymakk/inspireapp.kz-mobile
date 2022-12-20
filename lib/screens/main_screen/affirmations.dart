@@ -119,7 +119,7 @@ class _AffirmationsState extends State<Affirmations> {
             default:
               // return rideList(snapshot.data, context);
               if (snapshot.data == null) {
-                print(auth.read('token'));
+                // print(auth.read('token'));
                 return SizedBox();
                 // return Container(
                 //   width: 320,

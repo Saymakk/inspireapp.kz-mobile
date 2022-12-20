@@ -23,7 +23,7 @@ Future<void> affirmDoneRequest(int id) async {
 
   final Uri url = await Uri.parse(Const.domain + 'api/user/like_audio/$id');
   var request = await http.MultipartRequest('GET', url);
-  print(Const.domain);
+  // print(Const.domain);
   request.headers.addAll(headers);
 
   request.fields['content_id'] = id.toString();

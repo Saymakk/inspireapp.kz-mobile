@@ -58,7 +58,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
     super.initState();
      citiesListRequest();
 
-    print(Hive.box('db').get('list'));
+    // print(Hive.box('db').get('list'));
 
   }
 

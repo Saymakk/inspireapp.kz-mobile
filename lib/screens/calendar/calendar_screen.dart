@@ -218,7 +218,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
           String y = note.created_at.substring(0, 10).substring(0, 4);
           return GestureDetector(
             onTap: () {
-              print('${d}' + '.' + '${m}' + '.' + '${y}');
+              // print('${d}' + '.' + '${m}' + '.' + '${y}');
               Get.to(() => SingleNoteScreen(),
                   transition: Transition.rightToLeft,
                   arguments: [

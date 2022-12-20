@@ -86,7 +86,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          print(Get.arguments[4]);
+                          // print(Get.arguments[4]);
                         },
                         child: Container(
                           margin: EdgeInsets.only(right: 25),
@@ -154,7 +154,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       ),
                                     )));
                                   }
-                                  print(copied.text);
+                                  // print(copied.text);
                                 },
                                 child: Container(
                                   padding: EdgeInsets.only(left: 18, right: 18),

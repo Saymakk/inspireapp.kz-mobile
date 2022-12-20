@@ -44,10 +44,10 @@ class _PlayerScreenState extends State<PlayerScreen> {
   void initState() {
     // TODO: implement initState
 
-    print(hive_medit.get('medit_${audio_id}'));
-    print(hive_medit
-        .get('medit_${audio_id}')
-        .runtimeType);
+    // print(hive_medit.get('medit_${audio_id}'));
+    // print(hive_medit
+    //     .get('medit_${audio_id}')
+    //     .runtimeType);
 
     // print(local_audio.read('medit_${audio_id}'));
     // print(local_audio.read('medit_${audio_id}').runtimeType);
@@ -62,7 +62,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
         : isFile = false;
     // downloadFile();
 
-    print(isFile);
+    // print(isFile);
 
     int values = 1;
 
@@ -92,8 +92,8 @@ class _PlayerScreenState extends State<PlayerScreen> {
       } else {
         return;
       }
-      print(duration.inSeconds - position.inSeconds);
-      print(audioPlayer.releaseMode);
+      // print(duration.inSeconds - position.inSeconds);
+      // print(audioPlayer.releaseMode);
     });
   }
 
@@ -283,7 +283,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                   looped = !looped;
                                 });
                                 if (looped == true) {
-                                  print(looped);
+                                  // print(looped);
                                   return loop();
                                 } else {
                                   return unloop();
@@ -317,8 +317,8 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                       'assets/icons/play_button.svg'),
                                   iconSize: 48,
                                   onPressed: () async {
-                                    print(hive_medit
-                                        .get('medit_${audio_id}'));
+                                    // print(hive_medit
+                                    //     .get('medit_${audio_id}'));
                                     await audioPlayer.play(
                                         DeviceFileSource(
                                             hive_medit.get(
@@ -389,7 +389,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                 ),
                                 iconSize: 24,
                                 onPressed: () async {
-                                  print(audio_id);
+                                  // print(audio_id);
                                   await doLike(audio_id);
                                   setState(() {
                                     liked = !liked;
@@ -436,9 +436,9 @@ class _PlayerScreenState extends State<PlayerScreen> {
                               setState(
                                     () {
                                   isPlaying = true;
-                                  value.toInt() == duration.inSeconds
-                                      ? print('НОЛЬ')
-                                      : print(00000);
+                                  // value.toInt() == duration.inSeconds
+                                  //     ? print('НОЛЬ')
+                                  //     : print(00000);
                                 },
                               );
                             },
@@ -471,7 +471,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
     final raf = file.openSync(mode: FileMode.write);
     raf.writeFromSync(response.data);
     await raf.close();
-    print(file.path);
+    // print(file.path);
     if (file.path != null) {
       setState(() {
         isFile = true;

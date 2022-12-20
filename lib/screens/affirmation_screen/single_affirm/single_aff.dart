@@ -43,7 +43,7 @@ class _SingleAffScreenState extends State<SingleAffScreen>
 
   late final AnimationController _controller = AnimationController(
     vsync: this,
-    duration: Duration(seconds: 3),
+    duration: Duration(seconds: 2),
   )..repeat();
 
   // String aff_desc = Get.arguments[4];
@@ -59,14 +59,12 @@ class _SingleAffScreenState extends State<SingleAffScreen>
         active = true;
       },
     );
-    print(active);
     // audioPlayer.play(AssetSource('audio/sound1.wav'));
     audioPlayer.play(
       DeviceFileSource(
         hive_aff.get('aff_${aff_id}'),
       ),
     );
-    print(len);
     Future.delayed(
       Duration(seconds: len + 1),
       () {
@@ -92,15 +90,6 @@ class _SingleAffScreenState extends State<SingleAffScreen>
     // TODO: implement initState
     super.initState();
 
-    print(
-      hive_aff.get('aff_${aff_path}'),
-    );
-    print(hive_aff.get('aff_${aff_path}').runtimeType);
-
-    // downloadFile();
-
-    var counter = len;
-
     // active == true ?  audioPlayer.play(AssetSource('audio/sound1.wav')) : audioPlayer.stop();
     active == true
         // ? audioPlayer.play(UrlSource(Const.domain + aff_path))
@@ -111,32 +100,7 @@ class _SingleAffScreenState extends State<SingleAffScreen>
           )
         : audioPlayer.stop();
 
-    // Timer.periodic(const Duration(seconds: 1), (timer) async {
-    //   // print(timer.tick);
-    //   if (active == true) {
-    //     counter--;
-    //     print(counter);
-    //     if (counter == 0) {
-    //       /** Разобраться с таймером **/
-    //       setState(() {
-    //         print('Cancel timer');
-    //         timer.cancel();
-    //
-    //         Get.off(
-    //           () => CongratAffirm(),
-    //           arguments: [aff_id],
-    //         );
-    //       });
-    //     }
-    //   } else {
-    //     if (active == false) {
-    //       setState(() {
-    //         counter = len;
-    //         timer.cancel();
-    //       });
-    //     }
-    //   }
-    // });
+
     hive_aff.get('aff_${aff_id}') != null ? isFile = true : isFile = false;
   }
 

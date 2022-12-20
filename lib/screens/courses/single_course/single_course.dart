@@ -212,7 +212,7 @@ class _SingleCourseScreenState extends ConsumerState<SingleCourseScreen> {
                     fileName: '${course_title}.doc',
                   );
 
-                  print('https://kz.inspireapp.kz/' + material_path!);
+                  // print('https://kz.inspireapp.kz/' + material_path!);
                 },
                 child: Container(
                   width: double.infinity,

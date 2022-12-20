@@ -106,8 +106,8 @@ class _CongratAffirmState extends State<CongratAffirm> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          print(Hive.box('mybox').get(0));
-                          print(aff_id);
+                          // print(Hive.box('mybox').get(0));
+                          // print(aff_id);
                           // Get.back();
                           // Get.back();
                           Hive.box('db').put(

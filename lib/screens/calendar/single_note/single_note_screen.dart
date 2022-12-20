@@ -29,7 +29,7 @@ class _SingleNoteScreenState extends State<SingleNoteScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-print('${d}' + '.' + '${m}' + '.' + '${y}' );
+// print('${d}' + '.' + '${m}' + '.' + '${y}' );
   }
 
   @override
