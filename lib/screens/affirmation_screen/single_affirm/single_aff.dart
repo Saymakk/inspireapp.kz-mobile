@@ -42,7 +42,7 @@ class _SingleAffScreenState extends State<SingleAffScreen>
   String aff_path = Get.arguments[3];
 
   late final AnimationController _controller =
-      AnimationController(vsync: this, duration: Duration(seconds: 1))
+      AnimationController(vsync: this, duration: Duration(seconds: 3))
         ..repeat();
 
   // String aff_desc = Get.arguments[4];
@@ -53,13 +53,30 @@ class _SingleAffScreenState extends State<SingleAffScreen>
   GetStorage local_audio = GetStorage();
 
   void activePress() {
-    setState(() {
-      active = true;
-    });
+
+    setState(
+      () {
+        active = true;
+      },
+    );
     print(active);
     // audioPlayer.play(AssetSource('audio/sound1.wav'));
-    audioPlayer.play(DeviceFileSource(hive_aff.get('aff_${aff_id}')));
+    audioPlayer.play(
+      DeviceFileSource(
+        hive_aff.get('aff_${aff_id}'),
+      ),
+    );
     print(len);
+    Future.delayed(
+      Duration(seconds: len + 1),
+      () {
+        audioPlayer.stop();
+        Get.to(
+          () => CongratAffirm(),
+          arguments: [aff_id],
+        );
+      },
+    );
   }
 
   void inactivePress() {
@@ -174,57 +191,56 @@ class _SingleAffScreenState extends State<SingleAffScreen>
                     visible: active,
                     child: Expanded(
                       child: Container(
-                        child: Text(
-                          '$title',
-                          style: GoogleFonts.poppins(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 17,
-                          ),
-                          textAlign: TextAlign.center,
-                        ).animate(onComplete: (controller) {
-                          audioPlayer.stop();
-                          Get.to(
-                                () => CongratAffirm(),
-                            arguments: [aff_id],
-                          );
-                        }).tint(
-                          color: Color(0xff21cac8),
-                          delay: .5.seconds,
-                          end: .8,
-                          duration: len.seconds,
-                        ),
-                        // child: AnimatedTextKit(
-                        //   isRepeatingAnimation: false,
-                        //   pause: Duration(seconds: 0),
-                        //   displayFullTextOnTap: true,
-                        //   totalRepeatCount: 1,
-                        //   stopPauseOnTap: active,
-                        //   onFinished: () {
-                        //     audioPlayer.stop();
-                        //     Get.to(
-                        //       () => CongratAffirm(),
-                        //       arguments: [aff_id],
-                        //     );
-                        //   },
-                        //   animatedTexts: [
-                        //
-                        //     ColorizeAnimatedText(
-                        //       '$title',
-                        //       textStyle: GoogleFonts.poppins(
-                        //         color: Colors.white,
-                        //         fontWeight: FontWeight.w600,
-                        //         fontSize: 17,
-                        //       ),
-                        //       textAlign: TextAlign.center,
-                        //       colors: colorizeColors,
-                        //       speed: Duration(
-                        //         milliseconds: active == true ? 25 : 0,
-                        //       ),
-                        //       // cursor: '',
-                        //     ),
-                        //   ],
+                        // child: Text(
+                        //   '$title',
+                        //   style: GoogleFonts.poppins(
+                        //     color: Colors.white,
+                        //     fontWeight: FontWeight.w600,
+                        //     fontSize: 17,
+                        //   ),
+                        //   textAlign: TextAlign.center,
+                        // ).animate(onComplete: (controller) {
+                        //   audioPlayer.stop();
+                        //   Get.to(
+                        //         () => CongratAffirm(),
+                        //     arguments: [aff_id],
+                        //   );
+                        // }).tint(
+                        //   color: Color(0xff21cac8),
+                        //   delay: .5.seconds,
+                        //   end: .8,
+                        //   duration: len.seconds,
                         // ),
+                        child: AnimatedTextKit(
+                          isRepeatingAnimation: false,
+                          pause: Duration(seconds: 0),
+                          displayFullTextOnTap: true,
+                          totalRepeatCount: 1,
+                          stopPauseOnTap: !active,
+                          // onFinished: () {
+                          //   audioPlayer.stop();
+                          //   Get.to(
+                          //     () => CongratAffirm(),
+                          //     arguments: [aff_id],
+                          //   );
+                          // },
+                          animatedTexts: [
+                            ColorizeAnimatedText(
+                              '$title',
+                              textStyle: GoogleFonts.poppins(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 17,
+                              ),
+                              textAlign: TextAlign.center,
+                              colors: colorizeColors,
+                              speed: Duration(
+                                milliseconds: active == true ? 25 : 0,
+                              ),
+                              // cursor: '',
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
