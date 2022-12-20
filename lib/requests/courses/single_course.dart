@@ -11,7 +11,6 @@ import 'package:InspireApp/model/meditation_model.dart';
 import 'package:InspireApp/model/mini_courses_model.dart';
 import 'package:InspireApp/screens/courses/single_course/single_course.dart';
 
-
 Future<void> singleCourse(id) async {
   GetStorage auth = GetStorage();
 
@@ -26,23 +25,21 @@ Future<void> singleCourse(id) async {
   var responsed = await http.Response.fromStream(response);
 
   if (response.statusCode == 200) {
-
     dynamic list = json.decode(responsed.body);
 
     print(list['path']);
 
-
     // List<coursesList> datasheet = list.map((f) => coursesList.fromJson(f)).toList();
 
     Get.to(() => SingleCourseScreen(),
-        transition: Transition.rightToLeft, arguments: [
+        transition: Transition.rightToLeft,
+        arguments: [
           list['title'],
           list['material_path'],
           list['length'],
           list['description'],
           list['path'],
           list['picture'],
-
         ]);
     // return Future<List<coursesList>>.value(datasheet);
   } else {

@@ -56,7 +56,7 @@ class _VideoPlayerState extends State<VideoPlayer> {
 
   @override
   Widget build(BuildContext context) {
-    // print(video);
+    print(video);
     return Scaffold(
       backgroundColor: Color(0xFF15162B), //FF15162B // 0xFFF2F2F2
       appBar: MediaQuery.of(context).orientation == Orientation.portrait
@@ -80,7 +80,7 @@ class _VideoPlayerState extends State<VideoPlayer> {
       body:  VimeoVideoPlayer(
         vimeoPlayerModel: VimeoPlayerModel(
           deviceOrientation: DeviceOrientation.landscapeLeft,
-          url: 'https://vimeo.com/70591644',
+          url: 'https://vimeo.com/17536753',
           systemUiOverlay: const [
             SystemUiOverlay.top,
             SystemUiOverlay.bottom,

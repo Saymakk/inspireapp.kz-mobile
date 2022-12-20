@@ -123,7 +123,7 @@ class _SingleCourseScreenState extends ConsumerState<SingleCourseScreen> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: 10, top: 20),
+                padding: const EdgeInsets.only(bottom: 10, top: 20,),
                 child: Text(
                   'Описание урока',
                   style: GoogleFonts.poppins(
@@ -154,18 +154,18 @@ class _SingleCourseScreenState extends ConsumerState<SingleCourseScreen> {
                       margin: EdgeInsets.only(right: 13),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(16),
-                          color: Color(0xffE3F8FF)),
+                          color: Color(0xffE3F8FF),),
                       child: Container(
                           margin:
-                              EdgeInsets.symmetric(horizontal: 10, vertical: 3),
-                          child: Text('$length мин')),
+                              EdgeInsets.symmetric(horizontal: 10, vertical: 3,),
+                          child: Text('$length мин'),),
                     ),
                     Text(
                       'Время прохождения урока',
                       style: GoogleFonts.poppins(
                           color: Color(0xff282828),
                           fontSize: 11,
-                          fontWeight: FontWeight.w500),
+                          fontWeight: FontWeight.w500,),
                     ),
                   ],
                 ),
@@ -219,7 +219,7 @@ class _SingleCourseScreenState extends ConsumerState<SingleCourseScreen> {
                   margin: EdgeInsets.only(top: 25),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
-                      color: Color(0xff21cac8)),
+                      color: Color(0xff21cac8),),
                   child: Container(
                     margin: EdgeInsets.symmetric(vertical: 9),
                     child: Row(
@@ -238,7 +238,7 @@ class _SingleCourseScreenState extends ConsumerState<SingleCourseScreen> {
                           style: GoogleFonts.poppins(
                               fontWeight: FontWeight.w600,
                               fontSize: 14,
-                              color: Colors.white),
+                              color: Colors.white,),
                         ),
                       ],
                     ),

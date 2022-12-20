@@ -84,11 +84,17 @@ class _SingleAffScreenState extends State<SingleAffScreen>
     print(active);
     audioPlayer.stop();
   }
-
+  List<String> words = [];
   @override
   initState() {
     // TODO: implement initState
     super.initState();
+
+   words.addAll(title.split(RegExp("")));
+
+    // for(int i = 0; i < words.length; i++) {
+    //   print('$i. ${words[i]}');// Вывод в консоль номера элемента массива и его содержимое
+    // }
 
     // active == true ?  audioPlayer.play(AssetSource('audio/sound1.wav')) : audioPlayer.stop();
     active == true
@@ -164,77 +170,88 @@ class _SingleAffScreenState extends State<SingleAffScreen>
                 crossAxisAlignment: CrossAxisAlignment.center,
                 // mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Visibility(
-                    visible: active,
-                    child: Expanded(
-                      child: Container(
-                        // child: Text(
-                        //   '$title',
-                        //   style: GoogleFonts.poppins(
-                        //     color: Colors.white,
-                        //     fontWeight: FontWeight.w600,
-                        //     fontSize: 17,
-                        //   ),
-                        //   textAlign: TextAlign.center,
-                        // ).animate(onComplete: (controller) {
-                        //   audioPlayer.stop();
-                        //   Get.to(
-                        //         () => CongratAffirm(),
-                        //     arguments: [aff_id],
-                        //   );
-                        // }).tint(
-                        //   color: Color(0xff21cac8),
-                        //   delay: .5.seconds,
-                        //   end: .8,
-                        //   duration: len.seconds,
-                        // ),
-                        child: AnimatedTextKit(
-                          isRepeatingAnimation: false,
-                          pause: Duration(seconds: 0),
-                          displayFullTextOnTap: true,
-                          totalRepeatCount: 1,
-                          stopPauseOnTap: !active,
-                          // onFinished: () {
-                          //   audioPlayer.stop();
-                          //   Get.to(
-                          //     () => CongratAffirm(),
-                          //     arguments: [aff_id],
-                          //   );
-                          // },
-                          animatedTexts: [
-                            ColorizeAnimatedText(
-                              '$title',
-                              textStyle: GoogleFonts.poppins(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 17,
-                              ),
-                              textAlign: TextAlign.center,
-                              colors: colorizeColors,
-                              speed: Duration(
-                                milliseconds: active == true ? 25 : 0,
-                              ),
-                              // cursor: '',
-                            ),
-                          ],
-                        ),
+                  Expanded(
+                    child: Text(
+                      '${title}',
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.poppins(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 17,
                       ),
                     ),
                   ),
-                  Visibility(
-                    visible: !active,
-                    child: Expanded(
-                      child: Text(
-                        '$title',
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.poppins(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 17,
-                        ),
-                      ),
-                    ),
-                  ),
+                  // Visibility(
+                  //   visible: active,
+                  //   child: Expanded(
+                  //     child: Container(
+                  //       // child: Text(
+                  //       //   '$title',
+                  //       //   style: GoogleFonts.poppins(
+                  //       //     color: Colors.white,
+                  //       //     fontWeight: FontWeight.w600,
+                  //       //     fontSize: 17,
+                  //       //   ),
+                  //       //   textAlign: TextAlign.center,
+                  //       // ).animate(onComplete: (controller) {
+                  //       //   audioPlayer.stop();
+                  //       //   Get.to(
+                  //       //         () => CongratAffirm(),
+                  //       //     arguments: [aff_id],
+                  //       //   );
+                  //       // }).tint(
+                  //       //   color: Color(0xff21cac8),
+                  //       //   delay: .5.seconds,
+                  //       //   end: .8,
+                  //       //   duration: len.seconds,
+                  //       // ),
+                  //       child: AnimatedTextKit(
+                  //         isRepeatingAnimation: false,
+                  //         pause: Duration(seconds: 0),
+                  //         displayFullTextOnTap: true,
+                  //         totalRepeatCount: 1,
+                  //         stopPauseOnTap: !active,
+                  //         // onFinished: () {
+                  //         //   audioPlayer.stop();
+                  //         //   Get.to(
+                  //         //     () => CongratAffirm(),
+                  //         //     arguments: [aff_id],
+                  //         //   );
+                  //         // },
+                  //         animatedTexts: [
+                  //           ColorizeAnimatedText(
+                  //             '$words',
+                  //             textStyle: GoogleFonts.poppins(
+                  //               color: Colors.white,
+                  //               fontWeight: FontWeight.w600,
+                  //               fontSize: 17,
+                  //             ),
+                  //             textAlign: TextAlign.center,
+                  //             colors: colorizeColors,
+                  //             speed: Duration(
+                  //               milliseconds: active == true ? 25 : 0,
+                  //             ),
+                  //             // cursor: '',
+                  //           ),
+                  //         ],
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
+                  // Visibility(
+                  //   visible: !active,
+                  //   child: Expanded(
+                  //     child: Text(
+                  //       '${title}',
+                  //       textAlign: TextAlign.center,
+                  //       style: GoogleFonts.poppins(
+                  //         color: Colors.white,
+                  //         fontWeight: FontWeight.w600,
+                  //         fontSize: 17,
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
                   Expanded(
                     child: Visibility(
                       visible: isFile,

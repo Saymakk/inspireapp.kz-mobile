@@ -26,7 +26,7 @@ class _MiniCoursesState extends State<MiniCourses> {
         GestureDetector(
           onTap: () {
             Get.to(
-                  () => AllCoursesScreen(),
+              () => AllCoursesScreen(),
               transition: Transition.rightToLeft,
             );
           },
@@ -228,16 +228,17 @@ class _MiniCoursesState extends State<MiniCourses> {
                         alignment: Alignment.center,
                         children: [
                           ClipRRect(
-                              borderRadius: BorderRadius.only(
-                                topRight: Radius.circular(15),
-                                topLeft: Radius.circular(15),
-                              ),
-                              child: Image.network(
-                                course.picture,
-                                fit: BoxFit.cover,
-                                width: 259,
-                                height: 144,
-                              )),
+                            borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(15),
+                              topLeft: Radius.circular(15),
+                            ),
+                            child: Image.network(
+                              course.picture,
+                              fit: BoxFit.cover,
+                              width: 259,
+                              height: 144,
+                            ),
+                          ),
                           // Image.asset(
                           //   Const.imgs + 'kuralaj.png',
                           //   fit: BoxFit.fill,
@@ -258,11 +259,12 @@ class _MiniCoursesState extends State<MiniCourses> {
                         Text(
                           course.title,
                           style: GoogleFonts.poppins(
-                              textStyle: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 14,
-                            color: Color(0xff343434),
-                          )),
+                            textStyle: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 14,
+                              color: Color(0xff343434),
+                            ),
+                          ),
                         ),
                       ],
                     ),
@@ -282,11 +284,12 @@ class _MiniCoursesState extends State<MiniCourses> {
                         Text(
                           '${course.length.toString()} мин',
                           style: GoogleFonts.poppins(
-                              textStyle: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 12,
-                            color: Color(0xff343434),
-                          )),
+                            textStyle: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 12,
+                              color: Color(0xff343434),
+                            ),
+                          ),
                         ),
                       ],
                     ),
