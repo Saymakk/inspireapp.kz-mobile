@@ -10,7 +10,7 @@ class webViewPage extends StatelessWidget {
 
   WebViewController controller = WebViewController()
     ..setJavaScriptMode(JavaScriptMode.unrestricted)
-    ..setBackgroundColor( Colors.white60)
+    ..setBackgroundColor( Colors.white30)
     ..setNavigationDelegate(
       NavigationDelegate(
         onProgress: (int progress) {
@@ -35,7 +35,7 @@ class webViewPage extends StatelessWidget {
       DeviceOrientation.landscapeLeft,
       DeviceOrientation.landscapeRight,
     ]);
-    return Scaffold(
+    return Scaffold(backgroundColor: Colors.white,
       extendBody: true,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
