@@ -26,10 +26,7 @@ class _CoursesScreenState extends State<CoursesScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitDown,
-      DeviceOrientation.portraitUp,
-    ]);
+   
   }
 
   @override

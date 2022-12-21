@@ -49,10 +49,7 @@ class _SingleCourseScreenState extends ConsumerState<SingleCourseScreen> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitDown,
-      DeviceOrientation.portraitUp,
-    ]);
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(

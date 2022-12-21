@@ -31,10 +31,7 @@ class webViewPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.landscapeLeft,
-      DeviceOrientation.landscapeRight,
-    ]);
+
     return Scaffold(
       backgroundColor: Colors.white,
       extendBody: true,
@@ -44,12 +41,7 @@ class webViewPage extends StatelessWidget {
         elevation: 0,
         leading: IconButton(
           onPressed: () {
-            SystemChrome.setPreferredOrientations(
-              [
-                DeviceOrientation.portraitDown,
-                DeviceOrientation.portraitUp,
-              ],
-            );
+
             Get.back();
           },
           icon: Icon(

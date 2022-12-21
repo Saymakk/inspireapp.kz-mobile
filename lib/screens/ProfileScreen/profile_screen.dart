@@ -98,7 +98,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                           child:( Hive.box('mybox').get('photo') == null) ^
                                   (Hive.box('mybox').get('photo') ==
-                                      'https://ui-avatars.com/api/?name=z&color=7F9CF5&background=EBF4FF')
+                                      'https://ui-avatars.com/api/?name=${Hive.box('mybox').get('name').substring(0, 1)}&color=7F9CF5&background=EBF4FF')
                               ? Padding(
                                   padding: const EdgeInsets.all(25.0),
                                   child: Image.asset(
