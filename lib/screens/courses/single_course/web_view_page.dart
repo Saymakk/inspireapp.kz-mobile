@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class webViewPage extends StatelessWidget {
   webViewPage({Key? key}) : super(key: key);
+
+
 
   WebViewController controller = WebViewController()
     ..setJavaScriptMode(JavaScriptMode.unrestricted)
@@ -28,6 +31,10 @@ class webViewPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
     return Scaffold(
       extendBody: true,
       extendBodyBehindAppBar: true,
@@ -35,7 +42,13 @@ class webViewPage extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          onPressed: () => Get.back(),
+          onPressed: () {
+            SystemChrome.setPreferredOrientations([
+              DeviceOrientation.portraitDown,
+              DeviceOrientation.portraitUp,
+            ]);
+            Get.back();
+          },
 
           icon: Icon(
             Icons.arrow_back_ios,
