@@ -35,7 +35,7 @@
 	    	<key>NSAllowsArbitraryLoads</key>
 	    	<true/>
 	    	<key>NSAllowsArbitraryLoadsInWebContent</key>
-                <true/>
+            <true/>
 	    </dict>
 	<key>NSCameraUsageDescription</key>
 	<string>your usage description here</string>
