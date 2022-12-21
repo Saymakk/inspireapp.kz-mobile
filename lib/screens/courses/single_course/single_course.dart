@@ -4,6 +4,8 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:InspireApp/main.dart';
+import 'package:InspireApp/requests/vimeo/vimeo.dart';
+import 'package:InspireApp/screens/courses/single_course/web_view_page.dart';
 import 'package:better_open_file/better_open_file.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
@@ -79,8 +81,11 @@ class _SingleCourseScreenState extends ConsumerState<SingleCourseScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               GestureDetector(
-                onTap: () => Get.to(() => VideoPlayer(),
-                    arguments: [course_title, video]),
+                onTap: () => vimeoRequest(video),
+                // onTap: () => Get.to(() => wv(),
+                //     arguments: [video]),
+                // onTap: () => Get.to(() => VideoPlayer(),
+                //     arguments: [course_title, video]),
                 child: Stack(
                   alignment: AlignmentDirectional.center,
                   children: [

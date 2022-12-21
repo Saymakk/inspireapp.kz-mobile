@@ -5,6 +5,8 @@ import 'package:google_fonts/google_fonts.dart';
 class Const {
   //domains
   static const String domain = 'https://kz.inspireapp.kz/';
+  static const String vimeo = 'https://api.vimeo.com/videos/';
+  static const String vimeo_token = '7c5917e09bea6f5cd71e3c2fd1a67303';
 
   //COLORS
   static const greybg = Color.fromRGBO(239, 239, 239, 1);

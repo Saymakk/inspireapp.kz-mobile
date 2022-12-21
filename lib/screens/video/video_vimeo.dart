@@ -80,7 +80,7 @@ class _VideoPlayerState extends State<VideoPlayer> {
       body:  VimeoVideoPlayer(
         vimeoPlayerModel: VimeoPlayerModel(
           deviceOrientation: DeviceOrientation.landscapeLeft,
-          url: 'https://vimeo.com/17536753',
+          url: 'https://vimeo.com/783205413', 
           systemUiOverlay: const [
             SystemUiOverlay.top,
             SystemUiOverlay.bottom,
