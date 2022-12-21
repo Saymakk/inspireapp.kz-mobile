@@ -67,10 +67,8 @@ Future<void> userUpdateRequest(
 
   var response = await request.send();
 
-  // var responsed = await http.Response.fromStream(response);
+  var responsed = await http.Response.fromStream(response);
 
-  print(response.headers.toString());
-  print(response.statusCode);
 
   if (response.statusCode == 200) {
     // var data = json.decode(responsed.body);
