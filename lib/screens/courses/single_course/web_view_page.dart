@@ -6,11 +6,9 @@ import 'package:webview_flutter/webview_flutter.dart';
 class webViewPage extends StatelessWidget {
   webViewPage({Key? key}) : super(key: key);
 
-
-
   WebViewController controller = WebViewController()
     ..setJavaScriptMode(JavaScriptMode.unrestricted)
-    ..setBackgroundColor( Colors.white30)
+    ..setBackgroundColor(Colors.white30)
     ..setNavigationDelegate(
       NavigationDelegate(
         onProgress: (int progress) {
@@ -35,7 +33,8 @@ class webViewPage extends StatelessWidget {
       DeviceOrientation.landscapeLeft,
       DeviceOrientation.landscapeRight,
     ]);
-    return Scaffold(backgroundColor: Colors.white,
+    return Scaffold(
+      backgroundColor: Colors.white,
       extendBody: true,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -43,13 +42,14 @@ class webViewPage extends StatelessWidget {
         elevation: 0,
         leading: IconButton(
           onPressed: () {
-            SystemChrome.setPreferredOrientations([
-              DeviceOrientation.portraitDown,
-              DeviceOrientation.portraitUp,
-            ]);
+            SystemChrome.setPreferredOrientations(
+              [
+                DeviceOrientation.portraitDown,
+                DeviceOrientation.portraitUp,
+              ],
+            );
             Get.back();
           },
-
           icon: Icon(
             Icons.arrow_back_ios,
             color: Colors.black,
