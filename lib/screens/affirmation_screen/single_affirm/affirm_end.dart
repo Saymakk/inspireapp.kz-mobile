@@ -105,7 +105,8 @@ class _CongratAffirmState extends State<CongratAffirm> {
                         height: 20,
                       ),
                       GestureDetector(
-                        onTap: () {
+                        onTap: () async {
+                          await affirmDoneRequest(aff_id);
                           // print(Hive.box('mybox').get(0));
                           // print(aff_id);
                           // Get.back();

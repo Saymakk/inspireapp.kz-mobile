@@ -15,13 +15,13 @@ import 'package:oktoast/oktoast.dart';
 
 GetStorage auth = GetStorage();
 
-Future<void> affirmDoneRequest(var id) async {
+Future<void> coursesDoneRequest(var id) async {
   var headers = {
     'Accept': 'application/json',
     'Authorization': 'Bearer ${Hive.box('mybox').get(0)}'
   };
 
-  final Uri url = await Uri.parse(Const.domain + 'api/user/audio_activity');
+  final Uri url = await Uri.parse(Const.domain + 'api/user/video_activity');
   var request = await http.MultipartRequest('POST', url);
   // print(Const.domain);
   request.headers.addAll(headers);

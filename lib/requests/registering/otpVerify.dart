@@ -40,7 +40,7 @@ Future<void> otpVerify(invite_code, pass, name) async {
 
     print('response.statusCode : ${response.statusCode}');
     print('data : ${data['data']['token']}');
-    print('data : ${data['data']}');
+    // print('data : ${data['data']}');
 
     auth.write('reg_code', data['data']['code'].toString());
     await Hive.box('mybox').put(1, data['data']);

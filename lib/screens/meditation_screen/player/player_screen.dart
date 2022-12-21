@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:ui';
 import 'package:InspireApp/constants/constants.dart';
+import 'package:InspireApp/requests/affirmations/affirm_done.dart';
 import 'package:InspireApp/requests/affirmations/do_like.dart';
 import 'package:dio/dio.dart';
 import 'package:get_storage/get_storage.dart';
@@ -79,12 +80,13 @@ class _PlayerScreenState extends State<PlayerScreen> {
       });
     });
 
-    audioPlayer.onPositionChanged.listen((newPosition) {
+    audioPlayer.onPositionChanged.listen((newPosition) async {
       setState(() {
         position = newPosition;
       });
       if ((duration.inSeconds - position.inSeconds == 0) &
           (audioPlayer.releaseMode.toString() == 'ReleaseMode.release')) {
+        await affirmDoneRequest(Get.arguments[0]);
         setState(() {
           audioPlayer.stop();
           isPlaying = false;
@@ -241,8 +243,17 @@ class _PlayerScreenState extends State<PlayerScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        audio_desc.length <= 400 ?
                         Text(
                           Bidi.stripHtmlIfNeeded(audio_desc),
+                          style: GoogleFonts.poppins(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 14,
+                            height: 1.3,
+                          ),
+                        ) :  Text(
+                          Bidi.stripHtmlIfNeeded(audio_desc.substring(0, (audio_desc.length - audio_desc.length * 0.3).toInt()) + '...'),
                           style: GoogleFonts.poppins(
                             color: Colors.white,
                             fontWeight: FontWeight.w600,

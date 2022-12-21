@@ -4,6 +4,7 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:InspireApp/main.dart';
+import 'package:InspireApp/requests/courses/courses_done.dart';
 import 'package:InspireApp/requests/vimeo/vimeo.dart';
 import 'package:InspireApp/screens/courses/single_course/web_view_page.dart';
 import 'package:better_open_file/better_open_file.dart';
@@ -46,6 +47,7 @@ class _SingleCourseScreenState extends ConsumerState<SingleCourseScreen> {
   // String? material_path = Get.arguments[1];
   String video = Get.arguments[4];
   String picture = Get.arguments[5];
+  var course_id = Get.arguments[6];
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +84,10 @@ class _SingleCourseScreenState extends ConsumerState<SingleCourseScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               GestureDetector(
-                onTap: () => vimeoRequest(video),
+                onTap: () async {
+                  await coursesDoneRequest(course_id);
+                  vimeoRequest(video);
+                },
                 // onTap: () => Get.to(() => wv(),
                 //     arguments: [video]),
                 // onTap: () => Get.to(() => VideoPlayer(),

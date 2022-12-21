@@ -52,7 +52,7 @@ Future<void> otpVerifyFinal(
 
     print('response.statusCode : ${response.statusCode}');
     print('data : ${data['data']['token']}');
-    print('data : ${data['data']}');
+    // print('data : ${data['data']}');
 
     auth.write('reg_code', data['data']['code'].toString());
     await Hive.box('mybox').put(0, data['data']['token'].toString());
