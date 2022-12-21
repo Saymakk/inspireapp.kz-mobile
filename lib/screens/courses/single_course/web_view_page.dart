@@ -25,7 +25,9 @@ class webViewPage extends StatelessWidget {
         },
       ),
     )
-    ..loadRequest(Uri.parse('${Get.arguments[0]}'));
+    ..loadRequest(Uri.parse('${Get.arguments[0]}'))
+    ..clearCache()
+    ..clearLocalStorage();
 
   @override
   Widget build(BuildContext context) {
@@ -56,8 +58,17 @@ class webViewPage extends StatelessWidget {
           ),
         ),
       ),
-      body: WebViewWidget(
-        controller: controller,
+      body: Stack(
+        children: [
+          Center(
+            child: CircularProgressIndicator(
+              color: Color(0xff21cac8),
+            ),
+          ),
+          WebViewWidget(
+            controller: controller,
+          ),
+        ],
       ),
     );
   }

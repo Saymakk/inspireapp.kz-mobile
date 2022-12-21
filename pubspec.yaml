@@ -64,6 +64,7 @@ dependencies:
   video_player: ^2.4.10
   flick_video_player: ^0.5.0
   webview_flutter: ^4.0.0
+  webview_flutter_wkwebview: ^3.0.0
 #  vimeoplayer_trinity: ^0.2.3
 #  vimeo_player_flutter: ^0.0.3+2
 

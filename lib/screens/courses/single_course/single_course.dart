@@ -18,6 +18,7 @@ import 'package:InspireApp/constants/constants.dart';
 import 'package:InspireApp/screens/video/video_vimeo.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:vimeo_video_player/vimeo_video_player.dart';
+import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
 
 class SingleCourseScreen extends ConsumerStatefulWidget {
   const SingleCourseScreen({Key? key}) : super(key: key);
