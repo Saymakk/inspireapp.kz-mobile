@@ -30,7 +30,7 @@ class SingleAffScreen extends StatefulWidget {
 class _SingleAffScreenState extends State<SingleAffScreen>
     with SingleTickerProviderStateMixin {
   bool isFile = false;
-
+  late Timer _timer;
   late AnimationController _animationController;
 
   // bool playerButton = false;
@@ -65,23 +65,31 @@ class _SingleAffScreenState extends State<SingleAffScreen>
         hive_aff.get('aff_${aff_id}'),
       ),
     );
-    Future.delayed(
-      Duration(seconds: len + 1),
-      () {
-        audioPlayer.stop();
-        Get.to(
-          () => CongratAffirm(),
-          arguments: [aff_id],
-        );
-      },
-    );
+    _timer = Timer(Duration(seconds: (len * 60) + 1), () {
+      audioPlayer.stop();
+      Get.to(
+            () => CongratAffirm(),
+        arguments: [aff_id],
+      );
+    });
+    // Future.delayed(
+    //   Duration(seconds: (len * 60) + 1),
+    //   () {
+    //     audioPlayer.stop();
+    //     Get.to(
+    //       () => CongratAffirm(),
+    //       arguments: [aff_id],
+    //     );
+    //   },
+    // );
   }
 
   void inactivePress() {
     setState(() {
       active = false;
     });
-    print(active);
+    // print(active);
+    _timer.cancel();
     audioPlayer.stop();
   }
   List<String> words = [];
@@ -332,7 +340,7 @@ class _SingleAffScreenState extends State<SingleAffScreen>
                                   content: Text('Ваша аффирмация скачивается!'),
                                 ),
                               );
-                              print(hive_aff.get('aff_$aff_id'));
+                              // print(hive_aff.get('aff_$aff_id'));
 
                               downloadFile();
 
@@ -361,7 +369,8 @@ class _SingleAffScreenState extends State<SingleAffScreen>
 
   Future<File?> downloadFile() async {
     final appStorage = await getApplicationDocumentsDirectory();
-    final file = File('${appStorage.path}/aff_${aff_id}');
+    final file = File('${appStorage.path}/aff_${aff_id}.${aff_path.split('.')[1]}');
+
     final response = await Dio().get(
       Const.domain + aff_path,
       options: Options(
@@ -374,7 +383,7 @@ class _SingleAffScreenState extends State<SingleAffScreen>
     final raf = file.openSync(mode: FileMode.write);
     raf.writeFromSync(response.data);
     await raf.close();
-    print(file.path);
+
     if (file.path != null) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -388,11 +397,10 @@ class _SingleAffScreenState extends State<SingleAffScreen>
       setState(() {
         isFile = false;
       });
-    }
-    ;
+    };
 
     await local_audio.write('audio_$aff_id', file.path);
-    await hive_aff.put('aff_$aff_id', '${appStorage.path}/aff_${aff_id}');
+    await hive_aff.put('aff_$aff_id', '${appStorage.path}/aff_${aff_id}.${aff_path.split('.')[1]}');
     return file;
   }
 }

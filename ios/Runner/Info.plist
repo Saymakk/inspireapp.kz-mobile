@@ -68,5 +68,12 @@
     <string>Приложению необходим доступ к микрофону для подтверждения записи голоса.</string>
     <key>NSCameraUsageDescription</key>
     <string>Приложению нужен доступ к камере для создания фото.</string>
+    <key>NSAppTransportSecurity</key>
+        	<dict>
+        		<key>NSAllowsArbitraryLoads</key>
+        		<true/>
+        		<key>NSAllowsArbitraryLoadsInWebContent</key>
+        		<true/>
+        	</dict>
 </dict>
 </plist>

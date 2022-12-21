@@ -479,7 +479,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
 
   Future<File?> downloadFile() async {
     final appStorage = await getApplicationDocumentsDirectory();
-    final file = File('${appStorage.path}/medit_${audio_id}');
+    final file = File('${appStorage.path}/medit_${audio_id}.${audio_path.split('.')[1]}');
     final response = await Dio().get(Const.domain + audio_path,
         options: Options(
           responseType: ResponseType.bytes,
