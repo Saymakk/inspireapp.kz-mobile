@@ -28,6 +28,9 @@ Future<List> citiesListRequest() async {
   List<dynamic> cities = json.decode(responsed.body);
 
   Hive.box('db').put('list', cities);
+
+
+
   return cities;
 
   // if (response.statusCode == 200) {

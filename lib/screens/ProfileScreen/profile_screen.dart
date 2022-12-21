@@ -1,3 +1,4 @@
+import 'package:InspireApp/requests/lists/cities_list_request.dart';
 import 'package:InspireApp/widgets/bottom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -63,7 +64,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
             Padding(
               padding: const EdgeInsets.only(right: 24.0),
               child: GestureDetector(
-                onTap: () {
+                onTap: () async {
+                  await citiesListRequest();
                   Get.to(
                     () => ProfileSettingsScreen(),
                     transition: Transition.rightToLeft,
