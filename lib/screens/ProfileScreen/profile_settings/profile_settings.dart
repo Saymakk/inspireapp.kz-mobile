@@ -31,16 +31,6 @@ class ProfileSettingsScreen extends StatefulWidget {
 
 class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
 
-  @override
-  initState()  {
-    // TODO: implement initState
-    super.initState();
-    citiesListRequest();
-
-    print(Hive.box('db').get('list'));
-
-  }
-
   GetStorage lists = GetStorage();
 
   File? image;
