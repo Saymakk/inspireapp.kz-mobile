@@ -38,7 +38,7 @@ Future<void> userUpdateRequest(
   request.headers.addAll(headers);
 
   if (description.length == 0) {
-    description = ' ';
+    description = '';
   } else {
     description = description;
   }
@@ -47,17 +47,21 @@ Future<void> userUpdateRequest(
   if (image == null) {
     request.fields['name'] = name;
     request.fields['last_name'] = lastName;
-    // if(description.length == 0) {request.fields['description'] = 'Описание';} else {
-    //   request.fields['description'] = description;
-    // }
+    if (description.length < 1) {
+      null;
+    } else {
+      request.fields['description'] = description;
+    }
     // request.fields['description'] = description;
     request.fields['city_id'] = city.toString();
   } else {
     request.fields['name'] = name;
     request.fields['last_name'] = lastName;
-    // if(description.length == 0) {request.fields['description'] = 'Описание';} else {
-    //   request.fields['description'] = description;
-    // }    request.fields['city_id'] = city.toString();
+    if (description.length < 1) {
+      null;
+    } else {
+      request.fields['description'] = description;
+    }
     request.fields['city_id'] = city.toString();
 
     request.files.add(
@@ -68,7 +72,6 @@ Future<void> userUpdateRequest(
   var response = await request.send();
 
   var responsed = await http.Response.fromStream(response);
-
 
   if (response.statusCode == 200) {
     // var data = json.decode(responsed.body);

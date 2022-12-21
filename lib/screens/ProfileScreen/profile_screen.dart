@@ -1,4 +1,5 @@
 import 'package:InspireApp/requests/lists/cities_list_request.dart';
+import 'package:InspireApp/requests/profile/profile_init.dart';
 import 'package:InspireApp/widgets/bottom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,6 +13,7 @@ import 'package:InspireApp/requests/invited_users/invited_users_request.dart';
 import 'package:InspireApp/screens/ProfileScreen/profile_settings/profile_settings.dart';
 import 'package:InspireApp/screens/welcome_screen.dart';
 import 'package:skeletons/skeletons.dart';
+import 'package:translit/translit.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -31,6 +33,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   GetStorage auth = GetStorage();
 
+  String name_letter = '';
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    name_letter = Translit()
+        .toTranslit(source: Hive.box('mybox').get('name').substring(0, 1));
+    Hive.box('mybox').put('photo2', name_letter);
+    print(name_letter);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -47,7 +61,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               color: Color(0xff000000),
             ),
             onPressed: () {
-              Get.off(()=>BottomNav(), transition: Transition.leftToRight);
+              Get.off(() => BottomNav(), transition: Transition.leftToRight);
             },
           ),
           title: Text(
@@ -66,6 +80,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: GestureDetector(
                 onTap: () async {
                   await citiesListRequest();
+                  await userActivitiesInit();
+                  await profileRequestInit();
                   Get.to(
                     () => ProfileSettingsScreen(),
                     transition: Transition.rightToLeft,
@@ -99,9 +115,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             borderRadius: BorderRadius.circular(16),
                             color: Color(0xFFD9DCDD),
                           ),
-                          child:( Hive.box('mybox').get('photo') == null) ^
+                          child: (Hive.box('mybox').get('photo') == null) ^
                                   (Hive.box('mybox').get('photo') ==
-                                      'https://ui-avatars.com/api/?name=${Hive.box('mybox').get('name').substring(0, 1)}&color=7F9CF5&background=EBF4FF')
+                                      'https://ui-avatars.com/api/?name=${Translit().toTranslit(source: Hive.box('mybox').get('name').substring(0, 1))}&color=7F9CF5&background=EBF4FF')
                               ? Padding(
                                   padding: const EdgeInsets.all(25.0),
                                   child: Image.asset(

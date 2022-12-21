@@ -30,7 +30,6 @@ class ProfileSettingsScreen extends StatefulWidget {
 }
 
 class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
-
   GetStorage lists = GetStorage();
 
   File? image;
@@ -53,13 +52,13 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
     }
   }
 
-
-
   TextEditingController nameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
   TextEditingController descController = TextEditingController();
 
-  dynamic selected_city;
+  dynamic selected_city = (Hive.box('mybox').get('city_id') != null
+      ? Hive.box('mybox').get('city_id')
+      : '1');
   dynamic selected_country;
 
   bool country_list = false;
@@ -179,7 +178,13 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
                               child: Container(
                                 margin: EdgeInsets.only(left: 20),
                                 child: TextFormField(
-                                  controller: nameController,
+                                  controller:
+                                      Hive.box('mybox').get('name') != null
+                                          ? (nameController
+                                            ..text = Hive.box('mybox')
+                                                .get('name')
+                                                .toString())
+                                          : nameController,
                                   decoration: InputDecoration(
                                       hintText: 'Имя',
                                       border: InputBorder.none,
@@ -205,7 +210,13 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
                               child: Container(
                                 margin: EdgeInsets.only(left: 20),
                                 child: TextFormField(
-                                  controller: lastNameController,
+                                  controller:
+                                      Hive.box('mybox').get('last_name') != null
+                                          ? (lastNameController
+                                            ..text = Hive.box('mybox')
+                                                .get('last_name')
+                                                .toString())
+                                          : lastNameController,
                                   decoration: InputDecoration(
                                       hintText: 'Фамилия',
                                       border: InputBorder.none,
@@ -326,12 +337,14 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
                                     child: ListView.builder(
                                         physics: NeverScrollableScrollPhysics(),
                                         shrinkWrap: true,
-                                        itemCount: Hive.box('db').get('list').length,
+                                        itemCount:
+                                            Hive.box('db').get('list').length,
                                         itemBuilder: (context, index) {
                                           return GestureDetector(
                                             onTap: () {
                                               setState(() {
-                                                selected_city = Hive.box('db').get('list')[index]['id'];
+                                                selected_city = Hive.box('db')
+                                                    .get('list')[index]['id'];
                                               });
                                               print(selected_city);
                                             },
@@ -340,7 +353,9 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
                                                     EdgeInsets.only(top: 10),
                                                 decoration: BoxDecoration(
                                                     color: selected_city ==
-                                                        Hive.box('db').get('list')[index]['id']
+                                                            Hive.box('db').get(
+                                                                    'list')[
+                                                                index]['id']
                                                         ? Color(0xff21cac8)
                                                         : Colors.white,
                                                     borderRadius:
@@ -351,9 +366,13 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
                                                       vertical: 5,
                                                       horizontal: 10),
                                                   child: Text(
-                                                    Hive.box('db').get('list')[index]['title'],
+                                                    Hive.box('db')
+                                                            .get('list')[index]
+                                                        ['title'],
                                                     style: selected_city ==
-                                                        Hive.box('db').get('list')[index]['id']
+                                                            Hive.box('db').get(
+                                                                    'list')[
+                                                                index]['id']
                                                         ? GoogleFonts.poppins(
                                                             fontSize: 14,
                                                             color: Colors.white)
@@ -384,7 +403,11 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
                         border: Border.all(color: Color(0xffDEECEC)),
                         borderRadius: BorderRadius.circular(8)),
                     child: TextFormField(
-                      controller: descController,
+                      controller: Hive.box('mybox').get('description') != null
+                          ? (descController
+                            ..text =
+                                Hive.box('mybox').get('description').toString())
+                          : descController,
                       maxLines: 6,
                       decoration: InputDecoration(
                         hintText: 'О вас',
@@ -398,24 +421,32 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
                   ),
                   GestureDetector(
                     onTap: () {
+                      print(descController.text);
+                      Hive.box('mybox').put(
+                        'last_name',
+                        lastNameController.text,
+                      );
                       nameController.text == '' ||
                               lastNameController.text == '' ||
                               selected_city == null
                           ?
                           // descController.text == '' ||
                           // image!.path == null
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              content: Text(
-                              'Обязательно укажите имя, фамилию и город!',
-                              style: GoogleFonts.poppins(
-                                fontWeight: FontWeight.w400,
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  'Обязательно укажите имя, фамилию и город!',
+                                  style: GoogleFonts.poppins(
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
                               ),
-                            )))
+                            )
                           : userUpdateRequest(
                               nameController!.text,
                               lastNameController!.text,
                               selected_city!,
-                              descController.text,
+                              descController!.text,
                               image,
                             );
                     },

@@ -33,8 +33,15 @@ class _AddNoteState extends State<AddNote> {
 
   Future pickImage(ImageSource source) async {
     try {
-      final image = await ImagePicker().pickImage(source: source);
-      if (image == null) return; else {
+      final image = await ImagePicker().pickImage(
+        source: source,
+        maxHeight: 600,
+        maxWidth: 800,
+        imageQuality: 50,
+      );
+      if (image == null)
+        return;
+      else {
         setState(() {
           selfistate();
         });
@@ -92,7 +99,7 @@ class _AddNoteState extends State<AddNote> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return  Column(
       children: [
         Column(
           children: [
@@ -868,7 +875,7 @@ class _AddNoteState extends State<AddNote> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Column(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -982,6 +989,8 @@ class _AddNoteState extends State<AddNote> {
                   active = false;
                 });
               });
+
+
               noteController.text == ''
                   ? ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text('Заполните поле для заметок')))
