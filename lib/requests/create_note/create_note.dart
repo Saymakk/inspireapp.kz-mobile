@@ -38,6 +38,11 @@ Future<void> createNoteRequest(description, emoji, File? photo,) async {
   var responsed = await http.Response.fromStream(response);
 
   print(response.statusCode);
+  print(request.fields);
+  print(photo!.path);
+  print(headers);
+  print(responsed.body);
+  print(response.statusCode);
   // print(responsed.body);
 if(response.statusCode == 200) {
     Get.defaultDialog(
