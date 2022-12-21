@@ -81,7 +81,9 @@ Future<void> userUpdateRequest(
       title: 'Сохранить изменения',
       content: Text('Вы внесли изменения в свой аккаунт.'),
       confirm: TextButton(
-          onPressed: () {
+          onPressed: () async {
+            await userActivitiesInit();
+            await profileRequestInit();
             Get.back();
             Get.back();
           },

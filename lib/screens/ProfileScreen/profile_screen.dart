@@ -1,3 +1,4 @@
+import 'package:InspireApp/widgets/bottom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
@@ -45,7 +46,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               color: Color(0xff000000),
             ),
             onPressed: () {
-              Get.back();
+              Get.off(()=>BottomNav(), transition: Transition.leftToRight);
             },
           ),
           title: Text(

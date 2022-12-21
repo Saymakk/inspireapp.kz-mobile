@@ -22,10 +22,11 @@ Future<List> citiesListRequest() async {
   var response = await request.send();
   var responsed = await http.Response.fromStream(response);
 
-  // print(response.statusCode);
+  print(response.statusCode);
+  print(json.decode(responsed.body));
 
-  List cities = json.decode(responsed.body)['title'];
-  print(cities);
+  List<dynamic> cities = json.decode(responsed.body);
+
   Hive.box('db').put('list', cities);
   return cities;
 

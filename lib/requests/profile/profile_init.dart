@@ -51,7 +51,7 @@ Future<void> profileRequestInit() async {
   }
 }
 
-Future<void> userActivities() async {
+Future<void> userActivitiesInit() async {
   var headers = {
     'Accept': 'application/json',
     'Authorization': 'Bearer ${Hive.box('mybox').get(0)}'
