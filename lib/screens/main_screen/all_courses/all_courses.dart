@@ -292,7 +292,7 @@ class _AllCoursesScreenState extends State<AllCoursesScreen> {
                                         0) {
                                       return Container(
                                         alignment: Alignment.centerLeft,
-                                        margin: EdgeInsets.only(top: 20),
+                                        margin: EdgeInsets.only(top: 20, bottom: 20),
                                         child: Column(
                                           crossAxisAlignment:
                                           CrossAxisAlignment.start,
@@ -306,16 +306,22 @@ class _AllCoursesScreenState extends State<AllCoursesScreen> {
                                                   color: Colors.black),
                                             ),
                                             Container(
-                                              height: (course[index]
+                                              height: (course[
+                                              index]
                                                   .course_contents
-                                                  .length % 2 == 1) ? (course[index]
+                                                  .length %
+                                                  2 ==
+                                                  1)
+                                                  ? (course[index]
                                                   .course_contents
                                                   .length *
-                                                  100 + 70)
-                                                  .toDouble() : (course[index]
+                                                  100 +
+                                                  50)
+                                                  .toDouble()
+                                                  : (course[index]
                                                   .course_contents
                                                   .length *
-                                                  95)
+                                                  80 + 50)
                                                   .toDouble(),
                                               margin: EdgeInsets.only(top: 24),
                                               child: GridView.builder(
@@ -325,161 +331,148 @@ class _AllCoursesScreenState extends State<AllCoursesScreen> {
                                                 SliverGridDelegateWithFixedCrossAxisCount(
                                                   crossAxisCount: 2,
                                                   crossAxisSpacing: 2,
-                                                  mainAxisSpacing: 0,
+                                                  mainAxisSpacing: 10,
                                                 ),
                                                 itemCount: snapshot.data[index]
                                                     .course_contents.length,
                                                 itemBuilder:
                                                     (BuildContext context,
                                                     int index_grid) {
-                                                  return Column(
-                                                    children: [
-                                                      GestureDetector(
-                                                        onTap: () {
-                                                          // print(course[index].course_contents[index_grid].toString());
-                                                          singleCourse(course[
-                                                          index]
-                                                              .course_contents[
-                                                          index_grid]['id']);
-                                                        },
-                                                        child: Container(
-                                                          width: MediaQuery
-                                                              .of(
-                                                              context)
-                                                              .size
-                                                              .width /
-                                                              2.3,
-                                                          color:
-                                                          Color(0xffF7FAFB),
-                                                          // padding: EdgeInsets.only(right: 24),
-                                                          child: Column(
-                                                            children: [
-                                                              Container(
-                                                                decoration:
-                                                                BoxDecoration(
-                                                                  color: Color(
-                                                                      0xFFC6DAE1),
-                                                                  borderRadius:
-                                                                  BorderRadius
-                                                                      .only(
-                                                                    topRight: Radius
-                                                                        .circular(
-                                                                        15),
-                                                                    topLeft: Radius
-                                                                        .circular(
-                                                                        15),
+                                                  return Container(
+                                                    child: Column(
+                                                      children: [
+                                                        GestureDetector(
+                                                          onTap: () {
+                                                            // print(course[index].course_contents[index_grid].toString());
+                                                            singleCourse(course[
+                                                            index]
+                                                                .course_contents[
+                                                            index_grid]['id']);
+                                                          },
+                                                          child: Container(
+                                                            width: MediaQuery.of(
+                                                                context)
+                                                                .size
+                                                                .width *
+                                                                .4,
+                                                            color:
+                                                            Color(0xffF7FAFB),
+                                                            // padding: EdgeInsets.only(right: 24),
+                                                            child: Column(
+                                                              children: [
+                                                                Container(
+                                                                  decoration:
+                                                                  BoxDecoration(
+                                                                    color: Color(
+                                                                      0xFFC6DAE1,
+                                                                    ),
+                                                                    borderRadius:
+                                                                    BorderRadius
+                                                                        .only(
+                                                                      topRight: Radius
+                                                                          .circular(
+                                                                        15,
+                                                                      ),
+                                                                      topLeft: Radius
+                                                                          .circular(
+                                                                        15,
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                  child: Stack(
+                                                                    children: [
+                                                                      ClipRRect(
+                                                                        borderRadius:
+                                                                        BorderRadius
+                                                                            .only(
+                                                                          topRight:
+                                                                          Radius.circular(15),
+                                                                          topLeft:
+                                                                          Radius.circular(15),
+                                                                        ),
+                                                                        child: Image
+                                                                            .network(
+                                                                          course[index].course_contents[index_grid]
+                                                                          [
+                                                                          'picture'],
+                                                                          fit: BoxFit
+                                                                              .fill,
+                                                                        ),
+                                                                      )
+                                                                    ],
                                                                   ),
                                                                 ),
-                                                                child: Stack(
-                                                                  children: [
-                                                                    ClipRRect(
-                                                                      borderRadius:
-                                                                      BorderRadius
-                                                                          .only(
-                                                                        topRight:
-                                                                        Radius
-                                                                            .circular(
-                                                                            15),
-                                                                        topLeft:
-                                                                        Radius
-                                                                            .circular(
-                                                                            15),
-                                                                      ),
-                                                                      child: Image
-                                                                          .network(
-                                                                        course[index]
-                                                                            .course_contents[index_grid]
-                                                                        [
-                                                                        'picture'],
-                                                                        fit: BoxFit
-                                                                            .fill,
-                                                                      ),
-                                                                    )
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                              Container(
-                                                                child: Column(
-                                                                  children: [
-                                                                    Padding(
-                                                                      padding: const EdgeInsets
-                                                                          .only(
-                                                                          left:
-                                                                          10,
-                                                                          top:
-                                                                          10),
-                                                                      child:
-                                                                      Row(
-                                                                        children: [
-                                                                          Flexible(
-                                                                            child:
-                                                                            Text(
-                                                                              course[index]
-                                                                                  .course_contents[index_grid]['title'],
-                                                                              maxLines: 3,
-                                                                              style: GoogleFonts
-                                                                                  .poppins(
-                                                                                textStyle: TextStyle(
-                                                                                  fontWeight: FontWeight
-                                                                                      .w600,
-                                                                                  fontSize: 14,
-                                                                                  color: Color(
-                                                                                      0xff343434),
+                                                                Container(
+                                                                  child: Column(
+                                                                    children: [
+                                                                      Padding(
+                                                                        padding: const EdgeInsets
+                                                                            .only(
+                                                                            left:
+                                                                            10,
+                                                                            top:
+                                                                            10),
+                                                                        child:
+                                                                        Row(
+                                                                          children: [
+                                                                            Flexible(
+                                                                              child:
+                                                                              Text(
+                                                                                course[index].course_contents[index_grid]['title'],
+                                                                                maxLines: 3,
+                                                                                style: GoogleFonts.poppins(
+                                                                                  textStyle: TextStyle(
+                                                                                    fontWeight: FontWeight.w600,
+                                                                                    fontSize: 14,
+                                                                                    color: Color(0xff343434),
+                                                                                  ),
                                                                                 ),
                                                                               ),
                                                                             ),
-                                                                          ),
-                                                                        ],
+                                                                          ],
+                                                                        ),
                                                                       ),
-                                                                    ),
-                                                                    Padding(
-                                                                      padding: const EdgeInsets
-                                                                          .only(
-                                                                          left:
-                                                                          10,
-                                                                          bottom:
-                                                                          10),
-                                                                      child:
-                                                                      Row(
-                                                                        children: [
-                                                                          Padding(
-                                                                            padding:
-                                                                            const EdgeInsets
-                                                                                .only(
-                                                                                right: 7),
-                                                                            child:
-                                                                            Icon(
-                                                                              Icons
-                                                                                  .access_time_rounded,
-                                                                              size: 15,
-                                                                              color: Color(
-                                                                                  0xFF50546A),
+                                                                      Padding(
+                                                                        padding: const EdgeInsets
+                                                                            .only(
+                                                                            left:
+                                                                            10,
+                                                                            bottom:
+                                                                            10),
+                                                                        child:
+                                                                        Row(
+                                                                          children: [
+                                                                            Padding(
+                                                                              padding:
+                                                                              const EdgeInsets.only(right: 7),
+                                                                              child:
+                                                                              Icon(
+                                                                                Icons.access_time_rounded,
+                                                                                size: 15,
+                                                                                color: Color(0xFF50546A),
+                                                                              ),
                                                                             ),
-                                                                          ),
-                                                                          Text(
-                                                                            '${course[index]
-                                                                                .course_contents[index_grid]['length']} мин',
-                                                                            style: GoogleFonts
-                                                                                .poppins(
-                                                                                textStyle: TextStyle(
-                                                                                  fontWeight: FontWeight
-                                                                                      .w500,
-                                                                                  fontSize: 12,
-                                                                                  color: Color(
-                                                                                      0xff343434),
-                                                                                )),
-                                                                          ),
-                                                                        ],
-                                                                      ),
-                                                                    )
-                                                                  ],
+                                                                            Text(
+                                                                              '${course[index].course_contents[index_grid]['length']} мин',
+                                                                              style: GoogleFonts.poppins(
+                                                                                  textStyle: TextStyle(
+                                                                                    fontWeight: FontWeight.w500,
+                                                                                    fontSize: 12,
+                                                                                    color: Color(0xff343434),
+                                                                                  )),
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                      )
+                                                                    ],
+                                                                  ),
                                                                 ),
-                                                              ),
-                                                            ],
+                                                              ],
+                                                            ),
                                                           ),
                                                         ),
-                                                      ),
-                                                    ],
+                                                      ],
+                                                    ),
                                                   );
                                                 },
                                               ),
