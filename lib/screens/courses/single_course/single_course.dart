@@ -39,7 +39,7 @@ class _SingleCourseScreenState extends ConsumerState<SingleCourseScreen> {
   static var httpClient = new HttpClient();
 
   String course_title = Get.arguments[0];
-  String description = Get.arguments[3];
+  String description = Get.arguments[3] == null ? '' : Get.arguments[3];
   var length = Get.arguments[2];
 
   String material_path = Get.arguments[1] == null ? '' : Get.arguments[1];

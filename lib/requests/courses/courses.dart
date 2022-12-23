@@ -29,7 +29,7 @@ Future<List<coursesList>> coursesRequest() async {
     Iterable list = json.decode(responsed.body);
     List<coursesList> datasheet = list.map((f) => coursesList.fromJson(f)).toList();
 
-    print(list);
+    // print(json.decode(responsed.body)[1]);
 
     return Future<List<coursesList>>.value(datasheet);
   } else {
