@@ -30,7 +30,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   String? desc = Get.arguments[2];
   String phone = Get.arguments[3];
   String? photo = Get.arguments[4];
-
+  bool active = false;
   GetStorage auth = GetStorage();
 
   String name_letter = '';
@@ -76,9 +76,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
           actions: [
             Padding(
-              padding: const EdgeInsets.only(right: 24.0),
+              padding: const EdgeInsets.only(top: 5, right: 24.0),
               child: GestureDetector(
                 onTap: () async {
+                  setState(() {
+                    active = true;
+                  });
+                  Future.delayed(Duration(seconds: 5)).then((_) {
+                    setState(() {
+                      active = false;
+                    });
+                  });
                   await citiesListRequest();
                   await userActivitiesInit();
                   await profileRequestInit();
@@ -87,7 +95,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     transition: Transition.rightToLeft,
                   );
                 },
-                child: SvgPicture.asset('assets/icons/settings_button.svg'),
+                child: Stack(
+                  children: [
+                    SvgPicture.asset('assets/icons/settings_button.svg'),
+                    Visibility(
+                      visible: active,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],

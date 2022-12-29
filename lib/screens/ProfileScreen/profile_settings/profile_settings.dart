@@ -63,6 +63,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
 
   bool country_list = false;
   bool city_list = false;
+  bool active = false;
 
   @override
   Widget build(BuildContext context) {
@@ -255,7 +256,11 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    'Город',
+                                    Hive.box('db')
+                                        .get('list')[selected_city - 1]
+                                    ['title'] == null ? 'Город' : Hive.box('db')
+                                        .get('list')[selected_city - 1]
+                                    ['title'],
                                     style: GoogleFonts.poppins(
                                         fontWeight: FontWeight.w600,
                                         fontSize: 14,
@@ -421,6 +426,15 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
                   ),
                   GestureDetector(
                     onTap: () {
+                      setState(() {
+                        active = true;
+                      });
+                      Future.delayed(Duration(seconds: 5)).then((_) {
+                        setState(() {
+                          active = false;
+                        });
+                      });
+
                       print(descController.text);
                       Hive.box('mybox').put(
                         'last_name',
@@ -456,14 +470,29 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
                           borderRadius: BorderRadius.circular(8),
                           color: Color(0xff21cac8)),
                       child: Container(
-                        margin:
-                            EdgeInsets.symmetric(vertical: 9, horizontal: 48),
-                        child: Text(
-                          'Сохранить',
-                          style: GoogleFonts.poppins(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.white),
+                        height: 40,
+                        width: MediaQuery.of(context).size.width * .5,
+                        // margin:
+                        //     EdgeInsets.symmetric( horizontal: 48),
+                        child: Center(
+                          child: Stack(
+                            children: [
+                              Visibility(
+                                visible: !active,
+                                child: Text(
+                                  'Сохранить',
+                                  style: GoogleFonts.poppins(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.white),
+                                ),
+                              ),
+                              Visibility(
+                                visible: active,
+                                child: CircularProgressIndicator(),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
