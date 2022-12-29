@@ -34,6 +34,27 @@ class _PlayerScreenState extends State<PlayerScreen> {
   var audio_length = Get.arguments[4].toString();
 
   final audioPlayer = AudioPlayer();
+
+  final AudioContext audioContext = AudioContext(
+    iOS: AudioContextIOS(
+        defaultToSpeaker: false,
+        category: AVAudioSessionCategory.playback,
+        options: [AVAudioSessionOptions.mixWithOthers]
+            + [AVAudioSessionOptions.allowAirPlay]
+            + [AVAudioSessionOptions.allowBluetooth]
+            + [AVAudioSessionOptions.allowBluetoothA2DP]
+    ),
+    android: AudioContextAndroid(
+      isSpeakerphoneOn: true,
+      stayAwake: true,
+      contentType: AndroidContentType.sonification,
+      usageType: AndroidUsageType.assistanceSonification,
+      audioFocus: AndroidAudioFocus.none,
+    ),
+  );
+
+
+
   bool isPlaying = false;
   Duration duration = Duration.zero;
   Duration position = Duration.zero;
@@ -44,7 +65,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
   @override
   void initState() {
     // TODO: implement initState
-
+    // audioPlayer.setAudioContext(audioContext);
     // print(hive_medit.get('medit_${audio_id}'));
     // print(hive_medit
     //     .get('medit_${audio_id}')
@@ -54,6 +75,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
     // print(local_audio.read('medit_${audio_id}').runtimeType);
 
     super.initState();
+    AudioPlayer.global.setGlobalAudioContext(audioContext);
     // local_audio.write('medit_${audio_id}', '');
     // local_audio.read('medit_${audio_id}') != ''
     //     ? isFile = true

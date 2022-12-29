@@ -48,6 +48,23 @@ class _SingleAffScreenState extends State<SingleAffScreen>
 
   // String aff_desc = Get.arguments[4];
   final audioPlayer = AudioPlayer();
+  final AudioContext audioContext = AudioContext(
+    iOS: AudioContextIOS(
+      defaultToSpeaker: true,
+      category: AVAudioSessionCategory.playback,
+      options: [
+        AVAudioSessionOptions.defaultToSpeaker,
+        AVAudioSessionOptions.mixWithOthers,
+      ],
+    ),
+    android: AudioContextAndroid(
+      isSpeakerphoneOn: true,
+      stayAwake: true,
+      contentType: AndroidContentType.sonification,
+      usageType: AndroidUsageType.assistanceSonification,
+      audioFocus: AndroidAudioFocus.none,
+    ),
+  );
 
   bool active = false;
 
@@ -97,7 +114,7 @@ class _SingleAffScreenState extends State<SingleAffScreen>
   initState() {
     // TODO: implement initState
     super.initState();
-
+    audioPlayer.setAudioContext(audioContext);
    words.addAll(title.split(RegExp("")));
 
     // for(int i = 0; i < words.length; i++) {
