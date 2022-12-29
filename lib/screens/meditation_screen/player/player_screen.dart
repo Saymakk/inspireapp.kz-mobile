@@ -15,6 +15,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:path_provider/path_provider.dart';
+import 'dart:io' show Platform;
+
 
 class PlayerScreen extends StatefulWidget {
   const PlayerScreen({Key? key}) : super(key: key);
@@ -75,7 +77,9 @@ class _PlayerScreenState extends State<PlayerScreen> {
     // print(local_audio.read('medit_${audio_id}').runtimeType);
 
     super.initState();
-    AudioPlayer.global.setGlobalAudioContext(audioContext);
+    if(Platform.isIOS){
+      AudioPlayer.global.setGlobalAudioContext(audioContext);
+    }
     // local_audio.write('medit_${audio_id}', '');
     // local_audio.read('medit_${audio_id}') != ''
     //     ? isFile = true
@@ -162,6 +166,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
 
   @override
   Widget build(BuildContext context) {
+
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
@@ -364,8 +369,8 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                                 'assets/icons/play_button.svg'),
                                             iconSize: 48,
                                             onPressed: () async {
-                                              // print(hive_medit
-                                              //     .get('medit_${audio_id}'));
+                                              print(hive_medit
+                                                  .get('medit_${audio_id}').toString() + ' ССЫЛКА НА ФАЙЛ ');
                                               await audioPlayer.play(
                                                 DeviceFileSource(
                                                   hive_medit

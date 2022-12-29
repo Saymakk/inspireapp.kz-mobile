@@ -223,66 +223,68 @@ class _AffCatScreenState extends State<AffCatScreen> {
   }
 
   Widget AffirmList(List items, context) {
-    return Column(
-      children: items.map<Widget>(
-        (affirm) {
-          return Container(
-            decoration: BoxDecoration(
-              color: Const.lowgrey,
-              borderRadius: BorderRadius.circular(15),
-            ),
-            margin: EdgeInsets.only(
-              top: 10,
-              bottom: 10,
-            ),
-            child: GestureDetector(
-              onTap: () {
-                Get.to(
-                  () => SingleAffScreen(),
-                  transition: Transition.rightToLeft,
-                  arguments: [
-                    affirm.affirmation_texts,
-                    affirm.length,
-                    affirm.id,
-                    affirm.path,
-                    affirm.description,
-                  ],
-                );
-              },
-              child: ListTile(
-                isThreeLine: true,
-                title: Padding(
-                  padding: const EdgeInsets.only(bottom: 16),
-                  child: Text(
-                    affirm.title,
-                    style: GoogleFonts.poppins(
-                      textStyle: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
+    return SingleChildScrollView(
+      child: Column(
+        children: items.map<Widget>(
+          (affirm) {
+            return Container(
+              decoration: BoxDecoration(
+                color: Const.lowgrey,
+                borderRadius: BorderRadius.circular(15),
+              ),
+              margin: EdgeInsets.only(
+                top: 10,
+                bottom: 10,
+              ),
+              child: GestureDetector(
+                onTap: () {
+                  Get.to(
+                    () => SingleAffScreen(),
+                    transition: Transition.rightToLeft,
+                    arguments: [
+                      affirm.affirmation_texts,
+                      affirm.length,
+                      affirm.id,
+                      affirm.path,
+                      affirm.description,
+                    ],
+                  );
+                },
+                child: ListTile(
+                  isThreeLine: true,
+                  title: Padding(
+                    padding: const EdgeInsets.only(bottom: 16),
+                    child: Text(
+                      affirm.title,
+                      style: GoogleFonts.poppins(
+                        textStyle: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                subtitle: Row(
-                  children: [
-                    Icon(Icons.access_time_rounded),
-                    Text(' ${affirm.length} мин'),
-                  ],
-                ),
-                trailing: CircleAvatar(
-                  radius: 22.5,
-                  backgroundColor: Const.turq,
-                  child: Icon(
-                    Icons.play_arrow,
-                    size: 24,
-                    color: Colors.white,
+                  subtitle: Row(
+                    children: [
+                      Icon(Icons.access_time_rounded),
+                      Text(' ${affirm.length} мин'),
+                    ],
+                  ),
+                  trailing: CircleAvatar(
+                    radius: 22.5,
+                    backgroundColor: Const.turq,
+                    child: Icon(
+                      Icons.play_arrow,
+                      size: 24,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),
-            ),
-          );
-        },
-      ).toList(),
+            );
+          },
+        ).toList(),
+      ),
     );
   }
 }
