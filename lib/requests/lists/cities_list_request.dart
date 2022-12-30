@@ -10,8 +10,13 @@ import 'package:InspireApp/model/meditation_model.dart';
 import 'package:InspireApp/model/mini_courses_model.dart';
 
 // Future<List<citiesListModel>> citiesListRequest() async {
-Future<List> citiesListRequest() async {
+
+List<String> citiess = [];
+
+Future<void> citiesListRequest() async {
   GetStorage auth = GetStorage();
+
+  citiess.clear();
 
   var headers = {'Authorization': 'Bearer ${Hive.box('mybox').get(0)}'};
 
@@ -25,9 +30,20 @@ Future<List> citiesListRequest() async {
   print(response.statusCode);
   print(json.decode(responsed.body));
 
-  List<dynamic> cities = json.decode(responsed.body);
+  dynamic cities = json.decode(responsed.body);
+
+
+  for (dynamic i = 0; i < cities.length; i++) {
+    print(cities[i]['title']);
+    citiess.add(cities[i]['title']);
+  }
+  print(citiess.toString());
 
   Hive.box('db').put('list', cities);
+  Hive.box('db').put('cities', citiess);
+
+  print('города ' + Hive.box('db').get('list').toString());
+  print('города2 ' + Hive.box('db').get('cities').toString());
 
 
 

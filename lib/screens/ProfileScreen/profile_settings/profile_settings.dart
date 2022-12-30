@@ -256,15 +256,18 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    Hive.box('db')
-                                        .get('list')[selected_city - 1]
-                                    ['title'] == null ? 'Город' : Hive.box('db')
-                                        .get('list')[selected_city - 1]
-                                    ['title'],
+                                    Hive.box('db').get('list')[
+                                                selected_city - 1]['title'] ==
+                                            null
+                                        ? 'Город'
+                                        : Hive.box('db')
+                                                .get('list')[selected_city - 1]
+                                            ['title'],
                                     style: GoogleFonts.poppins(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 14,
-                                        height: 1.645),
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 14,
+                                      height: 1.645,
+                                    ),
                                   ),
                                   SvgPicture.asset(city_list == false
                                       ? 'assets/icons/button_down.svg'
