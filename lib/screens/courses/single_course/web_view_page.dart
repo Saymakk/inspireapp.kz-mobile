@@ -57,14 +57,14 @@ Page resource error:
   isForMainFrame: ${error.isForMainFrame}
           ''');
           },
-          onNavigationRequest: (NavigationRequest request) {
-            if (request.url.startsWith('${Get.arguments[0]}')) {
-              debugPrint('blocking navigation to ${request.url}');
-              return NavigationDecision.prevent;
-            }
-            debugPrint('allowing navigation to ${request.url}');
-            return NavigationDecision.navigate;
-          },
+          // onNavigationRequest: (NavigationRequest request) {
+          //   if (request.url.startsWith('${Get.arguments[0]}')) {
+          //     debugPrint('blocking navigation to ${request.url}');
+          //     return NavigationDecision.prevent;
+          //   }
+          //   debugPrint('allowing navigation to ${request.url}');
+          //   return NavigationDecision.navigate;
+          // },
         ),
       )
       ..addJavaScriptChannel(
@@ -116,6 +116,7 @@ Page resource error:
               color: Color(0xff21cac8),
             ),
           ),
+
           WebViewWidget(
             controller: _controller,
           ),
