@@ -23,7 +23,6 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
 
   TextEditingController noteController = TextEditingController();
 
-
   bool selfie = false;
 
   File? image;
@@ -87,12 +86,26 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
     });
   }
 
-
   @override
   void dispose() {
     noteController.dispose();
     super.dispose();
   }
+
+  List<Item> items = [
+    Item(selected: false, smile: '😀'),
+    Item(selected: false, smile: '😃'),
+    Item(selected: false, smile: '😄'),
+    Item(selected: false, smile: '😊'),
+    Item(selected: false, smile: '😍'),
+    Item(selected: false, smile: '😎'),
+    Item(selected: false, smile: '😘'),
+    Item(selected: false, smile: '😜'),
+    Item(selected: false, smile: '😝'),
+    Item(selected: false, smile: '😠'),
+    Item(selected: false, smile: '😡'),
+    Item(selected: false, smile: '😬')
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -811,6 +824,44 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
                           ],
                         ),
                       )
+                      // Container(
+                      //   height: MediaQuery.of(context).size.height,
+                      //   width: MediaQuery.of(context).size.width,
+                      //   child: GridView.builder(
+                      //     itemCount: items.length,
+                      //     gridDelegate:
+                      //         SliverGridDelegateWithFixedCrossAxisCount(
+                      //       crossAxisCount: 4,
+                      //       childAspectRatio: 1.0,
+                      //       mainAxisSpacing: 8.0,
+                      //       crossAxisSpacing: 8.0,
+                      //     ),
+                      //     itemBuilder: (BuildContext context, int index) {
+                      //       return GestureDetector(
+                      //         onTap: () {
+                      //           setState(() {
+                      //             items[index].selected =
+                      //                 !items[index].selected;
+                      //           });
+                      //         },
+                      //         child: Container(
+                      //           decoration: BoxDecoration(
+                      //             borderRadius: BorderRadius.circular(15),
+                      //             color: items[index].selected
+                      //                 ? Colors.grey[200]
+                      //                 : null,
+                      //           ),
+                      //           child: Center(
+                      //             child: Text(
+                      //               items[index].smile,
+                      //               style: TextStyle(fontSize: 24),
+                      //             ),
+                      //           ),
+                      //         ),
+                      //       );
+                      //     },
+                      //   ),
+                      // )
                     ],
                   ),
                 ),
@@ -997,7 +1048,6 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
               padding: const EdgeInsets.only(left: 24, right: 24),
               child: GestureDetector(
                 onTap: () async {
-
                   setState(() {
                     active = true;
                   });
@@ -1006,7 +1056,6 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
                       active = false;
                     });
                   });
-
 
                   noteController.text == ''
                       ? ScaffoldMessenger.of(context).showSnackBar(
@@ -1023,7 +1072,6 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
                                   image!,
                                 );
 
-                  /** !!! Добавить GET OBS !!! **/
                   // Get.defaultDialog(
                   //   title: 'Ваша заметка успешно сохранена!',
                   //   titleStyle: GoogleFonts.poppins(),
@@ -1040,11 +1088,13 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
                   decoration: Const.cont_turq_circ8,
                   // padding: EdgeInsets.only(top: 5),
                   child: Center(
-                    child: active == false ? Text(
-                      'Сохранить своё настроение',
-                      style: Const.buttontextstyle,
-                      textAlign: TextAlign.center,
-                    ) : CircularProgressIndicator(),
+                    child: active == false
+                        ? Text(
+                            'Сохранить своё настроение',
+                            style: Const.buttontextstyle,
+                            textAlign: TextAlign.center,
+                          )
+                        : CircularProgressIndicator(),
                   ),
                 ),
               ),
@@ -1054,4 +1104,11 @@ class _AddMoodScreenState extends State<AddMoodScreen> {
       ),
     );
   }
+}
+
+class Item {
+   bool selected;
+  final String smile;
+
+  Item({required this.selected, required this.smile});
 }

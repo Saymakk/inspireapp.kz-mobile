@@ -1,5 +1,6 @@
 import 'package:InspireApp/requests/lists/cities_list_request.dart';
 import 'package:InspireApp/requests/profile/profile_init.dart';
+import 'package:InspireApp/screens/ProfileScreen/tariffs/tariff_desc.dart';
 import 'package:InspireApp/widgets/bottom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -95,16 +96,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     transition: Transition.rightToLeft,
                   );
                 },
-                child: Stack(
-                  children: [
-                    SvgPicture.asset('assets/icons/settings_button.svg'),
-                    Visibility(
-                      visible: active,
-                      child: CircularProgressIndicator(
-                        strokeWidth: 2,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: Stack(
+                    children: [
+                      SvgPicture.asset('assets/icons/settings_button.svg'),
+                      Visibility(
+                        visible: active,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -242,6 +246,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ],
                   ),
                 ),
+                TariffsList(),
                 Container(
                   margin: EdgeInsets.only(bottom: 38),
                   child: Column(
@@ -413,26 +418,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ),
                 ),
-                // Container(
-                //   margin: EdgeInsets.only(bottom: 20),
-                //   padding: EdgeInsets.only(
-                //       left: 19, right: 19, top: 13.5, bottom: 10.5),
-                //   decoration: BoxDecoration(
-                //     // border: Border(left: BorderSide(color: Color(0xff21cac8), width: 1)),
-                //       color: Const.semiturq,
-                //       borderRadius: BorderRadius.circular(15)),
-                //   child: ListTile(
-                //     leading: Image.asset(
-                //       Const.icns + '!.png',
-                //       height: 37,
-                //     ),
-                //     title: Text(
-                //       'Введите КОД-пароль вашего партнера, чтобы присоединиться к проекту',
-                //       maxLines: 4,
-                //       style: TextStyle(fontSize: 14, color: Const.deepgrey),
-                //     ),
-                //   ),
-                // ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -541,7 +526,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ],
                 ),
-
                 Center(
                   child: Container(
                     margin: EdgeInsets.only(
@@ -678,4 +662,184 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ).toList(),
     );
   }
+
+  Widget TariffsList() {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 24),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Title(
+                color: Colors.black,
+                child: Text(
+                  'Тарифы',
+                  softWrap: true,
+                  style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 22,
+                      height: 1.15,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 12,
+          ),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            height: 150,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              shrinkWrap: true,
+              itemCount: tariffs.length,
+              itemBuilder: (BuildContext context, index) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 5),
+                  child: Column(
+                    children: [
+                      Container(
+                        child: Stack(
+                          alignment: Alignment.bottomLeft,
+                          children: [
+                            Image.asset(
+                              tariffs[index]['icon'].toString(),
+                              fit: BoxFit.fill,
+                            ),
+                            Positioned(
+                              left: 5,
+                              bottom: 5,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Пакет',
+                                    maxLines: 3,
+                                    style: GoogleFonts.poppins(
+                                      textStyle: TextStyle(
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 10,
+                                        height: 1.15,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                  Text(
+                                    '"${tariffs[index]['title'].toString()}"',
+                                    maxLines: 3,
+                                    style: GoogleFonts.poppins(
+                                      textStyle: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 10,
+                                        height: 1.15,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      OutlinedButton(
+                        style: OutlinedButton.styleFrom(
+                          foregroundColor: Color(0xff21cac8).withOpacity(1),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5.0),
+                          ),
+                          backgroundColor: Color(0xff282828),
+                          disabledForegroundColor:
+                              Color(0xff21cac8).withOpacity(1),
+                        ),
+                        onPressed: () {
+                          Get.to(
+                            () => TariffDescription(),
+                            transition: Transition.rightToLeft,
+                            arguments: tariffs[index],
+                          );
+                        },
+                        child: Text(
+                          'Подробнее',
+                          style: GoogleFonts.poppins(
+                              color: Colors.white,
+                              fontSize: 10,
+                              fontWeight: FontWeight.w500),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  List<dynamic> tariffs = [
+    {
+      "id": 1,
+      "title": "Base",
+      "icon": "assets/images/tarif1.png",
+      "image": "assets/images/banner1.png",
+      "description": {
+        "line_1": "Доступ на 12 месяцев к приложению Inspire App",
+        "line_2":
+            "Плановые ZOOM встречи:\n1) По продажам\n2) По маркетингу\n3) Театр продаж",
+      },
+      "price": 100000,
+      "to_buy": "link_to_buy"
+    },
+    {
+      "id": 2,
+      "title": "Осознанная",
+      "icon": "assets/images/tarif2.png",
+      "image": "assets/images/banner1.png",
+      "description": {
+        "line_1": "Доступ на 12 месяцев к приложению Inspire App",
+        "line_2": "Доступ к курсу «Изобильная Женщина»",
+        "line_3":
+            "Плановые ZOOM встречи:\n1) По продажам\n2) По маркетингу\n3) Театр продаж\n4) По Изобильной женщине",
+      },
+      "price": 250000,
+      "to_buy": "link_to_buy"
+    },
+    {
+      "id": 3,
+      "title": "Ресурсная",
+      "icon": "assets/images/tarif3.png",
+      "image": "assets/images/banner1.png",
+      "description": {
+        "line_1": "Доступ на 12 месяцев к приложению Inspire App",
+        "line_2": "Доступ к курсу «Изобильная Женщина»",
+        "line_3": "Доступ к курсу «Личный Бренд»",
+        "line_4":
+            "Плановые ZOOM встречи:\n1) По продажам\n2) По маркетингу\n3) Театр продаж\n4) По Изобильной женщине\n5) По Личному бренду",
+      },
+      "price": 500000,
+      "to_buy": "link_to_buy"
+    },
+    {
+      "id": 4,
+      "title": "Успешная",
+      "icon": "assets/images/tarif4.png",
+      "image": "assets/images/banner1.png",
+      "description": {
+        "line_1": "Доступ на 12 месяцев к приложению Inspire App",
+        "line_2": "Доступ к курсу «Изобильная Женщина»",
+        "line_3": "Доступ к курсу «Личный Бренд»",
+        "line_4": "Доступ к курсу «Продюсер Личных Брендов»",
+        "line_5": "Доступ к курсу «Миллион в сетевом»",
+        "line_6":
+        "Плановые ZOOM встречи:\n1) По продажам\n2) По маркетингу\n3) Театр продаж\n4) По Изобильной женщине\n5) По Личному бренду",
+      },
+      "price": 1000000,
+      "to_buy": "link_to_buy"
+    }
+  ];
 }

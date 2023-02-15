@@ -74,63 +74,12 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
       child: Container(
         child: Scaffold(
           backgroundColor: Color(0xffffffff),
-          appBar: AppBar(
-            titleSpacing: 0,
-            backgroundColor: Colors.white,
-            shadowColor: null,
-            elevation: 0,
-            leading: IconButton(
-              icon: Icon(Icons.arrow_back_ios, color: Color(0xff000000)),
-              onPressed: () {
-                Get.back();
-              },
-            ),
-            title: GestureDetector(
-              // onTap: () => citiesListRequest(),
-              child: Text(
-                'Настройки',
-                style: GoogleFonts.poppins(
-                  textStyle: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xff000000)),
-                ),
+          appBar: PreferredSize(
+              preferredSize: Size(
+                MediaQuery.of(context).size.width,
+                MediaQuery.of(context).size.height * .1,
               ),
-            ),
-            actions: [
-              IconButton(
-                onPressed: () {
-                  Get.defaultDialog(
-                    title: 'Удаление аккаунта',
-                    content: Container(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text('Вы действительно хотите удалить аккаунт?'),
-                        ],
-                      ),
-                    ),
-                    confirm: TextButton(
-                      onPressed: () => profile_delete(),
-                      child: Text(
-                        'Да',
-                        style: TextStyle(color: Colors.red),
-                      ),
-                    ),
-                    cancel: TextButton(
-                      onPressed: () {},
-                      child: Text('Нет'),
-                    ),
-                  );
-                },
-                icon: Icon(
-                  Icons.delete_forever,
-                  color: Colors.red,
-                ),
-                tooltip: 'Удалить аккаунт',
-              )
-            ],
-          ),
+              child: profileAppBar()),
           body: SingleChildScrollView(
             child: Container(
               padding:
@@ -585,6 +534,66 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
   //     ).toList(),
   //   );
   // }
+
+  Widget profileAppBar() {
+    return AppBar(
+      titleSpacing: 0,
+      backgroundColor: Colors.white,
+      shadowColor: null,
+      elevation: 0,
+      leading: IconButton(
+        icon: Icon(Icons.arrow_back_ios, color: Color(0xff000000)),
+        onPressed: () {
+          Get.back();
+        },
+      ),
+      title: GestureDetector(
+        // onTap: () => citiesListRequest(),
+        child: Text(
+          'Настройки',
+          style: GoogleFonts.poppins(
+            textStyle: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
+                color: Color(0xff000000)),
+          ),
+        ),
+      ),
+      actions: [
+        IconButton(
+          onPressed: () {
+            Get.defaultDialog(
+              title: 'Удаление аккаунта',
+              content: Container(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text('Вы действительно хотите удалить аккаунт?'),
+                  ],
+                ),
+              ),
+              confirm: TextButton(
+                onPressed: () => profile_delete(),
+                child: Text(
+                  'Да',
+                  style: TextStyle(color: Colors.red),
+                ),
+              ),
+              cancel: TextButton(
+                onPressed: () {},
+                child: Text('Нет'),
+              ),
+            );
+          },
+          icon: Icon(
+            Icons.delete_forever,
+            color: Colors.red,
+          ),
+          tooltip: 'Удалить аккаунт',
+        )
+      ],
+    );
+  }
 
   Widget CityListWidget(List items, context) {
     return Column(
