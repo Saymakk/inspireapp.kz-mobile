@@ -1,15 +1,12 @@
 import 'dart:convert';
 import 'dart:math';
 
+import 'package:InspireApp/requests/profile/payment_request.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hive/hive.dart';
-import 'package:http/http.dart' as http;
-import 'package:crypto/crypto.dart' as crypto;
-import 'package:url_launcher/url_launcher.dart';
-import 'package:url_launcher/url_launcher_string.dart';
+
 
 class TariffDescription extends StatefulWidget {
   const TariffDescription({Key? key}) : super(key: key);
@@ -41,7 +38,7 @@ class _TariffDescriptionState extends State<TariffDescription> {
           ),
           centerTitle: true,
           title: Text(
-            'Тариф',
+            'Тариф "${tar_desc['title']}"',
             style: GoogleFonts.poppins(
               textStyle: TextStyle(
                 fontSize: 20,
@@ -91,18 +88,19 @@ class _TariffDescriptionState extends State<TariffDescription> {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                         horizontal: 24.0,
-                        vertical: 20,
+                        vertical: 25,
                       ),
                       child: Stack(
                         children: [
                           Container(
-                            height: tar_desc['description'].length <= 3
-                                ? 270
-                                : tar_desc['description'].length == 4
-                                    ? 350
-                                    : 450,
+                            height: tar_desc['description'].length <= 2
+                                ? 175
+                                : tar_desc['description'].length == 3
+                                    ? 220
+                                    : tar_desc['description'].length == 4 ? 300 : 440,
                             child: ListView.builder(
                                 itemCount: tar_desc['description'].length,
+                                physics: NeverScrollableScrollPhysics(),
                                 itemBuilder: (BuildContext context, index) {
                                   return IntrinsicHeight(
                                     child: Row(
@@ -246,93 +244,8 @@ class _TariffDescriptionState extends State<TariffDescription> {
   }
 
   void _paybox(Map<String, dynamic> tariff_data) {
-    payBoxRequest();
+    payBoxRequest(tar_desc);
   }
 
-  String randomString({int length = 16}) {
-    String chars = '0123456789abcdefghijklmnopqrstywxqz';
-    var res = '';
-    var random = Random();
-    while (res.length < length) {
-      res += chars[random.nextInt(chars.length)];
-    }
-    return res;
-  }
 
-  Future<void> payBoxRequest() async {
-    final Uri url = Uri.parse('https://api.paybox.money/init_payment.php');
-    var request = http.MultipartRequest('POST', url);
-
-    var pg_merchant_id = 548205;
-    var secret_key = 'UNgrC1gDv6jGgQ8x';
-    var randomStr = randomString();
-    var requestForSignature = [
-      request.fields['pg_amount'] = tar_desc['price'].toString(),
-      request.fields['pg_description'] = 'Покупка курса',
-      request.fields['pg_merchant_id'] = pg_merchant_id.toString(),
-      request.fields['pg_order_id'] = tar_desc['id'].toString(),
-      request.fields['pg_salt'] = randomStr,
-    ];
-
-    Map pgElements = {
-      'pg_order_id': tar_desc['id'].toString(),
-      'pg_merchant_id': pg_merchant_id.toString(),
-      'pg_amount': tar_desc['price'].toString(),
-      'pg_description': 'Покупка курса',
-      'pg_salt': randomStr
-    };
-
-    Map<String, dynamic> signedParams(String url, requestForSignatureMap,
-        requestForSignature, String secretKey) {
-      var sorted = Map<String, dynamic>();
-      var paths = url.split('/');
-      var sig = paths.last;
-      var keysList = requestForSignatureMap.keys.toList();
-
-      keysList.sort();
-
-      for (var key in keysList) {
-        // print('${requestForSignatureMap[key]}');
-        sig += ';';
-        sig += "${requestForSignatureMap[key]}";
-        sorted[key] = requestForSignatureMap[key];
-      }
-      sig += ";$secretKey";
-
-      sorted['pg_sig'] = crypto.md5.convert(utf8.encode(sig)).toString();
-      return sorted;
-    }
-
-    var sig = signedParams('https://api.paybox.money/init_payment.php',
-        pgElements, requestForSignature, secret_key);
-
-    request.fields['pg_sig'] = sig['pg_sig'].toString();
-    //
-    // print('${sig}');
-    print(request.fields);
-
-    var response = await request.send();
-
-    var responsed = await http.Response.fromStream(response);
-
-    if (response.statusCode == 200) {
-      dynamic data = responsed.body;
-
-      String paymentLink = data.substring(131, 211);
-
-      await Hive.box('db').delete('paymentLink');
-      await Hive.box('db').put('paymentLink', paymentLink);
-
-      print('payBoxRequests ${Hive.box('db').get('paymentLink')}');
-
-      final Uri _url = Uri.parse(Hive.box('db').get('paymentLink').toString());
-
-      if (_url != '') {
-        (await launchUrl(_url));
-      }
-      // return data;
-    } else {
-      throw Exception('Failed.');
-    }
-  }
 }
