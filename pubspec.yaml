@@ -66,6 +66,8 @@ dependencies:
   webview_flutter: ^4.0.0
   webview_flutter_wkwebview: ^3.0.0
   translit: ^2.0.0
+  crypto: ^3.0.2
+  url_launcher: ^6.1.9
 #  vimeoplayer_trinity: ^0.2.3
 #  vimeo_player_flutter: ^0.0.3+2
 
