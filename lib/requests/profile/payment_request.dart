@@ -29,7 +29,7 @@ Future<void> payBoxRequest(Map<String, dynamic> tar_desc) async {
   var randomStr = randomString();
   var requestForSignature = [
     request.fields['pg_amount'] = tar_desc['price'].toString(),
-    request.fields['pg_description'] = 'Покупка курса $title',
+    request.fields['pg_description'] = 'Покупка курса "$title"',
     request.fields['pg_merchant_id'] = pg_merchant_id.toString(),
     request.fields['pg_order_id'] = tar_desc['id'].toString(),
     request.fields['pg_salt'] = randomStr,
@@ -39,7 +39,7 @@ Future<void> payBoxRequest(Map<String, dynamic> tar_desc) async {
     'pg_order_id': tar_desc['id'].toString(),
     'pg_merchant_id': pg_merchant_id.toString(),
     'pg_amount': tar_desc['price'].toString(),
-    'pg_description': 'Покупка курса $title',
+    'pg_description': 'Покупка курса "$title"',
     'pg_salt': randomStr
   };
 
