@@ -527,7 +527,7 @@ class _PlayerScreenState extends ConsumerState<PlayerScreen> {
         receiveTimeout: 0,
       ),
     );
-
+print('${appStorage.path}/medit_${audio_id}.${audio_path.split('.')[1]}');
     final raf = file.openSync(mode: FileMode.write);
     raf.writeFromSync(response.data);
     await raf.close();
