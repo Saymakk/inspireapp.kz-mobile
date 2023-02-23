@@ -4,6 +4,7 @@ import 'package:InspireApp/constants/constants.dart';
 import 'package:InspireApp/requests/affirmations/affirm_done.dart';
 import 'package:InspireApp/requests/affirmations/do_like.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/intl.dart';
@@ -17,15 +18,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io' show Platform;
 
-
-class PlayerScreen extends StatefulWidget {
+class PlayerScreen extends ConsumerStatefulWidget {
   const PlayerScreen({Key? key}) : super(key: key);
 
   @override
-  State<PlayerScreen> createState() => _PlayerScreenState();
+  ConsumerState<PlayerScreen> createState() => _PlayerScreenState();
 }
 
-class _PlayerScreenState extends State<PlayerScreen> {
+class _PlayerScreenState extends ConsumerState<PlayerScreen> {
   GetStorage local_audio = GetStorage();
   var hive_medit = Hive.box('db');
 
@@ -41,11 +41,10 @@ class _PlayerScreenState extends State<PlayerScreen> {
     iOS: AudioContextIOS(
         defaultToSpeaker: false,
         category: AVAudioSessionCategory.playback,
-        options: [AVAudioSessionOptions.mixWithOthers]
-            + [AVAudioSessionOptions.allowAirPlay]
-            + [AVAudioSessionOptions.allowBluetooth]
-            + [AVAudioSessionOptions.allowBluetoothA2DP]
-    ),
+        options: [AVAudioSessionOptions.mixWithOthers] +
+            [AVAudioSessionOptions.allowAirPlay] +
+            [AVAudioSessionOptions.allowBluetooth] +
+            [AVAudioSessionOptions.allowBluetoothA2DP]),
     android: AudioContextAndroid(
       isSpeakerphoneOn: true,
       stayAwake: true,
@@ -54,8 +53,6 @@ class _PlayerScreenState extends State<PlayerScreen> {
       audioFocus: AndroidAudioFocus.none,
     ),
   );
-
-
 
   bool isPlaying = false;
   Duration duration = Duration.zero;
@@ -67,23 +64,17 @@ class _PlayerScreenState extends State<PlayerScreen> {
   @override
   void initState() {
     // TODO: implement initState
-    // audioPlayer.setAudioContext(audioContext);
-    // print(hive_medit.get('medit_${audio_id}'));
+    // print(audio_path.toString().substring(audio_path.toString().length - 4));
+    // print(audio_path.toString().length);
     // print(hive_medit
     //     .get('medit_${audio_id}')
-    //     .runtimeType);
-
-    // print(local_audio.read('medit_${audio_id}'));
-    // print(local_audio.read('medit_${audio_id}').runtimeType);
+    //     .toString().length);
 
     super.initState();
-    if(Platform.isIOS){
+    if (Platform.isIOS) {
       AudioPlayer.global.setGlobalAudioContext(audioContext);
     }
-    // local_audio.write('medit_${audio_id}', '');
-    // local_audio.read('medit_${audio_id}') != ''
-    //     ? isFile = true
-    //     : isFile = false;
+
     hive_medit.get('medit_${audio_id}') != null
         ? isFile = true
         : isFile = false;
@@ -166,7 +157,6 @@ class _PlayerScreenState extends State<PlayerScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
@@ -270,24 +260,30 @@ class _PlayerScreenState extends State<PlayerScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        audio_desc.length <= 400 ?
-                        Text(
-                          Bidi.stripHtmlIfNeeded(audio_desc),
-                          style: GoogleFonts.poppins(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 14,
-                            height: 1.3,
-                          ),
-                        ) :  Text(
-                          Bidi.stripHtmlIfNeeded(audio_desc.substring(0, (audio_desc.length - audio_desc.length * 0.3).toInt()) + '...'),
-                          style: GoogleFonts.poppins(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 14,
-                            height: 1.3,
-                          ),
-                        ),
+                        audio_desc.length <= 400
+                            ? Text(
+                                Bidi.stripHtmlIfNeeded(audio_desc),
+                                style: GoogleFonts.poppins(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 14,
+                                  height: 1.3,
+                                ),
+                              )
+                            : Text(
+                                Bidi.stripHtmlIfNeeded(audio_desc.substring(
+                                        0,
+                                        (audio_desc.length -
+                                                audio_desc.length * 0.3)
+                                            .toInt()) +
+                                    '...'),
+                                style: GoogleFonts.poppins(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 14,
+                                  height: 1.3,
+                                ),
+                              ),
                       ],
                     ),
                   ),
@@ -370,7 +366,9 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                             iconSize: 48,
                                             onPressed: () async {
                                               print(hive_medit
-                                                  .get('medit_${audio_id}').toString() + ' ССЫЛКА НА ФАЙЛ ');
+                                                      .get('medit_${audio_id}')
+                                                      .toString() +
+                                                  ' ССЫЛКА НА ФАЙЛ ');
                                               await audioPlayer.play(
                                                 DeviceFileSource(
                                                   hive_medit
@@ -428,7 +426,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                       ),
                                     ),
                                   );
-                                  downloadFile();
+                                  downloadFile(file);
                                 },
                                 child:
                                     Icon(Icons.download, color: Colors.white),
@@ -515,20 +513,24 @@ class _PlayerScreenState extends State<PlayerScreen> {
 
   bool canplay = false;
 
-  Future<File?> downloadFile() async {
+  final file = null;
+
+  Future<File?> downloadFile(file) async {
     final appStorage = await getApplicationDocumentsDirectory();
-    final file = File('${appStorage.path}/medit_${audio_id}.${audio_path.split('.')[1]}');
-    final response = await Dio().get(Const.domain + audio_path,
-        options: Options(
-          responseType: ResponseType.bytes,
-          followRedirects: false,
-          receiveTimeout: 0,
-        ));
+    file = File(
+        '${appStorage.path}/medit_${audio_id}.${audio_path.split('.')[1]}');
+    final response = await Dio().get(
+      Const.domain + audio_path,
+      options: Options(
+        responseType: ResponseType.bytes,
+        followRedirects: false,
+        receiveTimeout: 0,
+      ),
+    );
 
     final raf = file.openSync(mode: FileMode.write);
     raf.writeFromSync(response.data);
     await raf.close();
-    // print(file.path);
     if (file.path != null) {
       setState(() {
         isFile = true;
@@ -538,9 +540,24 @@ class _PlayerScreenState extends State<PlayerScreen> {
         isFile = false;
       });
     }
-    ;
-    await hive_medit.put('medit_${audio_id}', file.path);
-    // await local_audio.write('medit_$audio_id', file.path);
+    print('${appStorage.path}/medit_${audio_id}.mp3');
+    print(file.path.toString() + ' 123123123');
+
+    var filepath =
+        file.path.toString().substring(file.path.toString().length - 4) ==
+                'net)'
+            ? file.path.toString().replaceAll('net)', 'mp3')
+            : file.path.toString().substring(file.path.toString().length - 4) ==
+            '.com'
+            ? file.path.toString().replaceAll('.com', '.mp3')
+            : file.path.toString().substring(file.path.toString().length - 4) ==
+            'com)'
+            ? file.path.toString().replaceAll('com)', 'mp3')
+            : file.path.toString();
+
+    print(filepath);
+
+    await hive_medit.put('medit_${audio_id}', filepath);
     return file;
   }
 }
