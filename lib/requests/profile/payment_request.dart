@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:math';
 
+import 'package:InspireApp/widgets/webview_screen.dart';
+import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 import 'package:crypto/crypto.dart' as crypto;
@@ -88,9 +90,19 @@ Future<void> payBoxRequest(Map<String, dynamic> tar_desc) async {
 
     final Uri _url = Uri.parse(Hive.box('db').get('paymentLink').toString());
 
-    if (_url != '') {
-      (await launchUrl(_url));
-    }
+    String myurl = Hive.box('db').get('paymentLink').toString();
+    // if (_url != '') {
+    //   (await launchUrl(_url));
+    // }
+
+    Future.delayed(Duration(seconds: 1), (){
+      if(_url != '') {
+        Get.to(()=> WebViewScreen(), arguments: ['Покупка курса "$title"']);
+      }
+
+    });
+
+
     // return data;
   } else {
     throw Exception('Failed.');

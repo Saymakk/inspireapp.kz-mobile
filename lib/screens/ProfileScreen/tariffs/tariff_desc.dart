@@ -94,9 +94,9 @@ class _TariffDescriptionState extends State<TariffDescription> {
                         children: [
                           Container(
                             height: tar_desc['description'].length <= 2
-                                ? 175
+                                ? 180
                                 : tar_desc['description'].length == 3
-                                    ? 220
+                                    ? 240
                                     : tar_desc['description'].length == 4 ? 300 : 440,
                             child: ListView.builder(
                                 itemCount: tar_desc['description'].length,
